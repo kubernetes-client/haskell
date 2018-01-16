@@ -57,6 +57,15 @@ library
     , unordered-containers
     , vector >=0.10.9 && <0.13
     , katip >=0.4 && < 0.6
+    -- below are manually added deps
+    , pem
+    , x509
+    , tls
+    , x509-system
+    , x509-store
+    , data-default-class
+    , connection
+    , x509-validation
   exposed-modules:
       Kubernetes
       Kubernetes.API.Admissionregistration
@@ -117,6 +126,8 @@ library
       Kubernetes.MimeTypes
       Kubernetes.Model
       Kubernetes.ModelLens
+      -- below are hand-written modules
+      Kubernetes.ClientHelper
   other-modules:
       Paths_kubernetes
   default-language: Haskell2010
