@@ -3,3 +3,6 @@ extra-deps:
 packages:
 - kubernetes
 - kubernetes-client-helper
+- kubeconfig
+nix:
+  enable: true
