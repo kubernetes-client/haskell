@@ -20,6 +20,7 @@ import           Data.X509                  (SignedCertificate,
 import qualified Data.X509                  as X509
 import           Data.X509.CertificateStore (makeCertificateStore)
 import qualified Data.X509.Validation       as X509
+import           Lens.Micro                 (Lens', lens, set)
 import           Network.Connection         (TLSSettings (..))
 import qualified Network.HTTP.Client        as NH
 import           Network.HTTP.Client.TLS    (mkManagerSettings)
@@ -67,25 +68,21 @@ defaultTLSClientParams = do
             }
         }
 
+clientHooksL :: Lens' TLS.ClientParams TLS.ClientHooks
+clientHooksL = lens TLS.clientHooks (\cp ch -> cp { TLS.clientHooks = ch })
+
+onServerCertificateL =
+  clientHooksL . lens TLS.onServerCertificate (\ch osc -> ch { TLS.onServerCertificate = osc })
+
 -- |Don't check whether the cert presented by the server matches the name of the server you are connecting to.
 -- This is necessary if you specify the server host by its IP address.
 disableServerNameValidation :: TLS.ClientParams -> TLS.ClientParams
-disableServerNameValidation cp = cp
-    { TLS.clientHooks = (TLS.clientHooks cp)
-        { TLS.onServerCertificate = X509.validate
-            X509.HashSHA256
-            def
-            def { X509.checkFQHN = False }
-        }
-    }
+disableServerNameValidation =
+  set onServerCertificateL (X509.validate X509.HashSHA256 def (def { X509.checkFQHN = False }))
 
 -- |Insecure mode. The client will not validate the server cert at all.
 disableServerCertValidation :: TLS.ClientParams -> TLS.ClientParams
-disableServerCertValidation cp = cp
-    { TLS.clientHooks = (TLS.clientHooks cp)
-        { TLS.onServerCertificate = (\_ _ _ _ -> return [])
-        }
-    }
+disableServerCertValidation = set onServerCertificateL (\_ _ _ _ -> return [])
 
 -- |Use a custom CA store.
 setCAStore :: [SignedCertificate] -> TLS.ClientParams -> TLS.ClientParams
@@ -95,13 +92,12 @@ setCAStore certs cp = cp
         }
     }
 
+onCertificateRequestL =
+  clientHooksL . lens TLS.onCertificateRequest (\ch ocr -> ch { TLS.onCertificateRequest = ocr })
+
 -- |Use a client cert for authentication.
 setClientCert :: Credential -> TLS.ClientParams -> TLS.ClientParams
-setClientCert cred cp = cp
-    { TLS.clientHooks = (TLS.clientHooks cp)
-        { TLS.onCertificateRequest = (\_ -> return (Just cred))
-        }
-    }
+setClientCert cred = set onCertificateRequestL (\_ -> return $ Just cred)
 
 -- |Parses a PEM-encoded @ByteString@ into a list of certificates.
 parsePEMCerts :: B.ByteString -> Either String [SignedCertificate]
