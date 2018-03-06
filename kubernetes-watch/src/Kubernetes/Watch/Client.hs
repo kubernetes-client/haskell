@@ -48,7 +48,7 @@ just streams to stdout. First some setup - this assumes kubernetes is accessible
 at http://localhost:8001, e.g. after running /kubectl proxy/:
 
 @
-import qualified Data.ByteString.Streaming.Char8 as Q -- from <https://hackage.haskell.org/package/streaming-bytestring-0.1.5/docs/Data-ByteString-Streaming-Char8.html streaming-bytestring>
+import qualified Data.ByteString.Streaming.Char8 as Q
 
 manager <- newManager defaultManagerSettings
 defaultConfig <- newConfig
@@ -80,7 +80,7 @@ withHTTP ::
   -> Manager
   -> (Response (Q.ByteString IO ()) -> IO a)
   -> IO a
-withHTTP response manager f = withResponse response manager f'
+withHTTP request manager f = withResponse request manager f'
   where
     f' resp = do
       let p = (from . brRead . responseBody) resp
