@@ -18,7 +18,7 @@ import           Data.Typeable              (Typeable)
 import           Data.X509                  (SignedCertificate,
                                              decodeSignedCertificate)
 import qualified Data.X509                  as X509
-import           Data.X509.CertificateStore (makeCertificateStore)
+import           Data.X509.CertificateStore (CertificateStore, makeCertificateStore)
 import qualified Data.X509.Validation       as X509
 import           Lens.Micro                 (Lens', lens, set)
 import           Network.Connection         (TLSSettings (..))
@@ -71,6 +71,7 @@ defaultTLSClientParams = do
 clientHooksL :: Lens' TLS.ClientParams TLS.ClientHooks
 clientHooksL = lens TLS.clientHooks (\cp ch -> cp { TLS.clientHooks = ch })
 
+onServerCertificateL :: Lens' TLS.ClientParams (CertificateStore -> TLS.ValidationCache -> X509.ServiceID -> X509.CertificateChain -> IO [X509.FailedReason])
 onServerCertificateL =
   clientHooksL . lens TLS.onServerCertificate (\ch osc -> ch { TLS.onServerCertificate = osc })
 
@@ -92,6 +93,7 @@ setCAStore certs cp = cp
         }
     }
 
+onCertificateRequestL :: Lens' TLS.ClientParams (([TLS.CertificateType], Maybe [TLS.HashAndSignatureAlgorithm], [X509.DistinguishedName]) -> IO (Maybe (X509.CertificateChain, TLS.PrivKey)))
 onCertificateRequestL =
   clientHooksL . lens TLS.onCertificateRequest (\ch ocr -> ch { TLS.onCertificateRequest = ocr })
 
