@@ -11,9 +11,11 @@ import qualified Data.ByteString            as B
 import qualified Data.ByteString.Lazy       as LazyB
 import           Data.Default.Class         (def)
 import           Data.Either                (rights)
+import           Data.Monoid                ((<>))
 import           Data.PEM                   (pemContent, pemParseBS)
 import qualified Data.Text                  as T
 import qualified Data.Text.Encoding         as T
+import qualified Data.Text.IO               as T
 import           Data.Typeable              (Typeable)
 import           Data.X509                  (SignedCertificate,
                                              decodeSignedCertificate)
@@ -27,6 +29,7 @@ import           Network.HTTP.Client.TLS    (mkManagerSettings)
 import           Network.TLS                (Credential, defaultParamsClient)
 import qualified Network.TLS                as TLS
 import qualified Network.TLS.Extra          as TLS
+import           System.Environment         (getEnv)
 import           System.X509                (getSystemCertificateStore)
 
 -- |Sets the master URI in the 'K.KubernetesConfig'.
@@ -47,7 +50,7 @@ setTokenAuth
     -> K.KubernetesConfig
     -> K.KubernetesConfig
 setTokenAuth token kcfg = kcfg
-    { K.configAuthMethods = [K.AnyAuthMethod (K.AuthApiKeyBearerToken token)]
+    { K.configAuthMethods = [K.AnyAuthMethod (K.AuthApiKeyBearerToken $ "Bearer " <> token)]
     }
 
 -- |Creates a 'NH.Manager' that can handle TLS.
@@ -117,3 +120,17 @@ loadPEMCerts p = do
     liftIO (B.readFile p)
         >>= either (throwM . ParsePEMCertsException) return
         .   parsePEMCerts
+
+serviceAccountDir :: FilePath
+serviceAccountDir = "/var/run/secrets/kubernetes.io/serviceaccount"
+
+cluster :: (MonadIO m, MonadThrow m) => m (NH.Manager, K.KubernetesConfig)
+cluster = do
+  caStore <- loadPEMCerts $ serviceAccountDir ++ "/ca.crt"
+  defTlsParams <- liftIO defaultTLSClientParams
+  mgr <- liftIO . newManager . setCAStore caStore $ disableServerNameValidation defTlsParams
+  tok <- liftIO . T.readFile $ serviceAccountDir ++ "/token"
+  host <- liftIO $ getEnv "KUBERNETES_SERVICE_HOST"
+  port <- liftIO $ getEnv "KUBERNETES_SERVICE_PORT"
+  config <- setTokenAuth tok . setMasterURI (T.pack $ "https://" ++ host ++ ":" ++ port) <$> liftIO K.newConfig
+  return (mgr, config)
