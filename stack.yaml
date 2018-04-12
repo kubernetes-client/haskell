@@ -3,6 +3,5 @@ extra-deps:
 packages:
 - kubernetes
 - kubernetes-client-helper
+- kubernetes-watch
 - kubeconfig
-nix:
-  enable: true
