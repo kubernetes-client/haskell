@@ -18,16 +18,16 @@ This is a mostly straightforward translation into Haskell, with 'FromJSON' and '
 -}
 module Kubernetes.KubeConfig where
 
-import           Data.Aeson       (FromJSON (..), Options, ToJSON (..),
-                                   Value (..), camelTo2, defaultOptions,
-                                   fieldLabelModifier, genericParseJSON,
-                                   genericToJSON, object, omitNothingFields,
-                                   withObject, (.:), (.=))
-import qualified Data.Map         as Map
+import           Data.Aeson     (FromJSON (..), Options, ToJSON (..),
+                                 Value (..), camelTo2, defaultOptions,
+                                 fieldLabelModifier, genericParseJSON,
+                                 genericToJSON, object, omitNothingFields,
+                                 withObject, (.:), (.=))
+import qualified Data.Map       as Map
 import           Data.Proxy
-import           Data.Semigroup   ((<>))
-import           Data.Text        (Text)
-import qualified Data.Text        as T
+import           Data.Semigroup ((<>))
+import           Data.Text      (Text)
+import qualified Data.Text      as T
 import           Data.Typeable
 import           GHC.Generics
 import           GHC.TypeLits
@@ -176,9 +176,9 @@ getAuthInfo cfg@Config {..} = do
 
 -- |Returns the currently active cluster.
 getCluster :: Config -> Either String Cluster
-getCluster cfg@Config {..} = do
-    Context {..} <- getContext cfg
-    let maybeCluster = Map.lookup cluster (toMap clusters)
+getCluster cfg@Config {clusters=clusters} = do
+    Context {cluster=clusterName} <- getContext cfg
+    let maybeCluster = Map.lookup clusterName (toMap clusters)
     case maybeCluster of
         Just cluster -> Right cluster
         Nothing      -> Left ("No cluster named " <> T.unpack cluster)
