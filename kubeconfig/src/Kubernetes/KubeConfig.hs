@@ -181,4 +181,4 @@ getCluster cfg@Config {clusters=clusters} = do
     let maybeCluster = Map.lookup clusterName (toMap clusters)
     case maybeCluster of
         Just cluster -> Right cluster
-        Nothing      -> Left ("No cluster named " <> T.unpack cluster)
+        Nothing      -> Left ("No cluster named " <> T.unpack clusterName)
