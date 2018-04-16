@@ -41,8 +41,8 @@ camelToWithOverrides c overrides = defaultOptions
 
 -- |Represents a kubeconfig.
 data Config = Config
-  { kind           :: Maybe (Text)
-  , apiVersion     :: Maybe (Text)
+  { kind           :: Maybe Text
+  , apiVersion     :: Maybe Text
   , preferences    :: Preferences
   , clusters       :: [NamedEntity Cluster "cluster"]
   , authInfos      :: [NamedEntity AuthInfo "user"]
@@ -61,7 +61,7 @@ instance FromJSON Config where
   parseJSON = genericParseJSON configJSONOptions
 
 newtype Preferences = Preferences
-  { colors :: Maybe (Bool)
+  { colors :: Maybe Bool
   } deriving (Eq, Generic, Show)
 
 instance ToJSON Preferences where
@@ -72,9 +72,9 @@ instance FromJSON Preferences where
 
 data Cluster = Cluster
   { server                   :: Text
-  , insecureSkipTLSVerify    :: Maybe (Bool)
-  , certificateAuthority     :: Maybe (Text)
-  , certificateAuthorityData :: Maybe (Text)
+  , insecureSkipTLSVerify    :: Maybe Bool
+  , certificateAuthority     :: Maybe Text
+  , certificateAuthorityData :: Maybe Text
   } deriving (Eq, Generic, Show, Typeable)
 
 instance ToJSON Cluster where
@@ -101,18 +101,18 @@ toMap :: [NamedEntity a s] -> Map.Map Text a
 toMap = Map.fromList . fmap (\NamedEntity {..} -> (name, entity))
 
 data AuthInfo = AuthInfo
-  { clientCertificate     :: Maybe (FilePath)
-  , clientCertificateData :: Maybe (Text)
-  , clientKey             :: Maybe (FilePath)
-  , clientKeyData         :: Maybe (Text)
-  , token                 :: Maybe (Text)
-  , tokenFile             :: Maybe (FilePath)
-  , impersonate           :: Maybe (Text)
-  , impersonateGroups     :: Maybe ([Text])
+  { clientCertificate     :: Maybe FilePath
+  , clientCertificateData :: Maybe Text
+  , clientKey             :: Maybe FilePath
+  , clientKeyData         :: Maybe Text
+  , token                 :: Maybe Text
+  , tokenFile             :: Maybe FilePath
+  , impersonate           :: Maybe Text
+  , impersonateGroups     :: Maybe [Text]
   , impersonateUserExtra  :: Maybe (Map.Map Text [Text])
-  , username              :: Maybe (Text)
-  , password              :: Maybe (Text)
-  , authProvider          :: Maybe (AuthProviderConfig)
+  , username              :: Maybe Text
+  , password              :: Maybe Text
+  , authProvider          :: Maybe AuthProviderConfig
   } deriving (Eq, Generic, Show, Typeable)
 
 authInfoJSONOptions = camelToWithOverrides
