@@ -14,7 +14,7 @@ main = do
   config :: Config <- fromJust <$> decodeFile "test/testdata/kubeconfig.yaml"
   hspec $ do
     describe "FromJSON and ToJSON instances" $ do
-      it "roundtrip successfully" $ do
+      it "roundtrips successfully" $ do
         decode (encode (toJSON config)) `shouldBe` Just config
     describe "getContext" $ do
       it "returns the correct context" $ do
