@@ -4,3 +4,4 @@ packages:
 - kubernetes
 - kubernetes-client-helper
 - kubernetes-watch
+- kubeconfig
