@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module WSClient
+module Kubernetes.WSClient
     (
       -- * Client connection 
       kClient
@@ -25,15 +25,9 @@ import Network.Socket(withSocketsDo)
 import qualified Data.Text as T
 import qualified Network.WebSockets as WS
 import System.Timeout
+import Kubernetes.Util
 
 
-type Channels = (
-    TChan Text -- * STDIN
-    , TChan Text -- * STDOut
-    , TChan Text -- * STDError
-    , TChan Text -- * Error
-    , TChan Text -- * Resize
-    )
 
 isOpen :: WS.Connection -> IO Bool 
 isOpen = undefined
@@ -47,33 +41,28 @@ runClient domain port route =
   withSocketsDo $ WS.runClient domain port route (\c -> kClient c _timeout)
 
 type TimeoutInterval = Int
-{-- 
-  . Read from a socket. 
-  . Parse the message and write on to an appropriate channel
-  . Start reader threads to read from the channel.
-  . Deal with asynchronous exceptions during disconnects.
---}
 
 kClient :: WS.Connection -> TimeoutInterval -> IO ([Text], [Text], [Text], [Text], [Text])
 kClient conn timeoutInterval = do
-    stdIn <- atomically newTChan
-    stdOut <- atomically newTChan 
-    stdErr <- atomically newTChan 
-    err <- atomically newTChan 
-    resize <- atomically newTChan
+    c1 <- atomically newTChan
+    c2 <- atomically newTChan 
+    c3 <- atomically newTChan 
+    c4 <- atomically newTChan 
+    c5 <- atomically newTChan
+    let channels = zip allChannels [c1, c2, c3, c4, c5]
     rcv <- timeout timeoutInterval $ forkIO $ forever $ do
         msg <- (WS.receiveData conn) `catch` (\e@(SomeException s) -> return "")
-        writeMsg (stdIn, stdOut, stdErr, err, resize) $ T.splitAt 1 msg
+        writeMsg channels $ T.splitAt 1 msg
     WS.sendClose conn ("Bye!" :: T.Text)
-    drainChannels (stdIn, stdOut, stdErr, err, resize)
+    drainChannels channels
 
-drainChannels :: Channels -> IO ([Text], [Text], [Text], [Text], [Text])
-drainChannels (stdIn, stdOut, stdErr, err, resize) = do 
-  inBuf <- channelReader stdIn
-  outBuf <- channelReader stdOut
-  stdErrBuf <- channelReader stdErr
-  errBuf <- channelReader err 
-  resizeBuf <- channelReader resize
+drainChannels :: [(ChannelId, TChan Text)] -> IO ([Text], [Text], [Text], [Text], [Text])
+drainChannels channels = do 
+  inBuf <- channelReader $ snd $ getChannelIdSTM StdIn channels
+  outBuf <- channelReader $ snd $ getChannelIdSTM StdOut channels
+  stdErrBuf <- channelReader $ snd $ getChannelIdSTM StdErr channels
+  errBuf <- channelReader $ snd $ getChannelIdSTM Error channels
+  resizeBuf <- channelReader $ snd $ getChannelIdSTM Resize channels
   return (inBuf, outBuf, stdErrBuf, errBuf, resizeBuf)
 
 channelReader :: TChan Text -> IO [Text]
@@ -88,41 +77,50 @@ channelReader inChan = do
       else
         loop inChan (nextItem : l)
 
-writeMsg :: (TChan Text, TChan Text, TChan Text, TChan Text, TChan Text) -> (Text, Text) -> IO ()
-writeMsg (stdIn, stdOut, stdErr, err, resize) (channel, message) = 
-  case channel of
-    "0" -> atomically $ writeTChan stdIn message 
-    "1" -> atomically $ writeTChan stdOut message 
-    "2" -> atomically $ writeTChan stdErr message 
-    "3" -> atomically $ writeTChan err message 
-    "4" -> atomically $ writeTChan resize message 
-    _ -> return ()
 
-readStdIn :: Channels -> STM Text
-readStdIn (stdIn, _, _, _, _) = readTChan stdIn
 
-readStdOutSTM :: Channels -> STM Text
-readStdOutSTM (_, stdOut, _, _, _) = readTChan stdOut 
+writeMsg :: [(ChannelId, TChan Text)] -> (Text, Text) -> IO ()
+writeMsg channels (channel, message) = do 
+  let chanId = readChannel channel
+  case chanId of
+    Nothing -> throwIO $ InvalidChannel channel
+    Just aChan -> 
+      mapM_ 
+        (\(x, y) -> atomically $ writeTChan y message) 
+          $ filter (\(x, y) -> x == aChan) channels
 
-readStdOut :: Channels -> IO Text 
+getChannelIdSTM :: ChannelId -> [(ChannelId, TChan Text)] -> (ChannelId, TChan Text)
+getChannelIdSTM aChannelId channels = 
+  head $ filter(\(x, _) -> x == aChannelId) channels
+
+readStdInSTM :: [(ChannelId, TChan Text)] -> STM Text
+readStdInSTM channels = readTChan $ snd $ getChannelIdSTM StdIn channels
+
+readStdIn :: [(ChannelId, TChan Text)] -> IO Text 
+readStdIn = atomically . readStdInSTM
+
+readStdOutSTM :: [(ChannelId, TChan Text)] -> STM Text
+readStdOutSTM channels = readTChan $ snd $ getChannelIdSTM StdOut channels
+
+readStdOut :: [(ChannelId, TChan Text)] -> IO Text 
 readStdOut = atomically . readStdOutSTM
 
-readStdErrSTM :: Channels -> STM Text
-readStdErrSTM (_, _, stdErr, _, _) = readTChan stdErr 
+readStdErrSTM :: [(ChannelId, TChan Text)] -> STM Text
+readStdErrSTM channels = readTChan $ snd $ getChannelIdSTM StdErr channels
 
-readStdErr :: Channels -> IO Text 
+readStdErr :: [(ChannelId, TChan Text)] -> IO Text 
 readStdErr = atomically . readStdErrSTM
 
-readErrSTM :: Channels -> STM Text 
-readErrSTM (_, _, _, err, _) = readTChan err 
+readErrSTM :: [(ChannelId, TChan Text)] -> STM Text 
+readErrSTM channels = readTChan $ snd $ getChannelIdSTM Error channels
 
-readErr :: Channels -> IO Text 
+readErr :: [(ChannelId, TChan Text)] -> IO Text 
 readErr = atomically . readErrSTM
 
-readResizeSTM :: Channels -> STM Text 
-readResizeSTM (_, _, _, _, resize) = readTChan resize
+readResizeSTM :: [(ChannelId, TChan Text)] -> STM Text 
+readResizeSTM channels = readTChan $ snd $ getChannelIdSTM Resize channels
 
-readResize :: Channels -> IO Text 
+readResize :: [(ChannelId, TChan Text)] -> IO Text 
 readResize = atomically . readResizeSTM
 
 readLineSTM :: TChan Text -> STM Text

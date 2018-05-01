@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 4e41c25175cf87f6e736fa53b567ec78a45e2615a4eb53e9249590aee79be711
+-- hash: a8a1194263629ea7bf52408c9b126b8d4a9189fcd309850fd6019f2b75d9ce3d
 
 name:           kubernetes-exec-helper
 version:        0.1.0.0
@@ -35,7 +35,8 @@ library
     , x509-system
     , x509-validation
   exposed-modules:
-      WSClient
+      Kubernetes.Util
+      Kubernetes.WSClient
   other-modules:
       Paths_kubernetes_exec_helper
   default-language: Haskell2010
