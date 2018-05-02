@@ -2,10 +2,8 @@
 
 module Kubernetes.WSStream
     (
-      -- * Client connection 
-      k8sClient
       -- * App
-      , runClient
+      runClient      
       , readLine
       , readResize
       , readStdIn
