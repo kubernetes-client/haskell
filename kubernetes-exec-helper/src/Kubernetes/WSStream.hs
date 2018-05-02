@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Kubernetes.WSClient
+module Kubernetes.WSStream
     (
       -- * Client connection 
       k8sClient
@@ -31,9 +31,7 @@ import qualified Network.WebSockets as WS
 import System.Timeout
 
 
-
-
--- | All running threads, a writer channel to send messages to the server 
+-- | State returns all threads that are running, a writer channel to send messages to the server 
 -- | and a list of all 'ChannelId' associated with a channel.
 -- | Clients can wait on '[Async ThreadId]' and proceed to work with each 
 -- | channel.
