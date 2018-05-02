@@ -3,5 +3,6 @@ extra-deps:
 packages:
 - kubernetes
 - kubernetes-client-helper
+- kubernetes-exec-helper
 - kubernetes-watch
 - kubeconfig
