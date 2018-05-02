@@ -5,6 +5,7 @@ import Data.Typeable
 import Control.Exception
 import Data.Text
 
+type TimeoutInterval = Int
 data ChannelId = StdIn | StdOut | StdErr | Error | Resize deriving (Show, Eq, Ord, Enum)
 newtype InvalidChannel = InvalidChannel Text deriving (Show, Typeable)
 

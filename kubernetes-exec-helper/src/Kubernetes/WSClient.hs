@@ -16,12 +16,13 @@ module Kubernetes.WSClient
     )
   where 
 
-import Control.Concurrent(forkIO, ThreadId)
+import Control.Concurrent(ThreadId)
 import Control.Concurrent.Async
 import Control.Concurrent.STM
 import Control.Exception
-import Control.Monad (forever, unless)
+import Control.Monad (forever)
 import Data.Maybe
+import Data.Monoid ((<>))
 import Data.Text (Text)
 import Kubernetes.Util
 import Network.Socket(withSocketsDo)
@@ -31,26 +32,26 @@ import System.Timeout
 
 
 
-isOpen :: WS.Connection -> IO Bool 
-isOpen = undefined
 
 -- | All running threads, a writer channel to send messages to the server 
 -- | and a list of all 'ChannelId' associated with a channel.
 -- | Clients can wait on '[Async ThreadId]' and proceed to work with each 
 -- | channel.
-type ClientState = ([Async ThreadId], TChan Text, [(ChannelId, TChan Text)])
+newtype ClientState a = ClientState {
+    _unState :: 
+      ([Async ThreadId], TChan a, [(ChannelId, TChan a)])
+    }
 
 runClient :: String -- ^ Host  
             -> Int  -- ^ Port 
             -> String -- ^ Path
             -> Maybe TimeoutInterval -- ^ Channel timeout.
-            -> IO ClientState 
-runClient domain port route timeout =  
-  withSocketsDo $ WS.runClient domain port route (\c -> k8sClient c timeout)
+            -> IO (ClientState Text)
+runClient domain port route = \timeout' -> 
+  withSocketsDo $ WS.runClient domain port route (\c -> k8sClient c timeout')
 
-type TimeoutInterval = Int
 
-k8sClient :: WS.Connection -> Maybe TimeoutInterval -> IO ClientState
+k8sClient :: WS.Connection -> Maybe TimeoutInterval -> IO (ClientState Text)
 k8sClient conn interval = do
     cW <- atomically newTChan :: IO (TChan Text)
     c1 <- atomically newTChan
@@ -63,7 +64,7 @@ k8sClient conn interval = do
     sender <- async $ forever $ do 
         nextMessage <- atomically . readTChan $ cW 
         WS.sendTextData conn nextMessage
-    return (catMaybes[Just sender, rcv], cW, channels)
+    return . ClientState $ (catMaybes[Just sender, rcv], cW, channels)
     where
       worker channels = async $ forever $ do 
             msg <- (WS.receiveData conn) `catch` (\e@(SomeException _) -> return $ T.pack . show $ e)
@@ -123,8 +124,11 @@ readLineSTM aChannel = do
   case messages of 
     h : t -> do 
         unGetTChan aChannel $ T.unlines t
-        return h 
+        return $ h <> "\n" 
     _ -> return ""
 
 readLine :: TChan Text -> IO Text 
 readLine = atomically . readLineSTM
+
+isOpen :: WS.Connection -> IO Bool 
+isOpen = undefined
