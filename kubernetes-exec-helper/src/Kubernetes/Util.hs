@@ -13,6 +13,7 @@ instance Exception InvalidChannel
 allChannels :: [ChannelId]
 allChannels = [StdIn .. Resize]
 
+-- TODO : Make this into an Either.
 readChannel :: Text -> Maybe ChannelId
 readChannel "0" = Just StdIn
 readChannel "1" = Just StdOut 
