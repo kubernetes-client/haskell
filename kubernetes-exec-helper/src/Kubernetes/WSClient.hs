@@ -1,16 +1,33 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Kubernetes.WSStream
+module Kubernetes.WSClient
     (
       -- * App
-      runClient      
-      , readLine
-      , readResize
-      , readStdIn
-      , readStdOut 
-      , readStdErr
+      runClient
+      -- * Reads      
       , readErr
-      , isOpen
+      , readErrSTM
+      , readLine
+      , readLineSTM
+      , readResize
+      , readResizeSTM
+      , readStdErr
+      , readStdErrSTM
+      , readStdIn
+      , readStdInSTM
+      , readStdOut 
+      , readStdOutSTM
+      -- *Writes 
+      , writeErr
+      , writeErrSTM
+      , writeResize
+      , writeResizeSTM
+      , writeStdErr
+      , writeStdErrSTM
+      , writeStdIn 
+      , writeStdInSTM
+      , writeStdOut
+      , writeStdOutSTM
     )
   where 
 
@@ -64,14 +81,15 @@ k8sClient conn interval = do
     where
       worker channels = async $ forever $ do 
             msg <- (WS.receiveData conn) `catch` (\e@(SomeException _) -> return $ T.pack . show $ e)
-            writeMsg channels $ T.splitAt 1 msg
+            publishMessage channels $ T.splitAt 1 msg
       timedThread aWorker channels timeoutInterval =
         case timeoutInterval of  
             Nothing ->  Just <$> aWorker channels
             Just m -> timeout m $ aWorker channels
 
-writeMsg :: [(ChannelId, TChan Text)] -> (Text, Text) -> IO ()
-writeMsg channels (channel, message) = do 
+-- Publish messages from the reader into the channel.
+publishMessage :: [(ChannelId, TChan Text)] -> (Text, Text) -> IO ()
+publishMessage channels (channel, message) = do 
   let chanId = readChannel channel
   case chanId of
     Nothing -> throwIO $ InvalidChannel channel
@@ -84,6 +102,8 @@ getChannelIdSTM :: ChannelId -> [(ChannelId, TChan Text)] -> (ChannelId, TChan T
 getChannelIdSTM aChannelId channels = 
   head $ filter(\(x, _) -> x == aChannelId) channels
 
+
+-- | * Readers
 readStdInSTM :: [(ChannelId, TChan Text)] -> STM Text
 readStdInSTM channels = readTChan $ snd $ getChannelIdSTM StdIn channels
 
@@ -114,9 +134,10 @@ readResizeSTM channels = readTChan $ snd $ getChannelIdSTM Resize channels
 readResize :: [(ChannelId, TChan Text)] -> IO Text 
 readResize = atomically . readResizeSTM
 
+
 readLineSTM :: TChan Text -> STM Text
 readLineSTM aChannel = do 
-  messages <- (T.split (\c -> c == '\n')) <$> readTChan aChannel 
+  messages <- T.split (== '\n') <$> readTChan aChannel 
   case messages of 
     h : t -> do 
         unGetTChan aChannel $ T.unlines t
@@ -126,5 +147,41 @@ readLineSTM aChannel = do
 readLine :: TChan Text -> IO Text 
 readLine = atomically . readLineSTM
 
-isOpen :: WS.Connection -> IO Bool 
-isOpen = undefined
+writeErrSTM :: Text -> TChan Text -> STM ()
+writeErrSTM = writeChannelIdSTM Error
+
+writeResizeSTM :: Text -> TChan Text -> STM () 
+writeResizeSTM = writeChannelIdSTM Resize
+
+writeStdErrSTM :: Text -> TChan Text -> STM () 
+writeStdErrSTM = writeChannelIdSTM StdErr
+
+writeStdOutSTM :: Text -> TChan Text -> STM () 
+writeStdOutSTM = writeChannelIdSTM StdOut
+
+writeStdInSTM :: Text -> TChan Text -> STM () 
+writeStdInSTM = writeChannelIdSTM StdIn
+
+writeErr :: Text -> TChan Text -> IO ()
+writeErr = \text chan -> atomically (writeErrSTM text chan)
+
+writeResize :: Text -> TChan Text -> IO ()
+writeResize = \text chan -> atomically (writeResizeSTM text chan)
+
+writeStdIn :: Text -> TChan Text -> IO () 
+writeStdIn = \text chan -> atomically (writeStdInSTM text chan) 
+
+writeStdOut :: Text -> TChan Text -> IO () 
+writeStdOut = \text chan -> atomically (writeStdOutSTM text chan) 
+
+writeStdErr :: Text -> TChan Text -> IO ()
+writeStdErr = \text chan -> atomically (writeStdErrSTM text chan)
+
+
+-- Write 'content' to 'ChannelId'.
+writeChannelIdSTM :: ChannelId -> Text -> TChan Text -> STM () 
+writeChannelIdSTM channelId content chan = 
+  writeTChan chan $ T.pack (show Error) <> content
+
+
+
