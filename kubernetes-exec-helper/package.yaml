@@ -5,6 +5,7 @@ library:
 dependencies:
   - base >=4.7 && <5.0
   - kubernetes == 0.1.0.0
+  - kubeconfig
   - pem
   - x509
   - tls
@@ -24,6 +25,7 @@ dependencies:
   - hlint >= 2.0 && < 3.0
   - async
   - stm
+  - mtl
 
 
 

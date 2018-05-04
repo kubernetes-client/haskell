@@ -1,4 +1,6 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE GeneralizedNewtypeDeriving #-}
+{-# LANGUAGE ScopedTypeVariables #-}
 
 module Kubernetes.WSClient
     (
@@ -36,17 +38,19 @@ import Control.Concurrent.Async
 import Control.Concurrent.STM
 import Control.Exception
 import Control.Monad (forever)
+import Control.Monad.Reader
 import Data.Maybe
 import Data.Monoid ((<>))
 import Data.Text (Text)
-import Kubernetes.Util
+import Kubernetes.K8SChannel
+import Kubernetes.KubeConfig
 import Network.Socket(withSocketsDo)
 import qualified Data.Text as T
 import qualified Network.WebSockets as WS
 import System.Timeout
 
-
--- | State returns all threads that are running, a writer channel to send messages to the server 
+-- | State maintains all threads that are running, 
+-- | a writer channel to send messages to the server 
 -- | and a list of all 'ChannelId' associated with a channel.
 -- | Clients can wait on '[Async ThreadId]' and proceed to work with each 
 -- | channel.
@@ -55,6 +59,40 @@ newtype ClientState a = ClientState {
       ([Async ThreadId], TChan a, [(ChannelId, TChan a)])
     }
 
+type PreloadContent = Bool
+data Protocol = WS | WSS
+instance Show Protocol where 
+  show WS = "ws" 
+  show WSS = "wss"
+
+type Host = String 
+type Port = Int 
+newtype URL = URL {_unP :: (Protocol, Host, Port)} 
+
+type KubeConfig = String -- todo : need help here.
+type ExecClientConfig = (KubeConfig, URL, Maybe TimeoutInterval, PreloadContent)
+newtype KubernetesClientApp a = 
+  KubernetesClientApp 
+    {runA :: ReaderT ExecClientConfig IO a }
+    deriving (Monad, MonadIO, Functor, Applicative
+      , MonadReader ExecClientConfig)
+
+runApp :: KubeConfig -> Protocol -> Host -> Port -> Maybe TimeoutInterval -> PreloadContent -> IO () 
+runApp kC proto host port timeout preloadContent = do
+  let config = (kC, (URL (proto, host, port)), timeout, preloadContent) 
+  runReaderT (runA exec) config
+
+
+exec :: KubernetesClientApp ()
+exec = do 
+  (cfg, URL (proto, host, port), interval, preloadContent) :: ExecClientConfig <- ask
+  liftIO $ do 
+    ClientState (threads, writer, readers) <- runClient (show (proto :: Protocol) <> "://" <> host) (port) "/" interval
+    
+    Async.waitAll threads 
+
+
+-- | Run the web socket client.
 runClient :: String -- ^ Host  
             -> Int  -- ^ Port 
             -> String -- ^ Path
@@ -63,16 +101,16 @@ runClient :: String -- ^ Host
 runClient domain port route = \timeout' -> 
   withSocketsDo $ WS.runClient domain port route (\c -> k8sClient c timeout')
 
-
+-- | Socket IO handler.
 k8sClient :: WS.Connection -> Maybe TimeoutInterval -> IO (ClientState Text)
 k8sClient conn interval = do
     cW <- atomically newTChan :: IO (TChan Text)
-    c1 <- atomically newTChan
+    c0 <- atomically newTChan
+    c1 <- atomically newTChan 
     c2 <- atomically newTChan 
     c3 <- atomically newTChan 
-    c4 <- atomically newTChan 
-    c5 <- atomically newTChan
-    let channels = zip allChannels [c1, c2, c3, c4, c5]
+    c3 <- atomically newTChan
+    let channels = zip allChannels [c0, c1, c2, c3, c4]
     rcv <- timedThread worker channels interval
     sender <- async $ forever $ do 
         nextMessage <- atomically . readTChan $ cW 

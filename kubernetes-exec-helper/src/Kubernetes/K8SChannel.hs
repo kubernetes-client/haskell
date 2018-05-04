@@ -1,5 +1,5 @@
 {-# LANGUAGE OverloadedStrings #-}
-module Kubernetes.Util where 
+module Kubernetes.K8SChannel where 
 
 import Data.Typeable
 import Control.Exception
