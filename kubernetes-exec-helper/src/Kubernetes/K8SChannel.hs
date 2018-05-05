@@ -1,8 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-| 
   Module : Kubernetes.K8SChannel
-  This module maintains types to interact with the 
-  STM channels and IO.
+  Description : This module maintains types to interact with STM channels and IO.
 -}
 module Kubernetes.K8SChannel where 
 
