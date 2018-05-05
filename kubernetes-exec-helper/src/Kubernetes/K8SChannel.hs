@@ -1,4 +1,9 @@
 {-# LANGUAGE OverloadedStrings #-}
+{-| 
+  -- Module : Kubernetes.K8SChannel
+  -- This module maintains types to interact with the 
+  -- the channels and the websocket client.
+-}
 module Kubernetes.K8SChannel where 
 
 import Data.Typeable
@@ -6,9 +11,21 @@ import Control.Exception
 import Data.Text
 import System.IO (stdin, stdout, stderr, Handle)
 
+-- | An interval in seconds for the timeout.
 type TimeoutInterval = Int
+
+-- | ChannelId encoding '[stdin, stdout, stderr]'.
 data ChannelId = StdIn | StdOut | StdErr | Error | Resize deriving (Eq, Ord, Enum)
+
+-- | An invalid channel.
 newtype InvalidChannel = InvalidChannel Text deriving (Show, Typeable)
+
+-- | 'Show' instance for channels with 
+-- | 'StdIn' -> 0
+-- | 'StdOut' -> 1
+-- | 'StdErr' -> 2
+-- | 'Error' -> 3  -- ^ TODO : what does Error mean?
+-- | 'Resize' -> 4 -- ^ TODO : how to test Resize.
 
 instance Show ChannelId where 
   show StdIn = "0"
@@ -17,12 +34,16 @@ instance Show ChannelId where
   show Error = "3"
   show Resize = "4"
 
+-- | Parsing incoming text can result in this exception.
+-- | Currently, any channel that is not mapped to a channel, 
+-- | sends the output intended for the channel to 'stderr'
 instance Exception InvalidChannel
 
+-- | Enumerate all of the channels supported.
 allChannels :: [ChannelId]
 allChannels = [StdIn .. Resize]
 
--- TODO : Make this into an Either.
+-- | Decode text to a channel.
 readChannel :: Text -> Maybe ChannelId
 readChannel "0" = Just StdIn
 readChannel "1" = Just StdOut 
@@ -31,7 +52,7 @@ readChannel "3" = Just Error
 readChannel "4" = Just Resize 
 readChannel _ = Nothing
 
--- | Tie the channel back to the appropriate handles
+-- | Tie the channel back to the handles on the command line.
 mapChannel :: ChannelId -> Handle 
 mapChannel StdIn = stdin
 mapChannel StdOut = stdout

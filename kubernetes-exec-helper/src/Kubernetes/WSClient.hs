@@ -2,6 +2,13 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
+{-
+  -- Module : Kubernetes.WSClient
+  -- Description : This module manages all connections and channels associated with 
+  -- the channels. 
+  -- Note : Flush channels happens after any of the threads close, therefore 
+  -- the flush operation may not completely flush all the contents.
+-}
 module Kubernetes.WSClient
     (
       -- * App
@@ -62,17 +69,25 @@ newtype ClientState a = ClientState {
       ([Async ThreadId], TChan a, [(ChannelId, TChan a)])
     }
 
+-- | A flag from the python library.
 type PreloadContent = Bool
+
+-- | A simple case to distinguish secure web sockets or otherwise.
 data Protocol = WS | WSS
+
+
 instance Show Protocol where 
   show WS = "ws" 
   show WSS = "wss"
 
 type Host = String 
 type Port = Int 
+
 newtype URL = URL {_unP :: (Protocol, Host, Port)} 
 
 type KubeConfig = String -- todo : need help here.
+
+-- | A reader configuration when running the client.
 type ExecClientConfig = (KubeConfig, URL, Maybe TimeoutInterval, PreloadContent)
 newtype KubernetesClientApp a = 
   KubernetesClientApp 
@@ -80,6 +95,7 @@ newtype KubernetesClientApp a =
     deriving (Monad, MonadIO, Functor, Applicative
       , MonadReader ExecClientConfig)
 
+-- | The core application when a user attaches a command to the pod.
 runApp :: KubeConfig -> Protocol -> Host -> Port -> Maybe TimeoutInterval -> PreloadContent -> IO () 
 runApp kC proto host port timeout preloadContent = do
   let config = (kC, (URL (proto, host, port)), timeout, preloadContent) 
@@ -92,6 +108,9 @@ writeToLocalChannels :: [(ChannelId, TChan Text)] -> IO [Async ThreadId]
 writeToLocalChannels channels = 
   mapM (flip writeToLocalChannel channels) $ [StdIn, StdOut, StdErr] 
 
+-- | Write to a local channel. The word local channel is used to represent the 
+-- | command line from which a user is running a command.
+
 writeToLocalChannel :: ChannelId -> [(ChannelId, TChan Text)] -> IO (Async ThreadId)
 writeToLocalChannel channelId channels = do 
   let std = mapChannel channelId
@@ -100,6 +119,7 @@ writeToLocalChannel channelId channels = do
         message <- atomically $ readTChan $ getTChanSTM channelId channels
         T.hPutStr std message
 
+-- | Send 'stdin' to the pod.
 readFromStdIn :: TChan Text -> IO (Async ThreadId)
 readFromStdIn outputChan = do 
   hSetBuffering stdin NoBuffering 
