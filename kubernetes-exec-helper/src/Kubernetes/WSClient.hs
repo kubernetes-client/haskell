@@ -34,7 +34,7 @@ module Kubernetes.WSClient
   where 
 
 import Control.Concurrent(ThreadId)
-import Control.Concurrent.Async
+import Control.Concurrent.Async(waitAny, async, Async)
 import Control.Concurrent.STM
 import Control.Exception
 import Control.Monad (forever)
@@ -46,8 +46,10 @@ import Kubernetes.K8SChannel
 import Kubernetes.KubeConfig
 import Network.Socket(withSocketsDo)
 import qualified Data.Text as T
+import qualified Data.Text.IO as T
 import qualified Network.WebSockets as WS
-import System.Timeout
+import System.Timeout (timeout) 
+import System.IO (hSetBuffering, BufferMode(..), stdin, stdout, stderr)
 
 -- | State maintains all threads that are running, 
 -- | a writer channel to send messages to the server 
@@ -82,15 +84,34 @@ runApp kC proto host port timeout preloadContent = do
   let config = (kC, (URL (proto, host, port)), timeout, preloadContent) 
   runReaderT (runA exec) config
 
+writeToLocalChannels :: [(ChannelId, TChan Text)] -> IO [Async ThreadId]
+writeToLocalChannels channels = 
+  mapM (flip writeToLocalChannel channels) $ [StdIn, StdOut, StdErr] 
+
+writeToLocalChannel :: ChannelId -> [(ChannelId, TChan Text)] -> IO (Async ThreadId)
+writeToLocalChannel channelId channels = do 
+  let std = mapChannel channelId
+  hSetBuffering std NoBuffering
+  r <- async $ forever $ do
+        message <- atomically $ readTChan $ getTChanSTM channelId channels
+        T.hPutStr std message 
+  return r
+
+readFromStdIn :: TChan Text -> IO [Async ThreadId]
+readFromStdIn = undefined
+
+waitAny_ :: [Async a] -> IO ()
+waitAny_ threads = waitAny threads >> return ()
 
 exec :: KubernetesClientApp ()
 exec = do 
   (cfg, URL (proto, host, port), interval, preloadContent) :: ExecClientConfig <- ask
   liftIO $ do 
     ClientState (threads, writer, readers) <- runClient (show (proto :: Protocol) <> "://" <> host) (port) "/" interval
-    
-    Async.waitAll threads 
-
+    -- Start all threads to publish to the appropriate channels.
+    writers <- writeToLocalChannels readers 
+    reader <- readFromStdIn writer
+    waitAny_ $ threads ++ writers ++ reader
 
 -- | Run the web socket client.
 runClient :: String -- ^ Host  
@@ -109,7 +130,7 @@ k8sClient conn interval = do
     c1 <- atomically newTChan 
     c2 <- atomically newTChan 
     c3 <- atomically newTChan 
-    c3 <- atomically newTChan
+    c4 <- atomically newTChan
     let channels = zip allChannels [c0, c1, c2, c3, c4]
     rcv <- timedThread worker channels interval
     sender <- async $ forever $ do 
@@ -132,16 +153,19 @@ publishMessage channels (channel, message) = do
   case chanId of
     Nothing -> throwIO $ InvalidChannel channel
     Just aChan -> 
-      mapM_ 
-        (\(_, y) -> atomically $ writeTChan y message) 
-          $ filter (\(x, _) -> x == aChan) channels
+      atomically $
+        writeTChan (snd $ getChannelIdSTM aChan channels) message
 
+getTChanSTM :: ChannelId -> [(ChannelId, TChan Text)] -> TChan Text 
+getTChanSTM a b = snd $ getChannelIdSTM a b 
 getChannelIdSTM :: ChannelId -> [(ChannelId, TChan Text)] -> (ChannelId, TChan Text)
 getChannelIdSTM aChannelId channels = 
   head $ filter(\(x, _) -> x == aChannelId) channels
 
-
 -- | * Readers
+readChannelIdSTM :: ChannelId -> [(ChannelId, TChan Text)] -> STM Text 
+readChannelIdSTM channel channels = 
+    readTChan $ snd $ getChannelIdSTM channel channels
 readStdInSTM :: [(ChannelId, TChan Text)] -> STM Text
 readStdInSTM channels = readTChan $ snd $ getChannelIdSTM StdIn channels
 

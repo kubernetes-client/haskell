@@ -4,6 +4,7 @@ module Kubernetes.K8SChannel where
 import Data.Typeable
 import Control.Exception
 import Data.Text
+import System.IO (stdin, stdout, stderr, Handle)
 
 type TimeoutInterval = Int
 data ChannelId = StdIn | StdOut | StdErr | Error | Resize deriving (Show, Eq, Ord, Enum)
@@ -22,3 +23,12 @@ readChannel "2" = Just StdErr
 readChannel "3" = Just Error 
 readChannel "4" = Just Resize 
 readChannel _ = Nothing
+
+-- | Tie the channel back to the appropriate handles
+mapChannel :: ChannelId -> Handle 
+mapChannel StdIn = stdin
+mapChannel StdOut = stdout
+mapChannel StdErr = stderr
+mapChannel _  = stderr
+
+
