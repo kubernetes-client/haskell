@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 05566e366213ba5f6690b19782b8fd3c78f4735b0048a34f2e4f5ba605278613
+-- hash: d3598969223a63400e0c4220880895ff8a01d36920beb0244cabff25c3196f24
 
 name:           kubernetes-exec-helper
 version:        0.1.0.0
@@ -13,7 +13,8 @@ library
   hs-source-dirs:
       src
   build-depends:
-      async
+      HTTP >=4000.3.9 && <4000.3.10
+    , async
     , base >=4.7 && <5.0
     , bytestring >=0.10.0 && <0.11
     , connection

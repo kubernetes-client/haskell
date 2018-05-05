@@ -55,6 +55,7 @@ import Data.Monoid ((<>))
 import Data.Text (Text)
 import Kubernetes.K8SChannel
 import Kubernetes.KubeConfig
+import Network.HTTP.Base (urlEncodeVars)
 import Network.Socket(withSocketsDo)
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
@@ -85,15 +86,30 @@ instance Show Protocol where
   show WS = "ws" 
   show WSS = "wss"
 
-type Host = String 
+-- | The host.
+type Host = String
+-- | The port. 
 type Port = Int 
 
+-- | The URL with "Protocol", "Host" and "Port"
 newtype URL = URL {_unP :: (Protocol, Host, Port)} 
 
+-- | The kube config.
 type KubeConfig = String -- TODO : need help here.
 
+-- | Command contains the "Executable" and a list of "Arguments"
+type Command = String
+
 -- | A reader configuration when running the client.
-type ExecClientConfig = (KubeConfig, URL, Maybe TimeoutInterval, PreloadContent)
+data ExecClientConfig = 
+  ExecClientConfig {
+  _kubeConfig :: KubeConfig
+  , _url :: URL 
+  , _timeout :: Maybe TimeoutInterval
+  , _preload :: Bool
+  , _commands :: Command
+  } 
+  
 newtype KubernetesClientApp a = 
   KubernetesClientApp 
     {runA :: ReaderT ExecClientConfig IO a }
@@ -101,9 +117,15 @@ newtype KubernetesClientApp a =
       , MonadReader ExecClientConfig)
 
 -- | The core application when a user attaches a command to the pod.
-runApp :: KubeConfig -> Protocol -> Host -> Port -> Maybe TimeoutInterval -> PreloadContent -> IO () 
-runApp kC proto host port timeout preloadContent = do
-  let config = (kC, (URL (proto, host, port)), timeout, preloadContent) 
+runApp :: KubeConfig -> Protocol -> Host -> Port -> 
+            Maybe TimeoutInterval -> 
+            PreloadContent -> Command -> IO () 
+runApp kC proto host port timeout preloadContent command = do
+  let config = ExecClientConfig kC
+                      (URL (proto, host, port)) 
+                      timeout
+                      preloadContent
+                      command
   runReaderT (runA exec) config
 
 -- | Read the text from the channels and direct to the appropriate 
@@ -144,9 +166,15 @@ readFromStdIn outputChan = do
 -}
 exec :: KubernetesClientApp ()
 exec = do 
-  (cfg, URL (proto, host, port), interval, preloadContent) :: ExecClientConfig <- ask
+  ExecClientConfig cfg 
+        (URL (proto, host, port))
+        interval
+        preloadContent
+        command <- ask
   liftIO $ do 
-    ClientState (threads, writer, readers) <- runClient (show (proto :: Protocol) <> "://" <> host) (port) "/" interval
+    let queryParams = urlEncodeVars [("command", command)]
+    ClientState (threads, writer, readers) <- 
+      runClient (show (proto :: Protocol) <> "://" <> host) (port) ("/?" <> queryParams) interval
     -- Start all threads to publish to the appropriate channels.
     writers <- writeToLocalChannels readers 
     reader <- readFromStdIn writer

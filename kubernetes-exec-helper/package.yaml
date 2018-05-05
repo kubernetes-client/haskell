@@ -26,6 +26,7 @@ dependencies:
   - async
   - stm
   - mtl
+  - HTTP >= 4000.3.9 && < 4000.3.10
 
 
 
