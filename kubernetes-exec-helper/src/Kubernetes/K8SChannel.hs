@@ -1,8 +1,8 @@
 {-# LANGUAGE OverloadedStrings #-}
 {-| 
-  -- Module : Kubernetes.K8SChannel
-  -- This module maintains types to interact with the 
-  -- the channels and the websocket client.
+  Module : Kubernetes.K8SChannel
+  This module maintains types to interact with the 
+  STM channels and IO.
 -}
 module Kubernetes.K8SChannel where 
 

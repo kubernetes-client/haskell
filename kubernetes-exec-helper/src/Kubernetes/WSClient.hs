@@ -2,17 +2,20 @@
 {-# LANGUAGE GeneralizedNewtypeDeriving #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
-{-
-  -- Module : Kubernetes.WSClient
-  -- Description : This module manages all connections and channels associated with 
-  -- the channels. 
-  -- Note : Flush channels happens after any of the threads close, therefore 
-  -- the flush operation may not completely flush all the contents.
+{- |
+  Module : Kubernetes.WSClient
+  Description : This module implements a web socket client attaching to kubectl exec command. 
+
+  This implementation is based on the 
+  python reference implementaion <https://github.com/kubernetes-client/python-base/tree/a41c44715241552de73361673152f3f0d0bb9bc4/stream 
+  here>.
 -}
 module Kubernetes.WSClient
     (
       -- * App
-      runClient
+      runApp -- ^ The main application.
+      , runClient
+      , exec
       -- * Reads      
       , readErr
       , readErrSTM
@@ -37,13 +40,14 @@ module Kubernetes.WSClient
       , writeStdInSTM
       , writeStdOut
       , writeStdOutSTM
+      , writeChannelIdSTM -- ^ Write to a "ChannelId" prefixing the channel code.
     )
   where 
 
 import Control.Concurrent(ThreadId)
 import Control.Concurrent.Async(waitAny, async, Async)
 import Control.Concurrent.STM
-import Control.Exception
+import Control.Exception.Safe
 import Control.Monad (forever)
 import Control.Monad.Reader
 import Data.Maybe
@@ -58,23 +62,24 @@ import qualified Network.WebSockets as WS
 import System.Timeout (timeout) 
 import System.IO (hSetBuffering, BufferMode(..), stdin, stdout, stderr)
 
-
--- | State maintains all threads that are running, 
--- | a writer channel to send messages to the server 
--- | and a list of all 'ChannelId' associated with a channel.
--- | Clients can wait on '[Async ThreadId]' and proceed to work with each 
--- | channel.
+{- | 
+  ClientState" maintains all threads that are running,  
+  a writer channel to send messages to the server 
+  and a list of all "(ChannelId, TChan Text)" pairs.
+  Clients can wait on '[Async ThreadId]' and proceed to work with each channel.
+-}
 newtype ClientState a = ClientState {
     _unState :: 
       ([Async ThreadId], TChan a, [(ChannelId, TChan a)])
     }
 
--- | A flag from the python library.
+-- A flag from the python library.
 type PreloadContent = Bool
 
--- | A simple case to distinguish secure web sockets or otherwise.
-data Protocol = WS | WSS
-
+-- | Secure web sockets connection?
+data Protocol = 
+  WS -- ^ "ws://abc.co" 
+  | WSS -- ^ "wss://abc.co"
 
 instance Show Protocol where 
   show WS = "ws" 
@@ -85,7 +90,7 @@ type Port = Int
 
 newtype URL = URL {_unP :: (Protocol, Host, Port)} 
 
-type KubeConfig = String -- todo : need help here.
+type KubeConfig = String -- TODO : need help here.
 
 -- | A reader configuration when running the client.
 type ExecClientConfig = (KubeConfig, URL, Maybe TimeoutInterval, PreloadContent)
@@ -103,14 +108,13 @@ runApp kC proto host port timeout preloadContent = do
 
 -- | Read the text from the channels and direct to the appropriate 
 -- | local channel.
-
 writeToLocalChannels :: [(ChannelId, TChan Text)] -> IO [Async ThreadId]
 writeToLocalChannels channels = 
   mapM (flip writeToLocalChannel channels) $ [StdIn, StdOut, StdErr] 
 
--- | Write to a local channel. The word local channel is used to represent the 
+-- | Write to a local channel. 
+-- | === Note : The word local channel is used to represent the 
 -- | command line from which a user is running a command.
-
 writeToLocalChannel :: ChannelId -> [(ChannelId, TChan Text)] -> IO (Async ThreadId)
 writeToLocalChannel channelId channels = do 
   let std = mapChannel channelId
@@ -127,12 +131,16 @@ readFromStdIn outputChan = do
     text <- T.hGetLine stdin 
     atomically $ writeTChan outputChan $ (T.pack $ show StdIn) <> text
 
-
-
-{- | Start the web socket client. 
- - | Setup local writers 
- - | Setup a command thread to send commands to the server 
- - | Flush all channels after any of the threads stops.
+{- | 
+  * Start the web socket client. Setup local writers .
+  * Setup a command reader thread to send commands to the server. 
+  * Flush all channels after any of the threads stops.
+ 
+ === Note : It helps to view the 'writers' and 'readers' from 
+ within the process therefore, the process essentially reads from an
+ input file handle and writes to channels for consumption. Readers 
+ read from a channel and communicate with the output handle. This world view
+ helps to get the direction right.
 -}
 exec :: KubernetesClientApp ()
 exec = do 
@@ -148,6 +156,7 @@ exec = do
     waitAny_ :: [Async a] -> IO ()
     waitAny_ threads = waitAny threads >> return ()
 
+-- | Flush all channels as part of cleanup.
 flushLocalChannels :: [(ChannelId, TChan Text)] -> IO () 
 flushLocalChannels channels = 
   mapM_ flushLocalChannel channels 
@@ -162,20 +171,23 @@ flushLocalChannels channels =
         T.hPutStr std message
         flushLocalChannel (channelId, tChan)
 
-
--- | Run the web socket client.
+-- | Run the web socket client. 
 runClient :: String -- ^ Host  
             -> Int  -- ^ Port 
             -> String -- ^ Path
             -> Maybe TimeoutInterval -- ^ Channel timeout.
             -> IO (ClientState Text)
 runClient domain port route = \timeout' -> 
-  withSocketsDo $ WS.runClient domain port route (\c -> k8sClient c timeout')
+  withSocketsDo $ WS.runClient domain port route $ 
+    (\c -> bracket 
+          (return c)
+          (\c ->WS.sendClose c ("Closing session" :: T.Text))
+          (\c -> k8sClient c timeout'))
 
 -- | Socket IO handler.
 k8sClient :: WS.Connection -> Maybe TimeoutInterval -> IO (ClientState Text)
 k8sClient conn interval = do
-    cW <- atomically newTChan :: IO (TChan Text)
+    cW <- atomically newTChan :: IO (TChan Text) -- Writer channel
     c0 <- atomically newTChan
     c1 <- atomically newTChan 
     c2 <- atomically newTChan 
@@ -196,7 +208,7 @@ k8sClient conn interval = do
             Nothing ->  Just <$> aWorker channels
             Just m -> timeout m $ aWorker channels
 
--- Publish messages from the reader into the channel.
+-- | Publish messages from the reader into the channel.
 publishMessage :: [(ChannelId, TChan Text)] -> (Text, Text) -> IO ()
 publishMessage channels (channel, message) = do 
   let chanId = readChannel channel
@@ -206,13 +218,13 @@ publishMessage channels (channel, message) = do
       atomically $
         writeTChan (snd $ getChannelIdSTM aChan channels) message
 
+
 getTChanSTM :: ChannelId -> [(ChannelId, TChan Text)] -> TChan Text 
 getTChanSTM a b = snd $ getChannelIdSTM a b 
 getChannelIdSTM :: ChannelId -> [(ChannelId, TChan Text)] -> (ChannelId, TChan Text)
 getChannelIdSTM aChannelId channels = 
   head $ filter(\(x, _) -> x == aChannelId) channels
 
--- | * Readers
 readChannelIdSTM :: ChannelId -> [(ChannelId, TChan Text)] -> STM Text 
 readChannelIdSTM channel channels = 
     readTChan $ snd $ getChannelIdSTM channel channels
@@ -294,6 +306,3 @@ writeStdErr = \text chan -> atomically (writeStdErrSTM text chan)
 writeChannelIdSTM :: ChannelId -> Text -> TChan Text -> STM () 
 writeChannelIdSTM channelId content chan = 
   writeTChan chan $ T.pack (show Error) <> content
-
-
-
