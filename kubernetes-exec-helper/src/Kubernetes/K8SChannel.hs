@@ -7,8 +7,15 @@ import Data.Text
 import System.IO (stdin, stdout, stderr, Handle)
 
 type TimeoutInterval = Int
-data ChannelId = StdIn | StdOut | StdErr | Error | Resize deriving (Show, Eq, Ord, Enum)
+data ChannelId = StdIn | StdOut | StdErr | Error | Resize deriving (Eq, Ord, Enum)
 newtype InvalidChannel = InvalidChannel Text deriving (Show, Typeable)
+
+instance Show ChannelId where 
+  show StdIn = "0"
+  show StdOut = "1" 
+  show StdErr = "2"
+  show Error = "3"
+  show Resize = "4"
 
 instance Exception InvalidChannel
 

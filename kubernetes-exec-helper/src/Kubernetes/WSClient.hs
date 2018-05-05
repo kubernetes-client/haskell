@@ -51,6 +51,7 @@ import qualified Network.WebSockets as WS
 import System.Timeout (timeout) 
 import System.IO (hSetBuffering, BufferMode(..), stdin, stdout, stderr)
 
+
 -- | State maintains all threads that are running, 
 -- | a writer channel to send messages to the server 
 -- | and a list of all 'ChannelId' associated with a channel.
@@ -84,6 +85,9 @@ runApp kC proto host port timeout preloadContent = do
   let config = (kC, (URL (proto, host, port)), timeout, preloadContent) 
   runReaderT (runA exec) config
 
+-- | Read the text from the channels and direct to the appropriate 
+-- | local channel.
+
 writeToLocalChannels :: [(ChannelId, TChan Text)] -> IO [Async ThreadId]
 writeToLocalChannels channels = 
   mapM (flip writeToLocalChannel channels) $ [StdIn, StdOut, StdErr] 
@@ -92,17 +96,24 @@ writeToLocalChannel :: ChannelId -> [(ChannelId, TChan Text)] -> IO (Async Threa
 writeToLocalChannel channelId channels = do 
   let std = mapChannel channelId
   hSetBuffering std NoBuffering
-  r <- async $ forever $ do
+  async $ forever $ do
         message <- atomically $ readTChan $ getTChanSTM channelId channels
-        T.hPutStr std message 
-  return r
+        T.hPutStr std message
 
-readFromStdIn :: TChan Text -> IO [Async ThreadId]
-readFromStdIn = undefined
+readFromStdIn :: TChan Text -> IO (Async ThreadId)
+readFromStdIn outputChan = do 
+  hSetBuffering stdin NoBuffering 
+  async $ forever $ do 
+    text <- T.hGetLine stdin 
+    atomically $ writeTChan outputChan $ (T.pack $ show StdIn) <> text
 
-waitAny_ :: [Async a] -> IO ()
-waitAny_ threads = waitAny threads >> return ()
 
+
+{- | Start the web socket client. 
+ - | Setup local writers 
+ - | Setup a command thread to send commands to the server 
+ - | Flush all channels after any of the threads stops.
+-}
 exec :: KubernetesClientApp ()
 exec = do 
   (cfg, URL (proto, host, port), interval, preloadContent) :: ExecClientConfig <- ask
@@ -111,7 +122,26 @@ exec = do
     -- Start all threads to publish to the appropriate channels.
     writers <- writeToLocalChannels readers 
     reader <- readFromStdIn writer
-    waitAny_ $ threads ++ writers ++ reader
+    waitAny_ $ reader : (threads ++ writers)
+    flushLocalChannels readers
+  where
+    waitAny_ :: [Async a] -> IO ()
+    waitAny_ threads = waitAny threads >> return ()
+
+flushLocalChannels :: [(ChannelId, TChan Text)] -> IO () 
+flushLocalChannels channels = 
+  mapM_ flushLocalChannel channels 
+  where 
+    flushLocalChannel :: (ChannelId, TChan Text) -> IO ()
+    flushLocalChannel (channelId, tChan) = do 
+      chanEmpty <- atomically $ isEmptyTChan tChan 
+      when (not chanEmpty) $ do 
+        let std = mapChannel channelId
+        hSetBuffering std NoBuffering
+        message <- atomically $ readTChan $ getTChanSTM channelId channels
+        T.hPutStr std message
+        flushLocalChannel (channelId, tChan)
+
 
 -- | Run the web socket client.
 runClient :: String -- ^ Host  
