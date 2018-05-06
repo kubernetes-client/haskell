@@ -26,7 +26,21 @@ dependencies:
   - async
   - stm
   - mtl
-  - HTTP >= 4000.3.9 && < 4000.3.10
+  - HTTP >= 4000.3.9 && < 4000.3.12
+  - optparse-applicative
 
-
-
+executable : 
+  main: Exec.hs
+  source-dirs: examples
+  dependencies: 
+    - yaml
+    - kubeconfig
+    - kubernetes-exec-helper
+tests:
+  spec:
+    main: Spec.hs
+    source-dirs: test
+    dependencies:
+      - hspec
+      - yaml
+      - kubeconfig
