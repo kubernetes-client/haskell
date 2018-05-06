@@ -29,6 +29,7 @@ module Kubernetes.WSClient
       , readStdInSTM
       , readStdOut 
       , readStdOutSTM
+      , readChannelIdSTM
       -- *Writes 
       , writeErr
       , writeErrSTM
@@ -61,7 +62,7 @@ import qualified Data.Text as T
 import qualified Data.Text.IO as T
 import qualified Network.WebSockets as WS
 import System.Timeout (timeout) 
-import System.IO (hSetBuffering, BufferMode(..), stdin, stdout, stderr)
+import System.IO (hSetBuffering, BufferMode(..), stdin)
 
 {- | 
   ClientState" maintains all threads that are running,  
@@ -95,7 +96,7 @@ type Port = Int
 newtype URL = URL {_unP :: (Protocol, Host, Port)} 
 
 -- | The kube config.
-type KubeConfig = String -- TODO : need help here.
+type KubeConfig = Config
 
 -- | Command contains the "Executable" and a list of "Arguments"
 type Command = String
@@ -120,10 +121,10 @@ newtype KubernetesClientApp a =
 runApp :: KubeConfig -> Protocol -> Host -> Port -> 
             Maybe TimeoutInterval -> 
             PreloadContent -> Command -> IO () 
-runApp kC proto host port timeout preloadContent command = do
+runApp kC proto host port timeoutInterval preloadContent command = do
   let config = ExecClientConfig kC
                       (URL (proto, host, port)) 
-                      timeout
+                      timeoutInterval
                       preloadContent
                       command
   runReaderT (runA exec) config
@@ -177,8 +178,8 @@ exec = do
       runClient (show (proto :: Protocol) <> "://" <> host) (port) ("/?" <> queryParams) interval
     -- Start all threads to publish to the appropriate channels.
     writers <- writeToLocalChannels readers 
-    reader <- readFromStdIn writer
-    waitAny_ $ reader : (threads ++ writers)
+    readerThread <- readFromStdIn writer
+    waitAny_ $ readerThread : (threads ++ writers)
     flushLocalChannels readers
   where
     waitAny_ :: [Async a] -> IO ()
@@ -192,7 +193,7 @@ flushLocalChannels channels =
     flushLocalChannel :: (ChannelId, TChan Text) -> IO ()
     flushLocalChannel (channelId, tChan) = do 
       chanEmpty <- atomically $ isEmptyTChan tChan 
-      when (not chanEmpty) $ do 
+      unless chanEmpty $ do 
         let std = mapChannel channelId
         hSetBuffering std NoBuffering
         message <- atomically $ readTChan $ getTChanSTM channelId channels
@@ -209,8 +210,8 @@ runClient domain port route = \timeout' ->
   withSocketsDo $ WS.runClient domain port route $ 
     (\c -> bracket 
           (return c)
-          (\c ->WS.sendClose c ("Closing session" :: T.Text))
-          (\c -> k8sClient c timeout'))
+          (\conn ->WS.sendClose conn ("Closing session" :: T.Text))
+          (\conn -> k8sClient conn timeout'))
 
 -- | Socket IO handler.
 k8sClient :: WS.Connection -> Maybe TimeoutInterval -> IO (ClientState Text)
@@ -256,6 +257,7 @@ getChannelIdSTM aChannelId channels =
 readChannelIdSTM :: ChannelId -> [(ChannelId, TChan Text)] -> STM Text 
 readChannelIdSTM channel channels = 
     readTChan $ snd $ getChannelIdSTM channel channels
+
 readStdInSTM :: [(ChannelId, TChan Text)] -> STM Text
 readStdInSTM channels = readTChan $ snd $ getChannelIdSTM StdIn channels
 
@@ -333,4 +335,4 @@ writeStdErr = \text chan -> atomically (writeStdErrSTM text chan)
 -- Write 'content' to 'ChannelId'.
 writeChannelIdSTM :: ChannelId -> Text -> TChan Text -> STM () 
 writeChannelIdSTM channelId content chan = 
-  writeTChan chan $ T.pack (show Error) <> content
+  writeTChan chan $ T.pack (show channelId) <> content
