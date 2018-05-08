@@ -5,9 +5,15 @@
 -}
 module Kubernetes.K8SChannel where 
 
-import Data.Typeable
 import Control.Exception
+import Control.Exception.Safe
+import Control.Monad (forever)
+import Control.Concurrent(ThreadId)
+import Control.Concurrent.Async(waitAny, async, Async)
+import Control.Concurrent.STM
 import Data.Text
+import Data.Typeable
+import Kubernetes.KubeConfig
 import System.IO (stdin, stdout, stderr, Handle)
 
 -- | An interval in seconds for the timeout.
@@ -18,6 +24,54 @@ data ChannelId = StdIn | StdOut | StdErr | Error | Resize deriving (Eq, Ord, Enu
 
 -- | An invalid channel.
 newtype InvalidChannel = InvalidChannel Text deriving (Show, Typeable)
+
+
+{- | 
+  ClientState" maintains all threads that are running,  
+  a writer channel to send messages to the server 
+  and a list of all "(ChannelId, TChan Text)" pairs.
+  Clients can wait on '[Async ThreadId]' and proceed to work with each channel.
+-}
+newtype ClientState a = ClientState {
+    _unState :: 
+      ([Async ThreadId], TChan a, [(ChannelId, TChan a)])
+    }
+
+-- A flag from the python library.
+type PreloadContent = Bool
+
+-- | Secure web sockets connection?
+data Protocol = 
+  WS -- ^ "ws://abc.co" 
+  | WSS -- ^ "wss://abc.co"
+
+instance Show Protocol where 
+  show WS = "ws" 
+  show WSS = "wss"
+
+-- | The host.
+type Host = String
+-- | The port. 
+type Port = Int 
+
+-- | The URL with "Protocol", "Host" and "Port"
+newtype URL = URL {_unP :: (Protocol, Host, Port)} 
+
+-- | The kube config.
+type KubeConfig = Config
+
+-- | Command contains the "Executable" and a list of "Arguments"
+type Command = String
+
+-- | A reader configuration when running the client.
+data ExecClientConfig = 
+  ExecClientConfig {
+  _kubeConfig :: KubeConfig
+  , _url :: URL 
+  , _timeout :: Maybe TimeoutInterval
+  , _preload :: Bool
+  , _commands :: Command
+  } 
 
 -- | 'Show' instance for channels with 
 -- | 'StdIn' -> 0

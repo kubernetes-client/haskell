@@ -7,7 +7,7 @@
 module Main where
 
 import System.IO
-import Kubernetes.WSStream
+import qualified Kubernetes.WSStream as WSStream
 import Data.Yaml (decodeFile, decodeEither, decodeFileEither, ParseException)
 import Data.Maybe (fromJust)
 import Kubernetes.KubeConfig(Config, getContext, getCluster)
@@ -17,7 +17,7 @@ import Data.Semigroup ((<>))
 data Settings = Settings {
   settingsFile :: FilePath 
 }
-
+-- TODO : The sample is work in progress.
 parseSettings :: Parser Settings 
 parseSettings = Settings
   <$> strOption 

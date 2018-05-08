@@ -28,6 +28,7 @@ dependencies:
   - mtl
   - HTTP >= 4000.3.9 && < 4000.3.12
   - optparse-applicative
+  - process
 
 executable : 
   main: Exec.hs
@@ -36,6 +37,7 @@ executable :
     - yaml
     - kubeconfig
     - kubernetes-exec-helper
+    - process
 tests:
   spec:
     main: Spec.hs

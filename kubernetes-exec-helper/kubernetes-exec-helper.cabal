@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 099944e4b16d468bebd8ef4dec3a8afd4fe1021d44c12702d8d34afc36ec728b
+-- hash: 11d25aab93c7bfae8b36407b71adaaef5761317a625a6cc4807ede938c6f975d
 
 name:           kubernetes-exec-helper
 version:        0.1.0.0
@@ -29,6 +29,7 @@ library
     , network >=2.6 && <2.7
     , optparse-applicative
     , pem
+    , process
     , safe-exceptions <0.2
     , stm
     , text >=0.11 && <1.3
@@ -68,6 +69,7 @@ executable kubernetes-exec-helper
     , network >=2.6 && <2.7
     , optparse-applicative
     , pem
+    , process
     , safe-exceptions <0.2
     , stm
     , text >=0.11 && <1.3
@@ -105,6 +107,7 @@ test-suite spec
     , network >=2.6 && <2.7
     , optparse-applicative
     , pem
+    , process
     , safe-exceptions <0.2
     , stm
     , text >=0.11 && <1.3
@@ -116,6 +119,7 @@ test-suite spec
     , x509-validation
     , yaml
   other-modules:
+      Network.TestServer
       WSClientSpec
       Paths_kubernetes_exec_helper
   default-language: Haskell2010

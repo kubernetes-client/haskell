@@ -7,15 +7,14 @@
   Description : This module implements a web socket client attaching to kubectl exec command. 
 
   This implementation is based on the 
-  python reference implementaion <https://github.com/kubernetes-client/python-base/tree/a41c44715241552de73361673152f3f0d0bb9bc4/stream 
+  python reference implementation 
+  <https://github.com/kubernetes-client/python-base/tree/a41c44715241552de73361673152f3f0d0bb9bc4/stream 
   here>.
+  
 -}
 module Kubernetes.WSClient
     (
-      -- * App
-      runApp -- ^ The main application.
-      , runClient
-      , exec
+      runClient
       -- * Reads      
       , readErr
       , readErrSTM
@@ -42,6 +41,8 @@ module Kubernetes.WSClient
       , writeStdOut
       , writeStdOutSTM
       , writeChannelIdSTM -- ^ Write to a "ChannelId" prefixing the channel code.
+      -- * Accesors
+      , getTChanSTM
     )
   where 
 
@@ -56,149 +57,12 @@ import Data.Monoid ((<>))
 import Data.Text (Text)
 import Kubernetes.K8SChannel
 import Kubernetes.KubeConfig
-import Network.HTTP.Base (urlEncodeVars)
 import Network.Socket(withSocketsDo)
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
 import qualified Network.WebSockets as WS
 import System.Timeout (timeout) 
 import System.IO (hSetBuffering, BufferMode(..), stdin)
-
-{- | 
-  ClientState" maintains all threads that are running,  
-  a writer channel to send messages to the server 
-  and a list of all "(ChannelId, TChan Text)" pairs.
-  Clients can wait on '[Async ThreadId]' and proceed to work with each channel.
--}
-newtype ClientState a = ClientState {
-    _unState :: 
-      ([Async ThreadId], TChan a, [(ChannelId, TChan a)])
-    }
-
--- A flag from the python library.
-type PreloadContent = Bool
-
--- | Secure web sockets connection?
-data Protocol = 
-  WS -- ^ "ws://abc.co" 
-  | WSS -- ^ "wss://abc.co"
-
-instance Show Protocol where 
-  show WS = "ws" 
-  show WSS = "wss"
-
--- | The host.
-type Host = String
--- | The port. 
-type Port = Int 
-
--- | The URL with "Protocol", "Host" and "Port"
-newtype URL = URL {_unP :: (Protocol, Host, Port)} 
-
--- | The kube config.
-type KubeConfig = Config
-
--- | Command contains the "Executable" and a list of "Arguments"
-type Command = String
-
--- | A reader configuration when running the client.
-data ExecClientConfig = 
-  ExecClientConfig {
-  _kubeConfig :: KubeConfig
-  , _url :: URL 
-  , _timeout :: Maybe TimeoutInterval
-  , _preload :: Bool
-  , _commands :: Command
-  } 
-  
-newtype KubernetesClientApp a = 
-  KubernetesClientApp 
-    {runA :: ReaderT ExecClientConfig IO a }
-    deriving (Monad, MonadIO, Functor, Applicative
-      , MonadReader ExecClientConfig)
-
--- | The core application when a user attaches a command to the pod.
-runApp :: KubeConfig -> Protocol -> Host -> Port -> 
-            Maybe TimeoutInterval -> 
-            PreloadContent -> Command -> IO () 
-runApp kC proto host port timeoutInterval preloadContent command = do
-  let config = ExecClientConfig kC
-                      (URL (proto, host, port)) 
-                      timeoutInterval
-                      preloadContent
-                      command
-  runReaderT (runA exec) config
-
--- | Read the text from the channels and direct to the appropriate 
--- | local channel.
-writeToLocalChannels :: [(ChannelId, TChan Text)] -> IO [Async ThreadId]
-writeToLocalChannels channels = 
-  mapM (flip writeToLocalChannel channels) $ [StdIn, StdOut, StdErr] 
-
--- | Write to a local channel. 
--- | === Note : The word local channel is used to represent the 
--- | command line from which a user is running a command.
-writeToLocalChannel :: ChannelId -> [(ChannelId, TChan Text)] -> IO (Async ThreadId)
-writeToLocalChannel channelId channels = do 
-  let std = mapChannel channelId
-  hSetBuffering std NoBuffering
-  async $ forever $ do
-        message <- atomically $ readTChan $ getTChanSTM channelId channels
-        T.hPutStr std message
-
--- | Send 'stdin' to the pod.
-readFromStdIn :: TChan Text -> IO (Async ThreadId)
-readFromStdIn outputChan = do 
-  hSetBuffering stdin NoBuffering 
-  async $ forever $ do 
-    text <- T.hGetLine stdin 
-    atomically $ writeTChan outputChan $ (T.pack $ show StdIn) <> text
-
-{- | 
-  * Start the web socket client. Setup local writers .
-  * Setup a command reader thread to send commands to the server. 
-  * Flush all channels after any of the threads stops.
- 
- === Note : It helps to view the 'writers' and 'readers' from 
- within the process therefore, the process essentially reads from an
- input file handle and writes to channels for consumption. Readers 
- read from a channel and communicate with the output handle. This world view
- helps to get the direction right.
--}
-exec :: KubernetesClientApp ()
-exec = do 
-  ExecClientConfig cfg 
-        (URL (proto, host, port))
-        interval
-        preloadContent
-        command <- ask
-  liftIO $ do 
-    let queryParams = urlEncodeVars [("command", command)]
-    ClientState (threads, writer, readers) <- 
-      runClient (show (proto :: Protocol) <> "://" <> host) (port) ("/?" <> queryParams) interval
-    -- Start all threads to publish to the appropriate channels.
-    writers <- writeToLocalChannels readers 
-    readerThread <- readFromStdIn writer
-    waitAny_ $ readerThread : (threads ++ writers)
-    flushLocalChannels readers
-  where
-    waitAny_ :: [Async a] -> IO ()
-    waitAny_ threads = waitAny threads >> return ()
-
--- | Flush all channels as part of cleanup.
-flushLocalChannels :: [(ChannelId, TChan Text)] -> IO () 
-flushLocalChannels channels = 
-  mapM_ flushLocalChannel channels 
-  where 
-    flushLocalChannel :: (ChannelId, TChan Text) -> IO ()
-    flushLocalChannel (channelId, tChan) = do 
-      chanEmpty <- atomically $ isEmptyTChan tChan 
-      unless chanEmpty $ do 
-        let std = mapChannel channelId
-        hSetBuffering std NoBuffering
-        message <- atomically $ readTChan $ getTChanSTM channelId channels
-        T.hPutStr std message
-        flushLocalChannel (channelId, tChan)
 
 -- | Run the web socket client. 
 runClient :: String -- ^ Host  
