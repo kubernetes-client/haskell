@@ -53,7 +53,7 @@ writeToLocalChannel channels channelId = do
  read from a channel and communicate with the output handle. This world view
  helps to get the direction right.
 -}
-exec :: KubernetesClientApp ()
+exec :: KubernetesClientApp (ClientState Text)
 exec = do 
   ExecClientConfig cfg 
         (URL (proto, host, port))
@@ -62,21 +62,15 @@ exec = do
         command <- ask
   liftIO $ do 
     let queryParams = urlEncodeVars [("command", command)]
-    ClientState (threads, writer, readers) <- 
-      runClient (show (proto :: Protocol) <> "://" <> host) (port) ("/?" <> queryParams) interval
-    -- Start all threads to publish to the appropriate channels.
-    writers <- writeToLocalChannels readers 
-    readerThread <- readFromStdIn writer
-    waitAny_ $ readerThread : (threads ++ writers)
-    flushLocalChannels readers
-  where
-    waitAny_ :: [Async a] -> IO ()
-    waitAny_ threads = waitAny threads >> return ()
+    runClient (show (proto :: Protocol) <> "://" <> host) 
+              (port) 
+              ("/?" <> queryParams) interval
+
 
 -- | The core application when a user attaches a command to the pod.
 runApp :: KubeConfig -> Protocol -> Host -> Port -> 
             Maybe TimeoutInterval -> 
-            PreloadContent -> Command -> IO () 
+            PreloadContent -> Command -> IO (ClientState Text)
 runApp kC proto host port timeoutInterval preloadContent command = do
   let config = ExecClientConfig kC
                       (URL (proto, host, port)) 
@@ -84,26 +78,3 @@ runApp kC proto host port timeoutInterval preloadContent command = do
                       preloadContent
                       command
   runReaderT (runA exec) config
-
--- | Flush all channels as part of cleanup.
-flushLocalChannels :: [(ChannelId, TChan Text)] -> IO () 
-flushLocalChannels channels = 
-  mapM_ flushLocalChannel channels 
-  where 
-    flushLocalChannel :: (ChannelId, TChan Text) -> IO ()
-    flushLocalChannel (channelId, tChan) = do 
-      chanEmpty <- atomically $ isEmptyTChan tChan 
-      unless chanEmpty $ do 
-        let std = mapChannel channelId
-        hSetBuffering std NoBuffering
-        message <- atomically $ readTChan $ getTChanSTM channelId channels
-        T.hPutStr std message
-        flushLocalChannel (channelId, tChan)
-
--- | Send 'stdin' to the pod.
-readFromStdIn :: TChan Text -> IO (Async ThreadId)
-readFromStdIn outputChan = do 
-  hSetBuffering stdin NoBuffering 
-  async $ forever $ do 
-    text <- T.hGetLine stdin 
-    atomically $ writeTChan outputChan $ (T.pack $ show StdIn) <> text

@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 11d25aab93c7bfae8b36407b71adaaef5761317a625a6cc4807ede938c6f975d
+-- hash: 104aea0731f0e7f356a8d980695d55537e70d407fb40146f849013348ab05d4f
 
 name:           kubernetes-exec-helper
 version:        0.1.0.0
@@ -24,6 +24,7 @@ library
     , http-client-tls
     , kubeconfig
     , kubernetes ==0.1.0.0
+    , kubernetes-client-helper ==0.1.0.0
     , microlens >=0.4.3 && <0.5
     , mtl
     , network >=2.6 && <2.7
@@ -63,6 +64,7 @@ executable kubernetes-exec-helper
     , http-client-tls
     , kubeconfig
     , kubernetes ==0.1.0.0
+    , kubernetes-client-helper ==0.1.0.0
     , kubernetes-exec-helper
     , microlens >=0.4.3 && <0.5
     , mtl
@@ -102,6 +104,7 @@ test-suite spec
     , http-client-tls
     , kubeconfig
     , kubernetes ==0.1.0.0
+    , kubernetes-client-helper ==0.1.0.0
     , microlens >=0.4.3 && <0.5
     , mtl
     , network >=2.6 && <2.7
