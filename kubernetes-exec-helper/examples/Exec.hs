@@ -10,7 +10,11 @@ import System.IO
 import qualified Kubernetes.WSStream as WSStream
 import Data.Yaml (decodeFile, decodeEither, decodeFileEither, ParseException)
 import Data.Maybe (fromJust)
-import Kubernetes.KubeConfig(Config, getContext, getCluster)
+import Kubernetes.KubeConfig
+import Kubernetes.Model
+import Kubernetes.Core(KubernetesRequest(..))
+import Kubernetes.MimeTypes
+import Kubernetes.API.CoreV1
 import Options.Applicative 
 import Data.Semigroup ((<>))
 
@@ -34,7 +38,13 @@ exec settings  = do
   config <- parse settings
   context <- return $ getContext <$> config
   cluster <- return $ getCluster <$> config
-  putStrLn $ "read context" <> (show config)
+  a@(KubernetesRequest req cType res accept) <- 
+    return $
+      readNamespacedPod 
+        (Accept MimePlainText)
+        (Name "busybox-test")
+        (Namespace "default")
+  putStrLn $ show res
   return ()
    
 main = do 

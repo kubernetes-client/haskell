@@ -9,10 +9,9 @@ import Control.Exception
 import Control.Exception.Safe
 import Control.Monad (forever)
 import Control.Concurrent(ThreadId)
-import Control.Concurrent.Async(waitAny, async, Async)
+import Control.Concurrent.Async(Async)
 import Control.Concurrent.STM
 import Data.Text
-import Data.Typeable
 import Kubernetes.KubeConfig
 import System.IO (stdin, stdout, stderr, Handle)
 

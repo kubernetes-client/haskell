@@ -37,10 +37,9 @@ metadata :
   name : busy_box
 spec: 
   containers:
-    image : busybox
-    name : sleep
-    args : 
-      /bin/sh
-      -c 
-      while true; do date sleep 5 done
-
+    - image : busybox
+      name : sleep
+      args : 
+        - /bin/sh
+          -c 
+          while true; do date sleep 5 done

@@ -6,9 +6,9 @@ import           Data.Maybe            (fromJust)
 import           Data.Yaml             (decodeFile)
 import           Kubernetes.KubeConfig (AuthInfo (..), Cluster (..), Config,
                                         Context (..), getAuthInfo, getCluster,
-                                        getContext)
+                                        getContext, getSpec)
 import           Test.Hspec
-
+import qualified Data.Map as Map
 main :: IO ()
 main = do
   config :: Config <- fromJust <$> decodeFile "test/testdata/kubeconfig.yaml"
@@ -27,3 +27,6 @@ main = do
     describe "getAuthInfo" $ do
       it "returns the correct authInfo" $ do
         fst <$> getAuthInfo config `shouldBe` (Right "user-aaa")
+    describe "getSpec" $ do 
+      it "returns the correct spec" $ do 
+        getSpec config `shouldBe` (Map.fromList[("abc", "abc")])
