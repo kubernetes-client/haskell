@@ -3,7 +3,7 @@
 
 module Kubernetes.WSStream (
       -- * App
-      runApp -- ^ The main application.
+      runApp -- ^ Opens a stream and exposes 'ClientState' to its clients.
    ) where 
 
 import Control.Concurrent(ThreadId)
