@@ -25,12 +25,12 @@ newtype InvalidChannel = InvalidChannel Text deriving (Show, Typeable)
 
 
 {- | 
-  ClientState" maintains all threads that are running,  
+  CreateWSClient maintains all threads that are running,  
   a writer channel to send messages to the server 
   and a list of all "(ChannelId, TChan Text)" pairs.
   Clients can wait on '[Async ThreadId]' and proceed to work with each channel.
 -}
-newtype ClientState a = ClientState {
+newtype CreateWSClient a = CreateWSClient {
     _unState :: 
       ([Async ThreadId], TChan a, [(ChannelId, TChan a)])
     }

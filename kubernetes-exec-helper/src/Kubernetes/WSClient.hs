@@ -69,7 +69,7 @@ runClient :: String -- ^ Host
             -> Int  -- ^ Port 
             -> String -- ^ Path
             -> Maybe TimeoutInterval -- ^ Channel timeout.
-            -> IO (ClientState Text)
+            -> IO (CreateWSClient Text)
 runClient domain port route = \timeout' -> 
   withSocketsDo $ WS.runClient domain port route $ 
     (\c -> bracket 
@@ -78,7 +78,7 @@ runClient domain port route = \timeout' ->
           (\conn -> k8sClient conn timeout'))
 
 -- | Socket IO handler.
-k8sClient :: WS.Connection -> Maybe TimeoutInterval -> IO (ClientState Text)
+k8sClient :: WS.Connection -> Maybe TimeoutInterval -> IO (CreateWSClient Text)
 k8sClient conn interval = do
     cW <- atomically newTChan :: IO (TChan Text) -- Writer channel
     c0 <- atomically newTChan
@@ -91,7 +91,7 @@ k8sClient conn interval = do
     sender <- async $ forever $ do 
         nextMessage <- atomically . readTChan $ cW 
         WS.sendTextData conn nextMessage
-    return . ClientState $ (catMaybes[Just sender, rcv], cW, channels)
+    return . CreateWSClient $ (catMaybes[Just sender, rcv], cW, channels)
     where
       worker channels = async $ forever $ do 
             msg <- (WS.receiveData conn) `catch` (\e@(SomeException _) -> return $ T.pack . show $ e)
