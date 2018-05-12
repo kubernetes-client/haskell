@@ -48,7 +48,7 @@ data Config = Config
   , authInfos      :: [NamedEntity AuthInfo "user"]
   , contexts       :: [NamedEntity Context "context"]
   , currentContext :: Text
-  , spec           :: Spec
+  , spec           :: Maybe Spec
   } deriving (Eq, Generic, Show)
 
 configJSONOptions = camelToWithOverrides
@@ -204,5 +204,5 @@ getCluster cfg@Config {clusters=clusters} = do
         Just cluster -> Right cluster
         Nothing      -> Left ("No cluster named " <> T.unpack clusterName)
 
-getSpec :: Config -> Spec
+getSpec :: Config -> Maybe Spec
 getSpec cfg = spec cfg

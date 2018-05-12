@@ -45,7 +45,34 @@ tests:
     main: Spec.hs
     source-dirs: test
     dependencies:
+      - base >=4.7 && <5.0
+      - aeson
+      - async
+      - bytestring >=0.10.0 && <0.11
+      - connection
+      - data-default-class
+      - hlint >= 2.0 && < 3.0
       - hspec
-      - yaml
+      - HTTP >= 4000.3.9 && < 4000.3.12
+      - http-client >=0.5 && <0.6
+      - http-client-tls
       - kubeconfig
-      - kubernetes-exec-helper
+      - kubernetes == 0.1.0.0
+      - kubernetes-client-helper == 0.1.0.0
+      - log-warper >= 1.8.2 && < 1.9
+      - microlens >= 0.4.3 && <0.5
+      - mtl
+      - network >= 2.6 && < 2.7
+      - optparse-applicative
+      - pem
+      - process
+      - safe-exceptions <0.2
+      - stm
+      - text >=0.11 && <1.3
+      - tls
+      - websockets >= 0.12 && < 0.13
+      - x509
+      - x509-store
+      - x509-system
+      - x509-validation
+      - yaml
