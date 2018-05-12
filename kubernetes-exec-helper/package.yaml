@@ -30,6 +30,7 @@ dependencies:
   - HTTP >= 4000.3.9 && < 4000.3.12
   - optparse-applicative
   - process
+  - log-warper >= 1.8.2 && < 1.9
 
 executable : 
   main: Exec.hs
@@ -47,3 +48,4 @@ tests:
       - hspec
       - yaml
       - kubeconfig
+      - kubernetes-exec-helper

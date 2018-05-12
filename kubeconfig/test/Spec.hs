@@ -27,6 +27,3 @@ main = do
     describe "getAuthInfo" $ do
       it "returns the correct authInfo" $ do
         fst <$> getAuthInfo config `shouldBe` (Right "user-aaa")
-    describe "getSpec" $ do 
-      it "returns the correct spec" $ do 
-        getSpec config `shouldBe` (Map.fromList[("abc", "abc")])
