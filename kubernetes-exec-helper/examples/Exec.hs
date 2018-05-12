@@ -33,6 +33,7 @@ parseSettings = Settings
 parse :: Settings -> IO (Either ParseException Config)
 parse (Settings fileName) = decodeFileEither fileName
 
+
 exec :: Settings -> IO ()
 exec settings  = do 
   settings <- parse settings
@@ -54,10 +55,7 @@ exec settings  = do
     Left e -> print e 
   return ()
 
--- TODO: how to do this?
-mkConfig :: Config -> KubernetesConfig
-mkConfig aConfig = undefined
-
+main :: IO ()
 main = do 
   exec =<< execParser opts 
   where 

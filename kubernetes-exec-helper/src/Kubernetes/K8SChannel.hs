@@ -7,7 +7,6 @@ module Kubernetes.K8SChannel where
 
 import Control.Exception
 import Control.Exception.Safe
-import Control.Monad (forever)
 import Control.Concurrent(ThreadId)
 import Control.Concurrent.Async(Async)
 import Control.Concurrent.STM

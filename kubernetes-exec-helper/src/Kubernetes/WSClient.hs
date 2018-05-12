@@ -111,12 +111,14 @@ publishMessage channels (channel, message) = do
       atomically $
         writeTChan (snd $ getChannelIdSTM aChan channels) message
 
-
+{- | 
+  Query a channelId from a list of Channels.
+-}
 getTChanSTM :: ChannelId -> [(ChannelId, TChan Text)] -> TChan Text 
 getTChanSTM a b = snd $ getChannelIdSTM a b 
 getChannelIdSTM :: ChannelId -> [(ChannelId, TChan Text)] -> (ChannelId, TChan Text)
 getChannelIdSTM aChannelId channels = 
-  head $ filter(\(x, _) -> x == aChannelId) channels
+  head $ Prelude.filter(\(x, _) -> x == aChannelId) channels
 
 readChannelIdSTM :: ChannelId -> [(ChannelId, TChan Text)] -> STM Text 
 readChannelIdSTM channel channels = 

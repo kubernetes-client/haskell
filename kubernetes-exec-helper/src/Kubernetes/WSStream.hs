@@ -4,13 +4,13 @@
 module Kubernetes.WSStream (
       -- * App
       runApp -- ^ The main application.
-      , exec
    ) where 
 
 import Control.Concurrent(ThreadId)
 import Control.Concurrent.Async(waitAny, async, Async)
 import Control.Concurrent.STM
-import Control.Monad.Reader
+import Control.Monad(forever)
+import Control.Monad.Reader (MonadReader, ReaderT, runReaderT, MonadIO, liftIO, ask)
 import Data.Text as T
 import Data.Text.IO as T
 import Data.Monoid ((<>))
@@ -45,7 +45,7 @@ writeToLocalChannel channels channelId = do
 {- | 
   * Start the web socket client. Setup local writers .
   * Setup a command reader thread to send commands to the server. 
-  * Flush all channels after any of the threads stops.
+  * Return the 'ClientState' to 
  
  === Note : It helps to view the 'writers' and 'readers' from 
  within the process therefore, the process essentially reads from an
@@ -65,7 +65,6 @@ exec = do
     runClient (show (proto :: Protocol) <> "://" <> host) 
               (port) 
               ("/?" <> queryParams) interval
-
 
 -- | The core application when a user attaches a command to the pod.
 runApp :: KubeConfig -> Protocol -> Host -> Port -> 
