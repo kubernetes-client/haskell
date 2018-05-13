@@ -59,6 +59,7 @@ tests:
       - kubeconfig
       - kubernetes == 0.1.0.0
       - kubernetes-client-helper == 0.1.0.0
+      - kubernetes-exec-helper == 0.1.0.0
       - log-warper >= 1.8.2 && < 1.9
       - microlens >= 0.4.3 && <0.5
       - mtl

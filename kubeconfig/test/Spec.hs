@@ -6,7 +6,7 @@ import           Data.Maybe            (fromJust)
 import           Data.Yaml             (decodeFile)
 import           Kubernetes.KubeConfig (AuthInfo (..), Cluster (..), Config,
                                         Context (..), getAuthInfo, getCluster,
-                                        getContext, getSpec)
+                                        getContext)
 import           Test.Hspec
 import qualified Data.Map as Map
 main :: IO ()

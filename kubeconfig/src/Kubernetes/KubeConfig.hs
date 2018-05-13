@@ -48,7 +48,6 @@ data Config = Config
   , authInfos      :: [NamedEntity AuthInfo "user"]
   , contexts       :: [NamedEntity Context "context"]
   , currentContext :: Text
-  , spec           :: Maybe Spec
   } deriving (Eq, Generic, Show)
 
 configJSONOptions = camelToWithOverrides
@@ -90,33 +89,13 @@ data NamedEntity a (typeKey :: Symbol) = NamedEntity
 
 instance (FromJSON a, Typeable a, KnownSymbol s) =>
          FromJSON (NamedEntity a s) where
-  parseJSON = withObject ("Named" <> (show $ typeOf (Proxy :: Proxy a))) $ \v ->
+  parseJSON = withObject ("Named" <> (show $ typeOf (undefined :: a))) $ \v ->
     NamedEntity <$> v .: "name" <*> v .: T.pack (symbolVal (Proxy :: Proxy s))
 
 instance (ToJSON a, KnownSymbol s) =>
          ToJSON (NamedEntity a s) where
   toJSON (NamedEntity {..}) = object
       ["name" .= toJSON name, T.pack (symbolVal (Proxy :: Proxy s)) .= toJSON entity]
-
-newtype Spec = Spec {containers :: [Container]}
-  deriving (Eq, Generic, Show, Typeable)
-
-data Container = Container {
-  image :: Text 
-  , name :: Text
-  , args :: [Text]
-} deriving (Eq, Generic, Show, Typeable)
-
-instance ToJSON Container where 
-  toJSON = genericToJSON $ camelToWithOverrides '-' Map.empty
-
-instance FromJSON Container where 
-  parseJSON = genericParseJSON $ camelToWithOverrides '-' Map.empty
-
-instance ToJSON Spec where 
-  toJSON = genericToJSON $ camelToWithOverrides '-' Map.empty 
-instance FromJSON Spec where 
-  parseJSON = genericParseJSON $ camelToWithOverrides '-' Map.empty
 
 toMap :: [NamedEntity a s] -> Map.Map Text a
 toMap = Map.fromList . fmap (\NamedEntity {..} -> (name, entity))
@@ -203,6 +182,3 @@ getCluster cfg@Config {clusters=clusters} = do
     case maybeCluster of
         Just cluster -> Right cluster
         Nothing      -> Left ("No cluster named " <> T.unpack clusterName)
-
-getSpec :: Config -> Maybe Spec
-getSpec cfg = spec cfg

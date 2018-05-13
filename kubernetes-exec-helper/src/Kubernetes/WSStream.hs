@@ -53,8 +53,10 @@ writeToLocalChannel channels channelId = do
  read from a channel and communicate with the output handle. This world view
  helps to get the direction right.
 -}
-exec :: KubernetesClientApp (CreateWSClient Text)
-exec = do 
+exec :: KubernetesClientApp ()
+exec = undefined
+
+{-exec = do 
   ExecClientConfig cfg 
         (URL (proto, host, port))
         interval
@@ -65,11 +67,13 @@ exec = do
     runClient (show (proto :: Protocol) <> "://" <> host) 
               (port) 
               ("/?" <> queryParams) interval
-
+-}
 -- | The core application when a user attaches a command to the pod.
 runApp :: KubeConfig -> Protocol -> Host -> Port -> 
             Maybe TimeoutInterval -> 
-            PreloadContent -> Command -> IO (CreateWSClient Text)
+            PreloadContent -> Command -> IO ()
+runApp = undefined 
+{-
 runApp kC proto host port timeoutInterval preloadContent command = do
   let config = ExecClientConfig kC
                       (URL (proto, host, port)) 
@@ -77,3 +81,4 @@ runApp kC proto host port timeoutInterval preloadContent command = do
                       preloadContent
                       command
   runReaderT (runA exec) config
+-}

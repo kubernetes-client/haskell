@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: bccd65b90a351ef601799b3ccb82d85f09a56ba84ad8e39240e476c303b52465
+-- hash: b3ce718ed9fe85749502b499be3ccae730e677d2653e56ba02b53964e7027096
 
 name:           kubernetes-exec-helper
 version:        0.1.0.0
@@ -108,6 +108,7 @@ test-suite spec
     , kubeconfig
     , kubernetes ==0.1.0.0
     , kubernetes-client-helper ==0.1.0.0
+    , kubernetes-exec-helper ==0.1.0.0
     , log-warper >=1.8.2 && <1.9
     , microlens >=0.4.3 && <0.5
     , mtl

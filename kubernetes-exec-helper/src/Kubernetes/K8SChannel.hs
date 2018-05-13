@@ -11,6 +11,7 @@ import Control.Concurrent(ThreadId)
 import Control.Concurrent.Async(Async)
 import Control.Concurrent.STM
 import Data.Text
+import qualified Network.WebSockets as WS
 import Kubernetes.KubeConfig
 import System.IO (stdin, stdout, stderr, Handle)
 
@@ -28,11 +29,10 @@ newtype InvalidChannel = InvalidChannel Text deriving (Show, Typeable)
   CreateWSClient maintains all threads that are running,  
   a writer channel to send messages to the server 
   and a list of all "(ChannelId, TChan Text)" pairs.
-  Clients can wait on '[Async ThreadId]' and proceed to work with each channel.
 -}
 newtype CreateWSClient a = CreateWSClient {
     _unState :: 
-      ([Async ThreadId], TChan a, [(ChannelId, TChan a)])
+      (TChan a, [(ChannelId, TChan a)])
     }
 
 -- A flag from the python library.

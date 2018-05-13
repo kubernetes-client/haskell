@@ -47,7 +47,7 @@ module Kubernetes.WSClient
   where 
 
 import Control.Concurrent(ThreadId)
-import Control.Concurrent.Async(waitAny, async, Async)
+import Control.Concurrent.Async(waitAny, async, Async, wait)
 import Control.Concurrent.STM
 import Control.Exception.Safe
 import Control.Monad (forever)
@@ -69,100 +69,91 @@ runClient :: String -- ^ Host
             -> Int  -- ^ Port 
             -> String -- ^ Path
             -> Maybe TimeoutInterval -- ^ Channel timeout.
-            -> IO (CreateWSClient Text)
-runClient domain port route = \timeout' -> 
+            -> CreateWSClient Text 
+            -> IO ()
+runClient domain port route timeout createWSClient = do 
   withSocketsDo $ WS.runClient domain port route $ 
     (\c -> bracket 
           (return c)
-          (\conn ->WS.sendClose conn ("Closing session" :: T.Text))
-          (\conn -> k8sClient conn timeout'))
+          (\conn -> WS.sendClose conn ("Closing session" :: T.Text))
+          (\conn -> k8sClient conn timeout createWSClient))
 
 -- | Socket IO handler.
-k8sClient :: WS.Connection -> Maybe TimeoutInterval -> IO (CreateWSClient Text)
-k8sClient conn interval = do
-    cW <- atomically newTChan :: IO (TChan Text) -- Writer channel
-    c0 <- atomically newTChan
-    c1 <- atomically newTChan 
-    c2 <- atomically newTChan 
-    c3 <- atomically newTChan 
-    c4 <- atomically newTChan
-    let channels = zip allChannels [c0, c1, c2, c3, c4]
-    rcv <- timedThread worker channels interval
+k8sClient :: WS.Connection -> Maybe TimeoutInterval -> CreateWSClient Text -> IO ()
+k8sClient conn interval clientState@(CreateWSClient (cW ,channels)) = do
+    rcv <- worker channels conn
     sender <- async $ forever $ do 
         nextMessage <- atomically . readTChan $ cW 
         WS.sendTextData conn nextMessage
-    return . CreateWSClient $ (catMaybes[Just sender, rcv], cW, channels)
+    _ <- waitAny [rcv, sender]
+    return ()
     where
-      worker channels = async $ forever $ do 
-            msg <- (WS.receiveData conn) `catch` (\e@(SomeException _) -> return $ T.pack . show $ e)
+      worker channels conn= async $ forever $ do 
+            msg <- WS.receiveData conn
             publishMessage channels $ T.splitAt 1 msg
-      timedThread aWorker channels timeoutInterval =
+      timedThread aWorker channels connection timeoutInterval =
         case timeoutInterval of  
-            Nothing ->  Just <$> aWorker channels
-            Just m -> timeout m $ aWorker channels
+            Nothing ->  Just <$> aWorker channels connection 
+            Just m -> timeout m $ aWorker channels connection
 
 -- | Publish messages from the reader into the channel.
 publishMessage :: [(ChannelId, TChan Text)] -> (Text, Text) -> IO ()
-publishMessage channels (channel, message) = do 
+publishMessage channels c@(channel, message) = do 
   let chanId = readChannel channel
   case chanId of
     Nothing -> throwIO $ InvalidChannel channel
-    Just aChan -> 
+    Just aChan -> do
       atomically $
-        writeTChan (snd $ getChannelIdSTM aChan channels) message
+        writeTChan (getChannelIdSTM aChan channels) message
 
 {- | 
   Query a channelId from a list of Channels.
 -}
 getTChanSTM :: ChannelId -> [(ChannelId, TChan Text)] -> TChan Text 
-getTChanSTM a b = snd $ getChannelIdSTM a b 
-getChannelIdSTM :: ChannelId -> [(ChannelId, TChan Text)] -> (ChannelId, TChan Text)
+getTChanSTM a b = getChannelIdSTM a b 
+
+getChannelIdSTM :: ChannelId -> [(ChannelId, TChan Text)] -> TChan Text
 getChannelIdSTM aChannelId channels = 
-  head $ Prelude.filter(\(x, _) -> x == aChannelId) channels
+  snd $ head $ Prelude.filter(\(x, _) -> x == aChannelId) channels
 
 readChannelIdSTM :: ChannelId -> [(ChannelId, TChan Text)] -> STM Text 
 readChannelIdSTM channel channels = 
-    readTChan $ snd $ getChannelIdSTM channel channels
+    readTChan $ getChannelIdSTM channel channels
 
 readStdInSTM :: [(ChannelId, TChan Text)] -> STM Text
-readStdInSTM channels = readTChan $ snd $ getChannelIdSTM StdIn channels
+readStdInSTM channels = readTChan $ getChannelIdSTM StdIn channels
 
 readStdIn :: [(ChannelId, TChan Text)] -> IO Text 
 readStdIn = atomically . readStdInSTM
 
 readStdOutSTM :: [(ChannelId, TChan Text)] -> STM Text
-readStdOutSTM channels = readTChan $ snd $ getChannelIdSTM StdOut channels
+readStdOutSTM channels = readTChan $ getChannelIdSTM StdOut channels
 
 readStdOut :: [(ChannelId, TChan Text)] -> IO Text 
 readStdOut = atomically . readStdOutSTM
 
 readStdErrSTM :: [(ChannelId, TChan Text)] -> STM Text
-readStdErrSTM channels = readTChan $ snd $ getChannelIdSTM StdErr channels
+readStdErrSTM channels = readTChan $ getChannelIdSTM StdErr channels
 
 readStdErr :: [(ChannelId, TChan Text)] -> IO Text 
 readStdErr = atomically . readStdErrSTM
 
 readErrSTM :: [(ChannelId, TChan Text)] -> STM Text 
-readErrSTM channels = readTChan $ snd $ getChannelIdSTM Error channels
+readErrSTM channels = readTChan $ getChannelIdSTM Error channels
 
 readErr :: [(ChannelId, TChan Text)] -> IO Text 
 readErr = atomically . readErrSTM
 
 readResizeSTM :: [(ChannelId, TChan Text)] -> STM Text 
-readResizeSTM channels = readTChan $ snd $ getChannelIdSTM Resize channels
+readResizeSTM channels = readTChan $ getChannelIdSTM Resize channels
 
 readResize :: [(ChannelId, TChan Text)] -> IO Text 
 readResize = atomically . readResizeSTM
 
-
 readLineSTM :: TChan Text -> STM Text
 readLineSTM aChannel = do 
-  messages <- T.split (== '\n') <$> readTChan aChannel 
-  case messages of 
-    h : t -> do 
-        unGetTChan aChannel $ T.unlines t
-        return $ h <> "\n" 
-    _ -> return ""
+  messages <- readTChan aChannel 
+  return messages
 
 readLine :: TChan Text -> IO Text 
 readLine = atomically . readLineSTM
