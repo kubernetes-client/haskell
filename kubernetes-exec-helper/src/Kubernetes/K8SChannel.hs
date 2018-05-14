@@ -26,25 +26,6 @@ data ChannelId = StdIn | StdOut | StdErr | Error | Resize deriving (Eq, Ord, Enu
 newtype InvalidChannel = InvalidChannel Text deriving (Show, Typeable)
 
 
-{- | 
-  CreateWSClient maintains all threads that are running,  
-  a writer channel to send messages to the server 
-  and a list of all "(ChannelId, TChan Text)" pairs.
--}
-data CreateWSClient a = CreateWSClient {
-    _writer :: TChan a -- ^ Write back to the server.
-    , _channels :: [(ChannelId, TChan a)] -- ^ Read from the server
-    , _clientSession :: (Socket, AddrInfo) -- ^ Handle to the 'Socket' and the 'AddrInfo'
-    }
-
-writer :: CreateWSClient a -> TChan a 
-writer clientState = _writer clientState
-
-channels :: CreateWSClient a -> [(ChannelId, TChan a)]
-channels = _channels 
-
-clientSession :: CreateWSClient a -> (Socket, AddrInfo)
-clientSession = _clientSession
 
 -- A flag from the python library.
 type PreloadContent = Bool
@@ -78,7 +59,6 @@ data ExecClientConfig =
   _kubeConfig :: KubeConfig
   , _url :: URL 
   , _timeout :: Maybe TimeoutInterval
-  , _preload :: Bool
   , _commands :: Command
   } 
 

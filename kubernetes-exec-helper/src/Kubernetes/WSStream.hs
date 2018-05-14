@@ -15,7 +15,8 @@ import Data.Text as T
 import Data.Text.IO as T
 import Data.Monoid ((<>))
 import Kubernetes.K8SChannel 
-import Kubernetes.WSClient as Client 
+import Kubernetes.WSClient as Client
+import Kubernetes.CreateWSClient  
 import System.IO (hSetBuffering, BufferMode(..), stdin)
 import Network.HTTP.Base (urlEncodeVars)
 
@@ -54,31 +55,25 @@ writeToLocalChannel channels channelId = do
  helps to get the direction right.
 -}
 exec :: KubernetesClientApp ()
-exec = undefined
-
-{-exec = do 
+exec = do 
   ExecClientConfig cfg 
         (URL (proto, host, port))
         interval
-        preloadContent
         command <- ask
   liftIO $ do 
+    wsClient <- createWSClient host port 
     let queryParams = urlEncodeVars [("command", command)]
     runClient (show (proto :: Protocol) <> "://" <> host) 
               (port) 
-              ("/?" <> queryParams) interval
--}
+              ("/?" <> queryParams) interval wsClient
+
 -- | The core application when a user attaches a command to the pod.
 runApp :: KubeConfig -> Protocol -> Host -> Port -> 
             Maybe TimeoutInterval -> 
             PreloadContent -> Command -> IO ()
-runApp = undefined 
-{-
 runApp kC proto host port timeoutInterval preloadContent command = do
   let config = ExecClientConfig kC
                       (URL (proto, host, port)) 
                       timeoutInterval
-                      preloadContent
                       command
   runReaderT (runA exec) config
--}

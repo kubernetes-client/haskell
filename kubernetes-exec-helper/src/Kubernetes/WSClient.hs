@@ -32,6 +32,7 @@ import Data.Maybe
 import Data.Monoid ((<>))
 import Data.Text (Text)
 import Kubernetes.K8SChannel
+import Kubernetes.CreateWSClient
 import Kubernetes.KubeConfig
 import Network.Socket as S
 import qualified Data.Text as T
@@ -56,7 +57,6 @@ runClient domain port route timeout createWSClient = do
     fullHost = if port == 80 then domain else (domain ++ ":" ++ show port)
     path     = if null route then "/" else route
   (socket, addr) <- return $ clientSession createWSClient
-  T.putStrLn $ T.pack $ show socket
   res <- finally 
           (do 
               _ <- S.connect socket (S.addrAddress addr)
@@ -69,7 +69,6 @@ runClient domain port route timeout createWSClient = do
 -- | Socket IO handler.
 k8sClient :: Maybe TimeoutInterval -> CreateWSClient Text -> WS.Connection -> IO ()
 k8sClient interval clientState conn = do
-    T.putStrLn "line 66"
     rcv <- worker (channels clientState) conn
     sender <- async $ forever $ do 
         nextMessage <- atomically . readTChan $ writer clientState

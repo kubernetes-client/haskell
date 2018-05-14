@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: b3ce718ed9fe85749502b499be3ccae730e677d2653e56ba02b53964e7027096
+-- hash: ddd3ecc0805d5a5483261debaece6fa99b75338e3b3ba0d1b0a7d3b46f72e70a
 
 name:           kubernetes-exec-helper
 version:        0.1.0.0
@@ -42,6 +42,7 @@ library
     , x509-system
     , x509-validation
   exposed-modules:
+      Kubernetes.CreateWSClient
       Kubernetes.K8SChannel
       Kubernetes.WSClient
       Kubernetes.WSStream

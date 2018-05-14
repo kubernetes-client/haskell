@@ -27,6 +27,7 @@ import           Kubernetes.KubeConfig
 import           Kubernetes.Model
 import           Kubernetes.Core(KubernetesRequest(..), KubernetesConfig(..), newConfig)
 import           Kubernetes.MimeTypes
+import           Kubernetes.CreateWSClient as CreateWSClient
 import           Kubernetes.API.CoreV1
 import           Options.Applicative
                       (execParser 
@@ -53,42 +54,13 @@ parse (Settings fileName) = decodeFileEither fileName
 echoServer :: WS.ServerApp
 echoServer pending = do 
   conn <- WS.acceptRequest pending
-  T.putStrLn "connection accepted."
   WS.forkPingThread conn 1 `catch` (\a@(SomeException e) -> T.putStrLn $ pack $ show a)
-  T.putStrLn "after fork"
   Prelude.mapM_ (\handle -> hSetBuffering handle NoBuffering) [stdin, stderr, stdout]
   loop conn `catch` (\a@(SomeException e) -> T.putStr ">>>loop " >> (T.putStrLn $ pack $ show a))
   where 
     loop connection = forever $ do 
       msg <- (WS.receiveData connection :: IO Text) 
       WS.sendTextData connection msg 
-
-
-
-makeSocket :: String -> Int -> IO (Socket, AddrInfo)
-makeSocket hostName port = do 
-  let hints = defaultHints
-                  {addrSocketType = Stream}
-
-  serverAddr:_ <- getAddrInfo (Just hints) (Just hostName) (Just $ Printf.printf "%d" port)
-  sock <- socket (addrFamily serverAddr) Stream defaultProtocol
-  setSocketOption sock NoDelay 1
-  return (sock, serverAddr)
-
-createWSClient host port = do
-    cW <- atomically newTChan :: IO (TChan Text) -- Writer channel
-    c0 <- atomically newTChan :: IO (TChan Text)
-    c1 <- atomically newTChan :: IO (TChan Text)
-    c2 <- atomically newTChan :: IO (TChan Text)
-    c3 <- atomically newTChan :: IO (TChan Text)
-    c4 <- atomically newTChan :: IO (TChan Text)
-    socket <- makeSocket host port
-    return 
-      $ K8SChannel.CreateWSClient 
-            cW 
-            (Prelude.zip K8SChannel.allChannels [c0, c1, c2, c3, c4])
-            socket
-
 
 sendTestMessages :: TChan Text -> IO ()
 sendTestMessages writerChannel = 
@@ -111,12 +83,11 @@ testSetup = do
   server <- async (WS.runServer host port echoServer)
   threadDelay (1 * (10 ^ 6))
   clientState <- createWSClient host port
-  T.putStrLn "creating wsclient"
   client <- async (WSClient.runClient host port route timeout clientState)
-  T.putStrLn "Sending test messages" 
-  replicateM_ 100 $ sendTestMessages $ K8SChannel.writer clientState
+  replicateM_ 5 $ sendTestMessages $ CreateWSClient.writer clientState
   mapConcurrently_ (\(channelId, channel) -> (output channelId channel)) 
-    $ Prelude.filter(\(cId, _) -> cId /= K8SChannel.StdIn) $ K8SChannel.channels clientState
+    $ Prelude.filter(\(cId, _) -> cId /= K8SChannel.StdIn) $ 
+      CreateWSClient.channels clientState
   
   waitAny [client, server]
   return ()
