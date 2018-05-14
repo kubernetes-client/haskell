@@ -11,6 +11,7 @@ import Control.Concurrent(ThreadId)
 import Control.Concurrent.Async(Async)
 import Control.Concurrent.STM
 import Data.Text
+import Network.Socket
 import qualified Network.WebSockets as WS
 import Kubernetes.KubeConfig
 import System.IO (stdin, stdout, stderr, Handle)
@@ -30,10 +31,20 @@ newtype InvalidChannel = InvalidChannel Text deriving (Show, Typeable)
   a writer channel to send messages to the server 
   and a list of all "(ChannelId, TChan Text)" pairs.
 -}
-newtype CreateWSClient a = CreateWSClient {
-    _unState :: 
-      (TChan a, [(ChannelId, TChan a)])
+data CreateWSClient a = CreateWSClient {
+    _writer :: TChan a -- ^ Write back to the server.
+    , _channels :: [(ChannelId, TChan a)] -- ^ Read from the server
+    , _clientSession :: (Socket, AddrInfo) -- ^ Handle to the 'Socket' and the 'AddrInfo'
     }
+
+writer :: CreateWSClient a -> TChan a 
+writer clientState = _writer clientState
+
+channels :: CreateWSClient a -> [(ChannelId, TChan a)]
+channels = _channels 
+
+clientSession :: CreateWSClient a -> (Socket, AddrInfo)
+clientSession = _clientSession
 
 -- A flag from the python library.
 type PreloadContent = Bool
