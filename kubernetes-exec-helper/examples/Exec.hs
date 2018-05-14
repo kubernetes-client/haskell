@@ -36,20 +36,6 @@ import           Options.Applicative
                         , strOption)
 import           Data.Semigroup ((<>))
 
-data Settings = Settings {
-  settingsFile :: FilePath 
-}
--- TODO : The sample is work in progress.
-parseSettings :: Parser Settings 
-parseSettings = Settings
-  <$> strOption 
-        (long "yaml"
-          <> metavar "yaml"
-          <> help "Configuration file for k8s."
-        )
-
-parse :: Settings -> IO (Either ParseException Config)
-parse (Settings fileName) = decodeFileEither fileName
 
 echoServer :: WS.ServerApp
 echoServer pending = do 
@@ -99,14 +85,6 @@ testSetup = do
     route = "/" 
     timeout = Nothing
 
-exec :: Settings -> IO ()
-exec settings  = testSetup
-
-mainWithOpts :: IO ()
-mainWithOpts = do 
-  exec =<< execParser opts 
-  return ()
-  where 
-    opts = info parseSettings (fullDesc)
-
+-- | A sample test setup, that should be moved to 
+-- | test spec. 
 main = testSetup
