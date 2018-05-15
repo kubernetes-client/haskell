@@ -38,7 +38,7 @@ writeToLocalChannels channels =
 writeToLocalChannel :: [(ChannelId, TChan Text)] -> ChannelId -> IO (Async ThreadId)
 writeToLocalChannel channels channelId = do 
   let std = mapChannel channelId
-  hSetBuffering std NoBuffering
+--  hSetBuffering std NoBuffering
   async $ forever $ do
         message <- atomically $ readTChan $ getTChanSTM channelId channels
         T.hPutStr std message

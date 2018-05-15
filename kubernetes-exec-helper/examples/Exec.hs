@@ -57,7 +57,7 @@ sendTestMessages writerChannel =
 output :: K8SChannel.ChannelId -> TChan Text -> IO ()
 output aChannelId aChannel = do 
   let handle = K8SChannel.mapChannel aChannelId
-  hSetBuffering handle NoBuffering
+--  hSetBuffering handle NoBuffering
   forever $ do 
     text <- readLine $ aChannel
     T.hPutStr handle text
@@ -67,21 +67,23 @@ output aChannelId aChannel = do
 -- This should all work.
 testSetup :: IO ()
 testSetup = do
+  server <- async (WS.runServer host port echoServer)
+  threadDelay (1 * (10 ^ 6))
   clientState <- createWSClient host port
   client <- async (WSClient.runClient host port route timeout clientState)
-  --sendTestMessages $ CreateWSClient.writer clientState
+  replicateM_ 5 $ sendTestMessages $ CreateWSClient.writer clientState
   outputAsyncs <- mapM (\(channelId, channel) -> async(output channelId channel)) 
     $ Prelude.filter(\(cId, _) -> cId /= K8SChannel.StdIn) $ 
       CreateWSClient.channels clientState
-  waitAny $ client : outputAsyncs
+  waitAny $ server : client : outputAsyncs
   return ()
   -- start a client
   -- send some messages.
   where
     -- Some sample parameters. Need to read this from 
     -- kubeconfig.
-    host = "192.168.99.100" 
-    port = 31779
+    host = "localhost" 
+    port = 20000
     queryParams = urlEncodeVars [("command", "/bin/sh\n")]    
     route = "/?" <> queryParams
     timeout = Nothing

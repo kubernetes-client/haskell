@@ -28,6 +28,7 @@ import Control.Concurrent.STM
 import Control.Exception.Safe
 import Control.Monad (forever)
 import Control.Monad.Reader
+import Data.ByteString (ByteString)
 import Data.Maybe
 import Data.Monoid ((<>))
 import Data.Text (Text)
@@ -52,8 +53,8 @@ runClient :: String -- ^ Host
             -> IO ()
 runClient domain port route timeout createWSClient = do
   let 
-    connectionOptions = WS.defaultConnectionOptions 
     headers = []
+    connectionOptions = WS.defaultConnectionOptions 
     fullHost = if port == 80 then domain else (domain ++ ":" ++ show port)
     path     = if null route then "/" else route
   (socket, addr) <- return $ clientSession createWSClient
@@ -112,10 +113,8 @@ readChannelIdSTM channel channels =
     readTChan $ getChannelIdSTM channel channels
 
 readLineSTM :: TChan Text -> STM Text
-readLineSTM aChannel = do 
-  messages <- readTChan aChannel 
-  return messages
+readLineSTM aChannel = readTChan aChannel 
+
 
 readLine :: TChan Text -> IO Text 
 readLine = atomically . readLineSTM
-
