@@ -6,6 +6,7 @@ module Kubernetes.CreateWSClient
     , channels
     , clientSession
     , createWSClient
+    , createWSClientFromContainer
   )
 where 
 import Control.Concurrent.STM 
@@ -13,6 +14,7 @@ import Data.Text
 import Network.Socket
 import Text.Printf as Printf 
 import Kubernetes.K8SChannel as K8SChannel
+import Kubernetes.Model
 {- | 
   CreateWSClient maintains all threads that are running,  
   a writer channel to send messages to the server 
@@ -61,3 +63,21 @@ createWSClient host port = do
             cW 
             (Prelude.zip K8SChannel.allChannels [c0, c1, c2, c3, c4])
             socket
+
+{- | 
+  Create a 'CreateWSClient' from a 'V1Container' given a 'containerName'. 
+-}          
+
+createWSClientFromContainer :: Text -> IO (CreateWSClient Text)
+createWSClientFromContainer containerName =  
+    createWSClient host port 
+  where 
+    container = mkV1Container containerName
+    port = getPort container :: Int 
+    host = getHost container :: String
+
+getPort :: V1Container -> Int
+getPort = undefined 
+
+getHost :: V1Container -> String
+getHost = undefined

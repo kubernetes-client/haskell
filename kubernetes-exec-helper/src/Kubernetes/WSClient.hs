@@ -59,12 +59,15 @@ runClient domain port route timeout createWSClient = do
   (socket, addr) <- return $ clientSession createWSClient
   res <- finally 
           (do 
-              _ <- S.connect socket (S.addrAddress addr)
+              _ <- S.connect socket (S.addrAddress addr) 
+                      `catch` (\a@(SomeException e) -> T.putStrLn (T.pack $ show a))
               withSocketsDo $ 
                 WS.runClientWithSocket 
                   socket fullHost route connectionOptions headers 
                     $ (\conn -> k8sClient timeout createWSClient conn))
-          (S.close socket)
+          (
+            T.putStrLn "Closing socket. Bye"
+             >> S.close socket)
   return ()
 -- | Socket IO handler.
 k8sClient :: Maybe TimeoutInterval -> CreateWSClient Text -> WS.Connection -> IO ()

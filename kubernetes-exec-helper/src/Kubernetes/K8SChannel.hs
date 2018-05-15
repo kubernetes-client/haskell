@@ -12,7 +12,6 @@ import Control.Concurrent.Async(Async)
 import Control.Concurrent.STM
 import Data.Text
 import Network.Socket
-import qualified Network.WebSockets as WS
 import Kubernetes.KubeConfig
 import System.IO (stdin, stdout, stderr, Handle)
 

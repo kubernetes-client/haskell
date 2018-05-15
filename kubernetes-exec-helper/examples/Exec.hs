@@ -22,6 +22,7 @@ import           Kubernetes.Client       (dispatchMime)
 import           Kubernetes.ClientHelper
 import           Network.WebSockets as WS
 import           Network.Socket
+import           Network.HTTP.Base (urlEncodeVars)
 import           Kubernetes.WSClient as WSClient
 import           Kubernetes.KubeConfig
 import           Kubernetes.Model
@@ -35,6 +36,7 @@ import           Options.Applicative
                         , metavar, long, metavar
                         , strOption)
 import           Data.Semigroup ((<>))
+import           System.Wlog
 
 
 echoServer :: WS.ServerApp
@@ -65,24 +67,23 @@ output aChannelId aChannel = do
 -- This should all work.
 testSetup :: IO ()
 testSetup = do
-  -- start server 
-  server <- async (WS.runServer host port echoServer)
-  threadDelay (1 * (10 ^ 6))
   clientState <- createWSClient host port
   client <- async (WSClient.runClient host port route timeout clientState)
-  replicateM_ 5 $ sendTestMessages $ CreateWSClient.writer clientState
-  mapConcurrently_ (\(channelId, channel) -> (output channelId channel)) 
+  --sendTestMessages $ CreateWSClient.writer clientState
+  outputAsyncs <- mapM (\(channelId, channel) -> async(output channelId channel)) 
     $ Prelude.filter(\(cId, _) -> cId /= K8SChannel.StdIn) $ 
       CreateWSClient.channels clientState
-  
-  waitAny [client, server]
+  waitAny $ client : outputAsyncs
   return ()
   -- start a client
   -- send some messages.
   where
-    host = "localhost" 
-    port = 20000
-    route = "/" 
+    -- Some sample parameters. Need to read this from 
+    -- kubeconfig.
+    host = "192.168.99.100" 
+    port = 31779
+    queryParams = urlEncodeVars [("command", "/bin/sh\n")]    
+    route = "/?" <> queryParams
     timeout = Nothing
 
 -- | A sample test setup, that should be moved to 
