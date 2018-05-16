@@ -49,17 +49,6 @@ newtype URL = URL {_unP :: (Protocol, Host, Port)}
 -- | The kube config.
 type KubeConfig = Config
 
--- | Command contains the "Executable" and a list of "Arguments"
-type Command = String
-
--- | A reader configuration when running the client.
-data ExecClientConfig = 
-  ExecClientConfig {
-  _kubeConfig :: KubeConfig
-  , _url :: URL 
-  , _timeout :: Maybe TimeoutInterval
-  , _commands :: Command
-  } 
 
 -- | 'Show' instance for channels with 
 -- | 'StdIn' -> 0

@@ -12,7 +12,6 @@ import           Control.Concurrent(threadDelay)
 import           Control.Exception
 import           System.IO
 import qualified Kubernetes.K8SChannel as K8SChannel
-import qualified Kubernetes.WSStream as WSStream
 import           Data.Text 
 import           Data.Text.IO as T
 import           Text.Printf as Printf
@@ -39,20 +38,7 @@ import           Data.Semigroup ((<>))
 import           System.Wlog
 
 
-echoServer :: WS.ServerApp
-echoServer pending = do 
-  conn <- WS.acceptRequest pending
-  WS.forkPingThread conn 1 `catch` (\a@(SomeException e) -> T.putStrLn $ pack $ show a)
-  Prelude.mapM_ (\handle -> hSetBuffering handle NoBuffering) [stdin, stderr, stdout]
-  loop conn `catch` (\a@(SomeException e) -> T.putStr ">>>loop " >> (T.putStrLn $ pack $ show a))
-  where 
-    loop connection = forever $ do 
-      msg <- (WS.receiveData connection :: IO Text) 
-      WS.sendTextData connection msg 
 
-sendTestMessages :: TChan Text -> IO ()
-sendTestMessages writerChannel = 
-  atomically $ writeTChan writerChannel $ "1" <> "echo something\n"
 
 output :: K8SChannel.ChannelId -> TChan Text -> IO ()
 output aChannelId aChannel = do 
@@ -62,32 +48,28 @@ output aChannelId aChannel = do
     text <- readLine $ aChannel
     T.hPutStr handle text
 
--- Create a test server, a test client and send some messages.
--- Close. 
--- This should all work.
+getHost :: V1Container -> String 
+getHost aContainer = undefined 
+
+getPort :: V1Container -> Int 
+getPort aContainer = undefined 
+
+testContainer :: V1Container
+testContainer = undefined
+
 testSetup :: IO ()
 testSetup = do
-  server <- async (WS.runServer host port echoServer)
-  threadDelay (1 * (10 ^ 6))
-  clientState <- createWSClient host port
-  client <- async (WSClient.runClient host port route timeout clientState)
-  replicateM_ 5 $ sendTestMessages $ CreateWSClient.writer clientState
+  host <- return $ getHost testContainer 
+  port <- return $ getPort testContainer
+  clientState <- createWSClient testContainer
+  client <- async (WSClient.runClient clientState)
   outputAsyncs <- mapM (\(channelId, channel) -> async(output channelId channel)) 
     $ Prelude.filter(\(cId, _) -> cId /= K8SChannel.StdIn) $ 
       CreateWSClient.channels clientState
-  waitAny $ server : client : outputAsyncs
+  waitAny $ client : outputAsyncs
   return ()
   -- start a client
   -- send some messages.
-  where
-    -- Some sample parameters. Need to read this from 
-    -- kubeconfig.
-    host = "localhost" 
-    port = 20000
-    queryParams = urlEncodeVars [("command", "/bin/sh\n")]    
-    route = "/?" <> queryParams
-    timeout = Nothing
-
 -- | A sample test setup, that should be moved to 
 -- | test spec. 
-main = testSetup
+mainTest = testSetup

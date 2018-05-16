@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: ddd3ecc0805d5a5483261debaece6fa99b75338e3b3ba0d1b0a7d3b46f72e70a
+-- hash: 6a938e5df52e6e58a156d0456cb5c168671a46c92dbc09d2e83558691c51e5c3
 
 name:           kubernetes-exec-helper
 version:        0.1.0.0
@@ -45,7 +45,6 @@ library
       Kubernetes.CreateWSClient
       Kubernetes.K8SChannel
       Kubernetes.WSClient
-      Kubernetes.WSStream
   other-modules:
       Paths_kubernetes_exec_helper
   default-language: Haskell2010

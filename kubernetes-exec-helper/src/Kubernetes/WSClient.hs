@@ -41,22 +41,38 @@ import qualified Data.Text.IO as T
 import qualified Text.Printf as Printf
 import Network.Socket as S
 import qualified Network.WebSockets as WS
+import Kubernetes.Model
+import Kubernetes.KubeConfig
 import System.Timeout (timeout) 
 import System.IO (hSetBuffering, BufferMode(..), stdin)
 
--- | Run the web socket client. 
-runClient :: String -- ^ Host  
-            -> Int  -- ^ Port 
-            -> String -- ^ Path
-            -> Maybe TimeoutInterval -- ^ Channel timeout.
-            -> CreateWSClient Text 
-            -> IO ()
-runClient domain port route timeout createWSClient = do
+getHeaders :: V1Container -> WS.Headers 
+getHeaders = undefined 
+
+getFullHost :: V1Container -> String 
+getFullHost = undefined 
+
+getConnectionOptions :: V1Container -> WS.ConnectionOptions 
+getConnectionOptions _ = WS.defaultConnectionOptions
+
+getPath :: V1Container -> String 
+getPath = undefined 
+
+getDomain :: V1Container -> String 
+getDomain = undefined 
+
+
+runClient :: CreateWSClient Text -> IO () 
+runClient createWSClient = do 
   let 
-    headers = []
-    connectionOptions = WS.defaultConnectionOptions 
-    fullHost = if port == 80 then domain else (domain ++ ":" ++ show port)
-    path     = if null route then "/" else route
+    container = configuration createWSClient
+    headers = getHeaders container
+    connectionOptions = getConnectionOptions container
+    fullHost = getFullHost container
+    route = getRoute createWSClient 
+    path = getPath container
+    domain = getDomain container
+    timeout = getTimeOut createWSClient 
   (socket, addr) <- return $ clientSession createWSClient
   res <- finally 
           (do 
@@ -70,6 +86,17 @@ runClient domain port route timeout createWSClient = do
             T.putStrLn "Closing socket. Bye"
              >> S.close socket)
   return ()
+
+{- | 
+  Read commands from std in and send it to the pod.
+-}
+readCommands :: TChan Text -> IO ()
+readCommands writerChannel = do 
+  hSetBuffering stdin NoBuffering
+  line <- T.pack <$> getLine
+  atomically $ writeTChan writerChannel $ line
+  readCommands writerChannel
+
 -- | Socket IO handler.
 k8sClient :: Maybe TimeoutInterval -> CreateWSClient Text -> WS.Connection -> IO ()
 k8sClient interval clientState conn = do
@@ -77,7 +104,8 @@ k8sClient interval clientState conn = do
     sender <- async $ forever $ do 
         nextMessage <- atomically . readTChan $ writer clientState
         WS.sendTextData conn nextMessage
-    _ <- waitAny [rcv, sender]
+    commandReader <- async $ readCommands $ writer clientState
+    _ <- waitAny [rcv, sender, commandReader]
     return ()
     where
       worker channels conn= async $ forever $ do 
@@ -114,7 +142,6 @@ readChannelIdSTM channel channels =
 
 readLineSTM :: TChan Text -> STM Text
 readLineSTM aChannel = readTChan aChannel 
-
 
 readLine :: TChan Text -> IO Text 
 readLine = atomically . readLineSTM
