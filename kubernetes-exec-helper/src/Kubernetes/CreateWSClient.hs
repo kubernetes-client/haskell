@@ -9,6 +9,7 @@ module Kubernetes.CreateWSClient
     , getTimeOut
     , createWSClient
     , getRoute
+    , prompt -- A command prompt.
   )
 where 
 import Control.Concurrent.STM 
@@ -32,6 +33,9 @@ data CreateWSClient a = CreateWSClient {
     , _configuration :: V1Container -- ^ The container
     , _commands :: [Command] -- ^ the list of commands to run.
     }
+
+prompt :: Text 
+prompt = "k8:s>"
 
 writer :: CreateWSClient a -> TChan a 
 writer clientState = _writer clientState

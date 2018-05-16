@@ -13,7 +13,7 @@
 -}
 module Kubernetes.WSClient
     (
-      runClient
+      runClient -- * Client.
       -- * Reads      
       , readLine
       , readChannelIdSTM
@@ -61,7 +61,6 @@ getPath = undefined
 getDomain :: V1Container -> String 
 getDomain = undefined 
 
-
 runClient :: CreateWSClient Text -> IO () 
 runClient createWSClient = do 
   let 
@@ -93,6 +92,7 @@ runClient createWSClient = do
 readCommands :: TChan Text -> IO ()
 readCommands writerChannel = do 
   hSetBuffering stdin NoBuffering
+  T.putStr prompt
   line <- T.pack <$> getLine
   atomically $ writeTChan writerChannel $ line
   readCommands writerChannel

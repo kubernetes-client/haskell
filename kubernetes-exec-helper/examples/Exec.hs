@@ -43,7 +43,7 @@ import           System.Wlog
 output :: K8SChannel.ChannelId -> TChan Text -> IO ()
 output aChannelId aChannel = do 
   let handle = K8SChannel.mapChannel aChannelId
---  hSetBuffering handle NoBuffering
+  hSetBuffering handle NoBuffering
   forever $ do 
     text <- readLine $ aChannel
     T.hPutStr handle text
@@ -72,4 +72,4 @@ testSetup = do
   -- send some messages.
 -- | A sample test setup, that should be moved to 
 -- | test spec. 
-mainTest = testSetup
+main = testSetup
