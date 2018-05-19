@@ -31,7 +31,7 @@ dependencies:
   - optparse-applicative
   - process
   - log-warper >= 1.8.2 && < 1.9
-
+  - wuss 
 executable : 
   main: Exec.hs
   source-dirs: examples

@@ -34,7 +34,7 @@ import Data.Monoid ((<>))
 import Data.Text (Text)
 import Kubernetes.K8SChannel
 import Kubernetes.CreateWSClient
-import Kubernetes.KubeConfig
+import Kubernetes.KubeConfig as KubeConfig
 import Network.Socket as S
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
@@ -45,45 +45,19 @@ import Kubernetes.Model
 import Kubernetes.KubeConfig
 import System.Timeout (timeout) 
 import System.IO (hSetBuffering, BufferMode(..), stdin)
+import Wuss as WSS (runSecureClient)
 
-getHeaders :: V1Container -> WS.Headers 
-getHeaders = undefined 
-
-getFullHost :: V1Container -> String 
-getFullHost = undefined 
-
-getConnectionOptions :: V1Container -> WS.ConnectionOptions 
-getConnectionOptions _ = WS.defaultConnectionOptions
-
-getPath :: V1Container -> String 
-getPath = undefined 
-
-getDomain :: V1Container -> String 
-getDomain = undefined 
 
 runClient :: CreateWSClient Text -> IO () 
 runClient createWSClient = do 
   let 
-    container = configuration createWSClient
-    headers = getHeaders container
-    connectionOptions = getConnectionOptions container
-    fullHost = getFullHost container
-    route = getRoute createWSClient 
-    path = getPath container
-    domain = getDomain container
-    timeout = getTimeOut createWSClient 
-  (socket, addr) <- return $ clientSession createWSClient
-  res <- finally 
-          (do 
-              _ <- S.connect socket (S.addrAddress addr) 
-                      `catch` (\a@(SomeException e) -> T.putStrLn (T.pack $ show a))
-              withSocketsDo $ 
-                WS.runClientWithSocket 
-                  socket fullHost route connectionOptions headers 
-                    $ (\conn -> k8sClient timeout createWSClient conn))
-          (
-            T.putStrLn "Closing socket. Bye"
-             >> S.close socket)
+    headers = getHeaders createWSClient
+    connectionOptions = getConnectionOptions createWSClient
+    host = getHost createWSClient
+    port = getPort createWSClient
+    route = undefined
+    timeoutInt = getTimeOut createWSClient
+  res <- WSS.runSecureClient host port route (\conn -> k8sClient timeoutInt createWSClient conn)
   return ()
 
 {- | 

@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 6a938e5df52e6e58a156d0456cb5c168671a46c92dbc09d2e83558691c51e5c3
+-- hash: 835fdf7a7735937e467e127b383866c1f2df435348d7ccae7aa185fa02efb7f4
 
 name:           kubernetes-exec-helper
 version:        0.1.0.0
@@ -37,6 +37,7 @@ library
     , text >=0.11 && <1.3
     , tls
     , websockets >=0.12 && <0.13
+    , wuss
     , x509
     , x509-store
     , x509-system
@@ -79,6 +80,7 @@ executable kubernetes-exec-helper
     , text >=0.11 && <1.3
     , tls
     , websockets >=0.12 && <0.13
+    , wuss
     , x509
     , x509-store
     , x509-system
@@ -121,6 +123,7 @@ test-suite spec
     , text >=0.11 && <1.3
     , tls
     , websockets >=0.12 && <0.13
+    , wuss
     , x509
     , x509-store
     , x509-system

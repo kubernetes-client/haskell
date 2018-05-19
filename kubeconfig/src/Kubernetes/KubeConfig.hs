@@ -89,7 +89,7 @@ data NamedEntity a (typeKey :: Symbol) = NamedEntity
 
 instance (FromJSON a, Typeable a, KnownSymbol s) =>
          FromJSON (NamedEntity a s) where
-  parseJSON = withObject ("Named" <> (show $ typeOf (undefined :: a))) $ \v ->
+  parseJSON = withObject ("Named" <> (show $ typeOf (Proxy :: Proxy a))) $ \v ->
     NamedEntity <$> v .: "name" <*> v .: T.pack (symbolVal (Proxy :: Proxy s))
 
 instance (ToJSON a, KnownSymbol s) =>

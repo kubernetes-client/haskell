@@ -49,4 +49,4 @@ main = do
             (Kubernetes.API.CoreV1.listPodForAllNamespaces (Accept MimeJSON))
         >>= print
 ```
-s
+

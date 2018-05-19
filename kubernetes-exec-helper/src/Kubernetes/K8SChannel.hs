@@ -7,11 +7,7 @@ module Kubernetes.K8SChannel where
 
 import Control.Exception
 import Control.Exception.Safe
-import Control.Concurrent(ThreadId)
-import Control.Concurrent.Async(Async)
-import Control.Concurrent.STM
 import Data.Text
-import Network.Socket
 import Kubernetes.KubeConfig
 import System.IO (stdin, stdout, stderr, Handle)
 
