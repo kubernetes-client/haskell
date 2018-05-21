@@ -78,14 +78,13 @@ runClient createWSClient name namespace bearerToken = do
   case(host, port) of 
     (Just h, Just p) -> do 
       execAttach_ <- async (attachExec createWSClient name namespace) -- TODO: Where should this go
-      Prelude.putStrLn "calling attach."
       runClientWithTLS h p urlRequest bearerToken clusterClientParams_ (\conn -> k8sClient timeoutInt createWSClient conn)     
       wait execAttach_ 
       return ()
-
     _ -> return ()
 
 
+runClientWithTLS :: String -> PortNumber -> String -> AuthApiKeyBearerToken -> TLSSettings -> WS.ClientApp () -> IO ()
 runClientWithTLS h p path (AuthApiKeyBearerToken bearerToken) tlsSettings application = do
   let options = WS.defaultConnectionOptions
   let headers = [("Authorization", CB8.toStrict $ CB8.pack $ Printf.printf "Bearer: %s" bearerToken )]
@@ -97,11 +96,9 @@ runClientWithTLS h p path (AuthApiKeyBearerToken bearerToken) tlsSettings applic
   }
   context <- initConnectionContext 
   connection <- connectTo context connectionParams 
-  Prelude.putStrLn $ show headers
   stream <- WS.makeStream 
     (fmap Just $ connectionGetChunk connection)
     (maybe (return()) (connectionPut connection . BL.toStrict))
-  Prelude.putStrLn $ "Path " <> path
   WS.runClientWithStream stream h path options headers application
     `catch` (\exc@(SomeException e) -> Prelude.putStrLn $ show exc)
 
@@ -165,19 +162,33 @@ readLineSTM aChannel = readTChan aChannel
 readLine :: TChan Text -> IO Text 
 readLine = atomically . readLineSTM
 
-
+fullRequest :: CreateWSClient a
+  -> Name
+  -> Namespace 
+  -> KubernetesRequest ConnectGetNamespacedPodExec MimeNoContent Text MimeJSON
 fullRequest client name namespace = 
   applyContainer containerName_ $ applyCommands (commands client ) $ makeRequest name namespace
   where 
     container_ = container client 
     containerName_ = v1ContainerName container_
 
+
+applyCommands :: (Kubernetes.Core.HasOptionalParam req param, Foldable t) =>
+  t param
+  -> KubernetesRequest req contentType res accept
+  -> KubernetesRequest req contentType res accept
 applyCommands commands request = 
     Prelude.foldr (\ele acc -> applyOptionalParam request ele) request commands
 
+applyContainer :: Kubernetes.Core.HasOptionalParam req Container =>
+  Text
+  -> KubernetesRequest req contentType res accept
+  -> KubernetesRequest req contentType res accept
 applyContainer containerName request = 
     applyOptionalParam request (Container containerName) 
 
+makeRequest :: Name ->  Namespace -> 
+  KubernetesRequest ConnectGetNamespacedPodExec MimeNoContent Text MimeJSON
 makeRequest name namespace = 
   (Kubernetes.API.CoreV1.connectGetNamespacedPodExec 
     (Accept MimeJSON) 
@@ -185,6 +196,8 @@ makeRequest name namespace =
     namespace
     )
 
+-- | Dispatch 'ConnectGetNamespacedPodExec' request.
+attachExec :: CreateWSClient a -> Name -> Namespace -> IO (MimeResult Text)
 attachExec client name namespace = do
   let 
     container_ = container client
@@ -192,7 +205,6 @@ attachExec client name namespace = do
     kubeConfig = kubernetesConfig client
     tlsParams = clusterClientParams client
     fullRequest_ = fullRequest client name namespace 
-  Prelude.putStrLn $ show fullRequest_
   manager <- newManager tlsParams 
   dispatchMime 
     manager 

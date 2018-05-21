@@ -64,7 +64,7 @@ clusterClientSetupParams = do
     myCAStore <- loadPEMCerts caStoreFile -- if using custom CA certs
     myCert    <- credentialLoadX509 clientCrt clientKey 
                   >>= either error return
-
+    Prelude.putStrLn $ show myCert
     defaultTLSClientParams
       & fmap disableServerNameValidation -- if master address is specified as an IP address
       & fmap disableServerCertValidation -- if you don't want to validate the server cert at all (insecure)          
@@ -99,7 +99,6 @@ setupAndRun containerName = do
   where 
     iterContainers :: ClientParams -> KubernetesConfig -> V1Container -> IO ()
     iterContainers tlsParams kubeConfig containerE = do
-          print ("..." :: String)
           apiBearerToken <- getBearerToken "./bearerToken.txt" -- TODO fix this.
           clientState <- createWSClient tlsParams kubeConfig containerE $ 
               ([
