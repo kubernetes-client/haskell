@@ -25,7 +25,6 @@ import           Kubernetes.Client (dispatchMime, MimeResult(..))
 import           Kubernetes.ClientHelper
 import           Network.WebSockets as WS
 import           Network.Socket
-import           Network.HTTP.Base (urlEncodeVars)
 import           Kubernetes.WSClient as WSClient
 import           Kubernetes.KubeConfig
 import           Kubernetes.Model
@@ -83,6 +82,10 @@ listPods kubeConfig = do
             (Kubernetes.API.CoreV1.listPodForAllNamespaces (Accept MimeJSON))
 
 
+getBearerToken :: FilePath -> IO AuthApiKeyBearerToken 
+getBearerToken aFile = 
+    T.readFile aFile >>= \x -> return $ AuthApiKeyBearerToken x
+
 setupAndRun :: Text -> IO ()
 setupAndRun containerName = do
   kubeConfig <- setupKubeConfig
@@ -90,17 +93,22 @@ setupAndRun containerName = do
   podsForNamespaces <- listPods kubeConfig
   (MimeResult containerResult response) <- getContainer podsForNamespaces containerName
   case containerResult of 
-    Right container -> iterContainers tlsParams kubeConfig container
+    Right container__ -> iterContainers tlsParams kubeConfig container__
     Left _ -> return ()
   return ()
   where 
     iterContainers :: ClientParams -> KubernetesConfig -> V1Container -> IO ()
     iterContainers tlsParams kubeConfig containerE = do
           print ("..." :: String)
+          apiBearerToken <- getBearerToken "./bearerToken.txt" -- TODO fix this.
           clientState <- createWSClient tlsParams kubeConfig containerE $ 
               ([
                 Command $ "/bin/sh -c echo This message goes to stderr >&2; echo This message goes to stdout"])
-          client <- async (WSClient.runClient clientState (Name containerName) (Namespace "default"))
+          client <- 
+            async $ 
+              WSClient.runClient clientState (Name containerName) (Namespace "default")
+                apiBearerToken
+          
           outputAsyncs <- mapM (\(channelId, channel) -> async(output channelId channel)) 
             $ Prelude.filter(\(cId, _) -> cId /= K8SChannel.StdIn) $ 
               CreateWSClient.channels clientState

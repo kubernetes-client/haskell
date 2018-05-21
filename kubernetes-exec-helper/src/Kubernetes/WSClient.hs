@@ -41,6 +41,7 @@ import Kubernetes.KubeConfig as KubeConfig
 import Kubernetes.Core
 import Network.Connection
 import Network.Socket as S
+import Network.HTTP.Types (renderQuery)
 import qualified Data.Text as T
 import qualified Data.Text.IO as T
 import qualified Text.Printf as Printf
@@ -56,8 +57,8 @@ import System.IO (hSetBuffering, BufferMode(..), stdin)
 import Wuss as WSS (runSecureClient)
 
 
-runClient :: CreateWSClient Text -> Name -> Namespace -> IO () 
-runClient createWSClient name namespace = do 
+runClient :: CreateWSClient Text -> Name -> Namespace -> AuthApiKeyBearerToken -> IO () 
+runClient createWSClient name namespace bearerToken = do 
   let 
     headers = getHeaders createWSClient
     connectionOptions = getConnectionOptions createWSClient
@@ -67,7 +68,10 @@ runClient createWSClient name namespace = do
     path = CB8.unpack $
               Prelude.foldr (\p acc -> p <> acc) "" $ rUrlPath $ 
                 fullRequest createWSClient name namespace
-    params = []
+    params = CB8.unpack $ 
+                CB8.fromStrict $ renderQuery True $ paramsQuery $ rParams $ fullRequest createWSClient name namespace
+
+    urlRequest = path <> params
     timeoutInt = getTimeOut createWSClient
     kubeConfig = kubernetesConfig createWSClient
     clusterClientParams_ = TLSSettings $ clusterClientParams createWSClient
@@ -75,16 +79,16 @@ runClient createWSClient name namespace = do
     (Just h, Just p) -> do 
       execAttach_ <- async (attachExec createWSClient name namespace) -- TODO: Where should this go
       Prelude.putStrLn "calling attach."
-      runClientWithTLS h p path clusterClientParams_ (\conn -> k8sClient timeoutInt createWSClient conn)     
+      runClientWithTLS h p urlRequest bearerToken clusterClientParams_ (\conn -> k8sClient timeoutInt createWSClient conn)     
       wait execAttach_ 
       return ()
 
     _ -> return ()
 
 
-runClientWithTLS h p path tlsSettings application = do
+runClientWithTLS h p path (AuthApiKeyBearerToken bearerToken) tlsSettings application = do
   let options = WS.defaultConnectionOptions
-  let headers = []
+  let headers = [("Authorization", CB8.toStrict $ CB8.pack $ Printf.printf "Bearer: %s" bearerToken )]
   let connectionParams = ConnectionParams {
       connectionHostname = h 
     , connectionPort = p 
@@ -93,6 +97,7 @@ runClientWithTLS h p path tlsSettings application = do
   }
   context <- initConnectionContext 
   connection <- connectTo context connectionParams 
+  Prelude.putStrLn $ show headers
   stream <- WS.makeStream 
     (fmap Just $ connectionGetChunk connection)
     (maybe (return()) (connectionPut connection . BL.toStrict))
