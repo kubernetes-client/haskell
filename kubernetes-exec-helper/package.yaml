@@ -10,7 +10,7 @@ dependencies:
   - kubernetes-client-helper == 0.1.0.0
   - pem
   - x509
-  - tls
+  - tls >= 1.4 && < 1.5
   - x509-system
   - x509-store
   - data-default-class
@@ -36,6 +36,7 @@ dependencies:
   - log-warper >= 1.8.2 && < 1.9
   - tls >= 1.4 && < 1.5
   - wuss 
+  - http-client
 executable : 
   main: Exec.hs
   source-dirs: examples

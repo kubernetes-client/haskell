@@ -22,6 +22,7 @@ module Kubernetes.WSClient
     )
   where 
 
+
 import Control.Concurrent(ThreadId, threadDelay)
 import Control.Concurrent.Async(waitAny, async, Async, wait)
 import Control.Concurrent.STM
@@ -29,31 +30,36 @@ import Control.Exception.Safe
 import Control.Monad (forever)
 import Control.Monad.Reader
 import Data.ByteString (ByteString)
-import Data.ByteString.Lazy.Char8 as CB8
 import Data.ByteString.Lazy as BL
+import Data.ByteString.Lazy.Char8 as CB8
+import qualified Data.ByteString.Lazy.Char8 as BCL
+import Data.Proxy as P (Proxy(..))
 import Data.Maybe
 import Data.Monoid ((<>))
-import Data.Text (Text)
-import Kubernetes.K8SChannel
-import Kubernetes.CreateWSClient
-import Kubernetes.ClientHelper
-import Kubernetes.KubeConfig as KubeConfig
-import Kubernetes.Core
-import Network.Connection
-import Network.Socket as S
-import Network.HTTP.Types (renderQuery)
-import qualified Data.Text as T
-import qualified Data.Text.IO as T
-import qualified Text.Printf as Printf
-import qualified Network.WebSockets as WS
-import qualified Network.WebSockets.Stream as WS
-import Kubernetes.Model
-import Kubernetes.KubeConfig
+import Data.Text as Text 
+import Data.Text.IO as T 
+import Data.Text.Encoding as TE 
 import Kubernetes.API.CoreV1
 import Kubernetes.Client
+import Kubernetes.ClientHelper
+import Kubernetes.Core
+import Kubernetes.CreateWSClient
+import Kubernetes.K8SChannel
+import Kubernetes.KubeConfig
+import Kubernetes.KubeConfig as KubeConfig
 import Kubernetes.MimeTypes
-import System.Timeout (timeout) 
+import Kubernetes.Model
+import Network.Connection
+import Network.HTTP.Types (renderQuery)
+import Network.Socket as S
+import qualified Data.Text
+import qualified Data.Text.IO as T
+import qualified Network.HTTP.Client as NH
+import qualified Network.WebSockets as WS
+import qualified Network.WebSockets.Stream as WS
+import qualified Text.Printf as Printf
 import System.IO (hSetBuffering, BufferMode(..), stdin)
+import System.Timeout (timeout) 
 import Wuss as WSS (runSecureClient)
 
 
@@ -69,25 +75,32 @@ runClient createWSClient name namespace bearerToken = do
               Prelude.foldr (\p acc -> p <> acc) "" $ rUrlPath $ 
                 fullRequest createWSClient name namespace
     params = CB8.unpack $ 
-                CB8.fromStrict $ renderQuery True $ paramsQuery $ rParams $ fullRequest createWSClient name namespace
-
-    urlRequest = path <> params
+                CB8.fromStrict $ renderQuery True 
+                  $ paramsQuery $ rParams $ fullRequest createWSClient name namespace
+    kubeConfig = kubernetesConfig createWSClient                  
     timeoutInt = getTimeOut createWSClient
-    kubeConfig = kubernetesConfig createWSClient
     clusterClientParams_ = TLSSettings $ clusterClientParams createWSClient
-  case(host, port) of 
-    (Just h, Just p) -> do 
+  case(host, port) of
+    (Just h, Just p) -> do
+      r@(InitRequest urlRequest) <- 
+          _toInitRequest kubeConfig $ (_mkRequest "GET" $ [BCL.pack $ path <> params])
+            `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyBearerToken)  :: IO (InitRequest Text MimeAny Text MimeAny)
       execAttach_ <- async (attachExec createWSClient name namespace) -- TODO: Where should this go
-      runClientWithTLS h p urlRequest bearerToken clusterClientParams_ (\conn -> k8sClient timeoutInt createWSClient conn)     
+      runClientWithTLS h p (path <> params) bearerToken clusterClientParams_ 
+        (\conn -> k8sClient timeoutInt createWSClient conn)     
       wait execAttach_ 
       return ()
     _ -> return ()
 
 
 runClientWithTLS :: String -> PortNumber -> String -> AuthApiKeyBearerToken -> TLSSettings -> WS.ClientApp () -> IO ()
-runClientWithTLS h p path (AuthApiKeyBearerToken bearerToken) tlsSettings application = do
+runClientWithTLS h p urlRequest (AuthApiKeyBearerToken bearerToken) tlsSettings application = do
   let options = WS.defaultConnectionOptions
-  let headers = [("Authorization", CB8.toStrict $ CB8.pack $ Printf.printf "Bearer: %s" bearerToken )]
+  let bearerTokenString = "Bearer " <> bearerToken
+  let headers = Prelude.map (\(x, y) -> (x, TE.encodeUtf8 y)) $ 
+        [("sec-websocket-protocol", "v4.channel.k8s.io")
+        , ("Connection", "upgrade"), ("Upgrade", "websocket")
+        , ("Authorization", bearerTokenString)]
   let connectionParams = ConnectionParams {
       connectionHostname = h 
     , connectionPort = p 
@@ -99,34 +112,24 @@ runClientWithTLS h p path (AuthApiKeyBearerToken bearerToken) tlsSettings applic
   stream <- WS.makeStream 
     (fmap Just $ connectionGetChunk connection)
     (maybe (return()) (connectionPut connection . BL.toStrict))
-  WS.runClientWithStream stream h path options headers application
-    `catch` (\exc@(SomeException e) -> Prelude.putStrLn $ show exc)
-
-{- | 
-  Read commands from std in and send it to the pod.
--}
-readCommands :: TChan Text -> IO ()
-readCommands writerChannel = do 
-  hSetBuffering stdin NoBuffering
-  T.putStr prompt
-  line <- T.pack <$> Prelude.getLine
-  atomically $ writeTChan writerChannel $ line
-  readCommands writerChannel
+  WS.runClientWithStream stream h urlRequest options headers application
+    `catch` (\exc@(SomeException e) -> 
+                    Prelude.putStrLn $ "Exception " <> show exc)
 
 -- | Socket IO handler.
 k8sClient :: Maybe TimeoutInterval -> CreateWSClient Text -> WS.Connection -> IO ()
 k8sClient interval clientState conn = do
+    Prelude.putStrLn "worker client..."
     rcv <- worker (channels clientState) conn
     sender <- async $ forever $ do 
         nextMessage <- atomically . readTChan $ writer clientState
         WS.sendTextData conn nextMessage
-    commandReader <- async $ readCommands $ writer clientState
-    _ <- waitAny [rcv, sender, commandReader]
+    _ <- waitAny [rcv, sender]
     return ()
     where
       worker channels conn= async $ forever $ do 
             msg <- WS.receiveData conn
-            publishMessage channels $ T.splitAt 1 msg
+            publishMessage channels $ Text.splitAt 1 msg
       timedThread aWorker channels connection timeoutInterval =
         case timeoutInterval of  
             Nothing ->  Just <$> aWorker channels connection 
@@ -167,7 +170,7 @@ fullRequest :: CreateWSClient a
   -> Namespace 
   -> KubernetesRequest ConnectGetNamespacedPodExec MimeNoContent Text MimeJSON
 fullRequest client name namespace = 
-  applyContainer containerName_ $ applyCommands (commands client ) $ makeRequest name namespace
+  applyCommands (commands client ) $ makeRequest name namespace
   where 
     container_ = container client 
     containerName_ = v1ContainerName container_

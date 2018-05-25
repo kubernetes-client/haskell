@@ -35,7 +35,7 @@ propMime
   => String -> (a -> a -> b) -> mime -> Proxy a -> Spec
 propMime eqDescr eq m _ =
   prop
-    (show (typeOf (Proxy :: Proxy a)) <> " " <> show (typeOf (Proxy :: Proxy mime)) <> " roundtrip " <> eqDescr) $
+    (show (typeOf (Proxy :: Proxy a)) <> " " <> show (typeOf (undefined mime)) <> " roundtrip " <> eqDescr) $
   \(x :: a) ->
      let rendered = mimeRender' m x
          actual = mimeUnrender' m rendered

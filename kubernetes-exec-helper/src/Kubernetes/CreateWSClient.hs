@@ -15,7 +15,6 @@ module Kubernetes.CreateWSClient
     , getHeaders
     , getConnectionOptions
     , prompt
-    , getContainer
     , getHost
     , getPort
     , getURIAuth
@@ -50,9 +49,6 @@ newtype Route = Route {_route :: String}
 data CreateWSClient a = CreateWSClient {
     _writer :: TChan a -- ^ Write back to the server.
     , _channels :: [(ChannelId, TChan a)] -- ^ Read from the server
-    , _kubernetesConfig :: KubernetesConfig
-    , _clusterClientParams :: TLS.ClientParams
-    , _container :: V1Container -- ^ The container
     , _commands :: [Command] -- ^ the list of commands to run.
     , _timeOutInterval :: Maybe TimeoutInterval
     }
@@ -127,11 +123,3 @@ getPort  createWSClient = do
 getConnectionOptions :: CreateWSClient a -> WS.ConnectionOptions 
 getConnectionOptions _ = WS.defaultConnectionOptions
 
--- This is hacky. TODO: Clean this up.
-getContainer :: Kubernetes.Client.MimeResult V1PodList -> Text -> IO (MimeResult V1Container)
-getContainer podList aContainerName = do
-  let podItems :: MimeResult [V1Pod] = fmap (\p -> v1PodListItems p) podList
-  let podSpecs :: MimeResult [V1PodSpec] = fmap (\p -> catMaybes $ fmap v1PodSpec p) podItems
-  let containers :: MimeResult [V1Container] = fmap Prelude.concat (fmap (\p -> fmap v1PodSpecContainers p) podSpecs)
-  let search :: MimeResult [V1Container] = fmap (\p -> Prelude.filter (\p1 -> aContainerName /= (v1ContainerName p1)) p) containers
-  return $ fmap (\list -> Prelude.head list) search -- catch the exception when empty

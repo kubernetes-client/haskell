@@ -8,7 +8,7 @@ import           Kubernetes.KubeConfig (AuthInfo (..), Cluster (..), Config,
                                         Context (..), getAuthInfo, getCluster,
                                         getContext)
 import           Test.Hspec
-import qualified Data.Map as Map
+
 main :: IO ()
 main = do
   config :: Config <- fromJust <$> decodeFile "test/testdata/kubeconfig.yaml"
