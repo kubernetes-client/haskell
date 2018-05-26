@@ -50,43 +50,12 @@ setupKubeConfig = do
       & fmap disableValidateAuthMethods  -- if using client cert auth
     return result
 
-clusterClientSetupParams :: IO TLS.ClientParams
-clusterClientSetupParams = do
-    home <- getEnv("HOME")
-    caStoreFile <- return $ Printf.printf "%s/.minikube/ca.crt" (pack home)
-    clientCrt <- return $ Printf.printf "%s/.minikube/client.crt" $ pack home
-    clientKey <- return $ Printf.printf "%s/.minikube/client.key" $ pack home 
-    myCAStore <- loadPEMCerts caStoreFile -- if using custom CA certs
-    myCert    <- credentialLoadX509 clientCrt clientKey 
-                  >>= either error return
-    r <- defaultTLSClientParams
-      & fmap disableServerNameValidation -- if master address is specified as an IP address
-      & fmap disableServerCertValidation -- if you don't want to validate the server cert at all (insecure)          
-      & fmap (setCAStore myCAStore)      -- if using custom CA certs
-      & fmap (setClientCert myCert)      -- if using client cert
-    return $ r {clientServerIdentification = ("", "")}
 
-listPods :: KubernetesConfig -> IO (Kubernetes.Client.MimeResult V1PodList)
-listPods kubeConfig = do 
-    tlsParams <- clusterClientSetupParams
-    manager <- newManager tlsParams
-    dispatchMime
-            manager
-            kubeConfig
-            (Kubernetes.API.CoreV1.listPodForAllNamespaces (Accept MimeJSON))
 
 getBearerToken :: FilePath -> IO AuthApiKeyBearerToken 
 getBearerToken aFile = 
     T.readFile aFile >>= \x -> return $ AuthApiKeyBearerToken x
 
--- This is hacky. TODO: Clean this up.
-getContainer :: Kubernetes.Client.MimeResult V1PodList -> Text -> IO (MimeResult V1Container)
-getContainer podList aContainerName = do
-  let podItems :: MimeResult [V1Pod] = fmap (\p -> v1PodListItems p) podList
-  let podSpecs :: MimeResult [V1PodSpec] = fmap (\p -> catMaybes $ fmap v1PodSpec p) podItems
-  let containers :: MimeResult [V1Container] = fmap Prelude.concat (fmap (\p -> fmap v1PodSpecContainers p) podSpecs)
-  let search :: MimeResult [V1Container] = fmap (\p -> Prelude.filter (\p1 -> aContainerName /= (v1ContainerName p1)) p) containers
-  return $ fmap (\list -> Prelude.head list) search -- catch the exception when empty
 
 
 output :: K8SChannel.ChannelId -> TChan Text -> IO ()

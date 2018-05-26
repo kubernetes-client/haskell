@@ -32,13 +32,12 @@ import Control.Monad.Reader
 import Data.ByteString (ByteString)
 import Data.ByteString.Lazy as BL
 import Data.ByteString.Lazy.Char8 as CB8
-import qualified Data.ByteString.Lazy.Char8 as BCL
-import Data.Proxy as P (Proxy(..))
 import Data.Maybe
 import Data.Monoid ((<>))
+import Data.Proxy as P (Proxy(..))
 import Data.Text as Text 
-import Data.Text.IO as T 
 import Data.Text.Encoding as TE 
+import Data.Text.IO as T 
 import Kubernetes.API.CoreV1
 import Kubernetes.Client
 import Kubernetes.ClientHelper
@@ -52,6 +51,7 @@ import Kubernetes.Model
 import Network.Connection
 import Network.HTTP.Types (renderQuery)
 import Network.Socket as S
+import qualified Data.ByteString.Lazy.Char8 as BCL
 import qualified Data.Text
 import qualified Data.Text.IO as T
 import qualified Network.HTTP.Client as NH
@@ -61,49 +61,38 @@ import qualified Text.Printf as Printf
 import System.IO (hSetBuffering, BufferMode(..), stdin)
 import System.Timeout (timeout) 
 import Wuss as WSS (runSecureClient)
+import Kubernetes.Misc 
 
 
-runClient :: CreateWSClient Text -> Name -> Namespace -> AuthApiKeyBearerToken -> IO () 
-runClient createWSClient name namespace bearerToken = do 
+
+runClient :: CreateWSClient Text -> Name -> Namespace -> KubernetesConfig -> IO () 
+runClient createWSClient name namespace kubeConfig = do 
   let 
-    headers = getHeaders createWSClient
-    connectionOptions = getConnectionOptions createWSClient
-    uri  = getURIAuth createWSClient
-    host = getHost createWSClient
-    port = getPort createWSClient
-    path = CB8.unpack $
-              Prelude.foldr (\p acc -> p <> acc) "" $ rUrlPath $ 
-                fullRequest createWSClient name namespace
-    params = CB8.unpack $ 
-                CB8.fromStrict $ renderQuery True 
-                  $ paramsQuery $ rParams $ fullRequest createWSClient name namespace
-    kubeConfig = kubernetesConfig createWSClient                  
     timeoutInt = getTimeOut createWSClient
-    clusterClientParams_ = TLSSettings $ clusterClientParams createWSClient
+    host = Just "some string" :: Maybe String 
+    port = Just . PortNum $ 99999 :: Maybe PortNumber
+    bearerToken = authApiKeyBearerToken kubeConfig
+    path = "fill_the_path" :: String 
+    params = "fill_the_params" :: String 
   case(host, port) of
     (Just h, Just p) -> do
-      r@(InitRequest urlRequest) <- 
-          _toInitRequest kubeConfig $ (_mkRequest "GET" $ [BCL.pack $ path <> params])
-            `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyBearerToken)  :: IO (InitRequest Text MimeAny Text MimeAny)
-      execAttach_ <- async (attachExec createWSClient name namespace) -- TODO: Where should this go
-      runClientWithTLS h p (path <> params) bearerToken clusterClientParams_ 
+      let r = connectGetNamespacedPodExec (Accept MimePlainText) name namespace
+      execAttach_ <- async (attachExec createWSClient kubeConfig name namespace r) -- TODO: Where should this go
+      runClientWithTLS h p (path <> params) kubeConfig 
         (\conn -> k8sClient timeoutInt createWSClient conn)     
       wait execAttach_ 
       return ()
     _ -> return ()
 
 
-runClientWithTLS :: String -> PortNumber -> String -> AuthApiKeyBearerToken -> TLSSettings -> WS.ClientApp () -> IO ()
-runClientWithTLS h p urlRequest (AuthApiKeyBearerToken bearerToken) tlsSettings application = do
+runClientWithTLS :: String -> PortNumber -> String -> KubernetesConfig -> WS.ClientApp () -> IO ()
+runClientWithTLS host portNumber urlRequest kubeConfig application = do
+  let tlsSettings = undefined -- get this from some place.
   let options = WS.defaultConnectionOptions
-  let bearerTokenString = "Bearer " <> bearerToken
-  let headers = Prelude.map (\(x, y) -> (x, TE.encodeUtf8 y)) $ 
-        [("sec-websocket-protocol", "v4.channel.k8s.io")
-        , ("Connection", "upgrade"), ("Upgrade", "websocket")
-        , ("Authorization", bearerTokenString)]
+  let headers = []
   let connectionParams = ConnectionParams {
-      connectionHostname = h 
-    , connectionPort = p 
+      connectionHostname = host 
+    , connectionPort = portNumber 
     , connectionUseSecure = Just tlsSettings
     , connectionUseSocks = Nothing
   }
@@ -112,7 +101,7 @@ runClientWithTLS h p urlRequest (AuthApiKeyBearerToken bearerToken) tlsSettings 
   stream <- WS.makeStream 
     (fmap Just $ connectionGetChunk connection)
     (maybe (return()) (connectionPut connection . BL.toStrict))
-  WS.runClientWithStream stream h urlRequest options headers application
+  WS.runClientWithStream stream host urlRequest options headers application
     `catch` (\exc@(SomeException e) -> 
                     Prelude.putStrLn $ "Exception " <> show exc)
 
@@ -165,51 +154,3 @@ readLineSTM aChannel = readTChan aChannel
 readLine :: TChan Text -> IO Text 
 readLine = atomically . readLineSTM
 
-fullRequest :: CreateWSClient a
-  -> Name
-  -> Namespace 
-  -> KubernetesRequest ConnectGetNamespacedPodExec MimeNoContent Text MimeJSON
-fullRequest client name namespace = 
-  applyCommands (commands client ) $ makeRequest name namespace
-  where 
-    container_ = container client 
-    containerName_ = v1ContainerName container_
-
-
-applyCommands :: (Kubernetes.Core.HasOptionalParam req param, Foldable t) =>
-  t param
-  -> KubernetesRequest req contentType res accept
-  -> KubernetesRequest req contentType res accept
-applyCommands commands request = 
-    Prelude.foldr (\ele acc -> applyOptionalParam request ele) request commands
-
-applyContainer :: Kubernetes.Core.HasOptionalParam req Container =>
-  Text
-  -> KubernetesRequest req contentType res accept
-  -> KubernetesRequest req contentType res accept
-applyContainer containerName request = 
-    applyOptionalParam request (Container containerName) 
-
-makeRequest :: Name ->  Namespace -> 
-  KubernetesRequest ConnectGetNamespacedPodExec MimeNoContent Text MimeJSON
-makeRequest name namespace = 
-  (Kubernetes.API.CoreV1.connectGetNamespacedPodExec 
-    (Accept MimeJSON) 
-    name
-    namespace
-    )
-
--- | Dispatch 'ConnectGetNamespacedPodExec' request.
-attachExec :: CreateWSClient a -> Name -> Namespace -> IO (MimeResult Text)
-attachExec client name namespace = do
-  let 
-    container_ = container client
-    containerName_ = v1ContainerName container_
-    kubeConfig = kubernetesConfig client
-    tlsParams = clusterClientParams client
-    fullRequest_ = fullRequest client name namespace 
-  manager <- newManager tlsParams 
-  dispatchMime 
-    manager 
-    kubeConfig
-    fullRequest_
