@@ -26,7 +26,6 @@ dependencies:
   - network-uri >= 2.6 &&< 2.7
   - network >= 2.6 && < 2.7
   - websockets >= 0.12 && < 0.13
-  - hlint >= 2.0 && < 3.0
   - async
   - stm
   - mtl
@@ -41,7 +40,6 @@ executable :
   main: Exec.hs
   source-dirs: examples
   dependencies: 
-    - yaml
     - kubeconfig
     - kubernetes-exec-helper
     - process

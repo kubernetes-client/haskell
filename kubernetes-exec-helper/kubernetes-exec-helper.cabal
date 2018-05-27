@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 7c2e85a7682a721a560c6b0479e7bf50419dc78325bd641343ff69d2e44dac27
+-- hash: b615e59b0e38f00bfc1432c9ebdd4a623a676c1fefe19ca0df86a3c86b839624
 
 name:           kubernetes-exec-helper
 version:        0.1.0.0
@@ -19,7 +19,6 @@ library
     , bytestring >=0.10.0 && <0.11
     , connection
     , data-default-class
-    , hlint >=2.0 && <3.0
     , http-client
     , http-client-tls
     , http-types >=0.9.1 && <0.10
@@ -64,7 +63,6 @@ executable kubernetes-exec-helper
     , bytestring >=0.10.0 && <0.11
     , connection
     , data-default-class
-    , hlint >=2.0 && <3.0
     , http-client
     , http-client-tls
     , http-types >=0.9.1 && <0.10
@@ -90,7 +88,6 @@ executable kubernetes-exec-helper
     , x509-store
     , x509-system
     , x509-validation
-    , yaml
   other-modules:
       Paths_kubernetes_exec_helper
   default-language: Haskell2010

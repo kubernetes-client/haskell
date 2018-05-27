@@ -19,7 +19,6 @@ import           Data.Proxy
 import           Data.Text as Text
 import           Data.Text.IO as T
 import           Text.Printf as Printf
-import           Data.Yaml (decodeFile, decodeEither, decodeFileEither, ParseException)
 import           Data.Maybe (fromJust)
 import           Kubernetes.Client (dispatchMime, MimeResult(..)) 
 import           Kubernetes.ClientHelper
@@ -28,6 +27,7 @@ import           Network.Socket
 import           Kubernetes.WSClient as WSClient
 import           Kubernetes.KubeConfig
 import           Kubernetes.Model
+import           Kubernetes.Misc
 import           Kubernetes.Core(KubernetesRequest(..), KubernetesConfig(..), newConfig)
 import           Kubernetes.MimeTypes
 import           Kubernetes.CreateWSClient as CreateWSClient
@@ -44,19 +44,21 @@ import           System.Environment
 
 setupKubeConfig :: IO KubernetesConfig
 setupKubeConfig = do
+    home <- Text.pack <$> getEnv("HOME")
+    AuthApiKeyBearerToken bearerToken <- getBearerToken $  
+      Printf.printf "%s/.minikube/bearerToken.txt" home
     result <- 
       newConfig
       & fmap (setMasterURI "https://192.168.99.100:8443")    -- fill in master URI
       & fmap disableValidateAuthMethods  -- if using client cert auth
+      & fmap (setTokenAuth bearerToken)
     return result
 
 
 
 getBearerToken :: FilePath -> IO AuthApiKeyBearerToken 
 getBearerToken aFile = 
-    T.readFile aFile >>= \x -> return $ AuthApiKeyBearerToken x
-
-
+    T.readFile aFile >>= \x -> return $ AuthApiKeyBearerToken $ "Bearer " <> x
 
 output :: K8SChannel.ChannelId -> TChan Text -> IO ()
 output aChannelId aChannel = do 
@@ -70,28 +72,19 @@ setupAndRun :: Text -> IO ()
 setupAndRun containerName = do
   kubeConfig <- setupKubeConfig
   tlsParams <- clusterClientSetupParams
-  podsForNamespaces <- listPods kubeConfig
-  (MimeResult containerResult response) <- getContainer podsForNamespaces containerName
-  case containerResult of 
-    Right container__ -> iterContainers tlsParams kubeConfig container__
-    Left _ -> return ()
+  clientState <- createWSClient $ [
+        Command $ "/bin/sh -c echo This message goes to stderr >&2; echo This message goes to stdout"]
+  client <- async $ WSClient.runClient clientState kubeConfig tlsParams name namespace
+  outputAsyncs <- mapM (\(channelId, channel) -> async(output channelId channel)) 
+    $ Prelude.filter(\(cId, _) -> cId /= K8SChannel.StdIn) $ 
+      CreateWSClient.channels clientState
+  _ <- waitAny $ client : outputAsyncs
   return ()
   where 
-    iterContainers :: ClientParams -> KubernetesConfig -> V1Container -> IO ()
-    iterContainers tlsParams kubeConfig containerE = do
-          apiBearerToken <- getBearerToken "./bearerToken.txt" -- TODO fix this.)
-          clientState <- createWSClient tlsParams kubeConfig containerE $ 
-              ([
-                Command $ "/bin/sh -c echo This message goes to stderr >&2; echo This message goes to stdout"])
-          client <- 
-            async $ 
-              WSClient.runClient clientState (Name containerName) (Namespace "default")
-                apiBearerToken
-          
-          outputAsyncs <- mapM (\(channelId, channel) -> async(output channelId channel)) 
-            $ Prelude.filter(\(cId, _) -> cId /= K8SChannel.StdIn) $ 
-              CreateWSClient.channels clientState
-          _ <- waitAny $ client : outputAsyncs
+    name = Name containerName 
+    namespace = Namespace "default"
+    iterContainers :: ClientParams -> KubernetesConfig -> IO ()
+    iterContainers tlsParams kubeConfig = do
           return ()
 
 -- | A sample test setup, that should be moved to 
@@ -106,7 +99,6 @@ main = setupAndRun "busybox-test"
 readCommands :: TChan Text -> IO ()
 readCommands writerChannel = do 
   hSetBuffering stdin NoBuffering
-  T.putStr prompt
   line <- Text.pack <$> Prelude.getLine
   atomically $ writeTChan writerChannel $ line
   readCommands writerChannel

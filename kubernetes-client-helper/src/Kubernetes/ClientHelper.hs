@@ -44,6 +44,13 @@ setMasterURI server kcfg =
 disableValidateAuthMethods :: K.KubernetesConfig -> K.KubernetesConfig
 disableValidateAuthMethods kcfg = kcfg { K.configValidateAuthMethods = False }
 
+-- | Configures the 'K.KubernetesConfig' to using token authentication 
+setTokenAuth' :: K.AuthApiKeyBearerToken -> K.KubernetesConfig -> K.KubernetesConfig
+setTokenAuth' token kcfg = 
+  kcfg{
+    K.configAuthMethods = [K.AnyAuthMethod token]
+  }
+  
 -- |Configures the 'K.KubernetesConfig' to use token authentication.
 setTokenAuth
     :: T.Text             -- ^Authentication token

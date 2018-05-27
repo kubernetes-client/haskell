@@ -26,6 +26,7 @@ import Kubernetes.ClientHelper
 import Kubernetes.Misc 
 import Network.Socket as Socket
 import Network.HTTP.Types.URI
+import Network.TLS as TLS
 import Network.WebSockets as WS (Headers, defaultConnectionOptions, ConnectionOptions)
 import Network.URI
 import Text.Printf as Printf 
@@ -66,8 +67,8 @@ getTimeOut client = _timeOutInterval client
   A convenience method to return a client state with relevant 
   reader and writer channels.
 -}
-createWSClient :: KubernetesConfig -> Name -> [Command] -> IO (CreateWSClient Text)
-createWSClient kubeConfig v1Container commands = do
+createWSClient :: [Command] -> IO (CreateWSClient Text)
+createWSClient commands = do
     cW <- atomically newTChan :: IO (TChan Text) -- Writer
     c0 <- atomically newTChan :: IO (TChan Text)
     c1 <- atomically newTChan :: IO (TChan Text)
@@ -81,13 +82,14 @@ createWSClient kubeConfig v1Container commands = do
             commands
             (Just $ (30 * (10 ^6)) :: Maybe Int)
 
-tlsParams = undefined 
+
 -- | Dispatch 'ConnectGetNamespacedPodExec' request.
 attachExec :: CreateWSClient a -> KubernetesConfig 
+                -> TLS.ClientParams
                 -> Name -> Namespace
                 -> KubernetesRequest ConnectGetNamespacedPodExec MimeNoContent Text MimePlainText 
                 -> IO (MimeResult Text)
-attachExec client kubeConfig name namespace aRequest = do
+attachExec client kubeConfig tlsParams name namespace aRequest = do
   -- get the tls params somehow
   manager <- newManager tlsParams 
   dispatchMime 

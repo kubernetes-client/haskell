@@ -30,12 +30,10 @@ import Control.Exception.Safe
 import Control.Monad (forever)
 import Control.Monad.Reader
 import Data.ByteString (ByteString)
-import Data.ByteString.Lazy as BL
-import Data.ByteString.Lazy.Char8 as CB8
 import Data.Maybe
 import Data.Monoid ((<>))
 import Data.Proxy as P (Proxy(..))
-import Data.Text as Text 
+import Data.Text as T
 import Data.Text.Encoding as TE 
 import Data.Text.IO as T 
 import Kubernetes.API.CoreV1
@@ -47,10 +45,15 @@ import Kubernetes.K8SChannel
 import Kubernetes.KubeConfig
 import Kubernetes.KubeConfig as KubeConfig
 import Kubernetes.MimeTypes
+import Kubernetes.Misc 
 import Kubernetes.Model
 import Network.Connection
 import Network.HTTP.Types (renderQuery)
 import Network.Socket as S
+import Network.TLS as TLS          (credentialLoadX509, ClientParams(..))
+import qualified Data.ByteString.Char8 as BC
+import qualified Data.ByteString.Lazy as BL
+import qualified Data.ByteString.Lazy.Char8 as BCL
 import qualified Data.ByteString.Lazy.Char8 as BCL
 import qualified Data.Text
 import qualified Data.Text.IO as T
@@ -60,50 +63,51 @@ import qualified Network.WebSockets.Stream as WS
 import qualified Text.Printf as Printf
 import System.IO (hSetBuffering, BufferMode(..), stdin)
 import System.Timeout (timeout) 
-import Wuss as WSS (runSecureClient)
-import Kubernetes.Misc 
+import Wuss as WSS
 
-
-
-runClient :: CreateWSClient Text -> Name -> Namespace -> KubernetesConfig -> IO () 
-runClient createWSClient name namespace kubeConfig = do 
+runClient :: CreateWSClient Text -> KubernetesConfig -> TLS.ClientParams -> Name -> Namespace -> IO () 
+runClient createWSClient kubeConfig clientParams name namespace = do 
   let 
     timeoutInt = getTimeOut createWSClient
-    host = Just "some string" :: Maybe String 
-    port = Just . PortNum $ 99999 :: Maybe PortNumber
-    bearerToken = authApiKeyBearerToken kubeConfig
-    path = "fill_the_path" :: String 
-    params = "fill_the_params" :: String 
-  case(host, port) of
-    (Just h, Just p) -> do
-      let r = connectGetNamespacedPodExec (Accept MimePlainText) name namespace
-      execAttach_ <- async (attachExec createWSClient kubeConfig name namespace r) -- TODO: Where should this go
-      runClientWithTLS h p (path <> params) kubeConfig 
-        (\conn -> k8sClient timeoutInt createWSClient conn)     
-      wait execAttach_ 
-      return ()
-    _ -> return ()
+    commands_ = commands createWSClient
+    r = 
+        Prelude.foldr (\c reqAcc -> applyOptionalParam reqAcc c) 
+              (connectGetNamespacedPodExec (Accept MimePlainText) name namespace)
+              commands_ 
+  (InitRequest req) <- _toInitRequest kubeConfig r
+  T.putStrLn $ T.pack (endpoint req) 
+  execAttach_ <- 
+    async (attachExec createWSClient kubeConfig clientParams name namespace r) -- TODO: Where should this go
+  runClientWithTLS (host req) (port req) (endpoint req) kubeConfig clientParams (\conn -> k8sClient timeoutInt createWSClient conn)
+  wait execAttach_ >> return ()
+  where 
+    endpoint req = 
+      T.unpack $ 
+        T.pack $
+          BC.unpack $
+            NH.method req <> " " <> NH.host req <> NH.path req <> NH.queryString req
+    host req = T.unpack $ T.pack $ BC.unpack $ NH.host req 
+    port req = PortNum 8443 -- $ ((fromIntegral (NH.port req :: Int)))
 
-
-runClientWithTLS :: String -> PortNumber -> String -> KubernetesConfig -> WS.ClientApp () -> IO ()
-runClientWithTLS host portNumber urlRequest kubeConfig application = do
-  let tlsSettings = undefined -- get this from some place.
+runClientWithTLS :: String -> PortNumber -> String -> KubernetesConfig -> TLS.ClientParams -> WS.ClientApp () -> IO ()
+runClientWithTLS host portNumber urlRequest kubeConfig tlsSettings application = do
   let options = WS.defaultConnectionOptions
   let headers = []
   let connectionParams = ConnectionParams {
       connectionHostname = host 
     , connectionPort = portNumber 
-    , connectionUseSecure = Just tlsSettings
+    , connectionUseSecure = Just $ TLSSettings tlsSettings
     , connectionUseSocks = Nothing
   }
-  context <- initConnectionContext 
-  connection <- connectTo context connectionParams 
-  stream <- WS.makeStream 
-    (fmap Just $ connectionGetChunk connection)
-    (maybe (return()) (connectionPut connection . BL.toStrict))
-  WS.runClientWithStream stream host urlRequest options headers application
-    `catch` (\exc@(SomeException e) -> 
-                    Prelude.putStrLn $ "Exception " <> show exc)
+  Prelude.putStrLn $ show host <> " : " <> (show portNumber)
+  context <- initConnectionContext
+  handle (\exc@(SomeException e) -> 
+                    Prelude.putStrLn $ "Exception " <> show exc <> (show host) <> ":" <> (show portNumber)) $ do 
+    connection <- connectTo context connectionParams 
+    stream <- WS.makeStream 
+      (fmap Just $ connectionGetChunk connection)
+      (maybe (return()) (connectionPut connection . BL.toStrict))
+    WS.runClientWithStream stream host urlRequest options headers application
 
 -- | Socket IO handler.
 k8sClient :: Maybe TimeoutInterval -> CreateWSClient Text -> WS.Connection -> IO ()
@@ -118,7 +122,7 @@ k8sClient interval clientState conn = do
     where
       worker channels conn= async $ forever $ do 
             msg <- WS.receiveData conn
-            publishMessage channels $ Text.splitAt 1 msg
+            publishMessage channels $ T.splitAt 1 msg
       timedThread aWorker channels connection timeoutInterval =
         case timeoutInterval of  
             Nothing ->  Just <$> aWorker channels connection 
