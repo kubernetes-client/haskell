@@ -21,31 +21,6 @@ data ChannelId = StdIn | StdOut | StdErr | Error | Resize deriving (Eq, Ord, Enu
 newtype InvalidChannel = InvalidChannel Text deriving (Show, Typeable)
 
 
-
--- A flag from the python library.
-type PreloadContent = Bool
-
--- | Secure web sockets connection?
-data Protocol = 
-  WS -- ^ "ws://abc.co" 
-  | WSS -- ^ "wss://abc.co"
-
-instance Show Protocol where 
-  show WS = "ws" 
-  show WSS = "wss"
-
--- | The host.
-type Host = String
--- | The port. 
-type Port = Int 
-
--- | The URL with "Protocol", "Host" and "Port"
-newtype URL = URL {_unP :: (Protocol, Host, Port)} 
-
--- | The kube config.
-type KubeConfig = Config
-
-
 -- | 'Show' instance for channels with 
 -- | 'StdIn' -> 0
 -- | 'StdOut' -> 1
