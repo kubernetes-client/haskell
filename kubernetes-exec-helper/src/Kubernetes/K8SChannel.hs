@@ -20,7 +20,6 @@ data ChannelId = StdIn | StdOut | StdErr | Error | Resize deriving (Eq, Ord, Enu
 -- | An invalid channel.
 newtype InvalidChannel = InvalidChannel Text deriving (Show, Typeable)
 
-
 -- | 'Show' instance for channels with 
 -- | 'StdIn' -> 0
 -- | 'StdOut' -> 1

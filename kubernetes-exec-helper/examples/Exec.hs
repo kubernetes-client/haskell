@@ -49,7 +49,7 @@ setupKubeConfig = do
       Printf.printf "%s/.minikube/bearerToken.txt" home
     result <- 
       newConfig
-      & fmap (setMasterURI "https://192.168.99.100:8443")    -- fill in master URI
+      & fmap (setMasterURI "https://192.168.99.100")    -- fill in master URI
       & fmap disableValidateAuthMethods  -- if using client cert auth
       & fmap (setTokenAuth bearerToken)
     return result

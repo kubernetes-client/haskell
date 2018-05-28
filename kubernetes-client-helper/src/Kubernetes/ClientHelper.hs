@@ -57,7 +57,7 @@ setTokenAuth
     -> K.KubernetesConfig
     -> K.KubernetesConfig
 setTokenAuth token kcfg = kcfg
-    { K.configAuthMethods = [K.AnyAuthMethod (K.AuthApiKeyBearerToken $ "Bearer " <> token)]
+    { K.configAuthMethods = [K.AnyAuthMethod (K.AuthApiKeyBearerToken token)]
     }
 
 -- |Creates a 'NH.Manager' that can handle TLS.

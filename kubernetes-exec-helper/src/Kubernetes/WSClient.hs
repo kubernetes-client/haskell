@@ -22,7 +22,7 @@ module Kubernetes.WSClient
     )
   where 
 
-
+import GHC.Word
 import Control.Concurrent(ThreadId, threadDelay)
 import Control.Concurrent.Async(waitAny, async, Async, wait)
 import Control.Concurrent.STM
@@ -75,10 +75,9 @@ runClient createWSClient kubeConfig clientParams name namespace = do
               (connectGetNamespacedPodExec (Accept MimePlainText) name namespace)
               commands_ 
   (InitRequest req) <- _toInitRequest kubeConfig r
-  T.putStrLn $ T.pack (endpoint req) 
   execAttach_ <- 
     async (attachExec createWSClient kubeConfig clientParams name namespace r) -- TODO: Where should this go
-  runClientWithTLS (host req) (port req) (endpoint req) kubeConfig clientParams (\conn -> k8sClient timeoutInt createWSClient conn)
+  runClientWithTLS (host req) (port req) (endpoint req) (NH.requestHeaders req) kubeConfig clientParams (\conn -> k8sClient timeoutInt createWSClient conn)
   wait execAttach_ >> return ()
   where 
     endpoint req = 
@@ -87,27 +86,28 @@ runClient createWSClient kubeConfig clientParams name namespace = do
           BC.unpack $
             NH.method req <> " " <> NH.host req <> NH.path req <> NH.queryString req
     host req = T.unpack $ T.pack $ BC.unpack $ NH.host req 
-    port req = PortNum 8443 -- $ ((fromIntegral (NH.port req :: Int)))
+    -- port req = (read $ (Printf.printf "%d" (NH.port req)) :: PortNumber)
+    port req = (read "8443" :: PortNumber)
 
-runClientWithTLS :: String -> PortNumber -> String -> KubernetesConfig -> TLS.ClientParams -> WS.ClientApp () -> IO ()
-runClientWithTLS host portNumber urlRequest kubeConfig tlsSettings application = do
+runClientWithTLS :: String -> PortNumber -> String -> WS.Headers -> KubernetesConfig -> TLS.ClientParams -> WS.ClientApp () -> IO ()
+runClientWithTLS host portNum urlRequest headers kubeConfig tlsSettings application = do
   let options = WS.defaultConnectionOptions
-  let headers = []
   let connectionParams = ConnectionParams {
       connectionHostname = host 
-    , connectionPort = portNumber 
+    , connectionPort = portNum
     , connectionUseSecure = Just $ TLSSettings tlsSettings
     , connectionUseSocks = Nothing
   }
-  Prelude.putStrLn $ show host <> " : " <> (show portNumber)
+  let headers_ = ("Sec-WebSocket-Protocol", "v4.channel.k8s.io") : headers 
+  T.putStrLn $ T.pack $ show headers_
   context <- initConnectionContext
   handle (\exc@(SomeException e) -> 
-                    Prelude.putStrLn $ "Exception " <> show exc <> (show host) <> ":" <> (show portNumber)) $ do 
+                    Prelude.putStrLn $ "Exception " <> show exc <> (show host) <> ":" <> (show portNum)) $ do 
     connection <- connectTo context connectionParams 
     stream <- WS.makeStream 
       (fmap Just $ connectionGetChunk connection)
       (maybe (return()) (connectionPut connection . BL.toStrict))
-    WS.runClientWithStream stream host urlRequest options headers application
+    WS.runClientWithStream stream host urlRequest options headers_ application
 
 -- | Socket IO handler.
 k8sClient :: Maybe TimeoutInterval -> CreateWSClient Text -> WS.Connection -> IO ()
