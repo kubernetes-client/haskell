@@ -9,7 +9,6 @@ module Kubernetes.CreateWSClient
     , commands
     , getTimeOut
     , createWSClient
-    , attachExec
   )
 where 
 
@@ -23,7 +22,6 @@ import Data.Text
 import Data.Text.Encoding as E (encodeUtf8)
 import Kubernetes.Client
 import Kubernetes.ClientHelper
-import Kubernetes.Misc 
 import Network.Socket as Socket
 import Network.HTTP.Types.URI
 import Network.TLS as TLS
@@ -83,16 +81,3 @@ createWSClient commands = do
             (Just $ (30 * (10 ^6)) :: Maybe Int)
 
 
--- | Dispatch 'ConnectGetNamespacedPodExec' request.
-attachExec :: CreateWSClient a -> KubernetesConfig 
-                -> TLS.ClientParams
-                -> Name -> Namespace
-                -> KubernetesRequest ConnectGetNamespacedPodExec MimeNoContent Text MimePlainText 
-                -> IO (MimeResult Text)
-attachExec client kubeConfig tlsParams name namespace aRequest = do
-  -- get the tls params somehow
-  manager <- newManager tlsParams 
-  dispatchMime 
-    manager 
-    kubeConfig
-    aRequest

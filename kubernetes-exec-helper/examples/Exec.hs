@@ -27,7 +27,6 @@ import           Network.Socket
 import           Kubernetes.WSClient as WSClient
 import           Kubernetes.KubeConfig
 import           Kubernetes.Model
-import           Kubernetes.Misc
 import           Kubernetes.Core(KubernetesRequest(..), KubernetesConfig(..), newConfig)
 import           Kubernetes.MimeTypes
 import           Kubernetes.CreateWSClient as CreateWSClient
@@ -49,11 +48,25 @@ setupKubeConfig = do
       Printf.printf "%s/.minikube/bearerToken.txt" home
     result <- 
       newConfig
-      & fmap (setMasterURI "https://192.168.99.100")    -- fill in master URI
+      & fmap (setMasterURI "https://192.168.99.100:8443")    -- fill in master URI
       & fmap disableValidateAuthMethods  -- if using client cert auth
       & fmap (setTokenAuth bearerToken)
     return result
 
+clusterClientSetupParams :: IO TLS.ClientParams
+clusterClientSetupParams = do
+    home <- getEnv("HOME")
+    caStoreFile <- return $ Printf.printf "%s/.minikube/ca.crt" (pack home)
+    clientCrt <- return $ Printf.printf "%s/.minikube/client.crt" $ pack home
+    clientKey <- return $ Printf.printf "%s/.minikube/client.key" $ pack home 
+    myCAStore <- loadPEMCerts caStoreFile -- if using custom CA certs
+    myCert    <- credentialLoadX509 clientCrt clientKey 
+                  >>= either error return
+    defaultTLSClientParams
+      & fmap disableServerNameValidation -- if master address is specified as an IP address
+      & fmap disableServerCertValidation -- if you don't want to validate the server cert at all (insecure)          
+      & fmap (setCAStore myCAStore)      -- if using custom CA certs
+      & fmap (setClientCert myCert)      -- if using client cert
 
 
 getBearerToken :: FilePath -> IO AuthApiKeyBearerToken 
@@ -78,15 +91,11 @@ setupAndRun containerName = do
   outputAsyncs <- mapM (\(channelId, channel) -> async(output channelId channel)) 
     $ Prelude.filter(\(cId, _) -> cId /= K8SChannel.StdIn) $ 
       CreateWSClient.channels clientState
-  _ <- waitAny $ client : outputAsyncs
+  _ <- waitAny $ [client]
   return ()
   where 
     name = Name containerName 
     namespace = Namespace "default"
-    iterContainers :: ClientParams -> KubernetesConfig -> IO ()
-    iterContainers tlsParams kubeConfig = do
-          return ()
-
 -- | A sample test setup, that should be moved to 
 -- | test spec. 
 main :: IO ()

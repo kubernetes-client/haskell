@@ -45,7 +45,6 @@ import Kubernetes.K8SChannel
 import Kubernetes.KubeConfig
 import Kubernetes.KubeConfig as KubeConfig
 import Kubernetes.MimeTypes
-import Kubernetes.Misc 
 import Kubernetes.Model
 import Network.Connection
 import Network.HTTP.Types (renderQuery)
@@ -65,20 +64,22 @@ import System.IO (hSetBuffering, BufferMode(..), stdin)
 import System.Timeout (timeout) 
 import Wuss as WSS
 
-runClient :: CreateWSClient Text -> KubernetesConfig -> TLS.ClientParams -> Name -> Namespace -> IO () 
-runClient createWSClient kubeConfig clientParams name namespace = do 
+runClient :: CreateWSClient Text -> KubernetesConfig -> TLS.ClientParams -> Name -> Namespace -> (IO())
+runClient createWSClient kubeConfig clientParams name@(Name nText) namespace = do 
   let 
     timeoutInt = getTimeOut createWSClient
     commands_ = commands createWSClient
-    r = 
-        Prelude.foldr (\c reqAcc -> applyOptionalParam reqAcc c) 
+    r = Prelude.foldr (\c reqAcc -> applyOptionalParam reqAcc c) 
               (connectGetNamespacedPodExec (Accept MimePlainText) name namespace)
               commands_ 
-  (InitRequest req) <- _toInitRequest kubeConfig r
-  execAttach_ <- 
-    async (attachExec createWSClient kubeConfig clientParams name namespace r) -- TODO: Where should this go
-  runClientWithTLS (host req) (port req) (endpoint req) (NH.requestHeaders req) kubeConfig clientParams (\conn -> k8sClient timeoutInt createWSClient conn)
-  wait execAttach_ >> return ()
+  (InitRequest req) <- _toInitRequest kubeConfig $ applyOptionalParam r $ Container nText
+  client_ <-   
+      async $ 
+        runClientWithTLS (host req) (port req) (endpoint req) 
+          (NH.requestHeaders req) kubeConfig clientParams 
+            (\conn -> k8sClient timeoutInt createWSClient conn)
+  waitAny [client_]
+  return ()
   where 
     endpoint req = 
       T.unpack $ 
@@ -86,8 +87,7 @@ runClient createWSClient kubeConfig clientParams name namespace = do
           BC.unpack $
             NH.method req <> " " <> NH.host req <> NH.path req <> NH.queryString req
     host req = T.unpack $ T.pack $ BC.unpack $ NH.host req 
-    -- port req = (read $ (Printf.printf "%d" (NH.port req)) :: PortNumber)
-    port req = (read "8443" :: PortNumber)
+    port req = (read $ (Printf.printf "%d" (NH.port req)) :: PortNumber)
 
 runClientWithTLS :: String -> PortNumber -> String -> WS.Headers -> KubernetesConfig -> TLS.ClientParams -> WS.ClientApp () -> IO ()
 runClientWithTLS host portNum urlRequest headers kubeConfig tlsSettings application = do
@@ -95,11 +95,10 @@ runClientWithTLS host portNum urlRequest headers kubeConfig tlsSettings applicat
   let connectionParams = ConnectionParams {
       connectionHostname = host 
     , connectionPort = portNum
-    , connectionUseSecure = Just $ TLSSettings tlsSettings
+    , connectionUseSecure = Just . TLSSettings $ tlsSettings
     , connectionUseSocks = Nothing
   }
   let headers_ = ("Sec-WebSocket-Protocol", "v4.channel.k8s.io") : headers 
-  T.putStrLn $ T.pack $ show headers_
   context <- initConnectionContext
   handle (\exc@(SomeException e) -> 
                     Prelude.putStrLn $ "Exception " <> show exc <> (show host) <> ":" <> (show portNum)) $ do 
@@ -112,7 +111,6 @@ runClientWithTLS host portNum urlRequest headers kubeConfig tlsSettings applicat
 -- | Socket IO handler.
 k8sClient :: Maybe TimeoutInterval -> CreateWSClient Text -> WS.Connection -> IO ()
 k8sClient interval clientState conn = do
-    Prelude.putStrLn "worker client..."
     rcv <- worker (channels clientState) conn
     sender <- async $ forever $ do 
         nextMessage <- atomically . readTChan $ writer clientState
