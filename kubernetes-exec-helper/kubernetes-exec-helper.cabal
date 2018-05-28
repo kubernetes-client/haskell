@@ -2,7 +2,7 @@
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: fe3c00457482343012aa881dc57a6d9ba55c2bb66e5a5d6543031fb10a19298b
+-- hash: 9ea9c140bb216c28a2c56df6e74c42aa7d005ebbd53e01d4ef3354a710041919
 
 name:           kubernetes-exec-helper
 version:        0.1.0.0
@@ -19,6 +19,7 @@ library
     , bytestring >=0.10.0 && <0.11
     , connection
     , data-default-class
+    , hslogger >=1.2 && <1.3
     , http-client
     , http-client-tls
     , http-types >=0.9.1 && <0.10
@@ -62,6 +63,7 @@ executable kubernetes-exec-helper
     , bytestring >=0.10.0 && <0.11
     , connection
     , data-default-class
+    , hslogger >=1.2 && <1.3
     , http-client
     , http-client-tls
     , http-types >=0.9.1 && <0.10
@@ -105,6 +107,7 @@ test-suite spec
     , connection
     , data-default-class
     , hlint >=2.0 && <3.0
+    , hslogger >=1.2 && <1.3
     , hspec
     , http-client >=0.5 && <0.6
     , http-client-tls

@@ -39,7 +39,10 @@ import           Options.Applicative
 import           Data.Semigroup ((<>))
 import           Network.TLS as TLS          (credentialLoadX509, ClientParams(..))
 import           System.Environment
-
+import           System.Log.Logger
+import           System.Log.Handler 
+import           System.Log.Handler.Simple
+import           System.Log.Formatter
 
 setupKubeConfig :: IO KubernetesConfig
 setupKubeConfig = do
@@ -99,8 +102,16 @@ setupAndRun containerName = do
 -- | A sample test setup, that should be moved to 
 -- | test spec. 
 main :: IO ()
-main = setupAndRun "busybox-test"
+main = do 
+  handler1 <- 
+    streamHandler stdout DEBUG >>= 
+        \h -> return $ setFormatter h (simpleLogFormatter "[$time : $loggername : $prio] $msg")
+  updateGlobalLogger "WSClient"
+                   (System.Log.Logger.setLevel DEBUG . setHandlers [handler1])  
 
+  _ <- setupAndRun "busybox-test"
+
+  return ()
 
 {- | 
   Read commands from std in and send it to the pod.

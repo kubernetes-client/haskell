@@ -62,6 +62,7 @@ import qualified Network.WebSockets.Stream as WS
 import qualified Text.Printf as Printf
 import System.IO (hSetBuffering, BufferMode(..), stdin)
 import System.Timeout (timeout) 
+import System.Log.Logger
 import Wuss as WSS
 
 runClient :: CreateWSClient Text -> KubernetesConfig -> TLS.ClientParams -> Name -> Namespace -> (IO())
@@ -76,7 +77,7 @@ runClient createWSClient kubeConfig clientParams name@(Name nText) namespace = d
   client_ <-   
       async $ 
         runClientWithTLS (host req) (port req) (endpoint req) 
-          (NH.requestHeaders req) kubeConfig clientParams 
+          (NH.requestHeaders req) clientParams 
             (\conn -> k8sClient timeoutInt createWSClient conn)
   waitAny [client_]
   return ()
@@ -89,8 +90,8 @@ runClient createWSClient kubeConfig clientParams name@(Name nText) namespace = d
     host req = T.unpack $ T.pack $ BC.unpack $ NH.host req 
     port req = (read $ (Printf.printf "%d" (NH.port req)) :: PortNumber)
 
-runClientWithTLS :: String -> PortNumber -> String -> WS.Headers -> KubernetesConfig -> TLS.ClientParams -> WS.ClientApp () -> IO ()
-runClientWithTLS host portNum urlRequest headers kubeConfig tlsSettings application = do
+runClientWithTLS :: String -> PortNumber -> String -> WS.Headers -> TLS.ClientParams -> WS.ClientApp () -> IO ()
+runClientWithTLS host portNum urlRequest headers tlsSettings application = do
   let options = WS.defaultConnectionOptions
   let connectionParams = ConnectionParams {
       connectionHostname = host 
@@ -98,10 +99,12 @@ runClientWithTLS host portNum urlRequest headers kubeConfig tlsSettings applicat
     , connectionUseSecure = Just . TLSSettings $ tlsSettings
     , connectionUseSocks = Nothing
   }
+  debugM "WSClient" $ show tlsSettings {clientServerIdentification = (host, "")}
   let headers_ = ("Sec-WebSocket-Protocol", "v4.channel.k8s.io") : headers 
+  debugM "WSClient" $ show urlRequest <> ":" <> (show headers_)
   context <- initConnectionContext
   handle (\exc@(SomeException e) -> 
-                    Prelude.putStrLn $ "Exception " <> show exc <> (show host) <> ":" <> (show portNum)) $ do 
+                    errorM "WSClient" $ show " Exception " <> show exc <> (show host) <> ":" <> (show portNum)) $ do 
     connection <- connectTo context connectionParams 
     stream <- WS.makeStream 
       (fmap Just $ connectionGetChunk connection)

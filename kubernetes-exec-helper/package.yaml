@@ -36,6 +36,8 @@ dependencies:
   - tls >= 1.4 && < 1.5
   - wuss 
   - http-client
+  - hslogger >= 1.2 && < 1.3
+  
 executable : 
   main: Exec.hs
   source-dirs: examples
