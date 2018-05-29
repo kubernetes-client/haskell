@@ -73,7 +73,7 @@ runClient createWSClient kubeConfig clientParams name@(Name nText) namespace = d
     r = Prelude.foldr (\c reqAcc -> applyOptionalParam reqAcc c) 
               (connectGetNamespacedPodExec (Accept MimePlainText) name namespace)
               commands_ 
-  (InitRequest req) <- _toInitRequest kubeConfig $ applyOptionalParam r $ Container nText
+  (InitRequest req) <- _toInitRequest kubeConfig r -- $ applyOptionalParam r $ Container nText
   client_ <-   
       async $ 
         runClientWithTLS (host req) (port req) (endpoint req) 
@@ -86,7 +86,7 @@ runClient createWSClient kubeConfig clientParams name@(Name nText) namespace = d
       T.unpack $ 
         T.pack $
           BC.unpack $
-            NH.method req <> " " <> NH.host req <> NH.path req <> NH.queryString req
+             NH.host req <> NH.path req <> NH.queryString req
     host req = T.unpack $ T.pack $ BC.unpack $ NH.host req 
     port req = (read $ (Printf.printf "%d" (NH.port req)) :: PortNumber)
 
@@ -99,18 +99,23 @@ runClientWithTLS host portNum urlRequest headers tlsSettings application = do
     , connectionUseSecure = Just . TLSSettings $ tlsSettings
     , connectionUseSocks = Nothing
   }
-  debugM "WSClient" $ show tlsSettings {clientServerIdentification = (host, "")}
   let headers_ = ("Sec-WebSocket-Protocol", "v4.channel.k8s.io") : headers 
-  debugM "WSClient" $ show urlRequest <> ":" <> (show headers_)
   context <- initConnectionContext
   handle (\exc@(SomeException e) -> 
-                    errorM "WSClient" $ show " Exception " <> show exc <> (show host) <> ":" <> (show portNum)) $ do 
+                    errorM "WSClient" $ show " Exception " 
+                        <> show exc <> (show host) <> ":" <> (show portNum)) $ do 
     connection <- connectTo context connectionParams 
     stream <- WS.makeStream 
-      (fmap Just $ connectionGetChunk connection)
-      (maybe (return()) (connectionPut connection . BL.toStrict))
+      (readChunk connection)
+      (maybe (return()) (\byteString -> do 
+        debugM "WSClient" $ (">>>" :: String) <> show (BL.toStrict byteString)
+        connectionPut connection $ BL.toStrict byteString))
     WS.runClientWithStream stream host urlRequest options headers_ application
-
+    where 
+      readChunk conn = do 
+        byteString <- connectionGetChunk conn 
+        debugM "WSClient" $ ("<<<" :: String) <> (show byteString) 
+        return $ Just byteString
 -- | Socket IO handler.
 k8sClient :: Maybe TimeoutInterval -> CreateWSClient Text -> WS.Connection -> IO ()
 k8sClient interval clientState conn = do

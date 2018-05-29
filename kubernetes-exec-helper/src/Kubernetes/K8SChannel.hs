@@ -8,7 +8,6 @@ module Kubernetes.K8SChannel where
 import Control.Exception
 import Control.Exception.Safe
 import Data.Text
-import Kubernetes.KubeConfig
 import System.IO (stdin, stdout, stderr, Handle)
 
 -- | An interval in seconds for the timeout.

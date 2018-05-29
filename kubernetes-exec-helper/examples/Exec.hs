@@ -52,7 +52,6 @@ setupKubeConfig = do
     result <- 
       newConfig
       & fmap (setMasterURI "https://192.168.99.100:8443")    -- fill in master URI
-      & fmap disableValidateAuthMethods  -- if using client cert auth
       & fmap (setTokenAuth bearerToken)
     return result
 
@@ -67,7 +66,6 @@ clusterClientSetupParams = do
                   >>= either error return
     defaultTLSClientParams
       & fmap disableServerNameValidation -- if master address is specified as an IP address
-      & fmap disableServerCertValidation -- if you don't want to validate the server cert at all (insecure)          
       & fmap (setCAStore myCAStore)      -- if using custom CA certs
       & fmap (setClientCert myCert)      -- if using client cert
 
