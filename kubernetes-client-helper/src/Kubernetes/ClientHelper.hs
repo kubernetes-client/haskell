@@ -56,9 +56,7 @@ setTokenAuth
     :: T.Text             -- ^Authentication token
     -> K.KubernetesConfig
     -> K.KubernetesConfig
-setTokenAuth token kcfg = kcfg
-    { K.configAuthMethods = [K.AnyAuthMethod (K.AuthApiKeyBearerToken token)]
-    }
+setTokenAuth token kcfg = setTokenAuth' (K.AuthApiKeyBearerToken token) kcfg
 
 -- |Creates a 'NH.Manager' that can handle TLS.
 newManager :: TLS.ClientParams -> IO NH.Manager

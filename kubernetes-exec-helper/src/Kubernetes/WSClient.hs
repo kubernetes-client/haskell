@@ -65,6 +65,7 @@ import System.Timeout (timeout)
 import System.Log.Logger
 import Wuss as WSS
 
+
 runClient :: CreateWSClient Text -> KubernetesConfig -> TLS.ClientParams -> Name -> Namespace -> IO (Async())
 runClient createWSClient kubeConfig clientParams name@(Name nText) namespace = do 
   let 
@@ -85,7 +86,7 @@ runClient createWSClient kubeConfig clientParams name@(Name nText) namespace = d
       T.unpack $ 
         T.pack $
           BC.unpack $
-             NH.host req <> NH.path req <> NH.queryString req
+             NH.path req <> NH.queryString req
     host req = T.unpack $ T.pack $ BC.unpack $ NH.host req 
     port req = (read $ (Printf.printf "%d" (NH.port req)) :: PortNumber)
 
@@ -100,7 +101,7 @@ runClientWithTLS host portNum urlRequest headers tlsSettings application = do
   }
   let headers_ = ("Sec-WebSocket-Protocol", "v4.channel.k8s.io") : headers 
   context <- initConnectionContext
-  handle (\exc@(SomeException e) -> 
+PlainText  handle (\exc@(SomeException e) -> 
                     errorM "WSClient" $ show " Exception " 
                         <> show exc <> (show host) <> ":" <> (show portNum)) $ do 
     connection <- connectTo context connectionParams 
@@ -115,6 +116,7 @@ runClientWithTLS host portNum urlRequest headers tlsSettings application = do
         byteString <- connectionGetChunk conn 
         debugM "WSClient" $ ("<<<" :: String) <> (show byteString) 
         return $ Just byteString
+
 -- | Socket IO handler.
 k8sClient :: Maybe TimeoutInterval -> CreateWSClient Text -> WS.Connection -> IO ()
 k8sClient interval clientState conn = do
