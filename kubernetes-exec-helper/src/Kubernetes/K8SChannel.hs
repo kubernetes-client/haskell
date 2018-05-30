@@ -42,14 +42,13 @@ instance Exception InvalidChannel
 allChannels :: [ChannelId]
 allChannels = [StdIn .. Resize]
 
--- | Decode text to a channel.
+-- | Decode text to a channel. TODO : Probably not represent this as Text and use bytestrings.
 readChannel :: Text -> Maybe ChannelId
-readChannel "0" = Just StdIn
-readChannel "1" = Just StdOut 
-readChannel "2" = Just StdErr 
-readChannel "3" = Just Error 
-readChannel "4" = Just Resize 
-readChannel _ = Nothing
+readChannel "\NUL" = Just StdIn
+readChannel "\SOH" = Just StdOut 
+readChannel "\STX" = Just StdErr 
+readChannel "\ETX" = Just StdErr 
+readChannel _ = Nothing 
 
 -- | Tie the channel back to the handles on the command line.
 mapChannel :: ChannelId -> Handle 

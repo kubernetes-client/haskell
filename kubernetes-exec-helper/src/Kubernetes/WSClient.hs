@@ -143,6 +143,7 @@ k8sClient interval clientState conn = do
 publishMessage :: [(ChannelId, TChan Text)] -> (Text, Text) -> IO ()
 publishMessage channels c@(channel, message) = do 
   let chanId = readChannel channel
+  debugM "WSClient" $ show c
   case chanId of
     Nothing -> throwIO $ InvalidChannel channel
     Just aChan -> do
