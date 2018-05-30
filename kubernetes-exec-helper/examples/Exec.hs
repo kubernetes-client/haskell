@@ -66,6 +66,7 @@ clusterClientSetupParams = do
                   >>= either error return
     defaultTLSClientParams
       & fmap disableServerNameValidation -- if master address is specified as an IP address
+      & fmap disableServerCertValidation -- if you don't want to validate the server cert at all (insecure)
       & fmap (setCAStore myCAStore)      -- if using custom CA certs
       & fmap (setClientCert myCert)      -- if using client cert
 
@@ -88,11 +89,11 @@ setupAndRun containerName = do
   tlsParams <- clusterClientSetupParams
   clientState <- createWSClient $ [
         Command $ "/bin/sh -c echo This message goes to stderr >&2; echo This message goes to stdout"]
-  client <- async $ WSClient.runClient clientState kubeConfig tlsParams name namespace
+  client <- WSClient.runClient clientState kubeConfig tlsParams name namespace
   outputAsyncs <- mapM (\(channelId, channel) -> async(output channelId channel)) 
     $ Prelude.filter(\(cId, _) -> cId /= K8SChannel.StdIn) $ 
       CreateWSClient.channels clientState
-  _ <- waitAny $ [client]
+  _ <- waitAny $ client : outputAsyncs
   return ()
   where 
     name = Name containerName 

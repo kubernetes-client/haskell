@@ -65,7 +65,7 @@ import System.Timeout (timeout)
 import System.Log.Logger
 import Wuss as WSS
 
-runClient :: CreateWSClient Text -> KubernetesConfig -> TLS.ClientParams -> Name -> Namespace -> (IO())
+runClient :: CreateWSClient Text -> KubernetesConfig -> TLS.ClientParams -> Name -> Namespace -> IO (Async())
 runClient createWSClient kubeConfig clientParams name@(Name nText) namespace = do 
   let 
     timeoutInt = getTimeOut createWSClient
@@ -79,8 +79,7 @@ runClient createWSClient kubeConfig clientParams name@(Name nText) namespace = d
         runClientWithTLS (host req) (port req) (endpoint req) 
           (NH.requestHeaders req) clientParams 
             (\conn -> k8sClient timeoutInt createWSClient conn)
-  waitAny [client_]
-  return ()
+  return client_
   where 
     endpoint req = 
       T.unpack $ 
