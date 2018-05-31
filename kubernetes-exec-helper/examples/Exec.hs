@@ -88,7 +88,7 @@ setupAndRun containerName = do
   kubeConfig <- setupKubeConfig
   tlsParams <- clusterClientSetupParams
   clientState <- createWSClient $ [
-        Command $ "/bin/sh -c echo This message goes to stderr >&2; echo This message goes to stdout"]
+        Command $ "date"]
   client <- WSClient.runClient clientState kubeConfig tlsParams name namespace
   outputAsyncs <- mapM (\(channelId, channel) -> async(output channelId channel)) 
     $ Prelude.filter(\(cId, _) -> cId /= K8SChannel.StdIn) $ 
@@ -103,10 +103,10 @@ setupAndRun containerName = do
 main :: IO ()
 main = do 
   handler1 <- 
-    streamHandler stdout DEBUG >>= 
+    streamHandler stdout INFO >>= 
         \h -> return $ setFormatter h (simpleLogFormatter "[$time : $loggername : $prio] $msg")
   updateGlobalLogger "WSClient"
-                   (System.Log.Logger.setLevel DEBUG . setHandlers [handler1])  
+                   (System.Log.Logger.setLevel INFO . setHandlers [handler1])  
 
   _ <- setupAndRun "busybox-test"
 
