@@ -74,7 +74,7 @@ runClient createWSClient kubeConfig clientParams name@(Name nText) namespace = d
     r = (Prelude.foldr (\c reqAcc -> applyOptionalParam reqAcc c)
               (connectGetNamespacedPodExec (Accept MimeNoContent) name namespace)
               commands_)
-        -&- (Stdin True) -&- (Stdout True) -&- (Stderr True) -&- Container nText
+        -&- (Stdin True) -&- (Stdout True) -&- (Stderr True)
   (InitRequest req) <- _toInitRequest kubeConfig r
   client_ <-   
       async $ 

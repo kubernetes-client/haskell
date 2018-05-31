@@ -87,27 +87,23 @@ setupAndRun :: Text -> IO ()
 setupAndRun containerName = do
   kubeConfig <- setupKubeConfig
   tlsParams <- clusterClientSetupParams
-  clientState <- createWSClient $ [
-        Command $ "date"] -- returns the date.
-  client <- WSClient.runClient clientState kubeConfig tlsParams name namespace
+  clientState <- createWSClient $ [Command $ "date"] -- returns the date.
+  client <- WSClient.runClient clientState kubeConfig tlsParams (Name containerName) (Namespace "default")
   outputAsyncs <- mapM (\(channelId, channel) -> async(output channelId channel)) 
     $ Prelude.filter(\(cId, _) -> cId /= K8SChannel.StdIn) $ 
       CreateWSClient.channels clientState
   reader <- async $ readCommands $ writer clientState
   _ <- waitAny $ reader : client : outputAsyncs
   return ()
-  where 
-    name = Name containerName 
-    namespace = Namespace "default"
 -- | A sample test setup, that should be moved to 
 -- | test spec. 
 main :: IO ()
 main = do 
   handler1 <- 
-    streamHandler stdout DEBUG >>=
+    streamHandler stdout INFO >>=
         \h -> return $ setFormatter h (simpleLogFormatter "[$time : $loggername : $prio] $msg")
   updateGlobalLogger "WSClient"
-                   (System.Log.Logger.setLevel DEBUG . setHandlers [handler1])
+                   (System.Log.Logger.setLevel INFO . setHandlers [handler1])
 
   _ <- setupAndRun "busybox-test"
 
