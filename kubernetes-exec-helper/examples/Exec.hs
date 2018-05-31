@@ -88,12 +88,13 @@ setupAndRun containerName = do
   kubeConfig <- setupKubeConfig
   tlsParams <- clusterClientSetupParams
   clientState <- createWSClient $ [
-        Command $ "date"]
+        Command $ "date"] -- returns the date.
   client <- WSClient.runClient clientState kubeConfig tlsParams name namespace
   outputAsyncs <- mapM (\(channelId, channel) -> async(output channelId channel)) 
     $ Prelude.filter(\(cId, _) -> cId /= K8SChannel.StdIn) $ 
       CreateWSClient.channels clientState
-  _ <- waitAny $ client : outputAsyncs
+  reader <- async $ readCommands $ writer clientState
+  _ <- waitAny $ reader : client : outputAsyncs
   return ()
   where 
     name = Name containerName 
@@ -103,10 +104,10 @@ setupAndRun containerName = do
 main :: IO ()
 main = do 
   handler1 <- 
-    streamHandler stdout INFO >>= 
+    streamHandler stdout DEBUG >>=
         \h -> return $ setFormatter h (simpleLogFormatter "[$time : $loggername : $prio] $msg")
   updateGlobalLogger "WSClient"
-                   (System.Log.Logger.setLevel INFO . setHandlers [handler1])  
+                   (System.Log.Logger.setLevel DEBUG . setHandlers [handler1])
 
   _ <- setupAndRun "busybox-test"
 
@@ -118,7 +119,9 @@ main = do
 readCommands :: TChan Text -> IO ()
 readCommands writerChannel = do 
   hSetBuffering stdin NoBuffering
+  T.putStr "k8s:>"
   line <- Text.pack <$> Prelude.getLine
-  atomically $ writeTChan writerChannel $ line
+  atomically $ writeTChan writerChannel $ "\NUL" <> line
+  debugM "WSClient" $ "written " <> (show line)
   readCommands writerChannel
 

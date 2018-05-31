@@ -71,14 +71,11 @@ runClient createWSClient kubeConfig clientParams name@(Name nText) namespace = d
   let 
     timeoutInt = getTimeOut createWSClient
     commands_ = commands createWSClient
-    r = Prelude.foldr (\c reqAcc -> applyOptionalParam reqAcc c) 
+    r = (Prelude.foldr (\c reqAcc -> applyOptionalParam reqAcc c)
               (connectGetNamespacedPodExec (Accept MimeNoContent) name namespace)
-              commands_ 
-    rstderr = applyOptionalParam r (Stderr True)
-    rstdout = applyOptionalParam rstderr (Stdout True)
-    rwithAll = applyOptionalParam rstdout (Stdin True)
-
-  (InitRequest req) <- _toInitRequest kubeConfig rwithAll -- $ applyOptionalParam r $ Container nText
+              commands_)
+        -&- (Stdin True) -&- (Stdout True) -&- (Stderr True) -&- Container nText
+  (InitRequest req) <- _toInitRequest kubeConfig r
   client_ <-   
       async $ 
         runClientWithTLS (host req) (port req) (endpoint req) 
@@ -93,6 +90,7 @@ runClient createWSClient kubeConfig clientParams name@(Name nText) namespace = d
              NH.path req <> NH.queryString req
     host req = T.unpack $ T.pack $ BC.unpack $ NH.host req 
     port req = (read $ (Printf.printf "%d" (NH.port req)) :: PortNumber)
+
 
 runClientWithTLS :: String -> PortNumber -> String -> WS.Headers -> TLS.ClientParams -> WS.ClientApp () -> IO ()
 runClientWithTLS host portNum urlRequest headers tlsSettings application = do
@@ -117,8 +115,8 @@ runClientWithTLS host portNum urlRequest headers tlsSettings application = do
     WS.runClientWithStream stream host urlRequest options headers_ application
     where
       readChunk conn = do 
-        byteString <- connectionGetChunk conn 
-        debugM "WSClient" $ ("<<<" :: String) <> (show byteString) 
+        byteString <- connectionGetChunk conn
+        debugM "WSClient" $ ("<<<" :: String) <> (Prelude.take 120 $ show byteString)
         return $ Just byteString
 
 -- | Socket IO handler.
