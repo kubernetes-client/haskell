@@ -167,4 +167,3 @@ readLineSTM aChannel = readTChan aChannel
 
 readLine :: TChan Text -> IO Text 
 readLine = atomically . readLineSTM
-
