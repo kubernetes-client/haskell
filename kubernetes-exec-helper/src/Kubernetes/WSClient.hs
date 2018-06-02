@@ -22,57 +22,39 @@ module Kubernetes.WSClient
     )
   where 
 
-import GHC.Word
-import Control.Concurrent(ThreadId, threadDelay)
-import Control.Concurrent.Async(waitAny, async, Async, wait)
+import Control.Concurrent.Async(waitAny, async, Async)
 import Control.Concurrent.STM
 import Control.Exception.Safe
 import Control.Monad (forever)
-import Control.Monad.Reader
-import Data.ByteString (ByteString)
-import Data.Maybe
 import Data.Monoid ((<>))
-import Data.Proxy as P (Proxy(..))
 import Data.Text as T
-import Data.Text.Encoding as TE 
-import Data.Text.IO as T 
 import Kubernetes.API.CoreV1
 import Kubernetes.Client
-import Kubernetes.ClientHelper
 import Kubernetes.Core
 import Kubernetes.CreateWSClient
 import Kubernetes.K8SChannel
-import Kubernetes.KubeConfig
-import Kubernetes.KubeConfig as KubeConfig
 import Kubernetes.MimeTypes
 import Kubernetes.Model
 import Network.Connection
-import Network.HTTP.Types (renderQuery)
 import Network.Socket as S
-import Network.TLS as TLS          (credentialLoadX509, ClientParams(..))
+import Network.TLS as TLS          (ClientParams(..))
 import qualified Data.ByteString.Char8 as BC
 import qualified Data.ByteString.Lazy as BL
-import qualified Data.ByteString.Lazy.Char8 as BCL
-import qualified Data.ByteString.Lazy.Char8 as BCL
-import qualified Data.Text
-import qualified Data.Text.IO as T
 import qualified Network.HTTP.Client as NH
 import qualified Network.WebSockets as WS
 import qualified Network.WebSockets.Stream as WS
 import qualified Text.Printf as Printf
-import System.IO (hSetBuffering, BufferMode(..), stdin)
 import System.Timeout (timeout) 
 import System.Log.Logger
-import Wuss as WSS
 
 
 runClient :: CreateWSClient Text -> KubernetesConfig -> TLS.ClientParams -> Name -> Namespace -> IO (Async())
-runClient createWSClient kubeConfig clientParams name@(Name nText) namespace = do 
+runClient createWSClient_ kubeConfig clientParams name_ namespace_ = do 
   let 
-    timeoutInt = getTimeOut createWSClient
-    commands_ = commands createWSClient
+    timeoutInt = getTimeOut createWSClient_
+    commands_ = commands createWSClient_
     r = (Prelude.foldr (\c reqAcc -> applyOptionalParam reqAcc c)
-              (connectGetNamespacedPodExec (Accept MimeNoContent) name namespace)
+              (connectGetNamespacedPodExec (Accept MimeNoContent) name_ namespace_)
               commands_)
         -&- (Stdin True) -&- (Stdout True) -&- (Stderr True)
   (InitRequest req) <- _toInitRequest kubeConfig r
@@ -80,7 +62,7 @@ runClient createWSClient kubeConfig clientParams name@(Name nText) namespace = d
       async $ 
         runClientWithTLS (host req) (port req) (endpoint req) 
           (NH.requestHeaders req) clientParams 
-            (\conn -> k8sClient timeoutInt createWSClient conn)
+            (\conn -> k8sClient timeoutInt createWSClient_ conn)
   return client_
   where 
     endpoint req = 
@@ -103,8 +85,8 @@ runClientWithTLS host portNum urlRequest headers tlsSettings application = do
   }
   let headers_ = ("Sec-WebSocket-Protocol", "v4.channel.k8s.io") : headers 
   context <- initConnectionContext
-  handle (\exc@(SomeException e) -> 
-                    errorM "WSClient" $ show " Exception " 
+  handle (\exc@(SomeException _) -> 
+                    errorM "WSClient" $ show (" Exception "  :: String)
                         <> show exc <> (show host) <> ":" <> (show portNum)) $ do 
     connection <- connectTo context connectionParams 
     stream <- WS.makeStream 
@@ -119,34 +101,39 @@ runClientWithTLS host portNum urlRequest headers tlsSettings application = do
         debugM "WSClient" $ ("<<<" :: String) <> (Prelude.take 120 $ show byteString)
         return $ Just byteString
 
+waitForThreads :: Maybe (Async a) -> (Async a) -> IO (Async a, a)
+waitForThreads (Just r) (sender) = waitAny [r, sender]
+waitForThreads _ _ = waitAny [] 
+
 -- | Socket IO handler.
 k8sClient :: Maybe TimeoutInterval -> CreateWSClient Text -> WS.Connection -> IO ()
 k8sClient interval clientState conn = do
-    rcv <- worker (channels clientState) conn
+    rcv <- timedThread worker (channels clientState) conn interval 
     sender <- async $ forever $ do 
         nextMessage <- atomically . readTChan $ writer clientState
         WS.sendTextData conn nextMessage
-    _ <- waitAny [rcv, sender]
+    -- TODO: Fix this code.
+    _ <- waitForThreads rcv sender
     return ()
     where
-      worker channels conn= async $ forever $ do 
-            msg <- WS.receiveData conn
-            publishMessage channels $ T.splitAt 1 msg
-      timedThread aWorker channels connection timeoutInterval =
+      worker channels_ conn_= async $ forever $ do 
+            msg <- WS.receiveData conn_
+            publishMessage channels_ $ T.splitAt 1 msg
+      timedThread aWorker channels_ connection timeoutInterval =
         case timeoutInterval of  
-            Nothing ->  Just <$> aWorker channels connection 
-            Just m -> timeout m $ aWorker channels connection
+            Nothing ->  Just <$> aWorker channels_ connection 
+            Just m -> timeout m $ aWorker channels_ connection
 
 -- | Publish messages from the reader into the channel.
 publishMessage :: [(ChannelId, TChan Text)] -> (Text, Text) -> IO ()
-publishMessage channels c@(channel, message) = do 
+publishMessage channels_ c@(channel, message) = do 
   let chanId = readChannel channel
   debugM "WSClient" $ show c
   case chanId of
     Nothing -> throwIO $ InvalidChannel channel
     Just aChan -> do
       atomically $
-        writeTChan (getChannelIdSTM aChan channels) message
+        writeTChan (getChannelIdSTM aChan channels_) message
 
 {- | 
   Query a channelId from a list of Channels.
@@ -155,12 +142,12 @@ getTChanSTM :: ChannelId -> [(ChannelId, TChan Text)] -> TChan Text
 getTChanSTM a b = getChannelIdSTM a b 
 
 getChannelIdSTM :: ChannelId -> [(ChannelId, TChan Text)] -> TChan Text
-getChannelIdSTM aChannelId channels = 
-  snd $ Prelude.head $ Prelude.filter(\(x, _) -> x == aChannelId) channels
+getChannelIdSTM aChannelId channels_ = 
+  snd $ Prelude.head $ Prelude.filter(\(x, _) -> x == aChannelId) channels_
 
 readChannelIdSTM :: ChannelId -> [(ChannelId, TChan Text)] -> STM Text 
-readChannelIdSTM channel channels = 
-    readTChan $ getChannelIdSTM channel channels
+readChannelIdSTM channel = 
+    \channels_ -> readTChan $ getChannelIdSTM channel channels_
 
 readLineSTM :: TChan Text -> STM Text
 readLineSTM aChannel = readTChan aChannel 
