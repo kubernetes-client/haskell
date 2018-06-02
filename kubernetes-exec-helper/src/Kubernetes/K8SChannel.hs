@@ -43,11 +43,11 @@ allChannels :: [ChannelId]
 allChannels = [StdIn .. Resize]
 
 -- | Decode text to a channel. TODO : Probably not represent this as Text and use bytestrings.
-readChannel :: Text -> Maybe ChannelId
-readChannel "\NUL" = Just StdIn
-readChannel "\SOH" = Just StdOut 
-readChannel "\STX" = Just StdErr 
-readChannel "\ETX" = Just StdErr 
+readChannel :: Char -> Maybe ChannelId
+readChannel '\NUL' = Just StdIn
+readChannel '\SOH' = Just StdOut 
+readChannel '\STX' = Just StdErr 
+readChannel '\ETX' = Just StdErr 
 readChannel _ = Nothing 
 
 -- | Tie the channel back to the handles on the command line.

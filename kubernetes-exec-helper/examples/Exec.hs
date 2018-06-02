@@ -82,15 +82,16 @@ setupAndRun containerName = do
 main :: IO ()
 main = do 
   handler1 <- 
-    streamHandler stdout INFO >>=
+    streamHandler stdout level >>=
         \h -> return $ setFormatter h (simpleLogFormatter "[$time : $loggername : $prio] $msg")
   updateGlobalLogger "WSClient"
-                   (System.Log.Logger.setLevel INFO . setHandlers [handler1])
+                   (System.Log.Logger.setLevel level . setHandlers [handler1])
 
   _ <- setupAndRun "busybox-test"
 
   return ()
-
+  where 
+    level = INFO
 {- | 
   Read commands from std in and send it to the pod.
 -}

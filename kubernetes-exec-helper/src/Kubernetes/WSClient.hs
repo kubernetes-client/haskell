@@ -26,8 +26,10 @@ import Control.Concurrent.Async(waitAny, async, Async)
 import Control.Concurrent.STM
 import Control.Exception.Safe
 import Control.Monad (forever)
+import Data.Char(chr)
 import Data.Monoid ((<>))
 import Data.Text as T
+import Data.Text.Encoding as TE
 import Kubernetes.API.CoreV1
 import Kubernetes.Client
 import Kubernetes.Core
@@ -44,8 +46,8 @@ import qualified Network.HTTP.Client as NH
 import qualified Network.WebSockets as WS
 import qualified Network.WebSockets.Stream as WS
 import qualified Text.Printf as Printf
-import System.Timeout (timeout) 
 import System.Log.Logger
+import System.Timeout (timeout) 
 
 
 runClient :: CreateWSClient Text -> KubernetesConfig -> TLS.ClientParams -> Name -> Namespace -> IO (Async())
@@ -127,14 +129,17 @@ k8sClient interval clientState conn = do
 -- | Publish messages from the reader into the channel.
 publishMessage :: [(ChannelId, TChan Text)] -> (Text, Text) -> IO ()
 publishMessage channels_ c@(channel, message) = do 
-  let chanId = readChannel channel
-  debugM "WSClient" $ show c
+  debugM "WSClient" $ "channel : " <> (show $ asByte channel)
+  let chanId = readChannel (asByte channel)
+  debugM "WSClient" $ show chanId
   case chanId of
-    Nothing -> throwIO $ InvalidChannel channel
+    Nothing -> throwIO $ InvalidChannel $ pack $ show chanId
     Just aChan -> do
       atomically $
         writeTChan (getChannelIdSTM aChan channels_) message
-
+  where 
+    asByte :: Text -> Char 
+    asByte aText = BC.head $ TE.encodeUtf8 aText
 {- | 
   Query a channelId from a list of Channels.
 -}
