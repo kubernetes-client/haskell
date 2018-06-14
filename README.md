@@ -4,7 +4,7 @@ Haskell client for the [kubernetes](http://kubernetes.io/) API.
 
 ## Contribute
 
-The client is in early stages of development and needs more contributors. If you are interested, please read [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/master/code-of-conduct.md) first and then pick an issue from [this list](https://github.com/kubernetes-client/haskell/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22). Please comment on the issue that you are working on it. If you need help/guidance,  please check [kubernetes-client](https://kubernetes.slack.com/messages/kubernetes-client) slack channel.
+The client is in early stages of development and needs more contributors. If you are interested, please read [CNCF Code of Conduct](https://github.com/cncf/foundation/blob/master/code-of-conduct.md) first and then pick an issue from [this list](https://github.com/kubernetes-client/haskell/issues?q=is%3Aissue+is%3Aopen+label%3A%22help+wanted%22). Please comment on the issue that you are working on it. If you need help/guidance, please check the [kubernetes-client](https://kubernetes.slack.com/messages/kubernetes-client) Slack channel. To request an invite to join the Slack channel, visit http://slack.kubernetes.io/.
 
 ## Community, Support, Discussion
 
