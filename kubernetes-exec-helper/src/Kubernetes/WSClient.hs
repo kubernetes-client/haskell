@@ -105,7 +105,7 @@ runClientWithTLS host portNum urlRequest headers tlsSettings application = do
 
 waitForThreads :: Maybe (Async a) -> (Async a) -> IO (Async a, a)
 waitForThreads (Just r) (sender) = waitAny [r, sender]
-waitForThreads _ _ = waitAny [] 
+waitForThreads Nothing sender = waitAny [sender] 
 
 -- | Socket IO handler.
 k8sClient :: Maybe TimeoutInterval -> CreateWSClient Text -> WS.Connection -> IO ()
