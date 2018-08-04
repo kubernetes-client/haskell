@@ -30,6 +30,7 @@ import Data.Char(chr)
 import Data.Monoid ((<>))
 import Data.Text as T
 import Data.Text.Encoding as TE
+import Data.Function ((&))
 import Kubernetes.API.CoreV1
 import Kubernetes.Client
 import Kubernetes.Core
@@ -43,23 +44,28 @@ import Network.TLS as TLS          (ClientParams(..))
 import qualified Data.ByteString.Char8 as BC
 import qualified Data.ByteString.Lazy as BL
 import qualified Network.HTTP.Client as NH
+import qualified Network.HTTP.Types.URI as NHURI
 import qualified Network.WebSockets as WS
 import qualified Network.WebSockets.Stream as WS
 import qualified Text.Printf as Printf
 import System.Log.Logger
 import System.Timeout (timeout) 
 
-
+type InitRequestS = InitRequest ConnectGetNamespacedPodExec MimeNoContent Text MimeNoContent
 runClient :: CreateWSClient Text -> KubernetesConfig -> TLS.ClientParams -> Name -> Namespace -> IO (Async())
 runClient createWSClient_ kubeConfig clientParams name_ namespace_ = do 
   let 
     timeoutInt = getTimeOut createWSClient_
-    commands_ = commands createWSClient_
-    r = (Prelude.foldr (\c reqAcc -> reqAcc -&- c)
-              (connectGetNamespacedPodExec (Accept MimeNoContent) name_ namespace_)
-              commands_)
-        -&- (Stdin True) -&- (Stdout True) -&- (Stderr True)
-  (InitRequest req) <- _toInitRequest kubeConfig r
+    commands_ = 
+        Prelude.map 
+          (\(Command c) -> ("command", Just c)) $ commands createWSClient_
+    initR :: KubernetesRequest ConnectGetNamespacedPodExec MimeNoContent Text MimeNoContent 
+      = connectGetNamespacedPodExec (Accept MimeNoContent) name_ namespace_
+    c = initR -&- (Stdin True) -&- (Stdout True) -&- (Stderr True)
+    rParamsP = rParams c
+    commandQuery = NHURI.queryTextToQuery commands_
+    rParamsP1 = rParamsP {paramsQuery = (commandQuery <> (paramsQuery rParamsP))}
+  InitRequest req :: InitRequestS <- _toInitRequest kubeConfig (c {rParams = rParamsP1})
   client_ <-   
       async $ 
         runClientWithTLS (host req) (port req) (endpoint req) 
