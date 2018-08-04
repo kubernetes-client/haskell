@@ -55,7 +55,7 @@ runClient createWSClient_ kubeConfig clientParams name_ namespace_ = do
   let 
     timeoutInt = getTimeOut createWSClient_
     commands_ = commands createWSClient_
-    r = (Prelude.foldr (\c reqAcc -> applyOptionalParam reqAcc c)
+    r = (Prelude.foldr (\c reqAcc -> reqAcc -&- c)
               (connectGetNamespacedPodExec (Accept MimeNoContent) name_ namespace_)
               commands_)
         -&- (Stdin True) -&- (Stdout True) -&- (Stderr True)

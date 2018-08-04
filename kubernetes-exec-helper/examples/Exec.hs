@@ -69,7 +69,7 @@ setupAndRun :: Text -> IO ()
 setupAndRun containerName = do
   kubeConfig <- setupKubeConfig
   tlsParams <- clusterClientSetupParams
-  clientState <- createWSClient $ [Command $ "date"] -- returns the date.
+  clientState <- createWSClient $ [Command $ "date", Command $ "date"] -- returns the date.
   client <- WSClient.runClient clientState kubeConfig tlsParams (Name containerName) (Namespace "default")
   outputAsyncs <- mapM (\(channelId, channel) -> async(output channelId channel)) 
     $ Prelude.filter(\(cId, _) -> cId /= K8SChannel.StdIn) $ 
@@ -91,7 +91,7 @@ main = do
 
   return ()
   where 
-    level = INFO
+    level = DEBUG
 {- | 
   Read commands from std in and send it to the pod.
 -}
