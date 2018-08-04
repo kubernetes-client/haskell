@@ -1,0 +1,141 @@
+-- This file has been generated from package.yaml by hpack version 0.20.0.
+--
+-- see: https://github.com/sol/hpack
+--
+-- hash: 9ea9c140bb216c28a2c56df6e74c42aa7d005ebbd53e01d4ef3354a710041919
+
+name:           kubernetes-exec-helper
+version:        0.1.0.0
+build-type:     Simple
+cabal-version:  >= 1.10
+
+library
+  hs-source-dirs:
+      src
+  build-depends:
+      HTTP >=4000.3.9 && <4000.3.12
+    , async
+    , base >=4.7 && <5.0
+    , bytestring >=0.10.0 && <0.11
+    , connection
+    , data-default-class
+    , hslogger >=1.2 && <1.3
+    , http-client
+    , http-client-tls
+    , http-types >=0.9.1 && <0.10
+    , kubeconfig
+    , kubernetes ==0.1.0.0
+    , kubernetes-client-helper ==0.1.0.0
+    , log-warper >=1.8.2 && <1.9
+    , microlens >=0.4.3 && <0.5
+    , mtl
+    , network >=2.6 && <2.7
+    , network-uri >=2.6 && <2.7
+    , optparse-applicative
+    , pem
+    , process
+    , safe-exceptions <0.2
+    , stm
+    , text >=0.11 && <1.3
+    , tls >=1.4 && <1.5
+    , websockets >=0.12 && <0.13
+    , wuss
+    , x509
+    , x509-store
+    , x509-system
+    , x509-validation
+  exposed-modules:
+      Kubernetes.CreateWSClient
+      Kubernetes.K8SChannel
+      Kubernetes.WSClient
+  other-modules:
+      Paths_kubernetes_exec_helper
+  default-language: Haskell2010
+
+executable kubernetes-exec-helper
+  main-is: Exec.hs
+  hs-source-dirs:
+      examples
+  build-depends:
+      HTTP >=4000.3.9 && <4000.3.12
+    , async
+    , base >=4.7 && <5.0
+    , bytestring >=0.10.0 && <0.11
+    , connection
+    , data-default-class
+    , hslogger >=1.2 && <1.3
+    , http-client
+    , http-client-tls
+    , http-types >=0.9.1 && <0.10
+    , kubeconfig
+    , kubernetes ==0.1.0.0
+    , kubernetes-client-helper ==0.1.0.0
+    , kubernetes-exec-helper
+    , log-warper >=1.8.2 && <1.9
+    , microlens >=0.4.3 && <0.5
+    , mtl
+    , network >=2.6 && <2.7
+    , network-uri >=2.6 && <2.7
+    , optparse-applicative
+    , pem
+    , process
+    , safe-exceptions <0.2
+    , stm
+    , text >=0.11 && <1.3
+    , tls >=1.4 && <1.5
+    , websockets >=0.12 && <0.13
+    , wuss
+    , x509
+    , x509-store
+    , x509-system
+    , x509-validation
+  other-modules:
+      Paths_kubernetes_exec_helper
+  default-language: Haskell2010
+
+test-suite spec
+  type: exitcode-stdio-1.0
+  main-is: Spec.hs
+  hs-source-dirs:
+      test
+  build-depends:
+      HTTP >=4000.3.9 && <4000.3.12
+    , aeson
+    , async
+    , base >=4.7 && <5.0
+    , bytestring >=0.10.0 && <0.11
+    , connection
+    , data-default-class
+    , hlint >=2.0 && <3.0
+    , hslogger >=1.2 && <1.3
+    , hspec
+    , http-client >=0.5 && <0.6
+    , http-client-tls
+    , http-types >=0.9.1 && <0.10
+    , kubeconfig
+    , kubernetes ==0.1.0.0
+    , kubernetes-client-helper ==0.1.0.0
+    , kubernetes-exec-helper ==0.1.0.0
+    , log-warper >=1.8.2 && <1.9
+    , microlens >=0.4.3 && <0.5
+    , mtl
+    , network >=2.6 && <2.7
+    , network-uri >=2.6 && <2.7
+    , optparse-applicative
+    , pem
+    , process
+    , safe-exceptions <0.2
+    , stm
+    , text >=0.11 && <1.3
+    , tls
+    , websockets >=0.12 && <0.13
+    , wuss
+    , x509
+    , x509-store
+    , x509-system
+    , x509-validation
+    , yaml
+  other-modules:
+      WSClientSpec
+      Paths_kubernetes_exec_helper
+  default-language: Haskell2010

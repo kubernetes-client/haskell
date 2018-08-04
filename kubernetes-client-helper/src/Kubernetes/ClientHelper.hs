@@ -44,14 +44,19 @@ setMasterURI server kcfg =
 disableValidateAuthMethods :: K.KubernetesConfig -> K.KubernetesConfig
 disableValidateAuthMethods kcfg = kcfg { K.configValidateAuthMethods = False }
 
+-- | Configures the 'K.KubernetesConfig' to using token authentication 
+setTokenAuth' :: K.AuthApiKeyBearerToken -> K.KubernetesConfig -> K.KubernetesConfig
+setTokenAuth' token kcfg = 
+  kcfg{
+    K.configAuthMethods = [K.AnyAuthMethod token]
+  }
+  
 -- |Configures the 'K.KubernetesConfig' to use token authentication.
 setTokenAuth
     :: T.Text             -- ^Authentication token
     -> K.KubernetesConfig
     -> K.KubernetesConfig
-setTokenAuth token kcfg = kcfg
-    { K.configAuthMethods = [K.AnyAuthMethod (K.AuthApiKeyBearerToken $ "Bearer " <> token)]
-    }
+setTokenAuth token kcfg = setTokenAuth' (K.AuthApiKeyBearerToken token) kcfg
 
 -- |Creates a 'NH.Manager' that can handle TLS.
 newManager :: TLS.ClientParams -> IO NH.Manager

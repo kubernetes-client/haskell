@@ -12,4 +12,3 @@ dependencies:
   - text >=0.11 && <1.3
   - kubernetes == 0.1.0.0
 
-
