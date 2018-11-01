@@ -4,6 +4,7 @@ description: |
   This package contains functions for working with kubeconfig files.
 
   Usage of kubeconfig files are described at https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/
+license-file: ../LICENSE
 library:
   source-dirs: src
 tests:
@@ -18,6 +19,6 @@ extra-source-files:
   - test/testdata/*
 dependencies:
   - base >=4.7 && <5.0
-  - aeson
-  - containers
-  - text
+  - aeson >=1.0 && <2.0
+  - containers >=0.5.0.0 && <0.6
+  - text >=0.11 && <1.3
