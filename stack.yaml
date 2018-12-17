@@ -1,5 +1,8 @@
-resolver: lts-10.0
-extra-deps:
+resolver: lts-12.24
+
+extra-deps: 
+- katip-0.7.0.0
+
 packages:
 - kubernetes
 - kubernetes-client-helper
