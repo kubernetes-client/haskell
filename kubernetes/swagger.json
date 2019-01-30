@@ -2,7 +2,7 @@
   "swagger": "2.0",
   "info": {
     "title": "Kubernetes",
-    "version": "v1.9.2"
+    "version": "v1.9.12"
   },
   "paths": {
     "/api/": {
@@ -796,7 +796,8 @@
           "group": "",
           "kind": "Namespace",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -864,7 +865,8 @@
           "group": "",
           "kind": "Binding",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -1035,7 +1037,8 @@
           "group": "",
           "kind": "ConfigMap",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ConfigMap",
@@ -1249,7 +1252,8 @@
           "group": "",
           "kind": "ConfigMap",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ConfigMap",
@@ -1315,7 +1319,8 @@
           "group": "",
           "kind": "ConfigMap",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ConfigMap",
@@ -1363,7 +1368,8 @@
           "group": "",
           "kind": "ConfigMap",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -1542,7 +1548,8 @@
           "group": "",
           "kind": "Endpoints",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of Endpoints",
@@ -1756,7 +1763,8 @@
           "group": "",
           "kind": "Endpoints",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete Endpoints",
@@ -1822,7 +1830,8 @@
           "group": "",
           "kind": "Endpoints",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Endpoints",
@@ -1870,7 +1879,8 @@
           "group": "",
           "kind": "Endpoints",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -2049,7 +2059,8 @@
           "group": "",
           "kind": "Event",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of Event",
@@ -2263,7 +2274,8 @@
           "group": "",
           "kind": "Event",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete an Event",
@@ -2329,7 +2341,8 @@
           "group": "",
           "kind": "Event",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Event",
@@ -2377,7 +2390,8 @@
           "group": "",
           "kind": "Event",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -2556,7 +2570,8 @@
           "group": "",
           "kind": "LimitRange",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of LimitRange",
@@ -2770,7 +2785,8 @@
           "group": "",
           "kind": "LimitRange",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a LimitRange",
@@ -2836,7 +2852,8 @@
           "group": "",
           "kind": "LimitRange",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified LimitRange",
@@ -2884,7 +2901,8 @@
           "group": "",
           "kind": "LimitRange",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -3063,7 +3081,8 @@
           "group": "",
           "kind": "PersistentVolumeClaim",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of PersistentVolumeClaim",
@@ -3277,7 +3296,8 @@
           "group": "",
           "kind": "PersistentVolumeClaim",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a PersistentVolumeClaim",
@@ -3343,7 +3363,8 @@
           "group": "",
           "kind": "PersistentVolumeClaim",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified PersistentVolumeClaim",
@@ -3391,7 +3412,8 @@
           "group": "",
           "kind": "PersistentVolumeClaim",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -3504,7 +3526,8 @@
           "group": "",
           "kind": "PersistentVolumeClaim",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified PersistentVolumeClaim",
@@ -3552,7 +3575,8 @@
           "group": "",
           "kind": "PersistentVolumeClaim",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -3731,7 +3755,8 @@
           "group": "",
           "kind": "Pod",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of Pod",
@@ -3945,7 +3970,8 @@
           "group": "",
           "kind": "Pod",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a Pod",
@@ -4011,7 +4037,8 @@
           "group": "",
           "kind": "Pod",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Pod",
@@ -4059,7 +4086,8 @@
           "group": "",
           "kind": "Pod",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -4264,7 +4292,8 @@
           "group": "",
           "kind": "Binding",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -4348,7 +4377,8 @@
           "group": "policy",
           "kind": "Eviction",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -5318,7 +5348,8 @@
           "group": "",
           "kind": "Pod",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified Pod",
@@ -5366,7 +5397,8 @@
           "group": "",
           "kind": "Pod",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -5545,7 +5577,8 @@
           "group": "",
           "kind": "PodTemplate",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of PodTemplate",
@@ -5759,7 +5792,8 @@
           "group": "",
           "kind": "PodTemplate",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a PodTemplate",
@@ -5825,7 +5859,8 @@
           "group": "",
           "kind": "PodTemplate",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified PodTemplate",
@@ -5873,7 +5908,8 @@
           "group": "",
           "kind": "PodTemplate",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -6052,7 +6088,8 @@
           "group": "",
           "kind": "ReplicationController",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ReplicationController",
@@ -6266,7 +6303,8 @@
           "group": "",
           "kind": "ReplicationController",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ReplicationController",
@@ -6332,7 +6370,8 @@
           "group": "",
           "kind": "ReplicationController",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ReplicationController",
@@ -6380,7 +6419,8 @@
           "group": "",
           "kind": "ReplicationController",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -6493,7 +6533,8 @@
           "group": "autoscaling",
           "kind": "Scale",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update scale of the specified ReplicationController",
@@ -6541,7 +6582,8 @@
           "group": "autoscaling",
           "kind": "Scale",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -6654,7 +6696,8 @@
           "group": "",
           "kind": "ReplicationController",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified ReplicationController",
@@ -6702,7 +6745,8 @@
           "group": "",
           "kind": "ReplicationController",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -6881,7 +6925,8 @@
           "group": "",
           "kind": "ResourceQuota",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ResourceQuota",
@@ -7095,7 +7140,8 @@
           "group": "",
           "kind": "ResourceQuota",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ResourceQuota",
@@ -7161,7 +7207,8 @@
           "group": "",
           "kind": "ResourceQuota",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ResourceQuota",
@@ -7209,7 +7256,8 @@
           "group": "",
           "kind": "ResourceQuota",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -7322,7 +7370,8 @@
           "group": "",
           "kind": "ResourceQuota",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified ResourceQuota",
@@ -7370,7 +7419,8 @@
           "group": "",
           "kind": "ResourceQuota",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -7549,7 +7599,8 @@
           "group": "",
           "kind": "Secret",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of Secret",
@@ -7763,7 +7814,8 @@
           "group": "",
           "kind": "Secret",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a Secret",
@@ -7829,7 +7881,8 @@
           "group": "",
           "kind": "Secret",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Secret",
@@ -7877,7 +7930,8 @@
           "group": "",
           "kind": "Secret",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -8056,7 +8110,8 @@
           "group": "",
           "kind": "ServiceAccount",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ServiceAccount",
@@ -8270,7 +8325,8 @@
           "group": "",
           "kind": "ServiceAccount",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ServiceAccount",
@@ -8336,7 +8392,8 @@
           "group": "",
           "kind": "ServiceAccount",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ServiceAccount",
@@ -8384,7 +8441,8 @@
           "group": "",
           "kind": "ServiceAccount",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -8563,7 +8621,8 @@
           "group": "",
           "kind": "Service",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -8684,7 +8743,8 @@
           "group": "",
           "kind": "Service",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a Service",
@@ -8767,7 +8827,8 @@
           "group": "",
           "kind": "Service",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -9404,7 +9465,8 @@
           "group": "",
           "kind": "Service",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified Service",
@@ -9452,7 +9514,8 @@
           "group": "",
           "kind": "Service",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -9581,7 +9644,8 @@
           "group": "",
           "kind": "Namespace",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a Namespace",
@@ -9647,7 +9711,8 @@
           "group": "",
           "kind": "Namespace",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Namespace",
@@ -9695,7 +9760,8 @@
           "group": "",
           "kind": "Namespace",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -9765,7 +9831,8 @@
           "group": "",
           "kind": "Namespace",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -9870,7 +9937,8 @@
           "group": "",
           "kind": "Namespace",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified Namespace",
@@ -9918,7 +9986,8 @@
           "group": "",
           "kind": "Namespace",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -10089,7 +10158,8 @@
           "group": "",
           "kind": "Node",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of Node",
@@ -10295,7 +10365,8 @@
           "group": "",
           "kind": "Node",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a Node",
@@ -10361,7 +10432,8 @@
           "group": "",
           "kind": "Node",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Node",
@@ -10409,7 +10481,8 @@
           "group": "",
           "kind": "Node",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -11022,7 +11095,8 @@
           "group": "",
           "kind": "Node",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified Node",
@@ -11070,7 +11144,8 @@
           "group": "",
           "kind": "Node",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -11345,7 +11420,8 @@
           "group": "",
           "kind": "PersistentVolume",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of PersistentVolume",
@@ -11551,7 +11627,8 @@
           "group": "",
           "kind": "PersistentVolume",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a PersistentVolume",
@@ -11617,7 +11694,8 @@
           "group": "",
           "kind": "PersistentVolume",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified PersistentVolume",
@@ -11665,7 +11743,8 @@
           "group": "",
           "kind": "PersistentVolume",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -11770,7 +11849,8 @@
           "group": "",
           "kind": "PersistentVolume",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified PersistentVolume",
@@ -11818,7 +11898,8 @@
           "group": "",
           "kind": "PersistentVolume",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -17456,7 +17537,8 @@
           "group": "admissionregistration.k8s.io",
           "kind": "InitializerConfiguration",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of InitializerConfiguration",
@@ -17662,7 +17744,8 @@
           "group": "admissionregistration.k8s.io",
           "kind": "InitializerConfiguration",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete an InitializerConfiguration",
@@ -17728,7 +17811,8 @@
           "group": "admissionregistration.k8s.io",
           "kind": "InitializerConfiguration",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified InitializerConfiguration",
@@ -17776,7 +17860,8 @@
           "group": "admissionregistration.k8s.io",
           "kind": "InitializerConfiguration",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -18122,7 +18207,8 @@
           "group": "admissionregistration.k8s.io",
           "kind": "MutatingWebhookConfiguration",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of MutatingWebhookConfiguration",
@@ -18328,7 +18414,8 @@
           "group": "admissionregistration.k8s.io",
           "kind": "MutatingWebhookConfiguration",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a MutatingWebhookConfiguration",
@@ -18394,7 +18481,8 @@
           "group": "admissionregistration.k8s.io",
           "kind": "MutatingWebhookConfiguration",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified MutatingWebhookConfiguration",
@@ -18442,7 +18530,8 @@
           "group": "admissionregistration.k8s.io",
           "kind": "MutatingWebhookConfiguration",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -18613,7 +18702,8 @@
           "group": "admissionregistration.k8s.io",
           "kind": "ValidatingWebhookConfiguration",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ValidatingWebhookConfiguration",
@@ -18819,7 +18909,8 @@
           "group": "admissionregistration.k8s.io",
           "kind": "ValidatingWebhookConfiguration",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ValidatingWebhookConfiguration",
@@ -18885,7 +18976,8 @@
           "group": "admissionregistration.k8s.io",
           "kind": "ValidatingWebhookConfiguration",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ValidatingWebhookConfiguration",
@@ -18933,7 +19025,8 @@
           "group": "admissionregistration.k8s.io",
           "kind": "ValidatingWebhookConfiguration",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -19454,7 +19547,8 @@
           "group": "apiextensions.k8s.io",
           "kind": "CustomResourceDefinition",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of CustomResourceDefinition",
@@ -19660,7 +19754,8 @@
           "group": "apiextensions.k8s.io",
           "kind": "CustomResourceDefinition",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a CustomResourceDefinition",
@@ -19726,7 +19821,8 @@
           "group": "apiextensions.k8s.io",
           "kind": "CustomResourceDefinition",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified CustomResourceDefinition",
@@ -19774,7 +19870,8 @@
           "group": "apiextensions.k8s.io",
           "kind": "CustomResourceDefinition",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -19844,7 +19941,8 @@
           "group": "apiextensions.k8s.io",
           "kind": "CustomResourceDefinition",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -20223,7 +20321,8 @@
           "group": "apiregistration.k8s.io",
           "kind": "APIService",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of APIService",
@@ -20429,7 +20528,8 @@
           "group": "apiregistration.k8s.io",
           "kind": "APIService",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete an APIService",
@@ -20495,7 +20595,8 @@
           "group": "apiregistration.k8s.io",
           "kind": "APIService",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified APIService",
@@ -20543,7 +20644,8 @@
           "group": "apiregistration.k8s.io",
           "kind": "APIService",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -20613,7 +20715,8 @@
           "group": "apiregistration.k8s.io",
           "kind": "APIService",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -21304,7 +21407,8 @@
           "group": "apps",
           "kind": "ControllerRevision",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ControllerRevision",
@@ -21518,7 +21622,8 @@
           "group": "apps",
           "kind": "ControllerRevision",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ControllerRevision",
@@ -21584,7 +21689,8 @@
           "group": "apps",
           "kind": "ControllerRevision",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ControllerRevision",
@@ -21632,7 +21738,8 @@
           "group": "apps",
           "kind": "ControllerRevision",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -21811,7 +21918,8 @@
           "group": "apps",
           "kind": "DaemonSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of DaemonSet",
@@ -22025,7 +22133,8 @@
           "group": "apps",
           "kind": "DaemonSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a DaemonSet",
@@ -22091,7 +22200,8 @@
           "group": "apps",
           "kind": "DaemonSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified DaemonSet",
@@ -22139,7 +22249,8 @@
           "group": "apps",
           "kind": "DaemonSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -22252,7 +22363,8 @@
           "group": "apps",
           "kind": "DaemonSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified DaemonSet",
@@ -22300,7 +22412,8 @@
           "group": "apps",
           "kind": "DaemonSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -22479,7 +22592,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of Deployment",
@@ -22693,7 +22807,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a Deployment",
@@ -22759,7 +22874,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Deployment",
@@ -22807,7 +22923,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -22920,7 +23037,8 @@
           "group": "autoscaling",
           "kind": "Scale",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update scale of the specified Deployment",
@@ -22968,7 +23086,8 @@
           "group": "autoscaling",
           "kind": "Scale",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -23081,7 +23200,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified Deployment",
@@ -23129,7 +23249,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -23308,7 +23429,8 @@
           "group": "apps",
           "kind": "ReplicaSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ReplicaSet",
@@ -23522,7 +23644,8 @@
           "group": "apps",
           "kind": "ReplicaSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ReplicaSet",
@@ -23588,7 +23711,8 @@
           "group": "apps",
           "kind": "ReplicaSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ReplicaSet",
@@ -23636,7 +23760,8 @@
           "group": "apps",
           "kind": "ReplicaSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -23749,7 +23874,8 @@
           "group": "autoscaling",
           "kind": "Scale",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update scale of the specified ReplicaSet",
@@ -23797,7 +23923,8 @@
           "group": "autoscaling",
           "kind": "Scale",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -23910,7 +24037,8 @@
           "group": "apps",
           "kind": "ReplicaSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified ReplicaSet",
@@ -23958,7 +24086,8 @@
           "group": "apps",
           "kind": "ReplicaSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -24137,7 +24266,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of StatefulSet",
@@ -24351,7 +24481,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a StatefulSet",
@@ -24417,7 +24548,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified StatefulSet",
@@ -24465,7 +24597,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -24578,7 +24711,8 @@
           "group": "autoscaling",
           "kind": "Scale",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update scale of the specified StatefulSet",
@@ -24626,7 +24760,8 @@
           "group": "autoscaling",
           "kind": "Scale",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -24739,7 +24874,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified StatefulSet",
@@ -24787,7 +24923,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -26540,7 +26677,8 @@
           "group": "apps",
           "kind": "ControllerRevision",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ControllerRevision",
@@ -26754,7 +26892,8 @@
           "group": "apps",
           "kind": "ControllerRevision",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ControllerRevision",
@@ -26820,7 +26959,8 @@
           "group": "apps",
           "kind": "ControllerRevision",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ControllerRevision",
@@ -26868,7 +27008,8 @@
           "group": "apps",
           "kind": "ControllerRevision",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -27047,7 +27188,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of Deployment",
@@ -27261,7 +27403,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a Deployment",
@@ -27327,7 +27470,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Deployment",
@@ -27375,7 +27519,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -27459,7 +27604,8 @@
           "group": "apps",
           "kind": "DeploymentRollback",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -27572,7 +27718,8 @@
           "group": "apps",
           "kind": "Scale",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update scale of the specified Deployment",
@@ -27620,7 +27767,8 @@
           "group": "apps",
           "kind": "Scale",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -27733,7 +27881,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified Deployment",
@@ -27781,7 +27930,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -27960,7 +28110,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of StatefulSet",
@@ -28174,7 +28325,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a StatefulSet",
@@ -28240,7 +28392,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified StatefulSet",
@@ -28288,7 +28441,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -28401,7 +28555,8 @@
           "group": "apps",
           "kind": "Scale",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update scale of the specified StatefulSet",
@@ -28449,7 +28604,8 @@
           "group": "apps",
           "kind": "Scale",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -28562,7 +28718,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified StatefulSet",
@@ -28610,7 +28767,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -29913,7 +30071,8 @@
           "group": "apps",
           "kind": "ControllerRevision",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ControllerRevision",
@@ -30127,7 +30286,8 @@
           "group": "apps",
           "kind": "ControllerRevision",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ControllerRevision",
@@ -30193,7 +30353,8 @@
           "group": "apps",
           "kind": "ControllerRevision",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ControllerRevision",
@@ -30241,7 +30402,8 @@
           "group": "apps",
           "kind": "ControllerRevision",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -30420,7 +30582,8 @@
           "group": "apps",
           "kind": "DaemonSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of DaemonSet",
@@ -30634,7 +30797,8 @@
           "group": "apps",
           "kind": "DaemonSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a DaemonSet",
@@ -30700,7 +30864,8 @@
           "group": "apps",
           "kind": "DaemonSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified DaemonSet",
@@ -30748,7 +30913,8 @@
           "group": "apps",
           "kind": "DaemonSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -30861,7 +31027,8 @@
           "group": "apps",
           "kind": "DaemonSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified DaemonSet",
@@ -30909,7 +31076,8 @@
           "group": "apps",
           "kind": "DaemonSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -31088,7 +31256,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of Deployment",
@@ -31302,7 +31471,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a Deployment",
@@ -31368,7 +31538,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Deployment",
@@ -31416,7 +31587,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -31529,7 +31701,8 @@
           "group": "apps",
           "kind": "Scale",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update scale of the specified Deployment",
@@ -31577,7 +31750,8 @@
           "group": "apps",
           "kind": "Scale",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -31690,7 +31864,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified Deployment",
@@ -31738,7 +31913,8 @@
           "group": "apps",
           "kind": "Deployment",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -31917,7 +32093,8 @@
           "group": "apps",
           "kind": "ReplicaSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ReplicaSet",
@@ -32131,7 +32308,8 @@
           "group": "apps",
           "kind": "ReplicaSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ReplicaSet",
@@ -32197,7 +32375,8 @@
           "group": "apps",
           "kind": "ReplicaSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ReplicaSet",
@@ -32245,7 +32424,8 @@
           "group": "apps",
           "kind": "ReplicaSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -32358,7 +32538,8 @@
           "group": "apps",
           "kind": "Scale",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update scale of the specified ReplicaSet",
@@ -32406,7 +32587,8 @@
           "group": "apps",
           "kind": "Scale",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -32519,7 +32701,8 @@
           "group": "apps",
           "kind": "ReplicaSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified ReplicaSet",
@@ -32567,7 +32750,8 @@
           "group": "apps",
           "kind": "ReplicaSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -32746,7 +32930,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of StatefulSet",
@@ -32960,7 +33145,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a StatefulSet",
@@ -33026,7 +33212,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified StatefulSet",
@@ -33074,7 +33261,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -33187,7 +33375,8 @@
           "group": "apps",
           "kind": "Scale",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update scale of the specified StatefulSet",
@@ -33235,7 +33424,8 @@
           "group": "apps",
           "kind": "Scale",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -33348,7 +33538,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified StatefulSet",
@@ -33396,7 +33587,8 @@
           "group": "apps",
           "kind": "StatefulSet",
           "version": "v1beta2"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -34879,7 +35071,8 @@
           "group": "authentication.k8s.io",
           "kind": "TokenReview",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -34980,7 +35173,8 @@
           "group": "authentication.k8s.io",
           "kind": "TokenReview",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -35114,7 +35308,8 @@
           "group": "authorization.k8s.io",
           "kind": "LocalSubjectAccessReview",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -35190,7 +35385,8 @@
           "group": "authorization.k8s.io",
           "kind": "SelfSubjectAccessReview",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -35258,7 +35454,8 @@
           "group": "authorization.k8s.io",
           "kind": "SelfSubjectRulesReview",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -35326,7 +35523,8 @@
           "group": "authorization.k8s.io",
           "kind": "SubjectAccessReview",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -35427,7 +35625,8 @@
           "group": "authorization.k8s.io",
           "kind": "LocalSubjectAccessReview",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -35503,7 +35702,8 @@
           "group": "authorization.k8s.io",
           "kind": "SelfSubjectAccessReview",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -35571,7 +35771,8 @@
           "group": "authorization.k8s.io",
           "kind": "SelfSubjectRulesReview",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -35639,7 +35840,8 @@
           "group": "authorization.k8s.io",
           "kind": "SubjectAccessReview",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -35972,7 +36174,8 @@
           "group": "autoscaling",
           "kind": "HorizontalPodAutoscaler",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of HorizontalPodAutoscaler",
@@ -36186,7 +36389,8 @@
           "group": "autoscaling",
           "kind": "HorizontalPodAutoscaler",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a HorizontalPodAutoscaler",
@@ -36252,7 +36456,8 @@
           "group": "autoscaling",
           "kind": "HorizontalPodAutoscaler",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified HorizontalPodAutoscaler",
@@ -36300,7 +36505,8 @@
           "group": "autoscaling",
           "kind": "HorizontalPodAutoscaler",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -36413,7 +36619,8 @@
           "group": "autoscaling",
           "kind": "HorizontalPodAutoscaler",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified HorizontalPodAutoscaler",
@@ -36461,7 +36668,8 @@
           "group": "autoscaling",
           "kind": "HorizontalPodAutoscaler",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -37002,7 +37210,8 @@
           "group": "autoscaling",
           "kind": "HorizontalPodAutoscaler",
           "version": "v2beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of HorizontalPodAutoscaler",
@@ -37216,7 +37425,8 @@
           "group": "autoscaling",
           "kind": "HorizontalPodAutoscaler",
           "version": "v2beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a HorizontalPodAutoscaler",
@@ -37282,7 +37492,8 @@
           "group": "autoscaling",
           "kind": "HorizontalPodAutoscaler",
           "version": "v2beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified HorizontalPodAutoscaler",
@@ -37330,7 +37541,8 @@
           "group": "autoscaling",
           "kind": "HorizontalPodAutoscaler",
           "version": "v2beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -37443,7 +37655,8 @@
           "group": "autoscaling",
           "kind": "HorizontalPodAutoscaler",
           "version": "v2beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified HorizontalPodAutoscaler",
@@ -37491,7 +37704,8 @@
           "group": "autoscaling",
           "kind": "HorizontalPodAutoscaler",
           "version": "v2beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -38065,7 +38279,8 @@
           "group": "batch",
           "kind": "Job",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of Job",
@@ -38279,7 +38494,8 @@
           "group": "batch",
           "kind": "Job",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a Job",
@@ -38345,7 +38561,8 @@
           "group": "batch",
           "kind": "Job",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Job",
@@ -38393,7 +38610,8 @@
           "group": "batch",
           "kind": "Job",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -38506,7 +38724,8 @@
           "group": "batch",
           "kind": "Job",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified Job",
@@ -38554,7 +38773,8 @@
           "group": "batch",
           "kind": "Job",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -39095,7 +39315,8 @@
           "group": "batch",
           "kind": "CronJob",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of CronJob",
@@ -39309,7 +39530,8 @@
           "group": "batch",
           "kind": "CronJob",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a CronJob",
@@ -39375,7 +39597,8 @@
           "group": "batch",
           "kind": "CronJob",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified CronJob",
@@ -39423,7 +39646,8 @@
           "group": "batch",
           "kind": "CronJob",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -39536,7 +39760,8 @@
           "group": "batch",
           "kind": "CronJob",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified CronJob",
@@ -39584,7 +39809,8 @@
           "group": "batch",
           "kind": "CronJob",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -40125,7 +40351,8 @@
           "group": "batch",
           "kind": "CronJob",
           "version": "v2alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of CronJob",
@@ -40339,7 +40566,8 @@
           "group": "batch",
           "kind": "CronJob",
           "version": "v2alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a CronJob",
@@ -40405,7 +40633,8 @@
           "group": "batch",
           "kind": "CronJob",
           "version": "v2alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified CronJob",
@@ -40453,7 +40682,8 @@
           "group": "batch",
           "kind": "CronJob",
           "version": "v2alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -40566,7 +40796,8 @@
           "group": "batch",
           "kind": "CronJob",
           "version": "v2alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified CronJob",
@@ -40614,7 +40845,8 @@
           "group": "batch",
           "kind": "CronJob",
           "version": "v2alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -41084,7 +41316,8 @@
           "group": "certificates.k8s.io",
           "kind": "CertificateSigningRequest",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of CertificateSigningRequest",
@@ -41290,7 +41523,8 @@
           "group": "certificates.k8s.io",
           "kind": "CertificateSigningRequest",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a CertificateSigningRequest",
@@ -41356,7 +41590,8 @@
           "group": "certificates.k8s.io",
           "kind": "CertificateSigningRequest",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified CertificateSigningRequest",
@@ -41404,7 +41639,8 @@
           "group": "certificates.k8s.io",
           "kind": "CertificateSigningRequest",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -41474,7 +41710,8 @@
           "group": "certificates.k8s.io",
           "kind": "CertificateSigningRequest",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -41544,7 +41781,8 @@
           "group": "certificates.k8s.io",
           "kind": "CertificateSigningRequest",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -42027,7 +42265,8 @@
           "group": "events.k8s.io",
           "kind": "Event",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of Event",
@@ -42241,7 +42480,8 @@
           "group": "events.k8s.io",
           "kind": "Event",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete an Event",
@@ -42307,7 +42547,8 @@
           "group": "events.k8s.io",
           "kind": "Event",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Event",
@@ -42355,7 +42596,8 @@
           "group": "events.k8s.io",
           "kind": "Event",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -43137,7 +43379,8 @@
           "group": "extensions",
           "kind": "DaemonSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of DaemonSet",
@@ -43351,7 +43594,8 @@
           "group": "extensions",
           "kind": "DaemonSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a DaemonSet",
@@ -43417,7 +43661,8 @@
           "group": "extensions",
           "kind": "DaemonSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified DaemonSet",
@@ -43465,7 +43710,8 @@
           "group": "extensions",
           "kind": "DaemonSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -43578,7 +43824,8 @@
           "group": "extensions",
           "kind": "DaemonSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified DaemonSet",
@@ -43626,7 +43873,8 @@
           "group": "extensions",
           "kind": "DaemonSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -43805,7 +44053,8 @@
           "group": "extensions",
           "kind": "Deployment",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of Deployment",
@@ -44019,7 +44268,8 @@
           "group": "extensions",
           "kind": "Deployment",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a Deployment",
@@ -44085,7 +44335,8 @@
           "group": "extensions",
           "kind": "Deployment",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Deployment",
@@ -44133,7 +44384,8 @@
           "group": "extensions",
           "kind": "Deployment",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -44217,7 +44469,8 @@
           "group": "extensions",
           "kind": "DeploymentRollback",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -44330,7 +44583,8 @@
           "group": "extensions",
           "kind": "Scale",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update scale of the specified Deployment",
@@ -44378,7 +44632,8 @@
           "group": "extensions",
           "kind": "Scale",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -44491,7 +44746,8 @@
           "group": "extensions",
           "kind": "Deployment",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified Deployment",
@@ -44539,7 +44795,8 @@
           "group": "extensions",
           "kind": "Deployment",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -44718,7 +44975,8 @@
           "group": "extensions",
           "kind": "Ingress",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of Ingress",
@@ -44932,7 +45190,8 @@
           "group": "extensions",
           "kind": "Ingress",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete an Ingress",
@@ -44998,7 +45257,8 @@
           "group": "extensions",
           "kind": "Ingress",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Ingress",
@@ -45046,7 +45306,8 @@
           "group": "extensions",
           "kind": "Ingress",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -45159,7 +45420,8 @@
           "group": "extensions",
           "kind": "Ingress",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified Ingress",
@@ -45207,7 +45469,8 @@
           "group": "extensions",
           "kind": "Ingress",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -45386,7 +45649,8 @@
           "group": "extensions",
           "kind": "NetworkPolicy",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of NetworkPolicy",
@@ -45600,7 +45864,8 @@
           "group": "extensions",
           "kind": "NetworkPolicy",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a NetworkPolicy",
@@ -45666,7 +45931,8 @@
           "group": "extensions",
           "kind": "NetworkPolicy",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified NetworkPolicy",
@@ -45714,7 +45980,8 @@
           "group": "extensions",
           "kind": "NetworkPolicy",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -45893,7 +46160,8 @@
           "group": "extensions",
           "kind": "ReplicaSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ReplicaSet",
@@ -46107,7 +46375,8 @@
           "group": "extensions",
           "kind": "ReplicaSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ReplicaSet",
@@ -46173,7 +46442,8 @@
           "group": "extensions",
           "kind": "ReplicaSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ReplicaSet",
@@ -46221,7 +46491,8 @@
           "group": "extensions",
           "kind": "ReplicaSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -46334,7 +46605,8 @@
           "group": "extensions",
           "kind": "Scale",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update scale of the specified ReplicaSet",
@@ -46382,7 +46654,8 @@
           "group": "extensions",
           "kind": "Scale",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -46495,7 +46768,8 @@
           "group": "extensions",
           "kind": "ReplicaSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified ReplicaSet",
@@ -46543,7 +46817,8 @@
           "group": "extensions",
           "kind": "ReplicaSet",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -46656,7 +46931,8 @@
           "group": "extensions",
           "kind": "Scale",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update scale of the specified ReplicationControllerDummy",
@@ -46704,7 +46980,8 @@
           "group": "extensions",
           "kind": "Scale",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -46987,7 +47264,8 @@
           "group": "extensions",
           "kind": "PodSecurityPolicy",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of PodSecurityPolicy",
@@ -47193,7 +47471,8 @@
           "group": "extensions",
           "kind": "PodSecurityPolicy",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a PodSecurityPolicy",
@@ -47259,7 +47538,8 @@
           "group": "extensions",
           "kind": "PodSecurityPolicy",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified PodSecurityPolicy",
@@ -47307,7 +47587,8 @@
           "group": "extensions",
           "kind": "PodSecurityPolicy",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -48915,7 +49196,8 @@
           "group": "networking.k8s.io",
           "kind": "NetworkPolicy",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of NetworkPolicy",
@@ -49129,7 +49411,8 @@
           "group": "networking.k8s.io",
           "kind": "NetworkPolicy",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a NetworkPolicy",
@@ -49195,7 +49478,8 @@
           "group": "networking.k8s.io",
           "kind": "NetworkPolicy",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified NetworkPolicy",
@@ -49243,7 +49527,8 @@
           "group": "networking.k8s.io",
           "kind": "NetworkPolicy",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -49817,7 +50102,8 @@
           "group": "policy",
           "kind": "PodDisruptionBudget",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of PodDisruptionBudget",
@@ -50031,7 +50317,8 @@
           "group": "policy",
           "kind": "PodDisruptionBudget",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a PodDisruptionBudget",
@@ -50097,7 +50384,8 @@
           "group": "policy",
           "kind": "PodDisruptionBudget",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified PodDisruptionBudget",
@@ -50145,7 +50433,8 @@
           "group": "policy",
           "kind": "PodDisruptionBudget",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -50258,7 +50547,8 @@
           "group": "policy",
           "kind": "PodDisruptionBudget",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update status of the specified PodDisruptionBudget",
@@ -50306,7 +50596,8 @@
           "group": "policy",
           "kind": "PodDisruptionBudget",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -50880,7 +51171,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRoleBinding",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ClusterRoleBinding",
@@ -51070,7 +51362,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRoleBinding",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ClusterRoleBinding",
@@ -51136,7 +51429,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRoleBinding",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ClusterRoleBinding",
@@ -51184,7 +51478,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRoleBinding",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -51355,7 +51650,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRole",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ClusterRole",
@@ -51545,7 +51841,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRole",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ClusterRole",
@@ -51611,7 +51908,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRole",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ClusterRole",
@@ -51659,7 +51957,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRole",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -51830,7 +52129,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "RoleBinding",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of RoleBinding",
@@ -52028,7 +52328,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "RoleBinding",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a RoleBinding",
@@ -52094,7 +52395,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "RoleBinding",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified RoleBinding",
@@ -52142,7 +52444,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "RoleBinding",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -52321,7 +52624,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "Role",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of Role",
@@ -52519,7 +52823,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "Role",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a Role",
@@ -52585,7 +52890,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "Role",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Role",
@@ -52633,7 +52939,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "Role",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -53787,7 +54094,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRoleBinding",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ClusterRoleBinding",
@@ -53977,7 +54285,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRoleBinding",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ClusterRoleBinding",
@@ -54043,7 +54352,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRoleBinding",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ClusterRoleBinding",
@@ -54091,7 +54401,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRoleBinding",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -54262,7 +54573,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRole",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ClusterRole",
@@ -54452,7 +54764,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRole",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ClusterRole",
@@ -54518,7 +54831,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRole",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ClusterRole",
@@ -54566,7 +54880,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRole",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -54737,7 +55052,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "RoleBinding",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of RoleBinding",
@@ -54935,7 +55251,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "RoleBinding",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a RoleBinding",
@@ -55001,7 +55318,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "RoleBinding",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified RoleBinding",
@@ -55049,7 +55367,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "RoleBinding",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -55228,7 +55547,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "Role",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of Role",
@@ -55426,7 +55746,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "Role",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a Role",
@@ -55492,7 +55813,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "Role",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Role",
@@ -55540,7 +55862,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "Role",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -56694,7 +57017,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRoleBinding",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ClusterRoleBinding",
@@ -56884,7 +57208,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRoleBinding",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ClusterRoleBinding",
@@ -56950,7 +57275,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRoleBinding",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ClusterRoleBinding",
@@ -56998,7 +57324,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRoleBinding",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -57169,7 +57496,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRole",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of ClusterRole",
@@ -57359,7 +57687,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRole",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a ClusterRole",
@@ -57425,7 +57754,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRole",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified ClusterRole",
@@ -57473,7 +57803,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "ClusterRole",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -57644,7 +57975,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "RoleBinding",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of RoleBinding",
@@ -57842,7 +58174,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "RoleBinding",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a RoleBinding",
@@ -57908,7 +58241,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "RoleBinding",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified RoleBinding",
@@ -57956,7 +58290,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "RoleBinding",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -58135,7 +58470,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "Role",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of Role",
@@ -58333,7 +58669,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "Role",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a Role",
@@ -58399,7 +58736,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "Role",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified Role",
@@ -58447,7 +58785,8 @@
           "group": "rbac.authorization.k8s.io",
           "kind": "Role",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -59634,7 +59973,8 @@
           "group": "scheduling.k8s.io",
           "kind": "PriorityClass",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of PriorityClass",
@@ -59840,7 +60180,8 @@
           "group": "scheduling.k8s.io",
           "kind": "PriorityClass",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a PriorityClass",
@@ -59906,7 +60247,8 @@
           "group": "scheduling.k8s.io",
           "kind": "PriorityClass",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified PriorityClass",
@@ -59954,7 +60296,8 @@
           "group": "scheduling.k8s.io",
           "kind": "PriorityClass",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -60333,7 +60676,8 @@
           "group": "settings.k8s.io",
           "kind": "PodPreset",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of PodPreset",
@@ -60547,7 +60891,8 @@
           "group": "settings.k8s.io",
           "kind": "PodPreset",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a PodPreset",
@@ -60613,7 +60958,8 @@
           "group": "settings.k8s.io",
           "kind": "PodPreset",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified PodPreset",
@@ -60661,7 +61007,8 @@
           "group": "settings.k8s.io",
           "kind": "PodPreset",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -61235,7 +61582,8 @@
           "group": "storage.k8s.io",
           "kind": "StorageClass",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of StorageClass",
@@ -61441,7 +61789,8 @@
           "group": "storage.k8s.io",
           "kind": "StorageClass",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a StorageClass",
@@ -61507,7 +61856,8 @@
           "group": "storage.k8s.io",
           "kind": "StorageClass",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified StorageClass",
@@ -61555,7 +61905,8 @@
           "group": "storage.k8s.io",
           "kind": "StorageClass",
           "version": "v1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -61901,7 +62252,8 @@
           "group": "storage.k8s.io",
           "kind": "VolumeAttachment",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of VolumeAttachment",
@@ -62107,7 +62459,8 @@
           "group": "storage.k8s.io",
           "kind": "VolumeAttachment",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a VolumeAttachment",
@@ -62173,7 +62526,8 @@
           "group": "storage.k8s.io",
           "kind": "VolumeAttachment",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified VolumeAttachment",
@@ -62221,7 +62575,8 @@
           "group": "storage.k8s.io",
           "kind": "VolumeAttachment",
           "version": "v1alpha1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -62567,7 +62922,8 @@
           "group": "storage.k8s.io",
           "kind": "StorageClass",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete collection of StorageClass",
@@ -62773,7 +63129,8 @@
           "group": "storage.k8s.io",
           "kind": "StorageClass",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "delete": {
         "description": "delete a StorageClass",
@@ -62839,7 +63196,8 @@
           "group": "storage.k8s.io",
           "kind": "StorageClass",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "patch": {
         "description": "partially update the specified StorageClass",
@@ -62887,7 +63245,8 @@
           "group": "storage.k8s.io",
           "kind": "StorageClass",
           "version": "v1beta1"
-        }
+        },
+        "x-codegen-request-body-name": "body"
       },
       "parameters": [
         {
@@ -63120,124 +63479,6 @@
         }
       }
     },
-    "/apis/{group}/{version}/{plural}": {
-      "post": {
-        "responses": {
-          "201": {
-            "description": "Created",
-            "schema": {
-              "type": "object"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        },
-        "schemes": [
-          "https"
-        ],
-        "description": "Creates a cluster scoped Custom object",
-        "parameters": [
-          {
-            "schema": {
-              "type": "object"
-            },
-            "description": "The JSON schema of the Resource to create.",
-            "required": true,
-            "name": "body",
-            "in": "body"
-          }
-        ],
-        "produces": [
-          "application/json"
-        ],
-        "tags": [
-          "custom_objects"
-        ],
-        "operationId": "createClusterCustomObject"
-      },
-      "parameters": [
-        {
-          "uniqueItems": true,
-          "in": "query",
-          "type": "string",
-          "description": "If 'true', then the output is pretty printed.",
-          "name": "pretty"
-        },
-        {
-          "description": "The custom resource's group name",
-          "required": true,
-          "type": "string",
-          "name": "group",
-          "in": "path"
-        },
-        {
-          "description": "The custom resource's version",
-          "required": true,
-          "type": "string",
-          "name": "version",
-          "in": "path"
-        },
-        {
-          "description": "The custom resource's plural name. For TPRs this would be lowercase plural kind.",
-          "required": true,
-          "type": "string",
-          "name": "plural",
-          "in": "path"
-        }
-      ],
-      "get": {
-        "responses": {
-          "200": {
-            "description": "OK",
-            "schema": {
-              "type": "object"
-            }
-          },
-          "401": {
-            "description": "Unauthorized"
-          }
-        },
-        "schemes": [
-          "https"
-        ],
-        "description": "list or watch cluster scoped custom objects",
-        "parameters": [
-          {
-            "uniqueItems": true,
-            "in": "query",
-            "type": "string",
-            "description": "A selector to restrict the list of returned objects by their labels. Defaults to everything.",
-            "name": "labelSelector"
-          },
-          {
-            "uniqueItems": true,
-            "in": "query",
-            "type": "string",
-            "description": "When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.",
-            "name": "resourceVersion"
-          },
-          {
-            "uniqueItems": true,
-            "in": "query",
-            "type": "boolean",
-            "name": "watch",
-            "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications."
-          }
-        ],
-        "tags": [
-          "custom_objects"
-        ],
-        "produces": [
-          "application/json",
-          "application/json;stream=watch"
-        ],
-        "consumes": [
-          "*/*"
-        ],
-        "operationId": "listClusterCustomObject"
-      }
-    },
     "/apis/{group}/{version}/namespaces/{namespace}/{plural}": {
       "post": {
         "responses": {
@@ -63269,6 +63510,7 @@
         "produces": [
           "application/json"
         ],
+        "x-codegen-request-body-name": "body",
         "tags": [
           "custom_objects"
         ],
@@ -63345,6 +63587,13 @@
           {
             "uniqueItems": true,
             "in": "query",
+            "type": "integer",
+            "description": "Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.",
+            "name": "timeoutSeconds"
+          },
+          {
+            "uniqueItems": true,
+            "in": "query",
             "type": "boolean",
             "name": "watch",
             "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications."
@@ -63363,11 +63612,11 @@
         "operationId": "listNamespacedCustomObject"
       }
     },
-    "/apis/{group}/{version}/{plural}/{name}": {
-      "put": {
+    "/apis/{group}/{version}/{plural}": {
+      "post": {
         "responses": {
-          "200": {
-            "description": "OK",
+          "201": {
+            "description": "Created",
             "schema": {
               "type": "object"
             }
@@ -63379,13 +63628,13 @@
         "schemes": [
           "https"
         ],
-        "description": "replace the specified cluster scoped custom object",
+        "description": "Creates a cluster scoped Custom object",
         "parameters": [
           {
             "schema": {
               "type": "object"
             },
-            "description": "The JSON schema of the Resource to replace.",
+            "description": "The JSON schema of the Resource to create.",
             "required": true,
             "name": "body",
             "in": "body"
@@ -63394,15 +63643,43 @@
         "produces": [
           "application/json"
         ],
+        "x-codegen-request-body-name": "body",
         "tags": [
           "custom_objects"
         ],
-        "consumes": [
-          "*/*"
-        ],
-        "operationId": "replaceClusterCustomObject"
+        "operationId": "createClusterCustomObject"
       },
-      "delete": {
+      "parameters": [
+        {
+          "uniqueItems": true,
+          "in": "query",
+          "type": "string",
+          "description": "If 'true', then the output is pretty printed.",
+          "name": "pretty"
+        },
+        {
+          "description": "The custom resource's group name",
+          "required": true,
+          "type": "string",
+          "name": "group",
+          "in": "path"
+        },
+        {
+          "description": "The custom resource's version",
+          "required": true,
+          "type": "string",
+          "name": "version",
+          "in": "path"
+        },
+        {
+          "description": "The custom resource's plural name. For TPRs this would be lowercase plural kind.",
+          "required": true,
+          "type": "string",
+          "name": "plural",
+          "in": "path"
+        }
+      ],
+      "get": {
         "responses": {
           "200": {
             "description": "OK",
@@ -63417,48 +63694,137 @@
         "schemes": [
           "https"
         ],
-        "description": "Deletes the specified cluster scoped custom object",
+        "description": "list or watch cluster scoped custom objects",
         "parameters": [
           {
-            "schema": {
-              "$ref": "#/definitions/v1.DeleteOptions"
-            },
-            "required": true,
-            "name": "body",
-            "in": "body"
-          },
-          {
             "uniqueItems": true,
             "in": "query",
-            "type": "integer",
-            "name": "gracePeriodSeconds",
-            "description": "The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately."
-          },
-          {
-            "uniqueItems": true,
-            "in": "query",
-            "type": "boolean",
-            "name": "orphanDependents",
-            "description": "Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both."
+            "type": "string",
+            "description": "A selector to restrict the list of returned objects by their labels. Defaults to everything.",
+            "name": "labelSelector"
           },
           {
             "uniqueItems": true,
             "in": "query",
             "type": "string",
-            "name": "propagationPolicy",
-            "description": "Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy."
+            "description": "When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.",
+            "name": "resourceVersion"
+          },
+          {
+            "uniqueItems": true,
+            "in": "query",
+            "type": "integer",
+            "description": "Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.",
+            "name": "timeoutSeconds"
+          },
+          {
+            "uniqueItems": true,
+            "in": "query",
+            "type": "boolean",
+            "name": "watch",
+            "description": "Watch for changes to the described resources and return them as a stream of add, update, and remove notifications."
+          }
+        ],
+        "tags": [
+          "custom_objects"
+        ],
+        "produces": [
+          "application/json",
+          "application/json;stream=watch"
+        ],
+        "consumes": [
+          "*/*"
+        ],
+        "operationId": "listClusterCustomObject"
+      }
+    },
+    "/apis/{group}/{version}/{plural}/{name}/status": {
+      "put": {
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "replace status of the cluster scoped specified custom object",
+        "parameters": [
+          {
+            "schema": {
+              "type": "object"
+            },
+            "required": true,
+            "name": "body",
+            "in": "body"
           }
         ],
         "produces": [
-          "application/json"
+          "application/json",
+          "application/yaml",
+          "application/vnd.kubernetes.protobuf"
         ],
+        "x-codegen-request-body-name": "body",
         "tags": [
           "custom_objects"
         ],
         "consumes": [
           "*/*"
         ],
-        "operationId": "deleteClusterCustomObject"
+        "operationId": "replaceClusterCustomObjectStatus"
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "partially update status of the specified cluster scoped custom object",
+        "parameters": [
+          {
+            "schema": {
+              "type": "object",
+              "description": "The JSON schema of the Resource to patch."
+            },
+            "required": true,
+            "name": "body",
+            "in": "body"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/yaml",
+          "application/vnd.kubernetes.protobuf"
+        ],
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "custom_objects"
+        ],
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "operationId": "patchClusterCustomObjectStatus"
       },
       "parameters": [
         {
@@ -63476,7 +63842,7 @@
           "in": "path"
         },
         {
-          "description": "the custom object's plural name. For TPRs this would be lowercase plural kind.",
+          "description": "the custom resource's plural name. For TPRs this would be lowercase plural kind.",
           "required": true,
           "type": "string",
           "name": "plural",
@@ -63493,7 +63859,7 @@
       "get": {
         "responses": {
           "200": {
-            "description": "A single Resource",
+            "description": "OK",
             "schema": {
               "type": "object"
             }
@@ -63505,9 +63871,11 @@
         "schemes": [
           "https"
         ],
-        "description": "Returns a cluster scoped custom object",
+        "description": "read status of the specified cluster scoped custom object",
         "produces": [
-          "application/json"
+          "application/json",
+          "application/yaml",
+          "application/vnd.kubernetes.protobuf"
         ],
         "tags": [
           "custom_objects"
@@ -63515,7 +63883,7 @@
         "consumes": [
           "*/*"
         ],
-        "operationId": "getClusterCustomObject"
+        "operationId": "getClusterCustomObjectStatus"
       }
     },
     "/apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}": {
@@ -63549,6 +63917,7 @@
         "produces": [
           "application/json"
         ],
+        "x-codegen-request-body-name": "body",
         "tags": [
           "custom_objects"
         ],
@@ -63556,6 +63925,45 @@
           "*/*"
         ],
         "operationId": "replaceNamespacedCustomObject"
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "patch the specified namespace scoped custom object",
+        "parameters": [
+          {
+            "schema": {
+              "type": "object"
+            },
+            "description": "The JSON schema of the Resource to patch.",
+            "required": true,
+            "name": "body",
+            "in": "body"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "custom_objects"
+        ],
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "operationId": "patchNamespacedCustomObject"
       },
       "delete": {
         "responses": {
@@ -63607,6 +64015,7 @@
         "produces": [
           "application/json"
         ],
+        "x-codegen-request-body-name": "body",
         "tags": [
           "custom_objects"
         ],
@@ -63678,6 +64087,660 @@
           "*/*"
         ],
         "operationId": "getNamespacedCustomObject"
+      }
+    },
+    "/apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}/scale": {
+      "put": {
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "replace scale of the specified namespace scoped custom object",
+        "parameters": [
+          {
+            "schema": {
+              "type": "object"
+            },
+            "required": true,
+            "name": "body",
+            "in": "body"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/yaml",
+          "application/vnd.kubernetes.protobuf"
+        ],
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "custom_objects"
+        ],
+        "consumes": [
+          "*/*"
+        ],
+        "operationId": "replaceNamespacedCustomObjectScale"
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "partially update scale of the specified namespace scoped custom object",
+        "parameters": [
+          {
+            "schema": {
+              "type": "object",
+              "description": "The JSON schema of the Resource to patch."
+            },
+            "required": true,
+            "name": "body",
+            "in": "body"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/yaml",
+          "application/vnd.kubernetes.protobuf"
+        ],
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "custom_objects"
+        ],
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "operationId": "patchNamespacedCustomObjectScale"
+      },
+      "parameters": [
+        {
+          "description": "the custom resource's group",
+          "required": true,
+          "type": "string",
+          "name": "group",
+          "in": "path"
+        },
+        {
+          "description": "the custom resource's version",
+          "required": true,
+          "type": "string",
+          "name": "version",
+          "in": "path"
+        },
+        {
+          "description": "The custom resource's namespace",
+          "required": true,
+          "type": "string",
+          "name": "namespace",
+          "in": "path"
+        },
+        {
+          "description": "the custom resource's plural name. For TPRs this would be lowercase plural kind.",
+          "required": true,
+          "type": "string",
+          "name": "plural",
+          "in": "path"
+        },
+        {
+          "description": "the custom object's name",
+          "required": true,
+          "type": "string",
+          "name": "name",
+          "in": "path"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "read scale of the specified namespace scoped custom object",
+        "produces": [
+          "application/json",
+          "application/yaml",
+          "application/vnd.kubernetes.protobuf"
+        ],
+        "tags": [
+          "custom_objects"
+        ],
+        "consumes": [
+          "*/*"
+        ],
+        "operationId": "getNamespacedCustomObjectScale"
+      }
+    },
+    "/apis/{group}/{version}/{plural}/{name}/scale": {
+      "put": {
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "replace scale of the specified cluster scoped custom object",
+        "parameters": [
+          {
+            "schema": {
+              "type": "object"
+            },
+            "required": true,
+            "name": "body",
+            "in": "body"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/yaml",
+          "application/vnd.kubernetes.protobuf"
+        ],
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "custom_objects"
+        ],
+        "consumes": [
+          "*/*"
+        ],
+        "operationId": "replaceClusterCustomObjectScale"
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "partially update scale of the specified cluster scoped custom object",
+        "parameters": [
+          {
+            "schema": {
+              "type": "object",
+              "description": "The JSON schema of the Resource to patch."
+            },
+            "required": true,
+            "name": "body",
+            "in": "body"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/yaml",
+          "application/vnd.kubernetes.protobuf"
+        ],
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "custom_objects"
+        ],
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "operationId": "patchClusterCustomObjectScale"
+      },
+      "parameters": [
+        {
+          "description": "the custom resource's group",
+          "required": true,
+          "type": "string",
+          "name": "group",
+          "in": "path"
+        },
+        {
+          "description": "the custom resource's version",
+          "required": true,
+          "type": "string",
+          "name": "version",
+          "in": "path"
+        },
+        {
+          "description": "the custom resource's plural name. For TPRs this would be lowercase plural kind.",
+          "required": true,
+          "type": "string",
+          "name": "plural",
+          "in": "path"
+        },
+        {
+          "description": "the custom object's name",
+          "required": true,
+          "type": "string",
+          "name": "name",
+          "in": "path"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "read scale of the specified custom object",
+        "produces": [
+          "application/json",
+          "application/yaml",
+          "application/vnd.kubernetes.protobuf"
+        ],
+        "tags": [
+          "custom_objects"
+        ],
+        "consumes": [
+          "*/*"
+        ],
+        "operationId": "getClusterCustomObjectScale"
+      }
+    },
+    "/apis/{group}/{version}/{plural}/{name}": {
+      "put": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "replace the specified cluster scoped custom object",
+        "parameters": [
+          {
+            "schema": {
+              "type": "object"
+            },
+            "description": "The JSON schema of the Resource to replace.",
+            "required": true,
+            "name": "body",
+            "in": "body"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "custom_objects"
+        ],
+        "consumes": [
+          "*/*"
+        ],
+        "operationId": "replaceClusterCustomObject"
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "patch the specified cluster scoped custom object",
+        "parameters": [
+          {
+            "schema": {
+              "type": "object"
+            },
+            "description": "The JSON schema of the Resource to patch.",
+            "required": true,
+            "name": "body",
+            "in": "body"
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "custom_objects"
+        ],
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "operationId": "patchClusterCustomObject"
+      },
+      "delete": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "Deletes the specified cluster scoped custom object",
+        "parameters": [
+          {
+            "schema": {
+              "$ref": "#/definitions/v1.DeleteOptions"
+            },
+            "required": true,
+            "name": "body",
+            "in": "body"
+          },
+          {
+            "uniqueItems": true,
+            "in": "query",
+            "type": "integer",
+            "name": "gracePeriodSeconds",
+            "description": "The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately."
+          },
+          {
+            "uniqueItems": true,
+            "in": "query",
+            "type": "boolean",
+            "name": "orphanDependents",
+            "description": "Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both."
+          },
+          {
+            "uniqueItems": true,
+            "in": "query",
+            "type": "string",
+            "name": "propagationPolicy",
+            "description": "Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy."
+          }
+        ],
+        "produces": [
+          "application/json"
+        ],
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "custom_objects"
+        ],
+        "consumes": [
+          "*/*"
+        ],
+        "operationId": "deleteClusterCustomObject"
+      },
+      "parameters": [
+        {
+          "description": "the custom resource's group",
+          "required": true,
+          "type": "string",
+          "name": "group",
+          "in": "path"
+        },
+        {
+          "description": "the custom resource's version",
+          "required": true,
+          "type": "string",
+          "name": "version",
+          "in": "path"
+        },
+        {
+          "description": "the custom object's plural name. For TPRs this would be lowercase plural kind.",
+          "required": true,
+          "type": "string",
+          "name": "plural",
+          "in": "path"
+        },
+        {
+          "description": "the custom object's name",
+          "required": true,
+          "type": "string",
+          "name": "name",
+          "in": "path"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "A single Resource",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "Returns a cluster scoped custom object",
+        "produces": [
+          "application/json"
+        ],
+        "tags": [
+          "custom_objects"
+        ],
+        "consumes": [
+          "*/*"
+        ],
+        "operationId": "getClusterCustomObject"
+      }
+    },
+    "/apis/{group}/{version}/namespaces/{namespace}/{plural}/{name}/status": {
+      "put": {
+        "responses": {
+          "201": {
+            "description": "Created",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "replace status of the specified namespace scoped custom object",
+        "parameters": [
+          {
+            "schema": {
+              "type": "object"
+            },
+            "required": true,
+            "name": "body",
+            "in": "body"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/yaml",
+          "application/vnd.kubernetes.protobuf"
+        ],
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "custom_objects"
+        ],
+        "consumes": [
+          "*/*"
+        ],
+        "operationId": "replaceNamespacedCustomObjectStatus"
+      },
+      "patch": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "partially update status of the specified namespace scoped custom object",
+        "parameters": [
+          {
+            "schema": {
+              "type": "object",
+              "description": "The JSON schema of the Resource to patch."
+            },
+            "required": true,
+            "name": "body",
+            "in": "body"
+          }
+        ],
+        "produces": [
+          "application/json",
+          "application/yaml",
+          "application/vnd.kubernetes.protobuf"
+        ],
+        "x-codegen-request-body-name": "body",
+        "tags": [
+          "custom_objects"
+        ],
+        "consumes": [
+          "application/merge-patch+json"
+        ],
+        "operationId": "patchNamespacedCustomObjectStatus"
+      },
+      "parameters": [
+        {
+          "description": "the custom resource's group",
+          "required": true,
+          "type": "string",
+          "name": "group",
+          "in": "path"
+        },
+        {
+          "description": "the custom resource's version",
+          "required": true,
+          "type": "string",
+          "name": "version",
+          "in": "path"
+        },
+        {
+          "description": "The custom resource's namespace",
+          "required": true,
+          "type": "string",
+          "name": "namespace",
+          "in": "path"
+        },
+        {
+          "description": "the custom resource's plural name. For TPRs this would be lowercase plural kind.",
+          "required": true,
+          "type": "string",
+          "name": "plural",
+          "in": "path"
+        },
+        {
+          "description": "the custom object's name",
+          "required": true,
+          "type": "string",
+          "name": "name",
+          "in": "path"
+        }
+      ],
+      "get": {
+        "responses": {
+          "200": {
+            "description": "OK",
+            "schema": {
+              "type": "object"
+            }
+          },
+          "401": {
+            "description": "Unauthorized"
+          }
+        },
+        "schemes": [
+          "https"
+        ],
+        "description": "read status of the specified namespace scoped custom object",
+        "produces": [
+          "application/json",
+          "application/yaml",
+          "application/vnd.kubernetes.protobuf"
+        ],
+        "tags": [
+          "custom_objects"
+        ],
+        "consumes": [
+          "*/*"
+        ],
+        "operationId": "getNamespacedCustomObjectStatus"
       }
     }
   },
@@ -71996,7 +73059,7 @@
           "type": "string"
         },
         "namespaceSelector": {
-          "description": "NamespaceSelector decides whether to run the webhook on an object based on whether the namespace for that object matches the selector. If the object itself is a namespace, the matching is performed on object.metadata.labels. If the object is other cluster scoped resource, it is not subjected to the webhook.\n\nFor example, to run the webhook on any objects whose namespace is not associated with \"runlevel\" of \"0\" or \"1\";  you will set the selector as follows: \"namespaceSelector\": {\n  \"matchExpressions\": [\n    {\n      \"key\": \"runlevel\",\n      \"operator\": \"NotIn\",\n      \"values\": [\n        \"0\",\n        \"1\"\n      ]\n    }\n  ]\n}\n\nIf instead you want to only run the webhook on any objects whose namespace is associated with the \"environment\" of \"prod\" or \"staging\"; you will set the selector as follows: \"namespaceSelector\": {\n  \"matchExpressions\": [\n    {\n      \"key\": \"environment\",\n      \"operator\": \"In\",\n      \"values\": [\n        \"prod\",\n        \"staging\"\n      ]\n    }\n  ]\n}\n\nSee https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/ for more examples of label selectors.\n\nDefault to the empty LabelSelector, which matches everything.",
+          "description": "NamespaceSelector decides whether to run the webhook on an object based on whether the namespace for that object matches the selector. If the object itself is a namespace, the matching is performed on object.metadata.labels. If the object is another cluster scoped resource, it never skips the webhook.\n\nFor example, to run the webhook on any objects whose namespace is not associated with \"runlevel\" of \"0\" or \"1\";  you will set the selector as follows: \"namespaceSelector\": {\n  \"matchExpressions\": [\n    {\n      \"key\": \"runlevel\",\n      \"operator\": \"NotIn\",\n      \"values\": [\n        \"0\",\n        \"1\"\n      ]\n    }\n  ]\n}\n\nIf instead you want to only run the webhook on any objects whose namespace is associated with the \"environment\" of \"prod\" or \"staging\"; you will set the selector as follows: \"namespaceSelector\": {\n  \"matchExpressions\": [\n    {\n      \"key\": \"environment\",\n      \"operator\": \"In\",\n      \"values\": [\n        \"prod\",\n        \"staging\"\n      ]\n    }\n  ]\n}\n\nSee https://kubernetes.io/docs/concepts/overview/working-with-objects/labels/ for more examples of label selectors.\n\nDefault to the empty LabelSelector, which matches everything.",
           "$ref": "#/definitions/v1.LabelSelector"
         },
         "rules": {
