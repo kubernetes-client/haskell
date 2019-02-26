@@ -2,8 +2,8 @@
 
 module Kubernetes.ClientHelper where
 
-import qualified Kubernetes.Core            as K
-import qualified Kubernetes.Model           as K
+import qualified Kubernetes.OpenAPI.Core            as K
+import qualified Kubernetes.OpenAPI.Model           as K
 
 import           Control.Exception.Safe     (Exception, MonadThrow, throwM)
 import           Control.Monad.IO.Class     (MonadIO, liftIO)
@@ -32,23 +32,23 @@ import qualified Network.TLS.Extra          as TLS
 import           System.Environment         (getEnv)
 import           System.X509                (getSystemCertificateStore)
 
--- |Sets the master URI in the 'K.KubernetesConfig'.
+-- |Sets the master URI in the 'K.KubernetesClientConfig'.
 setMasterURI
     :: T.Text                -- ^ Master URI
-    -> K.KubernetesConfig
-    -> K.KubernetesConfig
+    -> K.KubernetesClientConfig
+    -> K.KubernetesClientConfig
 setMasterURI server kcfg =
     kcfg { K.configHost = (LazyB.fromStrict . T.encodeUtf8) server }
 
 -- |Disables the client-side auth methods validation. This is necessary if you are using client cert authentication.
-disableValidateAuthMethods :: K.KubernetesConfig -> K.KubernetesConfig
+disableValidateAuthMethods :: K.KubernetesClientConfig -> K.KubernetesClientConfig
 disableValidateAuthMethods kcfg = kcfg { K.configValidateAuthMethods = False }
 
--- |Configures the 'K.KubernetesConfig' to use token authentication.
+-- |Configures the 'K.KubernetesClientConfig' to use token authentication.
 setTokenAuth
     :: T.Text             -- ^Authentication token
-    -> K.KubernetesConfig
-    -> K.KubernetesConfig
+    -> K.KubernetesClientConfig
+    -> K.KubernetesClientConfig
 setTokenAuth token kcfg = kcfg
     { K.configAuthMethods = [K.AnyAuthMethod (K.AuthApiKeyBearerToken $ "Bearer " <> token)]
     }
@@ -124,7 +124,7 @@ loadPEMCerts p = do
 serviceAccountDir :: FilePath
 serviceAccountDir = "/var/run/secrets/kubernetes.io/serviceaccount"
 
-cluster :: (MonadIO m, MonadThrow m) => m (NH.Manager, K.KubernetesConfig)
+cluster :: (MonadIO m, MonadThrow m) => m (NH.Manager, K.KubernetesClientConfig)
 cluster = do
   caStore <- loadPEMCerts $ serviceAccountDir ++ "/ca.crt"
   defTlsParams <- liftIO defaultTLSClientParams

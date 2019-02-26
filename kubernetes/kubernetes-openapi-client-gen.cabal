@@ -1,6 +1,6 @@
-name:           kubernetes-openapi
+name:           kubernetes-openapi-client-gen
 version:        0.1.0.0
-synopsis:       Auto-generated kubernetes-openapi API Client
+synopsis:       Auto-generated kubernetes-openapi-client-gen API Client
 description:    .
                 Client library for calling the Kubernetes API based on http-client.
                 .
@@ -57,7 +57,7 @@ library
     , vector >=0.10.9 && <0.13
     , katip >=0.4 && < 0.6
   other-modules:
-      Paths_kubernetes_openapi
+      Paths_kubernetes_openapi_client_gen
   exposed-modules:
       Kubernetes.OpenAPI
       Kubernetes.OpenAPI.API.Admissionregistration
@@ -127,7 +127,7 @@ test-suite tests
       tests
   ghc-options: -Wall -fno-warn-orphans
   build-depends:
-      kubernetes-openapi
+      kubernetes-openapi-client-gen
     , QuickCheck
     , aeson
     , base >=4.7 && <5.0
