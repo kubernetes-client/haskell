@@ -13,10 +13,10 @@ import Data.Aeson
 import qualified Data.ByteString as B
 import qualified Data.ByteString.Streaming.Char8 as Q
 import qualified Data.Text as T
-import Kubernetes.Core
-import Kubernetes.Client
-import Kubernetes.MimeTypes
-import Kubernetes.Model (Watch(..))
+import Kubernetes.OpenAPI.Core
+import Kubernetes.OpenAPI.Client
+import Kubernetes.OpenAPI.MimeTypes
+import Kubernetes.OpenAPI.Model (Watch(..))
 import Network.HTTP.Client
 
 data WatchEvent a = WatchEvent
@@ -66,7 +66,7 @@ Launching 'dispatchWatch' with the above we get a stream of endpoints data:
 dispatchWatch ::
   (HasOptionalParam req Watch, MimeType accept, MimeType contentType) =>
     Manager
-    -> KubernetesConfig
+    -> KubernetesClientConfig
     -> KubernetesRequest req contentType resp accept
     -> (Q.ByteString IO () -> IO a)
     -> IO a

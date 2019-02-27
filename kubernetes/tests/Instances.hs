@@ -2,8 +2,8 @@
 
 module Instances where
 
-import Kubernetes.Model
-import Kubernetes.Core
+import Kubernetes.OpenAPI.Model
+import Kubernetes.OpenAPI.Core
 
 import qualified Data.Aeson as A
 import qualified Data.ByteString.Lazy as BL

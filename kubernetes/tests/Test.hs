@@ -12,8 +12,8 @@ import Test.Hspec.QuickCheck
 import PropMime
 import Instances ()
 
-import Kubernetes.Model
-import Kubernetes.MimeTypes
+import Kubernetes.OpenAPI.Model
+import Kubernetes.OpenAPI.MimeTypes
 
 main :: IO ()
 main =

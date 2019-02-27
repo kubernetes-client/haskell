@@ -15,7 +15,7 @@ import Test.QuickCheck
 import Test.QuickCheck.Property
 import Test.Hspec.QuickCheck (prop)
 
-import Kubernetes.MimeTypes
+import Kubernetes.OpenAPI.MimeTypes
 
 import ApproxEq
 
