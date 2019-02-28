@@ -3,4 +3,3 @@ extra-deps:
 packages:
 - kubernetes
 - kubernetes-openapi-client
-- kubernetes-watch
