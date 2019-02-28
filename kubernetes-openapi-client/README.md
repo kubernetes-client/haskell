@@ -39,7 +39,7 @@ main = do
     dispatchMime
             manager
             kcfg
-            (Kubernetes.API.CoreV1.listPodForAllNamespaces (Accept MimeJSON))
+            (Kubernetes.OpenAPI.API.CoreV1.listPodForAllNamespaces (Accept MimeJSON))
         >>= print
 ```
 
