@@ -16,7 +16,7 @@ The official definition of the kubeconfig is defined in https://github.com/kuber
 
 This is a mostly straightforward translation into Haskell, with 'FromJSON' and 'ToJSON' instances defined.
 -}
-module Kubernetes.KubeConfig where
+module Kubernetes.OpenAPI.KubeConfig where
 
 import           Data.Aeson     (FromJSON (..), Options, ToJSON (..),
                                  Value (..), camelTo2, defaultOptions,

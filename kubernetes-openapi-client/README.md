@@ -8,11 +8,11 @@
 module Main where
 
 import           Data.Function           ((&))
-import qualified Kubernetes.API.CoreV1
-import           Kubernetes.Client       (dispatchMime)
-import           Kubernetes.ClientHelper
-import           Kubernetes.Core         (newConfig)
-import           Kubernetes.MimeTypes    (Accept (..), MimeJSON (..))
+import qualified Kubernetes.OpenAPI.API.CoreV1
+import           Kubernetes.OpenAPI.Client       (dispatchMime)
+import           Kubernetes.OpenAPI.ClientHelper
+import           Kubernetes.OpenAPI.Core         (newConfig)
+import           Kubernetes.OpenAPI.MimeTypes    (Accept (..), MimeJSON (..))
 import           Network.TLS             (credentialLoadX509)
 
 main :: IO ()
