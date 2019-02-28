@@ -1,0 +1,39 @@
+name: kubernetes-openapi-client
+version: 0.1.0.0
+description: |
+  This package contains functions for working with kubeconfig files.
+
+  Usage of kubeconfig files are described at https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/
+library:
+  source-dirs: src
+tests:
+  spec:
+    main: Spec.hs
+    source-dirs: test
+    dependencies:
+      - kubernetes-openapi-client
+      - hspec
+      - yaml
+extra-source-files:
+  - test/testdata/*
+dependencies:
+  - base >=4.7 && <5.0
+  - bytestring >=0.10.0 && <0.11
+  - aeson >=1.0 && <2.0
+  - connection
+  - containers
+  - data-default-class
+  - http-client >=0.5 && <0.6
+  - http-client-tls
+  - kubernetes-openapi-client-gen == 0.1.0.0
+  - microlens >= 0.4.3 && <0.5
+  - mtl >=2.2.1
+  - pem
+  - safe-exceptions <0.2
+  - streaming-bytestring >= 0.1.5 && < 0.2.0
+  - text >=0.11 && <1.3
+  - tls
+  - x509
+  - x509-system
+  - x509-store
+  - x509-validation

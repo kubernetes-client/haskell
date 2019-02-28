@@ -8,4 +8,4 @@ OpenAPI-Specification: https://github.com/OAI/OpenAPI-Specification/blob/master/
 
 ## Usage
 
-Please refer to the README of the `kubernetes-client-helper` package.
+Please refer to the README of the `kubernetes-openapi-client` package.
