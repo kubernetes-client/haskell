@@ -1,6 +1,6 @@
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE OverloadedStrings #-}
-module Kubernetes.OpenAPI.Watch.Client
+module Kubernetes.Client.Watch
   ( WatchEvent
   , eventType
   , eventObject
