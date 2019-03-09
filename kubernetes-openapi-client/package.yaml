@@ -37,3 +37,9 @@ dependencies:
   - x509-system
   - x509-store
   - x509-validation
+executables:
+  example:
+    main: App.hs
+    source-dirs: example
+    dependencies:
+      - kubernetes-openapi-client

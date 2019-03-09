@@ -7,13 +7,18 @@
 
 module Main where
 
-import           Data.Function           ((&))
-import qualified Kubernetes.OpenAPI.API.CoreV1
-import           Kubernetes.OpenAPI.Client       (dispatchMime)
-import           Kubernetes.OpenAPI.ClientHelper
-import           Kubernetes.OpenAPI.Core         (newConfig)
-import           Kubernetes.OpenAPI.MimeTypes    (Accept (..), MimeJSON (..))
-import           Network.TLS             (credentialLoadX509)
+import           Data.Function                 ((&))
+import           Kubernetes.Client             (defaultTLSClientParams,
+                                                disableServerCertValidation,
+                                                disableServerNameValidation,
+                                                disableValidateAuthMethods,
+                                                loadPEMCerts, newManager,
+                                                setCAStore, setClientCert,
+                                                setMasterURI, setTokenAuth)
+import           Kubernetes.OpenAPI            (Accept (..), MimeJSON (..),
+                                                dispatchMime, newConfig)
+import qualified Kubernetes.OpenAPI.API.CoreV1 as CoreV1
+import           Network.TLS                   (credentialLoadX509)
 
 main :: IO ()
 main = do
@@ -39,7 +44,7 @@ main = do
     dispatchMime
             manager
             kcfg
-            (Kubernetes.OpenAPI.API.CoreV1.listPodForAllNamespaces (Accept MimeJSON))
+            (CoreV1.listPodForAllNamespaces (Accept MimeJSON))
         >>= print
 ```
 
