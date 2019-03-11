@@ -1,4 +1,4 @@
-name: kubernetes-openapi-client
+name: kubernetes-client
 version: 0.1.0.0
 description: |
   This package contains functions for working with kubeconfig files.
@@ -11,7 +11,7 @@ tests:
     main: Spec.hs
     source-dirs: test
     dependencies:
-      - kubernetes-openapi-client
+      - kubernetes-client
       - hspec
       - yaml
 extra-source-files:
@@ -42,4 +42,4 @@ executables:
     main: App.hs
     source-dirs: example
     dependencies:
-      - kubernetes-openapi-client
+      - kubernetes-client

@@ -1,4 +1,4 @@
-# kubernetes-openapi-client
+# kubernetes-client
 
 ## Example
 
