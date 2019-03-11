@@ -1,9 +1,14 @@
 name: kubernetes-client
 version: 0.1.0.0
 description: |
-  This package contains functions for working with kubeconfig files.
+  Client library for interacting with a Kubernetes cluster.
 
-  Usage of kubeconfig files are described at https://kubernetes.io/docs/concepts/configuration/organize-cluster-access-kubeconfig/
+  This package contains hand-written code while kubernetes-client-core contains code auto-generated from the OpenAPI spec.
+synopsis: Client library for Kubernetes
+maintainer: Shimin Guo <smguo2001@gmail.com>
+category: Web
+license: Apache-2.0
+license-file: LICENSE
 library:
   source-dirs: src
 tests:
@@ -14,6 +19,11 @@ tests:
       - kubernetes-client
       - hspec
       - yaml
+  example:
+    main: App.hs
+    source-dirs: example
+    dependencies:
+      - kubernetes-client
 extra-source-files:
   - test/testdata/*
 dependencies:
@@ -37,9 +47,3 @@ dependencies:
   - x509-system
   - x509-store
   - x509-validation
-executables:
-  example:
-    main: App.hs
-    source-dirs: example
-    dependencies:
-      - kubernetes-client
