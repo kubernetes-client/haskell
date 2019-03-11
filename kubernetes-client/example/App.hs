@@ -15,8 +15,8 @@ import           Kubernetes.OpenAPI            (Accept (..), MimeJSON (..),
 import qualified Kubernetes.OpenAPI.API.CoreV1 as CoreV1
 import           Network.TLS                   (credentialLoadX509)
 
-main :: IO ()
-main = do
+example :: IO ()
+example = do
     -- We need to first create a Kubernetes.Core.KubernetesConfig and a Network.HTTP.Client.Manager.
     -- Currently we need to construct these objects manually. Work is underway to construct these
     -- objects automatically from a kubeconfig file. See https://github.com/kubernetes-client/haskell/issues/2.
@@ -41,3 +41,6 @@ main = do
             kcfg
             (CoreV1.listPodForAllNamespaces (Accept MimeJSON))
         >>= print
+
+main :: IO ()
+main = return ()
