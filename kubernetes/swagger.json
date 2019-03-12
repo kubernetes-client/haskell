@@ -63574,6 +63574,13 @@
             "uniqueItems": true,
             "in": "query",
             "type": "string",
+            "description": "A selector to restrict the list of returned objects by their fields. Defaults to everything.",
+            "name": "fieldSelector"
+          },
+          {
+            "uniqueItems": true,
+            "in": "query",
+            "type": "string",
             "description": "A selector to restrict the list of returned objects by their labels. Defaults to everything.",
             "name": "labelSelector"
           },
@@ -63696,6 +63703,13 @@
         ],
         "description": "list or watch cluster scoped custom objects",
         "parameters": [
+          {
+            "uniqueItems": true,
+            "in": "query",
+            "type": "string",
+            "description": "A selector to restrict the list of returned objects by their fields. Defaults to everything.",
+            "name": "fieldSelector"
+          },
           {
             "uniqueItems": true,
             "in": "query",
