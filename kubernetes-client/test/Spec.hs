@@ -1,12 +1,14 @@
 {-# LANGUAGE OverloadedStrings   #-}
 {-# LANGUAGE ScopedTypeVariables #-}
 
-import           Data.Aeson            (decode, encode, parseJSON, toJSON)
-import           Data.Maybe            (fromJust)
-import           Data.Yaml             (decodeFile)
-import           Kubernetes.KubeConfig (AuthInfo (..), Cluster (..), Config,
-                                        Context (..), getAuthInfo, getCluster,
-                                        getContext)
+import           Data.Aeson                   (decode, encode, parseJSON,
+                                               toJSON)
+import           Data.Maybe                   (fromJust)
+import           Data.Yaml                    (decodeFile)
+import           Kubernetes.Client.KubeConfig (AuthInfo (..), Cluster (..),
+                                               Config, Context (..),
+                                               getAuthInfo, getCluster,
+                                               getContext)
 import           Test.Hspec
 
 main :: IO ()

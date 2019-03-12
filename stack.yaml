@@ -2,6 +2,4 @@ resolver: lts-10.0
 extra-deps:
 packages:
 - kubernetes
-- kubernetes-client-helper
-- kubernetes-watch
-- kubeconfig
+- kubernetes-client

@@ -1,6 +1,6 @@
 {-# LANGUAGE OverloadedStrings     #-}
 
-module Kubernetes.ClientHelper where
+module Kubernetes.Client.Config where
 
 import qualified Kubernetes.OpenAPI.Core            as K
 import qualified Kubernetes.OpenAPI.Model           as K
