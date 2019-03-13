@@ -8,7 +8,7 @@ description:    .
                 .
                 base path: http://localhost
                 .
-                Kubernetes API version: v1.9.12
+                Kubernetes API version: v1.13.4
                 .
                 OpenAPI version: 3.0.1
                 .
@@ -69,12 +69,15 @@ library
       Kubernetes.OpenAPI.API.Apiextensions
       Kubernetes.OpenAPI.API.ApiextensionsV1beta1
       Kubernetes.OpenAPI.API.Apiregistration
+      Kubernetes.OpenAPI.API.ApiregistrationV1
       Kubernetes.OpenAPI.API.ApiregistrationV1beta1
       Kubernetes.OpenAPI.API.Apis
       Kubernetes.OpenAPI.API.Apps
       Kubernetes.OpenAPI.API.AppsV1
       Kubernetes.OpenAPI.API.AppsV1beta1
       Kubernetes.OpenAPI.API.AppsV1beta2
+      Kubernetes.OpenAPI.API.Auditregistration
+      Kubernetes.OpenAPI.API.AuditregistrationV1alpha1
       Kubernetes.OpenAPI.API.Authentication
       Kubernetes.OpenAPI.API.AuthenticationV1
       Kubernetes.OpenAPI.API.AuthenticationV1beta1
@@ -84,12 +87,15 @@ library
       Kubernetes.OpenAPI.API.Autoscaling
       Kubernetes.OpenAPI.API.AutoscalingV1
       Kubernetes.OpenAPI.API.AutoscalingV2beta1
+      Kubernetes.OpenAPI.API.AutoscalingV2beta2
       Kubernetes.OpenAPI.API.Batch
       Kubernetes.OpenAPI.API.BatchV1
       Kubernetes.OpenAPI.API.BatchV1beta1
       Kubernetes.OpenAPI.API.BatchV2alpha1
       Kubernetes.OpenAPI.API.Certificates
       Kubernetes.OpenAPI.API.CertificatesV1beta1
+      Kubernetes.OpenAPI.API.Coordination
+      Kubernetes.OpenAPI.API.CoordinationV1beta1
       Kubernetes.OpenAPI.API.Core
       Kubernetes.OpenAPI.API.CoreV1
       Kubernetes.OpenAPI.API.CustomObjects
@@ -108,6 +114,7 @@ library
       Kubernetes.OpenAPI.API.RbacAuthorizationV1beta1
       Kubernetes.OpenAPI.API.Scheduling
       Kubernetes.OpenAPI.API.SchedulingV1alpha1
+      Kubernetes.OpenAPI.API.SchedulingV1beta1
       Kubernetes.OpenAPI.API.Settings
       Kubernetes.OpenAPI.API.SettingsV1alpha1
       Kubernetes.OpenAPI.API.Storage
