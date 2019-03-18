@@ -35,7 +35,7 @@ dependencies:
   - data-default-class
   - http-client >=0.5 && <0.6
   - http-client-tls
-  - kubernetes-openapi-client-gen == 0.1.0.0
+  - kubernetes-client-core == 0.1.0.0
   - microlens >= 0.4.3 && <0.5
   - mtl >=2.2.1
   - pem
