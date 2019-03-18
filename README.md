@@ -1,5 +1,7 @@
 # Kubernetes Haskell Client
 
+[![Build Status](https://travis-ci.org/kubernetes-client/haskell.svg?branch=master)](https://travis-ci.org/kubernetes-client/haskell)
+
 Haskell client for the [kubernetes](http://kubernetes.io/) API.
 
 ## Contribute
