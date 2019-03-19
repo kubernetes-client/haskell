@@ -61,6 +61,7 @@ library
     , vector >=0.10.9 && <0.13
   other-modules:
       Paths_kubernetes_client_core
+      Kubernetes.OpenAPI.ImportMappings
   exposed-modules:
       Kubernetes.OpenAPI
       Kubernetes.OpenAPI.API.Admissionregistration
@@ -128,6 +129,7 @@ library
       Kubernetes.OpenAPI.MimeTypes
       Kubernetes.OpenAPI.Model
       Kubernetes.OpenAPI.ModelLens
+      Kubernetes.OpenAPI.CustomTypes
   default-language: Haskell2010
 
   if flag(UseKatip)
@@ -165,4 +167,5 @@ test-suite tests
       ApproxEq
       Instances
       PropMime
+      CustomInstances
   default-language: Haskell2010

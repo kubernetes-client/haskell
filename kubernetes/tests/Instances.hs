@@ -4,6 +4,7 @@ module Instances where
 
 import Kubernetes.OpenAPI.Model
 import Kubernetes.OpenAPI.Core
+import CustomInstances ()
 
 import qualified Data.Aeson as A
 import qualified Data.ByteString.Lazy as BL
@@ -255,8 +256,8 @@ instance Arbitrary AppsV1beta1RollingUpdateDeployment where
 genAppsV1beta1RollingUpdateDeployment :: Int -> Gen AppsV1beta1RollingUpdateDeployment
 genAppsV1beta1RollingUpdateDeployment n =
   AppsV1beta1RollingUpdateDeployment
-    <$> arbitraryReducedMaybeValue n -- appsV1beta1RollingUpdateDeploymentMaxSurge :: Maybe A.Value
-    <*> arbitraryReducedMaybeValue n -- appsV1beta1RollingUpdateDeploymentMaxUnavailable :: Maybe A.Value
+    <$> arbitraryReducedMaybe n -- appsV1beta1RollingUpdateDeploymentMaxSurge :: Maybe IntOrString
+    <*> arbitraryReducedMaybe n -- appsV1beta1RollingUpdateDeploymentMaxUnavailable :: Maybe IntOrString
   
 instance Arbitrary AppsV1beta1Scale where
   arbitrary = sized genAppsV1beta1Scale
@@ -485,8 +486,8 @@ instance Arbitrary ExtensionsV1beta1RollingUpdateDeployment where
 genExtensionsV1beta1RollingUpdateDeployment :: Int -> Gen ExtensionsV1beta1RollingUpdateDeployment
 genExtensionsV1beta1RollingUpdateDeployment n =
   ExtensionsV1beta1RollingUpdateDeployment
-    <$> arbitraryReducedMaybeValue n -- extensionsV1beta1RollingUpdateDeploymentMaxSurge :: Maybe A.Value
-    <*> arbitraryReducedMaybeValue n -- extensionsV1beta1RollingUpdateDeploymentMaxUnavailable :: Maybe A.Value
+    <$> arbitraryReducedMaybe n -- extensionsV1beta1RollingUpdateDeploymentMaxSurge :: Maybe IntOrString
+    <*> arbitraryReducedMaybe n -- extensionsV1beta1RollingUpdateDeploymentMaxUnavailable :: Maybe IntOrString
   
 instance Arbitrary ExtensionsV1beta1RunAsGroupStrategyOptions where
   arbitrary = sized genExtensionsV1beta1RunAsGroupStrategyOptions
@@ -1471,7 +1472,7 @@ genV1EmptyDirVolumeSource :: Int -> Gen V1EmptyDirVolumeSource
 genV1EmptyDirVolumeSource n =
   V1EmptyDirVolumeSource
     <$> arbitraryReducedMaybe n -- v1EmptyDirVolumeSourceMedium :: Maybe Text
-    <*> arbitraryReducedMaybe n -- v1EmptyDirVolumeSourceSizeLimit :: Maybe Text
+    <*> arbitraryReducedMaybe n -- v1EmptyDirVolumeSourceSizeLimit :: Maybe Quantity
   
 instance Arbitrary V1EndpointAddress where
   arbitrary = sized genV1EndpointAddress
@@ -1724,7 +1725,7 @@ genV1HTTPGetAction n =
     <$> arbitraryReducedMaybe n -- v1HTTPGetActionHost :: Maybe Text
     <*> arbitraryReducedMaybe n -- v1HTTPGetActionHttpHeaders :: Maybe [V1HTTPHeader]
     <*> arbitraryReducedMaybe n -- v1HTTPGetActionPath :: Maybe Text
-    <*> arbitraryReduced n -- v1HTTPGetActionPort :: A.Value
+    <*> arbitraryReduced n -- v1HTTPGetActionPort :: IntOrString
     <*> arbitraryReducedMaybe n -- v1HTTPGetActionScheme :: Maybe Text
   
 instance Arbitrary V1HTTPHeader where
@@ -1991,11 +1992,11 @@ instance Arbitrary V1LimitRangeItem where
 genV1LimitRangeItem :: Int -> Gen V1LimitRangeItem
 genV1LimitRangeItem n =
   V1LimitRangeItem
-    <$> arbitraryReducedMaybe n -- v1LimitRangeItemDefault :: Maybe (Map.Map String Text)
-    <*> arbitraryReducedMaybe n -- v1LimitRangeItemDefaultRequest :: Maybe (Map.Map String Text)
-    <*> arbitraryReducedMaybe n -- v1LimitRangeItemMax :: Maybe (Map.Map String Text)
-    <*> arbitraryReducedMaybe n -- v1LimitRangeItemMaxLimitRequestRatio :: Maybe (Map.Map String Text)
-    <*> arbitraryReducedMaybe n -- v1LimitRangeItemMin :: Maybe (Map.Map String Text)
+    <$> arbitraryReducedMaybe n -- v1LimitRangeItemDefault :: Maybe (Map.Map String Quantity)
+    <*> arbitraryReducedMaybe n -- v1LimitRangeItemDefaultRequest :: Maybe (Map.Map String Quantity)
+    <*> arbitraryReducedMaybe n -- v1LimitRangeItemMax :: Maybe (Map.Map String Quantity)
+    <*> arbitraryReducedMaybe n -- v1LimitRangeItemMaxLimitRequestRatio :: Maybe (Map.Map String Quantity)
+    <*> arbitraryReducedMaybe n -- v1LimitRangeItemMin :: Maybe (Map.Map String Quantity)
     <*> arbitraryReducedMaybe n -- v1LimitRangeItemType :: Maybe Text
   
 instance Arbitrary V1LimitRangeList where
@@ -2178,7 +2179,7 @@ instance Arbitrary V1NetworkPolicyPort where
 genV1NetworkPolicyPort :: Int -> Gen V1NetworkPolicyPort
 genV1NetworkPolicyPort n =
   V1NetworkPolicyPort
-    <$> arbitraryReducedMaybeValue n -- v1NetworkPolicyPortPort :: Maybe A.Value
+    <$> arbitraryReducedMaybe n -- v1NetworkPolicyPortPort :: Maybe IntOrString
     <*> arbitraryReducedMaybe n -- v1NetworkPolicyPortProtocol :: Maybe Text
   
 instance Arbitrary V1NetworkPolicySpec where
@@ -2320,8 +2321,8 @@ genV1NodeStatus :: Int -> Gen V1NodeStatus
 genV1NodeStatus n =
   V1NodeStatus
     <$> arbitraryReducedMaybe n -- v1NodeStatusAddresses :: Maybe [V1NodeAddress]
-    <*> arbitraryReducedMaybe n -- v1NodeStatusAllocatable :: Maybe (Map.Map String Text)
-    <*> arbitraryReducedMaybe n -- v1NodeStatusCapacity :: Maybe (Map.Map String Text)
+    <*> arbitraryReducedMaybe n -- v1NodeStatusAllocatable :: Maybe (Map.Map String Quantity)
+    <*> arbitraryReducedMaybe n -- v1NodeStatusCapacity :: Maybe (Map.Map String Quantity)
     <*> arbitraryReducedMaybe n -- v1NodeStatusConditions :: Maybe [V1NodeCondition]
     <*> arbitraryReducedMaybe n -- v1NodeStatusConfig :: Maybe V1NodeConfigStatus
     <*> arbitraryReducedMaybe n -- v1NodeStatusDaemonEndpoints :: Maybe V1NodeDaemonEndpoints
@@ -2494,7 +2495,7 @@ genV1PersistentVolumeClaimStatus :: Int -> Gen V1PersistentVolumeClaimStatus
 genV1PersistentVolumeClaimStatus n =
   V1PersistentVolumeClaimStatus
     <$> arbitraryReducedMaybe n -- v1PersistentVolumeClaimStatusAccessModes :: Maybe [Text]
-    <*> arbitraryReducedMaybe n -- v1PersistentVolumeClaimStatusCapacity :: Maybe (Map.Map String Text)
+    <*> arbitraryReducedMaybe n -- v1PersistentVolumeClaimStatusCapacity :: Maybe (Map.Map String Quantity)
     <*> arbitraryReducedMaybe n -- v1PersistentVolumeClaimStatusConditions :: Maybe [V1PersistentVolumeClaimCondition]
     <*> arbitraryReducedMaybe n -- v1PersistentVolumeClaimStatusPhase :: Maybe Text
   
@@ -2528,7 +2529,7 @@ genV1PersistentVolumeSpec n =
     <*> arbitraryReducedMaybe n -- v1PersistentVolumeSpecAwsElasticBlockStore :: Maybe V1AWSElasticBlockStoreVolumeSource
     <*> arbitraryReducedMaybe n -- v1PersistentVolumeSpecAzureDisk :: Maybe V1AzureDiskVolumeSource
     <*> arbitraryReducedMaybe n -- v1PersistentVolumeSpecAzureFile :: Maybe V1AzureFilePersistentVolumeSource
-    <*> arbitraryReducedMaybe n -- v1PersistentVolumeSpecCapacity :: Maybe (Map.Map String Text)
+    <*> arbitraryReducedMaybe n -- v1PersistentVolumeSpecCapacity :: Maybe (Map.Map String Quantity)
     <*> arbitraryReducedMaybe n -- v1PersistentVolumeSpecCephfs :: Maybe V1CephFSPersistentVolumeSource
     <*> arbitraryReducedMaybe n -- v1PersistentVolumeSpecCinder :: Maybe V1CinderPersistentVolumeSource
     <*> arbitraryReducedMaybe n -- v1PersistentVolumeSpecClaimRef :: Maybe V1ObjectReference
@@ -3009,7 +3010,7 @@ genV1ResourceFieldSelector :: Int -> Gen V1ResourceFieldSelector
 genV1ResourceFieldSelector n =
   V1ResourceFieldSelector
     <$> arbitraryReducedMaybe n -- v1ResourceFieldSelectorContainerName :: Maybe Text
-    <*> arbitraryReducedMaybe n -- v1ResourceFieldSelectorDivisor :: Maybe Text
+    <*> arbitraryReducedMaybe n -- v1ResourceFieldSelectorDivisor :: Maybe Quantity
     <*> arbitrary -- v1ResourceFieldSelectorResource :: Text
   
 instance Arbitrary V1ResourceQuota where
@@ -3041,7 +3042,7 @@ instance Arbitrary V1ResourceQuotaSpec where
 genV1ResourceQuotaSpec :: Int -> Gen V1ResourceQuotaSpec
 genV1ResourceQuotaSpec n =
   V1ResourceQuotaSpec
-    <$> arbitraryReducedMaybe n -- v1ResourceQuotaSpecHard :: Maybe (Map.Map String Text)
+    <$> arbitraryReducedMaybe n -- v1ResourceQuotaSpecHard :: Maybe (Map.Map String Quantity)
     <*> arbitraryReducedMaybe n -- v1ResourceQuotaSpecScopeSelector :: Maybe V1ScopeSelector
     <*> arbitraryReducedMaybe n -- v1ResourceQuotaSpecScopes :: Maybe [Text]
   
@@ -3051,8 +3052,8 @@ instance Arbitrary V1ResourceQuotaStatus where
 genV1ResourceQuotaStatus :: Int -> Gen V1ResourceQuotaStatus
 genV1ResourceQuotaStatus n =
   V1ResourceQuotaStatus
-    <$> arbitraryReducedMaybe n -- v1ResourceQuotaStatusHard :: Maybe (Map.Map String Text)
-    <*> arbitraryReducedMaybe n -- v1ResourceQuotaStatusUsed :: Maybe (Map.Map String Text)
+    <$> arbitraryReducedMaybe n -- v1ResourceQuotaStatusHard :: Maybe (Map.Map String Quantity)
+    <*> arbitraryReducedMaybe n -- v1ResourceQuotaStatusUsed :: Maybe (Map.Map String Quantity)
   
 instance Arbitrary V1ResourceRequirements where
   arbitrary = sized genV1ResourceRequirements
@@ -3060,8 +3061,8 @@ instance Arbitrary V1ResourceRequirements where
 genV1ResourceRequirements :: Int -> Gen V1ResourceRequirements
 genV1ResourceRequirements n =
   V1ResourceRequirements
-    <$> arbitraryReducedMaybe n -- v1ResourceRequirementsLimits :: Maybe (Map.Map String Text)
-    <*> arbitraryReducedMaybe n -- v1ResourceRequirementsRequests :: Maybe (Map.Map String Text)
+    <$> arbitraryReducedMaybe n -- v1ResourceRequirementsLimits :: Maybe (Map.Map String Quantity)
+    <*> arbitraryReducedMaybe n -- v1ResourceRequirementsRequests :: Maybe (Map.Map String Quantity)
   
 instance Arbitrary V1ResourceRule where
   arbitrary = sized genV1ResourceRule
@@ -3135,7 +3136,7 @@ instance Arbitrary V1RollingUpdateDaemonSet where
 genV1RollingUpdateDaemonSet :: Int -> Gen V1RollingUpdateDaemonSet
 genV1RollingUpdateDaemonSet n =
   V1RollingUpdateDaemonSet
-    <$> arbitraryReducedMaybeValue n -- v1RollingUpdateDaemonSetMaxUnavailable :: Maybe A.Value
+    <$> arbitraryReducedMaybe n -- v1RollingUpdateDaemonSetMaxUnavailable :: Maybe IntOrString
   
 instance Arbitrary V1RollingUpdateDeployment where
   arbitrary = sized genV1RollingUpdateDeployment
@@ -3143,8 +3144,8 @@ instance Arbitrary V1RollingUpdateDeployment where
 genV1RollingUpdateDeployment :: Int -> Gen V1RollingUpdateDeployment
 genV1RollingUpdateDeployment n =
   V1RollingUpdateDeployment
-    <$> arbitraryReducedMaybeValue n -- v1RollingUpdateDeploymentMaxSurge :: Maybe A.Value
-    <*> arbitraryReducedMaybeValue n -- v1RollingUpdateDeploymentMaxUnavailable :: Maybe A.Value
+    <$> arbitraryReducedMaybe n -- v1RollingUpdateDeploymentMaxSurge :: Maybe IntOrString
+    <*> arbitraryReducedMaybe n -- v1RollingUpdateDeploymentMaxUnavailable :: Maybe IntOrString
   
 instance Arbitrary V1RollingUpdateStatefulSetStrategy where
   arbitrary = sized genV1RollingUpdateStatefulSetStrategy
@@ -3452,7 +3453,7 @@ genV1ServicePort n =
     <*> arbitraryReducedMaybe n -- v1ServicePortNodePort :: Maybe Int
     <*> arbitrary -- v1ServicePortPort :: Int
     <*> arbitraryReducedMaybe n -- v1ServicePortProtocol :: Maybe Text
-    <*> arbitraryReducedMaybeValue n -- v1ServicePortTargetPort :: Maybe A.Value
+    <*> arbitraryReducedMaybe n -- v1ServicePortTargetPort :: Maybe IntOrString
   
 instance Arbitrary V1ServiceReference where
   arbitrary = sized genV1ServiceReference
@@ -3738,7 +3739,7 @@ genV1TCPSocketAction :: Int -> Gen V1TCPSocketAction
 genV1TCPSocketAction n =
   V1TCPSocketAction
     <$> arbitraryReducedMaybe n -- v1TCPSocketActionHost :: Maybe Text
-    <*> arbitraryReduced n -- v1TCPSocketActionPort :: A.Value
+    <*> arbitraryReduced n -- v1TCPSocketActionPort :: IntOrString
   
 instance Arbitrary V1Taint where
   arbitrary = sized genV1Taint
@@ -4924,7 +4925,7 @@ genV1beta1IngressBackend :: Int -> Gen V1beta1IngressBackend
 genV1beta1IngressBackend n =
   V1beta1IngressBackend
     <$> arbitrary -- v1beta1IngressBackendServiceName :: Text
-    <*> arbitraryReduced n -- v1beta1IngressBackendServicePort :: A.Value
+    <*> arbitraryReduced n -- v1beta1IngressBackendServicePort :: IntOrString
   
 instance Arbitrary V1beta1IngressList where
   arbitrary = sized genV1beta1IngressList
@@ -5149,7 +5150,7 @@ instance Arbitrary V1beta1NetworkPolicyPort where
 genV1beta1NetworkPolicyPort :: Int -> Gen V1beta1NetworkPolicyPort
 genV1beta1NetworkPolicyPort n =
   V1beta1NetworkPolicyPort
-    <$> arbitraryReducedMaybeValue n -- v1beta1NetworkPolicyPortPort :: Maybe A.Value
+    <$> arbitraryReducedMaybe n -- v1beta1NetworkPolicyPortPort :: Maybe IntOrString
     <*> arbitraryReducedMaybe n -- v1beta1NetworkPolicyPortProtocol :: Maybe Text
   
 instance Arbitrary V1beta1NetworkPolicySpec where
@@ -5210,8 +5211,8 @@ instance Arbitrary V1beta1PodDisruptionBudgetSpec where
 genV1beta1PodDisruptionBudgetSpec :: Int -> Gen V1beta1PodDisruptionBudgetSpec
 genV1beta1PodDisruptionBudgetSpec n =
   V1beta1PodDisruptionBudgetSpec
-    <$> arbitraryReducedMaybeValue n -- v1beta1PodDisruptionBudgetSpecMaxUnavailable :: Maybe A.Value
-    <*> arbitraryReducedMaybeValue n -- v1beta1PodDisruptionBudgetSpecMinAvailable :: Maybe A.Value
+    <$> arbitraryReducedMaybe n -- v1beta1PodDisruptionBudgetSpecMaxUnavailable :: Maybe IntOrString
+    <*> arbitraryReducedMaybe n -- v1beta1PodDisruptionBudgetSpecMinAvailable :: Maybe IntOrString
     <*> arbitraryReducedMaybe n -- v1beta1PodDisruptionBudgetSpecSelector :: Maybe V1LabelSelector
   
 instance Arbitrary V1beta1PodDisruptionBudgetStatus where
@@ -5408,7 +5409,7 @@ instance Arbitrary V1beta1RollingUpdateDaemonSet where
 genV1beta1RollingUpdateDaemonSet :: Int -> Gen V1beta1RollingUpdateDaemonSet
 genV1beta1RollingUpdateDaemonSet n =
   V1beta1RollingUpdateDaemonSet
-    <$> arbitraryReducedMaybeValue n -- v1beta1RollingUpdateDaemonSetMaxUnavailable :: Maybe A.Value
+    <$> arbitraryReducedMaybe n -- v1beta1RollingUpdateDaemonSetMaxUnavailable :: Maybe IntOrString
   
 instance Arbitrary V1beta1RollingUpdateStatefulSetStrategy where
   arbitrary = sized genV1beta1RollingUpdateStatefulSetStrategy
@@ -6006,7 +6007,7 @@ instance Arbitrary V1beta2RollingUpdateDaemonSet where
 genV1beta2RollingUpdateDaemonSet :: Int -> Gen V1beta2RollingUpdateDaemonSet
 genV1beta2RollingUpdateDaemonSet n =
   V1beta2RollingUpdateDaemonSet
-    <$> arbitraryReducedMaybeValue n -- v1beta2RollingUpdateDaemonSetMaxUnavailable :: Maybe A.Value
+    <$> arbitraryReducedMaybe n -- v1beta2RollingUpdateDaemonSetMaxUnavailable :: Maybe IntOrString
   
 instance Arbitrary V1beta2RollingUpdateDeployment where
   arbitrary = sized genV1beta2RollingUpdateDeployment
@@ -6014,8 +6015,8 @@ instance Arbitrary V1beta2RollingUpdateDeployment where
 genV1beta2RollingUpdateDeployment :: Int -> Gen V1beta2RollingUpdateDeployment
 genV1beta2RollingUpdateDeployment n =
   V1beta2RollingUpdateDeployment
-    <$> arbitraryReducedMaybeValue n -- v1beta2RollingUpdateDeploymentMaxSurge :: Maybe A.Value
-    <*> arbitraryReducedMaybeValue n -- v1beta2RollingUpdateDeploymentMaxUnavailable :: Maybe A.Value
+    <$> arbitraryReducedMaybe n -- v1beta2RollingUpdateDeploymentMaxSurge :: Maybe IntOrString
+    <*> arbitraryReducedMaybe n -- v1beta2RollingUpdateDeploymentMaxUnavailable :: Maybe IntOrString
   
 instance Arbitrary V1beta2RollingUpdateStatefulSetStrategy where
   arbitrary = sized genV1beta2RollingUpdateStatefulSetStrategy
@@ -6203,8 +6204,8 @@ genV2beta1ExternalMetricSource n =
   V2beta1ExternalMetricSource
     <$> arbitrary -- v2beta1ExternalMetricSourceMetricName :: Text
     <*> arbitraryReducedMaybe n -- v2beta1ExternalMetricSourceMetricSelector :: Maybe V1LabelSelector
-    <*> arbitraryReducedMaybe n -- v2beta1ExternalMetricSourceTargetAverageValue :: Maybe Text
-    <*> arbitraryReducedMaybe n -- v2beta1ExternalMetricSourceTargetValue :: Maybe Text
+    <*> arbitraryReducedMaybe n -- v2beta1ExternalMetricSourceTargetAverageValue :: Maybe Quantity
+    <*> arbitraryReducedMaybe n -- v2beta1ExternalMetricSourceTargetValue :: Maybe Quantity
   
 instance Arbitrary V2beta1ExternalMetricStatus where
   arbitrary = sized genV2beta1ExternalMetricStatus
@@ -6212,8 +6213,8 @@ instance Arbitrary V2beta1ExternalMetricStatus where
 genV2beta1ExternalMetricStatus :: Int -> Gen V2beta1ExternalMetricStatus
 genV2beta1ExternalMetricStatus n =
   V2beta1ExternalMetricStatus
-    <$> arbitraryReducedMaybe n -- v2beta1ExternalMetricStatusCurrentAverageValue :: Maybe Text
-    <*> arbitrary -- v2beta1ExternalMetricStatusCurrentValue :: Text
+    <$> arbitraryReducedMaybe n -- v2beta1ExternalMetricStatusCurrentAverageValue :: Maybe Quantity
+    <*> arbitraryReduced n -- v2beta1ExternalMetricStatusCurrentValue :: Quantity
     <*> arbitrary -- v2beta1ExternalMetricStatusMetricName :: Text
     <*> arbitraryReducedMaybe n -- v2beta1ExternalMetricStatusMetricSelector :: Maybe V1LabelSelector
   
@@ -6306,11 +6307,11 @@ instance Arbitrary V2beta1ObjectMetricSource where
 genV2beta1ObjectMetricSource :: Int -> Gen V2beta1ObjectMetricSource
 genV2beta1ObjectMetricSource n =
   V2beta1ObjectMetricSource
-    <$> arbitraryReducedMaybe n -- v2beta1ObjectMetricSourceAverageValue :: Maybe Text
+    <$> arbitraryReducedMaybe n -- v2beta1ObjectMetricSourceAverageValue :: Maybe Quantity
     <*> arbitrary -- v2beta1ObjectMetricSourceMetricName :: Text
     <*> arbitraryReducedMaybe n -- v2beta1ObjectMetricSourceSelector :: Maybe V1LabelSelector
     <*> arbitraryReduced n -- v2beta1ObjectMetricSourceTarget :: V2beta1CrossVersionObjectReference
-    <*> arbitrary -- v2beta1ObjectMetricSourceTargetValue :: Text
+    <*> arbitraryReduced n -- v2beta1ObjectMetricSourceTargetValue :: Quantity
   
 instance Arbitrary V2beta1ObjectMetricStatus where
   arbitrary = sized genV2beta1ObjectMetricStatus
@@ -6318,8 +6319,8 @@ instance Arbitrary V2beta1ObjectMetricStatus where
 genV2beta1ObjectMetricStatus :: Int -> Gen V2beta1ObjectMetricStatus
 genV2beta1ObjectMetricStatus n =
   V2beta1ObjectMetricStatus
-    <$> arbitraryReducedMaybe n -- v2beta1ObjectMetricStatusAverageValue :: Maybe Text
-    <*> arbitrary -- v2beta1ObjectMetricStatusCurrentValue :: Text
+    <$> arbitraryReducedMaybe n -- v2beta1ObjectMetricStatusAverageValue :: Maybe Quantity
+    <*> arbitraryReduced n -- v2beta1ObjectMetricStatusCurrentValue :: Quantity
     <*> arbitrary -- v2beta1ObjectMetricStatusMetricName :: Text
     <*> arbitraryReducedMaybe n -- v2beta1ObjectMetricStatusSelector :: Maybe V1LabelSelector
     <*> arbitraryReduced n -- v2beta1ObjectMetricStatusTarget :: V2beta1CrossVersionObjectReference
@@ -6332,7 +6333,7 @@ genV2beta1PodsMetricSource n =
   V2beta1PodsMetricSource
     <$> arbitrary -- v2beta1PodsMetricSourceMetricName :: Text
     <*> arbitraryReducedMaybe n -- v2beta1PodsMetricSourceSelector :: Maybe V1LabelSelector
-    <*> arbitrary -- v2beta1PodsMetricSourceTargetAverageValue :: Text
+    <*> arbitraryReduced n -- v2beta1PodsMetricSourceTargetAverageValue :: Quantity
   
 instance Arbitrary V2beta1PodsMetricStatus where
   arbitrary = sized genV2beta1PodsMetricStatus
@@ -6340,7 +6341,7 @@ instance Arbitrary V2beta1PodsMetricStatus where
 genV2beta1PodsMetricStatus :: Int -> Gen V2beta1PodsMetricStatus
 genV2beta1PodsMetricStatus n =
   V2beta1PodsMetricStatus
-    <$> arbitrary -- v2beta1PodsMetricStatusCurrentAverageValue :: Text
+    <$> arbitraryReduced n -- v2beta1PodsMetricStatusCurrentAverageValue :: Quantity
     <*> arbitrary -- v2beta1PodsMetricStatusMetricName :: Text
     <*> arbitraryReducedMaybe n -- v2beta1PodsMetricStatusSelector :: Maybe V1LabelSelector
   
@@ -6352,7 +6353,7 @@ genV2beta1ResourceMetricSource n =
   V2beta1ResourceMetricSource
     <$> arbitrary -- v2beta1ResourceMetricSourceName :: Text
     <*> arbitraryReducedMaybe n -- v2beta1ResourceMetricSourceTargetAverageUtilization :: Maybe Int
-    <*> arbitraryReducedMaybe n -- v2beta1ResourceMetricSourceTargetAverageValue :: Maybe Text
+    <*> arbitraryReducedMaybe n -- v2beta1ResourceMetricSourceTargetAverageValue :: Maybe Quantity
   
 instance Arbitrary V2beta1ResourceMetricStatus where
   arbitrary = sized genV2beta1ResourceMetricStatus
@@ -6361,7 +6362,7 @@ genV2beta1ResourceMetricStatus :: Int -> Gen V2beta1ResourceMetricStatus
 genV2beta1ResourceMetricStatus n =
   V2beta1ResourceMetricStatus
     <$> arbitraryReducedMaybe n -- v2beta1ResourceMetricStatusCurrentAverageUtilization :: Maybe Int
-    <*> arbitrary -- v2beta1ResourceMetricStatusCurrentAverageValue :: Text
+    <*> arbitraryReduced n -- v2beta1ResourceMetricStatusCurrentAverageValue :: Quantity
     <*> arbitrary -- v2beta1ResourceMetricStatusName :: Text
   
 instance Arbitrary V2beta2CrossVersionObjectReference where
@@ -6491,9 +6492,9 @@ genV2beta2MetricTarget :: Int -> Gen V2beta2MetricTarget
 genV2beta2MetricTarget n =
   V2beta2MetricTarget
     <$> arbitraryReducedMaybe n -- v2beta2MetricTargetAverageUtilization :: Maybe Int
-    <*> arbitraryReducedMaybe n -- v2beta2MetricTargetAverageValue :: Maybe Text
+    <*> arbitraryReducedMaybe n -- v2beta2MetricTargetAverageValue :: Maybe Quantity
     <*> arbitrary -- v2beta2MetricTargetType :: Text
-    <*> arbitraryReducedMaybe n -- v2beta2MetricTargetValue :: Maybe Text
+    <*> arbitraryReducedMaybe n -- v2beta2MetricTargetValue :: Maybe Quantity
   
 instance Arbitrary V2beta2MetricValueStatus where
   arbitrary = sized genV2beta2MetricValueStatus
@@ -6502,8 +6503,8 @@ genV2beta2MetricValueStatus :: Int -> Gen V2beta2MetricValueStatus
 genV2beta2MetricValueStatus n =
   V2beta2MetricValueStatus
     <$> arbitraryReducedMaybe n -- v2beta2MetricValueStatusAverageUtilization :: Maybe Int
-    <*> arbitraryReducedMaybe n -- v2beta2MetricValueStatusAverageValue :: Maybe Text
-    <*> arbitraryReducedMaybe n -- v2beta2MetricValueStatusValue :: Maybe Text
+    <*> arbitraryReducedMaybe n -- v2beta2MetricValueStatusAverageValue :: Maybe Quantity
+    <*> arbitraryReducedMaybe n -- v2beta2MetricValueStatusValue :: Maybe Quantity
   
 instance Arbitrary V2beta2ObjectMetricSource where
   arbitrary = sized genV2beta2ObjectMetricSource
