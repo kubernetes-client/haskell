@@ -11,6 +11,7 @@ import Test.Hspec.QuickCheck
 
 import PropMime
 import Instances ()
+import CustomInstances ()
 
 import Kubernetes.OpenAPI.Model
 import Kubernetes.OpenAPI.MimeTypes

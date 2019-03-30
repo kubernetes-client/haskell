@@ -361,12 +361,12 @@ appsV1beta1RollbackConfigRevisionL f AppsV1beta1RollbackConfig{..} = (\appsV1bet
 -- * AppsV1beta1RollingUpdateDeployment
 
 -- | 'appsV1beta1RollingUpdateDeploymentMaxSurge' Lens
-appsV1beta1RollingUpdateDeploymentMaxSurgeL :: Lens_' AppsV1beta1RollingUpdateDeployment (Maybe A.Value)
+appsV1beta1RollingUpdateDeploymentMaxSurgeL :: Lens_' AppsV1beta1RollingUpdateDeployment (Maybe IntOrString)
 appsV1beta1RollingUpdateDeploymentMaxSurgeL f AppsV1beta1RollingUpdateDeployment{..} = (\appsV1beta1RollingUpdateDeploymentMaxSurge -> AppsV1beta1RollingUpdateDeployment { appsV1beta1RollingUpdateDeploymentMaxSurge, ..} ) <$> f appsV1beta1RollingUpdateDeploymentMaxSurge
 {-# INLINE appsV1beta1RollingUpdateDeploymentMaxSurgeL #-}
 
 -- | 'appsV1beta1RollingUpdateDeploymentMaxUnavailable' Lens
-appsV1beta1RollingUpdateDeploymentMaxUnavailableL :: Lens_' AppsV1beta1RollingUpdateDeployment (Maybe A.Value)
+appsV1beta1RollingUpdateDeploymentMaxUnavailableL :: Lens_' AppsV1beta1RollingUpdateDeployment (Maybe IntOrString)
 appsV1beta1RollingUpdateDeploymentMaxUnavailableL f AppsV1beta1RollingUpdateDeployment{..} = (\appsV1beta1RollingUpdateDeploymentMaxUnavailable -> AppsV1beta1RollingUpdateDeployment { appsV1beta1RollingUpdateDeploymentMaxUnavailable, ..} ) <$> f appsV1beta1RollingUpdateDeploymentMaxUnavailable
 {-# INLINE appsV1beta1RollingUpdateDeploymentMaxUnavailableL #-}
 
@@ -891,12 +891,12 @@ extensionsV1beta1RollbackConfigRevisionL f ExtensionsV1beta1RollbackConfig{..} =
 -- * ExtensionsV1beta1RollingUpdateDeployment
 
 -- | 'extensionsV1beta1RollingUpdateDeploymentMaxSurge' Lens
-extensionsV1beta1RollingUpdateDeploymentMaxSurgeL :: Lens_' ExtensionsV1beta1RollingUpdateDeployment (Maybe A.Value)
+extensionsV1beta1RollingUpdateDeploymentMaxSurgeL :: Lens_' ExtensionsV1beta1RollingUpdateDeployment (Maybe IntOrString)
 extensionsV1beta1RollingUpdateDeploymentMaxSurgeL f ExtensionsV1beta1RollingUpdateDeployment{..} = (\extensionsV1beta1RollingUpdateDeploymentMaxSurge -> ExtensionsV1beta1RollingUpdateDeployment { extensionsV1beta1RollingUpdateDeploymentMaxSurge, ..} ) <$> f extensionsV1beta1RollingUpdateDeploymentMaxSurge
 {-# INLINE extensionsV1beta1RollingUpdateDeploymentMaxSurgeL #-}
 
 -- | 'extensionsV1beta1RollingUpdateDeploymentMaxUnavailable' Lens
-extensionsV1beta1RollingUpdateDeploymentMaxUnavailableL :: Lens_' ExtensionsV1beta1RollingUpdateDeployment (Maybe A.Value)
+extensionsV1beta1RollingUpdateDeploymentMaxUnavailableL :: Lens_' ExtensionsV1beta1RollingUpdateDeployment (Maybe IntOrString)
 extensionsV1beta1RollingUpdateDeploymentMaxUnavailableL f ExtensionsV1beta1RollingUpdateDeployment{..} = (\extensionsV1beta1RollingUpdateDeploymentMaxUnavailable -> ExtensionsV1beta1RollingUpdateDeployment { extensionsV1beta1RollingUpdateDeploymentMaxUnavailable, ..} ) <$> f extensionsV1beta1RollingUpdateDeploymentMaxUnavailable
 {-# INLINE extensionsV1beta1RollingUpdateDeploymentMaxUnavailableL #-}
 
@@ -3093,7 +3093,7 @@ v1EmptyDirVolumeSourceMediumL f V1EmptyDirVolumeSource{..} = (\v1EmptyDirVolumeS
 {-# INLINE v1EmptyDirVolumeSourceMediumL #-}
 
 -- | 'v1EmptyDirVolumeSourceSizeLimit' Lens
-v1EmptyDirVolumeSourceSizeLimitL :: Lens_' V1EmptyDirVolumeSource (Maybe Text)
+v1EmptyDirVolumeSourceSizeLimitL :: Lens_' V1EmptyDirVolumeSource (Maybe Quantity)
 v1EmptyDirVolumeSourceSizeLimitL f V1EmptyDirVolumeSource{..} = (\v1EmptyDirVolumeSourceSizeLimit -> V1EmptyDirVolumeSource { v1EmptyDirVolumeSourceSizeLimit, ..} ) <$> f v1EmptyDirVolumeSourceSizeLimit
 {-# INLINE v1EmptyDirVolumeSourceSizeLimitL #-}
 
@@ -3645,7 +3645,7 @@ v1HTTPGetActionPathL f V1HTTPGetAction{..} = (\v1HTTPGetActionPath -> V1HTTPGetA
 {-# INLINE v1HTTPGetActionPathL #-}
 
 -- | 'v1HTTPGetActionPort' Lens
-v1HTTPGetActionPortL :: Lens_' V1HTTPGetAction (A.Value)
+v1HTTPGetActionPortL :: Lens_' V1HTTPGetAction (IntOrString)
 v1HTTPGetActionPortL f V1HTTPGetAction{..} = (\v1HTTPGetActionPort -> V1HTTPGetAction { v1HTTPGetActionPort, ..} ) <$> f v1HTTPGetActionPort
 {-# INLINE v1HTTPGetActionPortL #-}
 
@@ -4236,27 +4236,27 @@ v1LimitRangeSpecL f V1LimitRange{..} = (\v1LimitRangeSpec -> V1LimitRange { v1Li
 -- * V1LimitRangeItem
 
 -- | 'v1LimitRangeItemDefault' Lens
-v1LimitRangeItemDefaultL :: Lens_' V1LimitRangeItem (Maybe (Map.Map String Text))
+v1LimitRangeItemDefaultL :: Lens_' V1LimitRangeItem (Maybe (Map.Map String Quantity))
 v1LimitRangeItemDefaultL f V1LimitRangeItem{..} = (\v1LimitRangeItemDefault -> V1LimitRangeItem { v1LimitRangeItemDefault, ..} ) <$> f v1LimitRangeItemDefault
 {-# INLINE v1LimitRangeItemDefaultL #-}
 
 -- | 'v1LimitRangeItemDefaultRequest' Lens
-v1LimitRangeItemDefaultRequestL :: Lens_' V1LimitRangeItem (Maybe (Map.Map String Text))
+v1LimitRangeItemDefaultRequestL :: Lens_' V1LimitRangeItem (Maybe (Map.Map String Quantity))
 v1LimitRangeItemDefaultRequestL f V1LimitRangeItem{..} = (\v1LimitRangeItemDefaultRequest -> V1LimitRangeItem { v1LimitRangeItemDefaultRequest, ..} ) <$> f v1LimitRangeItemDefaultRequest
 {-# INLINE v1LimitRangeItemDefaultRequestL #-}
 
 -- | 'v1LimitRangeItemMax' Lens
-v1LimitRangeItemMaxL :: Lens_' V1LimitRangeItem (Maybe (Map.Map String Text))
+v1LimitRangeItemMaxL :: Lens_' V1LimitRangeItem (Maybe (Map.Map String Quantity))
 v1LimitRangeItemMaxL f V1LimitRangeItem{..} = (\v1LimitRangeItemMax -> V1LimitRangeItem { v1LimitRangeItemMax, ..} ) <$> f v1LimitRangeItemMax
 {-# INLINE v1LimitRangeItemMaxL #-}
 
 -- | 'v1LimitRangeItemMaxLimitRequestRatio' Lens
-v1LimitRangeItemMaxLimitRequestRatioL :: Lens_' V1LimitRangeItem (Maybe (Map.Map String Text))
+v1LimitRangeItemMaxLimitRequestRatioL :: Lens_' V1LimitRangeItem (Maybe (Map.Map String Quantity))
 v1LimitRangeItemMaxLimitRequestRatioL f V1LimitRangeItem{..} = (\v1LimitRangeItemMaxLimitRequestRatio -> V1LimitRangeItem { v1LimitRangeItemMaxLimitRequestRatio, ..} ) <$> f v1LimitRangeItemMaxLimitRequestRatio
 {-# INLINE v1LimitRangeItemMaxLimitRequestRatioL #-}
 
 -- | 'v1LimitRangeItemMin' Lens
-v1LimitRangeItemMinL :: Lens_' V1LimitRangeItem (Maybe (Map.Map String Text))
+v1LimitRangeItemMinL :: Lens_' V1LimitRangeItem (Maybe (Map.Map String Quantity))
 v1LimitRangeItemMinL f V1LimitRangeItem{..} = (\v1LimitRangeItemMin -> V1LimitRangeItem { v1LimitRangeItemMin, ..} ) <$> f v1LimitRangeItemMin
 {-# INLINE v1LimitRangeItemMinL #-}
 
@@ -4582,7 +4582,7 @@ v1NetworkPolicyPeerPodSelectorL f V1NetworkPolicyPeer{..} = (\v1NetworkPolicyPee
 -- * V1NetworkPolicyPort
 
 -- | 'v1NetworkPolicyPortPort' Lens
-v1NetworkPolicyPortPortL :: Lens_' V1NetworkPolicyPort (Maybe A.Value)
+v1NetworkPolicyPortPortL :: Lens_' V1NetworkPolicyPort (Maybe IntOrString)
 v1NetworkPolicyPortPortL f V1NetworkPolicyPort{..} = (\v1NetworkPolicyPortPort -> V1NetworkPolicyPort { v1NetworkPolicyPortPort, ..} ) <$> f v1NetworkPolicyPortPort
 {-# INLINE v1NetworkPolicyPortPortL #-}
 
@@ -4858,12 +4858,12 @@ v1NodeStatusAddressesL f V1NodeStatus{..} = (\v1NodeStatusAddresses -> V1NodeSta
 {-# INLINE v1NodeStatusAddressesL #-}
 
 -- | 'v1NodeStatusAllocatable' Lens
-v1NodeStatusAllocatableL :: Lens_' V1NodeStatus (Maybe (Map.Map String Text))
+v1NodeStatusAllocatableL :: Lens_' V1NodeStatus (Maybe (Map.Map String Quantity))
 v1NodeStatusAllocatableL f V1NodeStatus{..} = (\v1NodeStatusAllocatable -> V1NodeStatus { v1NodeStatusAllocatable, ..} ) <$> f v1NodeStatusAllocatable
 {-# INLINE v1NodeStatusAllocatableL #-}
 
 -- | 'v1NodeStatusCapacity' Lens
-v1NodeStatusCapacityL :: Lens_' V1NodeStatus (Maybe (Map.Map String Text))
+v1NodeStatusCapacityL :: Lens_' V1NodeStatus (Maybe (Map.Map String Quantity))
 v1NodeStatusCapacityL f V1NodeStatus{..} = (\v1NodeStatusCapacity -> V1NodeStatus { v1NodeStatusCapacity, ..} ) <$> f v1NodeStatusCapacity
 {-# INLINE v1NodeStatusCapacityL #-}
 
@@ -5325,7 +5325,7 @@ v1PersistentVolumeClaimStatusAccessModesL f V1PersistentVolumeClaimStatus{..} = 
 {-# INLINE v1PersistentVolumeClaimStatusAccessModesL #-}
 
 -- | 'v1PersistentVolumeClaimStatusCapacity' Lens
-v1PersistentVolumeClaimStatusCapacityL :: Lens_' V1PersistentVolumeClaimStatus (Maybe (Map.Map String Text))
+v1PersistentVolumeClaimStatusCapacityL :: Lens_' V1PersistentVolumeClaimStatus (Maybe (Map.Map String Quantity))
 v1PersistentVolumeClaimStatusCapacityL f V1PersistentVolumeClaimStatus{..} = (\v1PersistentVolumeClaimStatusCapacity -> V1PersistentVolumeClaimStatus { v1PersistentVolumeClaimStatusCapacity, ..} ) <$> f v1PersistentVolumeClaimStatusCapacity
 {-# INLINE v1PersistentVolumeClaimStatusCapacityL #-}
 
@@ -5402,7 +5402,7 @@ v1PersistentVolumeSpecAzureFileL f V1PersistentVolumeSpec{..} = (\v1PersistentVo
 {-# INLINE v1PersistentVolumeSpecAzureFileL #-}
 
 -- | 'v1PersistentVolumeSpecCapacity' Lens
-v1PersistentVolumeSpecCapacityL :: Lens_' V1PersistentVolumeSpec (Maybe (Map.Map String Text))
+v1PersistentVolumeSpecCapacityL :: Lens_' V1PersistentVolumeSpec (Maybe (Map.Map String Quantity))
 v1PersistentVolumeSpecCapacityL f V1PersistentVolumeSpec{..} = (\v1PersistentVolumeSpecCapacity -> V1PersistentVolumeSpec { v1PersistentVolumeSpecCapacity, ..} ) <$> f v1PersistentVolumeSpecCapacity
 {-# INLINE v1PersistentVolumeSpecCapacityL #-}
 
@@ -6629,7 +6629,7 @@ v1ResourceFieldSelectorContainerNameL f V1ResourceFieldSelector{..} = (\v1Resour
 {-# INLINE v1ResourceFieldSelectorContainerNameL #-}
 
 -- | 'v1ResourceFieldSelectorDivisor' Lens
-v1ResourceFieldSelectorDivisorL :: Lens_' V1ResourceFieldSelector (Maybe Text)
+v1ResourceFieldSelectorDivisorL :: Lens_' V1ResourceFieldSelector (Maybe Quantity)
 v1ResourceFieldSelectorDivisorL f V1ResourceFieldSelector{..} = (\v1ResourceFieldSelectorDivisor -> V1ResourceFieldSelector { v1ResourceFieldSelectorDivisor, ..} ) <$> f v1ResourceFieldSelectorDivisor
 {-# INLINE v1ResourceFieldSelectorDivisorL #-}
 
@@ -6696,7 +6696,7 @@ v1ResourceQuotaListMetadataL f V1ResourceQuotaList{..} = (\v1ResourceQuotaListMe
 -- * V1ResourceQuotaSpec
 
 -- | 'v1ResourceQuotaSpecHard' Lens
-v1ResourceQuotaSpecHardL :: Lens_' V1ResourceQuotaSpec (Maybe (Map.Map String Text))
+v1ResourceQuotaSpecHardL :: Lens_' V1ResourceQuotaSpec (Maybe (Map.Map String Quantity))
 v1ResourceQuotaSpecHardL f V1ResourceQuotaSpec{..} = (\v1ResourceQuotaSpecHard -> V1ResourceQuotaSpec { v1ResourceQuotaSpecHard, ..} ) <$> f v1ResourceQuotaSpecHard
 {-# INLINE v1ResourceQuotaSpecHardL #-}
 
@@ -6715,12 +6715,12 @@ v1ResourceQuotaSpecScopesL f V1ResourceQuotaSpec{..} = (\v1ResourceQuotaSpecScop
 -- * V1ResourceQuotaStatus
 
 -- | 'v1ResourceQuotaStatusHard' Lens
-v1ResourceQuotaStatusHardL :: Lens_' V1ResourceQuotaStatus (Maybe (Map.Map String Text))
+v1ResourceQuotaStatusHardL :: Lens_' V1ResourceQuotaStatus (Maybe (Map.Map String Quantity))
 v1ResourceQuotaStatusHardL f V1ResourceQuotaStatus{..} = (\v1ResourceQuotaStatusHard -> V1ResourceQuotaStatus { v1ResourceQuotaStatusHard, ..} ) <$> f v1ResourceQuotaStatusHard
 {-# INLINE v1ResourceQuotaStatusHardL #-}
 
 -- | 'v1ResourceQuotaStatusUsed' Lens
-v1ResourceQuotaStatusUsedL :: Lens_' V1ResourceQuotaStatus (Maybe (Map.Map String Text))
+v1ResourceQuotaStatusUsedL :: Lens_' V1ResourceQuotaStatus (Maybe (Map.Map String Quantity))
 v1ResourceQuotaStatusUsedL f V1ResourceQuotaStatus{..} = (\v1ResourceQuotaStatusUsed -> V1ResourceQuotaStatus { v1ResourceQuotaStatusUsed, ..} ) <$> f v1ResourceQuotaStatusUsed
 {-# INLINE v1ResourceQuotaStatusUsedL #-}
 
@@ -6729,12 +6729,12 @@ v1ResourceQuotaStatusUsedL f V1ResourceQuotaStatus{..} = (\v1ResourceQuotaStatus
 -- * V1ResourceRequirements
 
 -- | 'v1ResourceRequirementsLimits' Lens
-v1ResourceRequirementsLimitsL :: Lens_' V1ResourceRequirements (Maybe (Map.Map String Text))
+v1ResourceRequirementsLimitsL :: Lens_' V1ResourceRequirements (Maybe (Map.Map String Quantity))
 v1ResourceRequirementsLimitsL f V1ResourceRequirements{..} = (\v1ResourceRequirementsLimits -> V1ResourceRequirements { v1ResourceRequirementsLimits, ..} ) <$> f v1ResourceRequirementsLimits
 {-# INLINE v1ResourceRequirementsLimitsL #-}
 
 -- | 'v1ResourceRequirementsRequests' Lens
-v1ResourceRequirementsRequestsL :: Lens_' V1ResourceRequirements (Maybe (Map.Map String Text))
+v1ResourceRequirementsRequestsL :: Lens_' V1ResourceRequirements (Maybe (Map.Map String Quantity))
 v1ResourceRequirementsRequestsL f V1ResourceRequirements{..} = (\v1ResourceRequirementsRequests -> V1ResourceRequirements { v1ResourceRequirementsRequests, ..} ) <$> f v1ResourceRequirementsRequests
 {-# INLINE v1ResourceRequirementsRequestsL #-}
 
@@ -6887,7 +6887,7 @@ v1RoleRefNameL f V1RoleRef{..} = (\v1RoleRefName -> V1RoleRef { v1RoleRefName, .
 -- * V1RollingUpdateDaemonSet
 
 -- | 'v1RollingUpdateDaemonSetMaxUnavailable' Lens
-v1RollingUpdateDaemonSetMaxUnavailableL :: Lens_' V1RollingUpdateDaemonSet (Maybe A.Value)
+v1RollingUpdateDaemonSetMaxUnavailableL :: Lens_' V1RollingUpdateDaemonSet (Maybe IntOrString)
 v1RollingUpdateDaemonSetMaxUnavailableL f V1RollingUpdateDaemonSet{..} = (\v1RollingUpdateDaemonSetMaxUnavailable -> V1RollingUpdateDaemonSet { v1RollingUpdateDaemonSetMaxUnavailable, ..} ) <$> f v1RollingUpdateDaemonSetMaxUnavailable
 {-# INLINE v1RollingUpdateDaemonSetMaxUnavailableL #-}
 
@@ -6896,12 +6896,12 @@ v1RollingUpdateDaemonSetMaxUnavailableL f V1RollingUpdateDaemonSet{..} = (\v1Rol
 -- * V1RollingUpdateDeployment
 
 -- | 'v1RollingUpdateDeploymentMaxSurge' Lens
-v1RollingUpdateDeploymentMaxSurgeL :: Lens_' V1RollingUpdateDeployment (Maybe A.Value)
+v1RollingUpdateDeploymentMaxSurgeL :: Lens_' V1RollingUpdateDeployment (Maybe IntOrString)
 v1RollingUpdateDeploymentMaxSurgeL f V1RollingUpdateDeployment{..} = (\v1RollingUpdateDeploymentMaxSurge -> V1RollingUpdateDeployment { v1RollingUpdateDeploymentMaxSurge, ..} ) <$> f v1RollingUpdateDeploymentMaxSurge
 {-# INLINE v1RollingUpdateDeploymentMaxSurgeL #-}
 
 -- | 'v1RollingUpdateDeploymentMaxUnavailable' Lens
-v1RollingUpdateDeploymentMaxUnavailableL :: Lens_' V1RollingUpdateDeployment (Maybe A.Value)
+v1RollingUpdateDeploymentMaxUnavailableL :: Lens_' V1RollingUpdateDeployment (Maybe IntOrString)
 v1RollingUpdateDeploymentMaxUnavailableL f V1RollingUpdateDeployment{..} = (\v1RollingUpdateDeploymentMaxUnavailable -> V1RollingUpdateDeployment { v1RollingUpdateDeploymentMaxUnavailable, ..} ) <$> f v1RollingUpdateDeploymentMaxUnavailable
 {-# INLINE v1RollingUpdateDeploymentMaxUnavailableL #-}
 
@@ -7573,7 +7573,7 @@ v1ServicePortProtocolL f V1ServicePort{..} = (\v1ServicePortProtocol -> V1Servic
 {-# INLINE v1ServicePortProtocolL #-}
 
 -- | 'v1ServicePortTargetPort' Lens
-v1ServicePortTargetPortL :: Lens_' V1ServicePort (Maybe A.Value)
+v1ServicePortTargetPortL :: Lens_' V1ServicePort (Maybe IntOrString)
 v1ServicePortTargetPortL f V1ServicePort{..} = (\v1ServicePortTargetPort -> V1ServicePort { v1ServicePortTargetPort, ..} ) <$> f v1ServicePortTargetPort
 {-# INLINE v1ServicePortTargetPortL #-}
 
@@ -8259,7 +8259,7 @@ v1TCPSocketActionHostL f V1TCPSocketAction{..} = (\v1TCPSocketActionHost -> V1TC
 {-# INLINE v1TCPSocketActionHostL #-}
 
 -- | 'v1TCPSocketActionPort' Lens
-v1TCPSocketActionPortL :: Lens_' V1TCPSocketAction (A.Value)
+v1TCPSocketActionPortL :: Lens_' V1TCPSocketAction (IntOrString)
 v1TCPSocketActionPortL f V1TCPSocketAction{..} = (\v1TCPSocketActionPort -> V1TCPSocketAction { v1TCPSocketActionPort, ..} ) <$> f v1TCPSocketActionPort
 {-# INLINE v1TCPSocketActionPortL #-}
 
@@ -10872,7 +10872,7 @@ v1beta1IngressBackendServiceNameL f V1beta1IngressBackend{..} = (\v1beta1Ingress
 {-# INLINE v1beta1IngressBackendServiceNameL #-}
 
 -- | 'v1beta1IngressBackendServicePort' Lens
-v1beta1IngressBackendServicePortL :: Lens_' V1beta1IngressBackend (A.Value)
+v1beta1IngressBackendServicePortL :: Lens_' V1beta1IngressBackend (IntOrString)
 v1beta1IngressBackendServicePortL f V1beta1IngressBackend{..} = (\v1beta1IngressBackendServicePort -> V1beta1IngressBackend { v1beta1IngressBackendServicePort, ..} ) <$> f v1beta1IngressBackendServicePort
 {-# INLINE v1beta1IngressBackendServicePortL #-}
 
@@ -11408,7 +11408,7 @@ v1beta1NetworkPolicyPeerPodSelectorL f V1beta1NetworkPolicyPeer{..} = (\v1beta1N
 -- * V1beta1NetworkPolicyPort
 
 -- | 'v1beta1NetworkPolicyPortPort' Lens
-v1beta1NetworkPolicyPortPortL :: Lens_' V1beta1NetworkPolicyPort (Maybe A.Value)
+v1beta1NetworkPolicyPortPortL :: Lens_' V1beta1NetworkPolicyPort (Maybe IntOrString)
 v1beta1NetworkPolicyPortPortL f V1beta1NetworkPolicyPort{..} = (\v1beta1NetworkPolicyPortPort -> V1beta1NetworkPolicyPort { v1beta1NetworkPolicyPortPort, ..} ) <$> f v1beta1NetworkPolicyPortPort
 {-# INLINE v1beta1NetworkPolicyPortPortL #-}
 
@@ -11527,12 +11527,12 @@ v1beta1PodDisruptionBudgetListMetadataL f V1beta1PodDisruptionBudgetList{..} = (
 -- * V1beta1PodDisruptionBudgetSpec
 
 -- | 'v1beta1PodDisruptionBudgetSpecMaxUnavailable' Lens
-v1beta1PodDisruptionBudgetSpecMaxUnavailableL :: Lens_' V1beta1PodDisruptionBudgetSpec (Maybe A.Value)
+v1beta1PodDisruptionBudgetSpecMaxUnavailableL :: Lens_' V1beta1PodDisruptionBudgetSpec (Maybe IntOrString)
 v1beta1PodDisruptionBudgetSpecMaxUnavailableL f V1beta1PodDisruptionBudgetSpec{..} = (\v1beta1PodDisruptionBudgetSpecMaxUnavailable -> V1beta1PodDisruptionBudgetSpec { v1beta1PodDisruptionBudgetSpecMaxUnavailable, ..} ) <$> f v1beta1PodDisruptionBudgetSpecMaxUnavailable
 {-# INLINE v1beta1PodDisruptionBudgetSpecMaxUnavailableL #-}
 
 -- | 'v1beta1PodDisruptionBudgetSpecMinAvailable' Lens
-v1beta1PodDisruptionBudgetSpecMinAvailableL :: Lens_' V1beta1PodDisruptionBudgetSpec (Maybe A.Value)
+v1beta1PodDisruptionBudgetSpecMinAvailableL :: Lens_' V1beta1PodDisruptionBudgetSpec (Maybe IntOrString)
 v1beta1PodDisruptionBudgetSpecMinAvailableL f V1beta1PodDisruptionBudgetSpec{..} = (\v1beta1PodDisruptionBudgetSpecMinAvailable -> V1beta1PodDisruptionBudgetSpec { v1beta1PodDisruptionBudgetSpecMinAvailable, ..} ) <$> f v1beta1PodDisruptionBudgetSpecMinAvailable
 {-# INLINE v1beta1PodDisruptionBudgetSpecMinAvailableL #-}
 
@@ -11990,7 +11990,7 @@ v1beta1RoleRefNameL f V1beta1RoleRef{..} = (\v1beta1RoleRefName -> V1beta1RoleRe
 -- * V1beta1RollingUpdateDaemonSet
 
 -- | 'v1beta1RollingUpdateDaemonSetMaxUnavailable' Lens
-v1beta1RollingUpdateDaemonSetMaxUnavailableL :: Lens_' V1beta1RollingUpdateDaemonSet (Maybe A.Value)
+v1beta1RollingUpdateDaemonSetMaxUnavailableL :: Lens_' V1beta1RollingUpdateDaemonSet (Maybe IntOrString)
 v1beta1RollingUpdateDaemonSetMaxUnavailableL f V1beta1RollingUpdateDaemonSet{..} = (\v1beta1RollingUpdateDaemonSetMaxUnavailable -> V1beta1RollingUpdateDaemonSet { v1beta1RollingUpdateDaemonSetMaxUnavailable, ..} ) <$> f v1beta1RollingUpdateDaemonSetMaxUnavailable
 {-# INLINE v1beta1RollingUpdateDaemonSetMaxUnavailableL #-}
 
@@ -13368,7 +13368,7 @@ v1beta2ReplicaSetStatusReplicasL f V1beta2ReplicaSetStatus{..} = (\v1beta2Replic
 -- * V1beta2RollingUpdateDaemonSet
 
 -- | 'v1beta2RollingUpdateDaemonSetMaxUnavailable' Lens
-v1beta2RollingUpdateDaemonSetMaxUnavailableL :: Lens_' V1beta2RollingUpdateDaemonSet (Maybe A.Value)
+v1beta2RollingUpdateDaemonSetMaxUnavailableL :: Lens_' V1beta2RollingUpdateDaemonSet (Maybe IntOrString)
 v1beta2RollingUpdateDaemonSetMaxUnavailableL f V1beta2RollingUpdateDaemonSet{..} = (\v1beta2RollingUpdateDaemonSetMaxUnavailable -> V1beta2RollingUpdateDaemonSet { v1beta2RollingUpdateDaemonSetMaxUnavailable, ..} ) <$> f v1beta2RollingUpdateDaemonSetMaxUnavailable
 {-# INLINE v1beta2RollingUpdateDaemonSetMaxUnavailableL #-}
 
@@ -13377,12 +13377,12 @@ v1beta2RollingUpdateDaemonSetMaxUnavailableL f V1beta2RollingUpdateDaemonSet{..}
 -- * V1beta2RollingUpdateDeployment
 
 -- | 'v1beta2RollingUpdateDeploymentMaxSurge' Lens
-v1beta2RollingUpdateDeploymentMaxSurgeL :: Lens_' V1beta2RollingUpdateDeployment (Maybe A.Value)
+v1beta2RollingUpdateDeploymentMaxSurgeL :: Lens_' V1beta2RollingUpdateDeployment (Maybe IntOrString)
 v1beta2RollingUpdateDeploymentMaxSurgeL f V1beta2RollingUpdateDeployment{..} = (\v1beta2RollingUpdateDeploymentMaxSurge -> V1beta2RollingUpdateDeployment { v1beta2RollingUpdateDeploymentMaxSurge, ..} ) <$> f v1beta2RollingUpdateDeploymentMaxSurge
 {-# INLINE v1beta2RollingUpdateDeploymentMaxSurgeL #-}
 
 -- | 'v1beta2RollingUpdateDeploymentMaxUnavailable' Lens
-v1beta2RollingUpdateDeploymentMaxUnavailableL :: Lens_' V1beta2RollingUpdateDeployment (Maybe A.Value)
+v1beta2RollingUpdateDeploymentMaxUnavailableL :: Lens_' V1beta2RollingUpdateDeployment (Maybe IntOrString)
 v1beta2RollingUpdateDeploymentMaxUnavailableL f V1beta2RollingUpdateDeployment{..} = (\v1beta2RollingUpdateDeploymentMaxUnavailable -> V1beta2RollingUpdateDeployment { v1beta2RollingUpdateDeploymentMaxUnavailable, ..} ) <$> f v1beta2RollingUpdateDeploymentMaxUnavailable
 {-# INLINE v1beta2RollingUpdateDeploymentMaxUnavailableL #-}
 
@@ -13795,12 +13795,12 @@ v2beta1ExternalMetricSourceMetricSelectorL f V2beta1ExternalMetricSource{..} = (
 {-# INLINE v2beta1ExternalMetricSourceMetricSelectorL #-}
 
 -- | 'v2beta1ExternalMetricSourceTargetAverageValue' Lens
-v2beta1ExternalMetricSourceTargetAverageValueL :: Lens_' V2beta1ExternalMetricSource (Maybe Text)
+v2beta1ExternalMetricSourceTargetAverageValueL :: Lens_' V2beta1ExternalMetricSource (Maybe Quantity)
 v2beta1ExternalMetricSourceTargetAverageValueL f V2beta1ExternalMetricSource{..} = (\v2beta1ExternalMetricSourceTargetAverageValue -> V2beta1ExternalMetricSource { v2beta1ExternalMetricSourceTargetAverageValue, ..} ) <$> f v2beta1ExternalMetricSourceTargetAverageValue
 {-# INLINE v2beta1ExternalMetricSourceTargetAverageValueL #-}
 
 -- | 'v2beta1ExternalMetricSourceTargetValue' Lens
-v2beta1ExternalMetricSourceTargetValueL :: Lens_' V2beta1ExternalMetricSource (Maybe Text)
+v2beta1ExternalMetricSourceTargetValueL :: Lens_' V2beta1ExternalMetricSource (Maybe Quantity)
 v2beta1ExternalMetricSourceTargetValueL f V2beta1ExternalMetricSource{..} = (\v2beta1ExternalMetricSourceTargetValue -> V2beta1ExternalMetricSource { v2beta1ExternalMetricSourceTargetValue, ..} ) <$> f v2beta1ExternalMetricSourceTargetValue
 {-# INLINE v2beta1ExternalMetricSourceTargetValueL #-}
 
@@ -13809,12 +13809,12 @@ v2beta1ExternalMetricSourceTargetValueL f V2beta1ExternalMetricSource{..} = (\v2
 -- * V2beta1ExternalMetricStatus
 
 -- | 'v2beta1ExternalMetricStatusCurrentAverageValue' Lens
-v2beta1ExternalMetricStatusCurrentAverageValueL :: Lens_' V2beta1ExternalMetricStatus (Maybe Text)
+v2beta1ExternalMetricStatusCurrentAverageValueL :: Lens_' V2beta1ExternalMetricStatus (Maybe Quantity)
 v2beta1ExternalMetricStatusCurrentAverageValueL f V2beta1ExternalMetricStatus{..} = (\v2beta1ExternalMetricStatusCurrentAverageValue -> V2beta1ExternalMetricStatus { v2beta1ExternalMetricStatusCurrentAverageValue, ..} ) <$> f v2beta1ExternalMetricStatusCurrentAverageValue
 {-# INLINE v2beta1ExternalMetricStatusCurrentAverageValueL #-}
 
 -- | 'v2beta1ExternalMetricStatusCurrentValue' Lens
-v2beta1ExternalMetricStatusCurrentValueL :: Lens_' V2beta1ExternalMetricStatus (Text)
+v2beta1ExternalMetricStatusCurrentValueL :: Lens_' V2beta1ExternalMetricStatus (Quantity)
 v2beta1ExternalMetricStatusCurrentValueL f V2beta1ExternalMetricStatus{..} = (\v2beta1ExternalMetricStatusCurrentValue -> V2beta1ExternalMetricStatus { v2beta1ExternalMetricStatusCurrentValue, ..} ) <$> f v2beta1ExternalMetricStatusCurrentValue
 {-# INLINE v2beta1ExternalMetricStatusCurrentValueL #-}
 
@@ -14031,7 +14031,7 @@ v2beta1MetricStatusTypeL f V2beta1MetricStatus{..} = (\v2beta1MetricStatusType -
 -- * V2beta1ObjectMetricSource
 
 -- | 'v2beta1ObjectMetricSourceAverageValue' Lens
-v2beta1ObjectMetricSourceAverageValueL :: Lens_' V2beta1ObjectMetricSource (Maybe Text)
+v2beta1ObjectMetricSourceAverageValueL :: Lens_' V2beta1ObjectMetricSource (Maybe Quantity)
 v2beta1ObjectMetricSourceAverageValueL f V2beta1ObjectMetricSource{..} = (\v2beta1ObjectMetricSourceAverageValue -> V2beta1ObjectMetricSource { v2beta1ObjectMetricSourceAverageValue, ..} ) <$> f v2beta1ObjectMetricSourceAverageValue
 {-# INLINE v2beta1ObjectMetricSourceAverageValueL #-}
 
@@ -14051,7 +14051,7 @@ v2beta1ObjectMetricSourceTargetL f V2beta1ObjectMetricSource{..} = (\v2beta1Obje
 {-# INLINE v2beta1ObjectMetricSourceTargetL #-}
 
 -- | 'v2beta1ObjectMetricSourceTargetValue' Lens
-v2beta1ObjectMetricSourceTargetValueL :: Lens_' V2beta1ObjectMetricSource (Text)
+v2beta1ObjectMetricSourceTargetValueL :: Lens_' V2beta1ObjectMetricSource (Quantity)
 v2beta1ObjectMetricSourceTargetValueL f V2beta1ObjectMetricSource{..} = (\v2beta1ObjectMetricSourceTargetValue -> V2beta1ObjectMetricSource { v2beta1ObjectMetricSourceTargetValue, ..} ) <$> f v2beta1ObjectMetricSourceTargetValue
 {-# INLINE v2beta1ObjectMetricSourceTargetValueL #-}
 
@@ -14060,12 +14060,12 @@ v2beta1ObjectMetricSourceTargetValueL f V2beta1ObjectMetricSource{..} = (\v2beta
 -- * V2beta1ObjectMetricStatus
 
 -- | 'v2beta1ObjectMetricStatusAverageValue' Lens
-v2beta1ObjectMetricStatusAverageValueL :: Lens_' V2beta1ObjectMetricStatus (Maybe Text)
+v2beta1ObjectMetricStatusAverageValueL :: Lens_' V2beta1ObjectMetricStatus (Maybe Quantity)
 v2beta1ObjectMetricStatusAverageValueL f V2beta1ObjectMetricStatus{..} = (\v2beta1ObjectMetricStatusAverageValue -> V2beta1ObjectMetricStatus { v2beta1ObjectMetricStatusAverageValue, ..} ) <$> f v2beta1ObjectMetricStatusAverageValue
 {-# INLINE v2beta1ObjectMetricStatusAverageValueL #-}
 
 -- | 'v2beta1ObjectMetricStatusCurrentValue' Lens
-v2beta1ObjectMetricStatusCurrentValueL :: Lens_' V2beta1ObjectMetricStatus (Text)
+v2beta1ObjectMetricStatusCurrentValueL :: Lens_' V2beta1ObjectMetricStatus (Quantity)
 v2beta1ObjectMetricStatusCurrentValueL f V2beta1ObjectMetricStatus{..} = (\v2beta1ObjectMetricStatusCurrentValue -> V2beta1ObjectMetricStatus { v2beta1ObjectMetricStatusCurrentValue, ..} ) <$> f v2beta1ObjectMetricStatusCurrentValue
 {-# INLINE v2beta1ObjectMetricStatusCurrentValueL #-}
 
@@ -14099,7 +14099,7 @@ v2beta1PodsMetricSourceSelectorL f V2beta1PodsMetricSource{..} = (\v2beta1PodsMe
 {-# INLINE v2beta1PodsMetricSourceSelectorL #-}
 
 -- | 'v2beta1PodsMetricSourceTargetAverageValue' Lens
-v2beta1PodsMetricSourceTargetAverageValueL :: Lens_' V2beta1PodsMetricSource (Text)
+v2beta1PodsMetricSourceTargetAverageValueL :: Lens_' V2beta1PodsMetricSource (Quantity)
 v2beta1PodsMetricSourceTargetAverageValueL f V2beta1PodsMetricSource{..} = (\v2beta1PodsMetricSourceTargetAverageValue -> V2beta1PodsMetricSource { v2beta1PodsMetricSourceTargetAverageValue, ..} ) <$> f v2beta1PodsMetricSourceTargetAverageValue
 {-# INLINE v2beta1PodsMetricSourceTargetAverageValueL #-}
 
@@ -14108,7 +14108,7 @@ v2beta1PodsMetricSourceTargetAverageValueL f V2beta1PodsMetricSource{..} = (\v2b
 -- * V2beta1PodsMetricStatus
 
 -- | 'v2beta1PodsMetricStatusCurrentAverageValue' Lens
-v2beta1PodsMetricStatusCurrentAverageValueL :: Lens_' V2beta1PodsMetricStatus (Text)
+v2beta1PodsMetricStatusCurrentAverageValueL :: Lens_' V2beta1PodsMetricStatus (Quantity)
 v2beta1PodsMetricStatusCurrentAverageValueL f V2beta1PodsMetricStatus{..} = (\v2beta1PodsMetricStatusCurrentAverageValue -> V2beta1PodsMetricStatus { v2beta1PodsMetricStatusCurrentAverageValue, ..} ) <$> f v2beta1PodsMetricStatusCurrentAverageValue
 {-# INLINE v2beta1PodsMetricStatusCurrentAverageValueL #-}
 
@@ -14137,7 +14137,7 @@ v2beta1ResourceMetricSourceTargetAverageUtilizationL f V2beta1ResourceMetricSour
 {-# INLINE v2beta1ResourceMetricSourceTargetAverageUtilizationL #-}
 
 -- | 'v2beta1ResourceMetricSourceTargetAverageValue' Lens
-v2beta1ResourceMetricSourceTargetAverageValueL :: Lens_' V2beta1ResourceMetricSource (Maybe Text)
+v2beta1ResourceMetricSourceTargetAverageValueL :: Lens_' V2beta1ResourceMetricSource (Maybe Quantity)
 v2beta1ResourceMetricSourceTargetAverageValueL f V2beta1ResourceMetricSource{..} = (\v2beta1ResourceMetricSourceTargetAverageValue -> V2beta1ResourceMetricSource { v2beta1ResourceMetricSourceTargetAverageValue, ..} ) <$> f v2beta1ResourceMetricSourceTargetAverageValue
 {-# INLINE v2beta1ResourceMetricSourceTargetAverageValueL #-}
 
@@ -14151,7 +14151,7 @@ v2beta1ResourceMetricStatusCurrentAverageUtilizationL f V2beta1ResourceMetricSta
 {-# INLINE v2beta1ResourceMetricStatusCurrentAverageUtilizationL #-}
 
 -- | 'v2beta1ResourceMetricStatusCurrentAverageValue' Lens
-v2beta1ResourceMetricStatusCurrentAverageValueL :: Lens_' V2beta1ResourceMetricStatus (Text)
+v2beta1ResourceMetricStatusCurrentAverageValueL :: Lens_' V2beta1ResourceMetricStatus (Quantity)
 v2beta1ResourceMetricStatusCurrentAverageValueL f V2beta1ResourceMetricStatus{..} = (\v2beta1ResourceMetricStatusCurrentAverageValue -> V2beta1ResourceMetricStatus { v2beta1ResourceMetricStatusCurrentAverageValue, ..} ) <$> f v2beta1ResourceMetricStatusCurrentAverageValue
 {-# INLINE v2beta1ResourceMetricStatusCurrentAverageValueL #-}
 
@@ -14429,7 +14429,7 @@ v2beta2MetricTargetAverageUtilizationL f V2beta2MetricTarget{..} = (\v2beta2Metr
 {-# INLINE v2beta2MetricTargetAverageUtilizationL #-}
 
 -- | 'v2beta2MetricTargetAverageValue' Lens
-v2beta2MetricTargetAverageValueL :: Lens_' V2beta2MetricTarget (Maybe Text)
+v2beta2MetricTargetAverageValueL :: Lens_' V2beta2MetricTarget (Maybe Quantity)
 v2beta2MetricTargetAverageValueL f V2beta2MetricTarget{..} = (\v2beta2MetricTargetAverageValue -> V2beta2MetricTarget { v2beta2MetricTargetAverageValue, ..} ) <$> f v2beta2MetricTargetAverageValue
 {-# INLINE v2beta2MetricTargetAverageValueL #-}
 
@@ -14439,7 +14439,7 @@ v2beta2MetricTargetTypeL f V2beta2MetricTarget{..} = (\v2beta2MetricTargetType -
 {-# INLINE v2beta2MetricTargetTypeL #-}
 
 -- | 'v2beta2MetricTargetValue' Lens
-v2beta2MetricTargetValueL :: Lens_' V2beta2MetricTarget (Maybe Text)
+v2beta2MetricTargetValueL :: Lens_' V2beta2MetricTarget (Maybe Quantity)
 v2beta2MetricTargetValueL f V2beta2MetricTarget{..} = (\v2beta2MetricTargetValue -> V2beta2MetricTarget { v2beta2MetricTargetValue, ..} ) <$> f v2beta2MetricTargetValue
 {-# INLINE v2beta2MetricTargetValueL #-}
 
@@ -14453,12 +14453,12 @@ v2beta2MetricValueStatusAverageUtilizationL f V2beta2MetricValueStatus{..} = (\v
 {-# INLINE v2beta2MetricValueStatusAverageUtilizationL #-}
 
 -- | 'v2beta2MetricValueStatusAverageValue' Lens
-v2beta2MetricValueStatusAverageValueL :: Lens_' V2beta2MetricValueStatus (Maybe Text)
+v2beta2MetricValueStatusAverageValueL :: Lens_' V2beta2MetricValueStatus (Maybe Quantity)
 v2beta2MetricValueStatusAverageValueL f V2beta2MetricValueStatus{..} = (\v2beta2MetricValueStatusAverageValue -> V2beta2MetricValueStatus { v2beta2MetricValueStatusAverageValue, ..} ) <$> f v2beta2MetricValueStatusAverageValue
 {-# INLINE v2beta2MetricValueStatusAverageValueL #-}
 
 -- | 'v2beta2MetricValueStatusValue' Lens
-v2beta2MetricValueStatusValueL :: Lens_' V2beta2MetricValueStatus (Maybe Text)
+v2beta2MetricValueStatusValueL :: Lens_' V2beta2MetricValueStatus (Maybe Quantity)
 v2beta2MetricValueStatusValueL f V2beta2MetricValueStatus{..} = (\v2beta2MetricValueStatusValue -> V2beta2MetricValueStatus { v2beta2MetricValueStatusValue, ..} ) <$> f v2beta2MetricValueStatusValue
 {-# INLINE v2beta2MetricValueStatusValueL #-}
 

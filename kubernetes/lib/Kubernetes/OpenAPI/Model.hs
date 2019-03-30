@@ -26,10 +26,11 @@ Module : Kubernetes.OpenAPI.Model
 {-# LANGUAGE TypeFamilies #-}
 {-# OPTIONS_GHC -fno-warn-unused-matches -fno-warn-unused-binds -fno-warn-unused-imports #-}
 
-module Kubernetes.OpenAPI.Model where
+module Kubernetes.OpenAPI.Model (module Kubernetes.OpenAPI.Model, module Kubernetes.OpenAPI.ImportMappings) where
 
 import Kubernetes.OpenAPI.Core
 import Kubernetes.OpenAPI.MimeTypes
+import Kubernetes.OpenAPI.ImportMappings
 
 import Data.Aeson ((.:),(.:!),(.:?),(.=))
 
@@ -735,8 +736,8 @@ mkAppsV1beta1RollbackConfig =
 -- | AppsV1beta1RollingUpdateDeployment
 -- Spec to control the desired behavior of rolling update.
 data AppsV1beta1RollingUpdateDeployment = AppsV1beta1RollingUpdateDeployment
-  { appsV1beta1RollingUpdateDeploymentMaxSurge :: !(Maybe A.Value) -- ^ "maxSurge" - The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to 25%. Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new ReplicaSet can be scaled up further, ensuring that total number of pods running at any time during the update is atmost 130% of desired pods.
-  , appsV1beta1RollingUpdateDeploymentMaxUnavailable :: !(Maybe A.Value) -- ^ "maxUnavailable" - The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults to 25%. Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old ReplicaSet can be scaled down further, followed by scaling up the new ReplicaSet, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.
+  { appsV1beta1RollingUpdateDeploymentMaxSurge :: !(Maybe IntOrString) -- ^ "maxSurge"
+  , appsV1beta1RollingUpdateDeploymentMaxUnavailable :: !(Maybe IntOrString) -- ^ "maxUnavailable"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON AppsV1beta1RollingUpdateDeployment
@@ -1612,8 +1613,8 @@ mkExtensionsV1beta1RollbackConfig =
 -- | ExtensionsV1beta1RollingUpdateDeployment
 -- Spec to control the desired behavior of rolling update.
 data ExtensionsV1beta1RollingUpdateDeployment = ExtensionsV1beta1RollingUpdateDeployment
-  { extensionsV1beta1RollingUpdateDeploymentMaxSurge :: !(Maybe A.Value) -- ^ "maxSurge" - The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. By default, a value of 1 is used. Example: when this is set to 30%, the new RC can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new RC can be scaled up further, ensuring that total number of pods running at any time during the update is atmost 130% of desired pods.
-  , extensionsV1beta1RollingUpdateDeploymentMaxUnavailable :: !(Maybe A.Value) -- ^ "maxUnavailable" - The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. By default, a fixed value of 1 is used. Example: when this is set to 30%, the old RC can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old RC can be scaled down further, followed by scaling up the new RC, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.
+  { extensionsV1beta1RollingUpdateDeploymentMaxSurge :: !(Maybe IntOrString) -- ^ "maxSurge"
+  , extensionsV1beta1RollingUpdateDeploymentMaxUnavailable :: !(Maybe IntOrString) -- ^ "maxUnavailable"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON ExtensionsV1beta1RollingUpdateDeployment
@@ -5381,7 +5382,7 @@ mkV1DownwardAPIVolumeSource =
 -- Represents an empty directory for a pod. Empty directory volumes support ownership management and SELinux relabeling.
 data V1EmptyDirVolumeSource = V1EmptyDirVolumeSource
   { v1EmptyDirVolumeSourceMedium :: !(Maybe Text) -- ^ "medium" - What type of storage medium should back this directory. The default is \&quot;\&quot; which means to use the node&#39;s default medium. Must be an empty string (default) or Memory. More info: https://kubernetes.io/docs/concepts/storage/volumes#emptydir
-  , v1EmptyDirVolumeSourceSizeLimit :: !(Maybe Text) -- ^ "sizeLimit" - Total amount of local storage required for this EmptyDir volume. The size limit is also applicable for memory medium. The maximum usage on memory medium EmptyDir would be the minimum value between the SizeLimit specified here and the sum of memory limits of all containers in a pod. The default is nil which means that the limit is undefined. More info: http://kubernetes.io/docs/user-guide/volumes#emptydir
+  , v1EmptyDirVolumeSourceSizeLimit :: !(Maybe Quantity) -- ^ "sizeLimit"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V1EmptyDirVolumeSource
@@ -6335,7 +6336,7 @@ data V1HTTPGetAction = V1HTTPGetAction
   { v1HTTPGetActionHost :: !(Maybe Text) -- ^ "host" - Host name to connect to, defaults to the pod IP. You probably want to set \&quot;Host\&quot; in httpHeaders instead.
   , v1HTTPGetActionHttpHeaders :: !(Maybe [V1HTTPHeader]) -- ^ "httpHeaders" - Custom headers to set in the request. HTTP allows repeated headers.
   , v1HTTPGetActionPath :: !(Maybe Text) -- ^ "path" - Path to access on the HTTP server.
-  , v1HTTPGetActionPort :: !(A.Value) -- ^ /Required/ "port" - Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.
+  , v1HTTPGetActionPort :: !(IntOrString) -- ^ /Required/ "port"
   , v1HTTPGetActionScheme :: !(Maybe Text) -- ^ "scheme" - Scheme to use for connecting to the host. Defaults to HTTP.
   } deriving (P.Show, P.Eq, P.Typeable)
 
@@ -6363,7 +6364,7 @@ instance A.ToJSON V1HTTPGetAction where
 
 -- | Construct a value of type 'V1HTTPGetAction' (by applying it's required fields, if any)
 mkV1HTTPGetAction
-  :: A.Value -- ^ 'v1HTTPGetActionPort': Name or number of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.
+  :: IntOrString -- ^ 'v1HTTPGetActionPort' 
   -> V1HTTPGetAction
 mkV1HTTPGetAction v1HTTPGetActionPort =
   V1HTTPGetAction
@@ -7366,11 +7367,11 @@ mkV1LimitRange =
 -- | V1LimitRangeItem
 -- LimitRangeItem defines a min/max usage limit for any resource that matches on kind.
 data V1LimitRangeItem = V1LimitRangeItem
-  { v1LimitRangeItemDefault :: !(Maybe (Map.Map String Text)) -- ^ "default" - Default resource requirement limit value by resource name if resource limit is omitted.
-  , v1LimitRangeItemDefaultRequest :: !(Maybe (Map.Map String Text)) -- ^ "defaultRequest" - DefaultRequest is the default resource requirement request value by resource name if resource request is omitted.
-  , v1LimitRangeItemMax :: !(Maybe (Map.Map String Text)) -- ^ "max" - Max usage constraints on this kind by resource name.
-  , v1LimitRangeItemMaxLimitRequestRatio :: !(Maybe (Map.Map String Text)) -- ^ "maxLimitRequestRatio" - MaxLimitRequestRatio if specified, the named resource must have a request and limit that are both non-zero where limit divided by request is less than or equal to the enumerated value; this represents the max burst for the named resource.
-  , v1LimitRangeItemMin :: !(Maybe (Map.Map String Text)) -- ^ "min" - Min usage constraints on this kind by resource name.
+  { v1LimitRangeItemDefault :: !(Maybe (Map.Map String Quantity)) -- ^ "default" - Default resource requirement limit value by resource name if resource limit is omitted.
+  , v1LimitRangeItemDefaultRequest :: !(Maybe (Map.Map String Quantity)) -- ^ "defaultRequest" - DefaultRequest is the default resource requirement request value by resource name if resource request is omitted.
+  , v1LimitRangeItemMax :: !(Maybe (Map.Map String Quantity)) -- ^ "max" - Max usage constraints on this kind by resource name.
+  , v1LimitRangeItemMaxLimitRequestRatio :: !(Maybe (Map.Map String Quantity)) -- ^ "maxLimitRequestRatio" - MaxLimitRequestRatio if specified, the named resource must have a request and limit that are both non-zero where limit divided by request is less than or equal to the enumerated value; this represents the max burst for the named resource.
+  , v1LimitRangeItemMin :: !(Maybe (Map.Map String Quantity)) -- ^ "min" - Min usage constraints on this kind by resource name.
   , v1LimitRangeItemType :: !(Maybe Text) -- ^ "type" - Type of resource that this limit applies to.
   } deriving (P.Show, P.Eq, P.Typeable)
 
@@ -8065,7 +8066,7 @@ mkV1NetworkPolicyPeer =
 -- | V1NetworkPolicyPort
 -- NetworkPolicyPort describes a port to allow traffic on
 data V1NetworkPolicyPort = V1NetworkPolicyPort
-  { v1NetworkPolicyPortPort :: !(Maybe A.Value) -- ^ "port" - The port on the given protocol. This can either be a numerical or named port on a pod. If this field is not provided, this matches all port names and numbers.
+  { v1NetworkPolicyPortPort :: !(Maybe IntOrString) -- ^ "port"
   , v1NetworkPolicyPortProtocol :: !(Maybe Text) -- ^ "protocol" - The protocol (TCP, UDP, or SCTP) which traffic must match. If not specified, this field defaults to TCP.
   } deriving (P.Show, P.Eq, P.Typeable)
 
@@ -8597,8 +8598,8 @@ mkV1NodeSpec =
 -- NodeStatus is information about the current status of a node.
 data V1NodeStatus = V1NodeStatus
   { v1NodeStatusAddresses :: !(Maybe [V1NodeAddress]) -- ^ "addresses" - List of addresses reachable to the node. Queried from cloud provider, if available. More info: https://kubernetes.io/docs/concepts/nodes/node/#addresses
-  , v1NodeStatusAllocatable :: !(Maybe (Map.Map String Text)) -- ^ "allocatable" - Allocatable represents the resources of a node that are available for scheduling. Defaults to Capacity.
-  , v1NodeStatusCapacity :: !(Maybe (Map.Map String Text)) -- ^ "capacity" - Capacity represents the total resources of a node. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
+  , v1NodeStatusAllocatable :: !(Maybe (Map.Map String Quantity)) -- ^ "allocatable" - Allocatable represents the resources of a node that are available for scheduling. Defaults to Capacity.
+  , v1NodeStatusCapacity :: !(Maybe (Map.Map String Quantity)) -- ^ "capacity" - Capacity represents the total resources of a node. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
   , v1NodeStatusConditions :: !(Maybe [V1NodeCondition]) -- ^ "conditions" - Conditions is an array of current observed node conditions. More info: https://kubernetes.io/docs/concepts/nodes/node/#condition
   , v1NodeStatusConfig :: !(Maybe V1NodeConfigStatus) -- ^ "config"
   , v1NodeStatusDaemonEndpoints :: !(Maybe V1NodeDaemonEndpoints) -- ^ "daemonEndpoints"
@@ -9273,7 +9274,7 @@ mkV1PersistentVolumeClaimSpec =
 -- PersistentVolumeClaimStatus is the current status of a persistent volume claim.
 data V1PersistentVolumeClaimStatus = V1PersistentVolumeClaimStatus
   { v1PersistentVolumeClaimStatusAccessModes :: !(Maybe [Text]) -- ^ "accessModes" - AccessModes contains the actual access modes the volume backing the PVC has. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#access-modes-1
-  , v1PersistentVolumeClaimStatusCapacity :: !(Maybe (Map.Map String Text)) -- ^ "capacity" - Represents the actual resources of the underlying volume.
+  , v1PersistentVolumeClaimStatusCapacity :: !(Maybe (Map.Map String Quantity)) -- ^ "capacity" - Represents the actual resources of the underlying volume.
   , v1PersistentVolumeClaimStatusConditions :: !(Maybe [V1PersistentVolumeClaimCondition]) -- ^ "conditions" - Current Condition of persistent volume claim. If underlying persistent volume is being resized then the Condition will be set to &#39;ResizeStarted&#39;.
   , v1PersistentVolumeClaimStatusPhase :: !(Maybe Text) -- ^ "phase" - Phase represents the current phase of PersistentVolumeClaim.
   } deriving (P.Show, P.Eq, P.Typeable)
@@ -9393,7 +9394,7 @@ data V1PersistentVolumeSpec = V1PersistentVolumeSpec
   , v1PersistentVolumeSpecAwsElasticBlockStore :: !(Maybe V1AWSElasticBlockStoreVolumeSource) -- ^ "awsElasticBlockStore"
   , v1PersistentVolumeSpecAzureDisk :: !(Maybe V1AzureDiskVolumeSource) -- ^ "azureDisk"
   , v1PersistentVolumeSpecAzureFile :: !(Maybe V1AzureFilePersistentVolumeSource) -- ^ "azureFile"
-  , v1PersistentVolumeSpecCapacity :: !(Maybe (Map.Map String Text)) -- ^ "capacity" - A description of the persistent volume&#39;s resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
+  , v1PersistentVolumeSpecCapacity :: !(Maybe (Map.Map String Quantity)) -- ^ "capacity" - A description of the persistent volume&#39;s resources and capacity. More info: https://kubernetes.io/docs/concepts/storage/persistent-volumes#capacity
   , v1PersistentVolumeSpecCephfs :: !(Maybe V1CephFSPersistentVolumeSource) -- ^ "cephfs"
   , v1PersistentVolumeSpecCinder :: !(Maybe V1CinderPersistentVolumeSource) -- ^ "cinder"
   , v1PersistentVolumeSpecClaimRef :: !(Maybe V1ObjectReference) -- ^ "claimRef"
@@ -11240,7 +11241,7 @@ mkV1ResourceAttributes =
 -- ResourceFieldSelector represents container resources (cpu, memory) and their output format
 data V1ResourceFieldSelector = V1ResourceFieldSelector
   { v1ResourceFieldSelectorContainerName :: !(Maybe Text) -- ^ "containerName" - Container name: required for volumes, optional for env vars
-  , v1ResourceFieldSelectorDivisor :: !(Maybe Text) -- ^ "divisor" - Specifies the output format of the exposed resources, defaults to \&quot;1\&quot;
+  , v1ResourceFieldSelectorDivisor :: !(Maybe Quantity) -- ^ "divisor"
   , v1ResourceFieldSelectorResource :: !(Text) -- ^ /Required/ "resource" - Required: resource to select
   } deriving (P.Show, P.Eq, P.Typeable)
 
@@ -11364,7 +11365,7 @@ mkV1ResourceQuotaList v1ResourceQuotaListItems =
 -- | V1ResourceQuotaSpec
 -- ResourceQuotaSpec defines the desired hard limits to enforce for Quota.
 data V1ResourceQuotaSpec = V1ResourceQuotaSpec
-  { v1ResourceQuotaSpecHard :: !(Maybe (Map.Map String Text)) -- ^ "hard" - hard is the set of desired hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/
+  { v1ResourceQuotaSpecHard :: !(Maybe (Map.Map String Quantity)) -- ^ "hard" - hard is the set of desired hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/
   , v1ResourceQuotaSpecScopeSelector :: !(Maybe V1ScopeSelector) -- ^ "scopeSelector"
   , v1ResourceQuotaSpecScopes :: !(Maybe [Text]) -- ^ "scopes" - A collection of filters that must match each object tracked by a quota. If not specified, the quota matches all objects.
   } deriving (P.Show, P.Eq, P.Typeable)
@@ -11401,8 +11402,8 @@ mkV1ResourceQuotaSpec =
 -- | V1ResourceQuotaStatus
 -- ResourceQuotaStatus defines the enforced hard limits and observed use.
 data V1ResourceQuotaStatus = V1ResourceQuotaStatus
-  { v1ResourceQuotaStatusHard :: !(Maybe (Map.Map String Text)) -- ^ "hard" - Hard is the set of enforced hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/
-  , v1ResourceQuotaStatusUsed :: !(Maybe (Map.Map String Text)) -- ^ "used" - Used is the current observed total usage of the resource in the namespace.
+  { v1ResourceQuotaStatusHard :: !(Maybe (Map.Map String Quantity)) -- ^ "hard" - Hard is the set of enforced hard limits for each named resource. More info: https://kubernetes.io/docs/concepts/policy/resource-quotas/
+  , v1ResourceQuotaStatusUsed :: !(Maybe (Map.Map String Quantity)) -- ^ "used" - Used is the current observed total usage of the resource in the namespace.
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V1ResourceQuotaStatus
@@ -11434,8 +11435,8 @@ mkV1ResourceQuotaStatus =
 -- | V1ResourceRequirements
 -- ResourceRequirements describes the compute resource requirements.
 data V1ResourceRequirements = V1ResourceRequirements
-  { v1ResourceRequirementsLimits :: !(Maybe (Map.Map String Text)) -- ^ "limits" - Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
-  , v1ResourceRequirementsRequests :: !(Maybe (Map.Map String Text)) -- ^ "requests" - Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+  { v1ResourceRequirementsLimits :: !(Maybe (Map.Map String Quantity)) -- ^ "limits" - Limits describes the maximum amount of compute resources allowed. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
+  , v1ResourceRequirementsRequests :: !(Maybe (Map.Map String Quantity)) -- ^ "requests" - Requests describes the minimum amount of compute resources required. If Requests is omitted for a container, it defaults to Limits if that is explicitly specified, otherwise to an implementation-defined value. More info: https://kubernetes.io/docs/concepts/configuration/manage-compute-resources-container/
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V1ResourceRequirements
@@ -11721,7 +11722,7 @@ mkV1RoleRef v1RoleRefApiGroup v1RoleRefKind v1RoleRefName =
 -- | V1RollingUpdateDaemonSet
 -- Spec to control the desired behavior of daemon set rolling update.
 data V1RollingUpdateDaemonSet = V1RollingUpdateDaemonSet
-  { v1RollingUpdateDaemonSetMaxUnavailable :: !(Maybe A.Value) -- ^ "maxUnavailable" - The maximum number of DaemonSet pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of total number of DaemonSet pods at the start of the update (ex: 10%). Absolute number is calculated from percentage by rounding up. This cannot be 0. Default value is 1. Example: when this is set to 30%, at most 30% of the total number of nodes that should be running the daemon pod (i.e. status.desiredNumberScheduled) can have their pods stopped for an update at any given time. The update starts by stopping at most 30% of those DaemonSet pods and then brings up new DaemonSet pods in their place. Once the new pods are available, it then proceeds onto other DaemonSet pods, thus ensuring that at least 70% of original number of DaemonSet pods are available at all times during the update.
+  { v1RollingUpdateDaemonSetMaxUnavailable :: !(Maybe IntOrString) -- ^ "maxUnavailable"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V1RollingUpdateDaemonSet
@@ -11750,8 +11751,8 @@ mkV1RollingUpdateDaemonSet =
 -- | V1RollingUpdateDeployment
 -- Spec to control the desired behavior of rolling update.
 data V1RollingUpdateDeployment = V1RollingUpdateDeployment
-  { v1RollingUpdateDeploymentMaxSurge :: !(Maybe A.Value) -- ^ "maxSurge" - The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to 25%. Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new ReplicaSet can be scaled up further, ensuring that total number of pods running at any time during the update is at most 130% of desired pods.
-  , v1RollingUpdateDeploymentMaxUnavailable :: !(Maybe A.Value) -- ^ "maxUnavailable" - The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults to 25%. Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old ReplicaSet can be scaled down further, followed by scaling up the new ReplicaSet, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.
+  { v1RollingUpdateDeploymentMaxSurge :: !(Maybe IntOrString) -- ^ "maxSurge"
+  , v1RollingUpdateDeploymentMaxUnavailable :: !(Maybe IntOrString) -- ^ "maxUnavailable"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V1RollingUpdateDeployment
@@ -12907,7 +12908,7 @@ data V1ServicePort = V1ServicePort
   , v1ServicePortNodePort :: !(Maybe Int) -- ^ "nodePort" - The port on each node on which this service is exposed when type&#x3D;NodePort or LoadBalancer. Usually assigned by the system. If specified, it will be allocated to the service if unused or else creation of the service will fail. Default is to auto-allocate a port if the ServiceType of this Service requires one. More info: https://kubernetes.io/docs/concepts/services-networking/service/#type-nodeport
   , v1ServicePortPort :: !(Int) -- ^ /Required/ "port" - The port that will be exposed by this service.
   , v1ServicePortProtocol :: !(Maybe Text) -- ^ "protocol" - The IP protocol for this port. Supports \&quot;TCP\&quot;, \&quot;UDP\&quot;, and \&quot;SCTP\&quot;. Default is TCP.
-  , v1ServicePortTargetPort :: !(Maybe A.Value) -- ^ "targetPort" - Number or name of the port to access on the pods targeted by the service. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME. If this is a string, it will be looked up as a named port in the target Pod&#39;s container ports. If this is not specified, the value of the &#39;port&#39; field is used (an identity map). This field is ignored for services with clusterIP&#x3D;None, and should be omitted or set equal to the &#39;port&#39; field. More info: https://kubernetes.io/docs/concepts/services-networking/service/#defining-a-service
+  , v1ServicePortTargetPort :: !(Maybe IntOrString) -- ^ "targetPort"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V1ServicePort
@@ -14007,7 +14008,7 @@ mkV1Sysctl v1SysctlName v1SysctlValue =
 -- TCPSocketAction describes an action based on opening a socket
 data V1TCPSocketAction = V1TCPSocketAction
   { v1TCPSocketActionHost :: !(Maybe Text) -- ^ "host" - Optional: Host name to connect to, defaults to the pod IP.
-  , v1TCPSocketActionPort :: !(A.Value) -- ^ /Required/ "port" - Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.
+  , v1TCPSocketActionPort :: !(IntOrString) -- ^ /Required/ "port"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V1TCPSocketAction
@@ -14028,7 +14029,7 @@ instance A.ToJSON V1TCPSocketAction where
 
 -- | Construct a value of type 'V1TCPSocketAction' (by applying it's required fields, if any)
 mkV1TCPSocketAction
-  :: A.Value -- ^ 'v1TCPSocketActionPort': Number or name of the port to access on the container. Number must be in the range 1 to 65535. Name must be an IANA_SVC_NAME.
+  :: IntOrString -- ^ 'v1TCPSocketActionPort' 
   -> V1TCPSocketAction
 mkV1TCPSocketAction v1TCPSocketActionPort =
   V1TCPSocketAction
@@ -18536,7 +18537,7 @@ mkV1beta1Ingress =
 -- IngressBackend describes all endpoints for a given service and port.
 data V1beta1IngressBackend = V1beta1IngressBackend
   { v1beta1IngressBackendServiceName :: !(Text) -- ^ /Required/ "serviceName" - Specifies the name of the referenced service.
-  , v1beta1IngressBackendServicePort :: !(A.Value) -- ^ /Required/ "servicePort" - Specifies the port of the referenced service.
+  , v1beta1IngressBackendServicePort :: !(IntOrString) -- ^ /Required/ "servicePort"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V1beta1IngressBackend
@@ -18558,7 +18559,7 @@ instance A.ToJSON V1beta1IngressBackend where
 -- | Construct a value of type 'V1beta1IngressBackend' (by applying it's required fields, if any)
 mkV1beta1IngressBackend
   :: Text -- ^ 'v1beta1IngressBackendServiceName': Specifies the name of the referenced service.
-  -> A.Value -- ^ 'v1beta1IngressBackendServicePort': Specifies the port of the referenced service.
+  -> IntOrString -- ^ 'v1beta1IngressBackendServicePort' 
   -> V1beta1IngressBackend
 mkV1beta1IngressBackend v1beta1IngressBackendServiceName v1beta1IngressBackendServicePort =
   V1beta1IngressBackend
@@ -19389,7 +19390,7 @@ mkV1beta1NetworkPolicyPeer =
 -- | V1beta1NetworkPolicyPort
 -- DEPRECATED 1.9 - This group version of NetworkPolicyPort is deprecated by networking/v1/NetworkPolicyPort.
 data V1beta1NetworkPolicyPort = V1beta1NetworkPolicyPort
-  { v1beta1NetworkPolicyPortPort :: !(Maybe A.Value) -- ^ "port" - If specified, the port on the given protocol.  This can either be a numerical or named port on a pod.  If this field is not provided, this matches all port names and numbers. If present, only traffic on the specified protocol AND port will be matched.
+  { v1beta1NetworkPolicyPortPort :: !(Maybe IntOrString) -- ^ "port"
   , v1beta1NetworkPolicyPortProtocol :: !(Maybe Text) -- ^ "protocol" - Optional.  The protocol (TCP, UDP, or SCTP) which traffic must match. If not specified, this field defaults to TCP.
   } deriving (P.Show, P.Eq, P.Typeable)
 
@@ -19618,8 +19619,8 @@ mkV1beta1PodDisruptionBudgetList v1beta1PodDisruptionBudgetListItems =
 -- | V1beta1PodDisruptionBudgetSpec
 -- PodDisruptionBudgetSpec is a description of a PodDisruptionBudget.
 data V1beta1PodDisruptionBudgetSpec = V1beta1PodDisruptionBudgetSpec
-  { v1beta1PodDisruptionBudgetSpecMaxUnavailable :: !(Maybe A.Value) -- ^ "maxUnavailable" - An eviction is allowed if at most \&quot;maxUnavailable\&quot; pods selected by \&quot;selector\&quot; are unavailable after the eviction, i.e. even in absence of the evicted pod. For example, one can prevent all voluntary evictions by specifying 0. This is a mutually exclusive setting with \&quot;minAvailable\&quot;.
-  , v1beta1PodDisruptionBudgetSpecMinAvailable :: !(Maybe A.Value) -- ^ "minAvailable" - An eviction is allowed if at least \&quot;minAvailable\&quot; pods selected by \&quot;selector\&quot; will still be available after the eviction, i.e. even in the absence of the evicted pod.  So for example you can prevent all voluntary evictions by specifying \&quot;100%\&quot;.
+  { v1beta1PodDisruptionBudgetSpecMaxUnavailable :: !(Maybe IntOrString) -- ^ "maxUnavailable"
+  , v1beta1PodDisruptionBudgetSpecMinAvailable :: !(Maybe IntOrString) -- ^ "minAvailable"
   , v1beta1PodDisruptionBudgetSpecSelector :: !(Maybe V1LabelSelector) -- ^ "selector"
   } deriving (P.Show, P.Eq, P.Typeable)
 
@@ -20378,7 +20379,7 @@ mkV1beta1RoleRef v1beta1RoleRefApiGroup v1beta1RoleRefKind v1beta1RoleRefName =
 -- | V1beta1RollingUpdateDaemonSet
 -- Spec to control the desired behavior of daemon set rolling update.
 data V1beta1RollingUpdateDaemonSet = V1beta1RollingUpdateDaemonSet
-  { v1beta1RollingUpdateDaemonSetMaxUnavailable :: !(Maybe A.Value) -- ^ "maxUnavailable" - The maximum number of DaemonSet pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of total number of DaemonSet pods at the start of the update (ex: 10%). Absolute number is calculated from percentage by rounding up. This cannot be 0. Default value is 1. Example: when this is set to 30%, at most 30% of the total number of nodes that should be running the daemon pod (i.e. status.desiredNumberScheduled) can have their pods stopped for an update at any given time. The update starts by stopping at most 30% of those DaemonSet pods and then brings up new DaemonSet pods in their place. Once the new pods are available, it then proceeds onto other DaemonSet pods, thus ensuring that at least 70% of original number of DaemonSet pods are available at all times during the update.
+  { v1beta1RollingUpdateDaemonSetMaxUnavailable :: !(Maybe IntOrString) -- ^ "maxUnavailable"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V1beta1RollingUpdateDaemonSet
@@ -22661,7 +22662,7 @@ mkV1beta2ReplicaSetStatus v1beta2ReplicaSetStatusReplicas =
 -- | V1beta2RollingUpdateDaemonSet
 -- Spec to control the desired behavior of daemon set rolling update.
 data V1beta2RollingUpdateDaemonSet = V1beta2RollingUpdateDaemonSet
-  { v1beta2RollingUpdateDaemonSetMaxUnavailable :: !(Maybe A.Value) -- ^ "maxUnavailable" - The maximum number of DaemonSet pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of total number of DaemonSet pods at the start of the update (ex: 10%). Absolute number is calculated from percentage by rounding up. This cannot be 0. Default value is 1. Example: when this is set to 30%, at most 30% of the total number of nodes that should be running the daemon pod (i.e. status.desiredNumberScheduled) can have their pods stopped for an update at any given time. The update starts by stopping at most 30% of those DaemonSet pods and then brings up new DaemonSet pods in their place. Once the new pods are available, it then proceeds onto other DaemonSet pods, thus ensuring that at least 70% of original number of DaemonSet pods are available at all times during the update.
+  { v1beta2RollingUpdateDaemonSetMaxUnavailable :: !(Maybe IntOrString) -- ^ "maxUnavailable"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V1beta2RollingUpdateDaemonSet
@@ -22690,8 +22691,8 @@ mkV1beta2RollingUpdateDaemonSet =
 -- | V1beta2RollingUpdateDeployment
 -- Spec to control the desired behavior of rolling update.
 data V1beta2RollingUpdateDeployment = V1beta2RollingUpdateDeployment
-  { v1beta2RollingUpdateDeploymentMaxSurge :: !(Maybe A.Value) -- ^ "maxSurge" - The maximum number of pods that can be scheduled above the desired number of pods. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). This can not be 0 if MaxUnavailable is 0. Absolute number is calculated from percentage by rounding up. Defaults to 25%. Example: when this is set to 30%, the new ReplicaSet can be scaled up immediately when the rolling update starts, such that the total number of old and new pods do not exceed 130% of desired pods. Once old pods have been killed, new ReplicaSet can be scaled up further, ensuring that total number of pods running at any time during the update is atmost 130% of desired pods.
-  , v1beta2RollingUpdateDeploymentMaxUnavailable :: !(Maybe A.Value) -- ^ "maxUnavailable" - The maximum number of pods that can be unavailable during the update. Value can be an absolute number (ex: 5) or a percentage of desired pods (ex: 10%). Absolute number is calculated from percentage by rounding down. This can not be 0 if MaxSurge is 0. Defaults to 25%. Example: when this is set to 30%, the old ReplicaSet can be scaled down to 70% of desired pods immediately when the rolling update starts. Once new pods are ready, old ReplicaSet can be scaled down further, followed by scaling up the new ReplicaSet, ensuring that the total number of pods available at all times during the update is at least 70% of desired pods.
+  { v1beta2RollingUpdateDeploymentMaxSurge :: !(Maybe IntOrString) -- ^ "maxSurge"
+  , v1beta2RollingUpdateDeploymentMaxUnavailable :: !(Maybe IntOrString) -- ^ "maxUnavailable"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V1beta2RollingUpdateDeployment
@@ -23402,8 +23403,8 @@ mkV2beta1CrossVersionObjectReference v2beta1CrossVersionObjectReferenceKind v2be
 data V2beta1ExternalMetricSource = V2beta1ExternalMetricSource
   { v2beta1ExternalMetricSourceMetricName :: !(Text) -- ^ /Required/ "metricName" - metricName is the name of the metric in question.
   , v2beta1ExternalMetricSourceMetricSelector :: !(Maybe V1LabelSelector) -- ^ "metricSelector"
-  , v2beta1ExternalMetricSourceTargetAverageValue :: !(Maybe Text) -- ^ "targetAverageValue" - targetAverageValue is the target per-pod value of global metric (as a quantity). Mutually exclusive with TargetValue.
-  , v2beta1ExternalMetricSourceTargetValue :: !(Maybe Text) -- ^ "targetValue" - targetValue is the target value of the metric (as a quantity). Mutually exclusive with TargetAverageValue.
+  , v2beta1ExternalMetricSourceTargetAverageValue :: !(Maybe Quantity) -- ^ "targetAverageValue"
+  , v2beta1ExternalMetricSourceTargetValue :: !(Maybe Quantity) -- ^ "targetValue"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V2beta1ExternalMetricSource
@@ -23442,8 +23443,8 @@ mkV2beta1ExternalMetricSource v2beta1ExternalMetricSourceMetricName =
 -- | V2beta1ExternalMetricStatus
 -- ExternalMetricStatus indicates the current value of a global metric not associated with any Kubernetes object.
 data V2beta1ExternalMetricStatus = V2beta1ExternalMetricStatus
-  { v2beta1ExternalMetricStatusCurrentAverageValue :: !(Maybe Text) -- ^ "currentAverageValue" - currentAverageValue is the current value of metric averaged over autoscaled pods.
-  , v2beta1ExternalMetricStatusCurrentValue :: !(Text) -- ^ /Required/ "currentValue" - currentValue is the current value of the metric (as a quantity)
+  { v2beta1ExternalMetricStatusCurrentAverageValue :: !(Maybe Quantity) -- ^ "currentAverageValue"
+  , v2beta1ExternalMetricStatusCurrentValue :: !(Quantity) -- ^ /Required/ "currentValue"
   , v2beta1ExternalMetricStatusMetricName :: !(Text) -- ^ /Required/ "metricName" - metricName is the name of a metric used for autoscaling in metric system.
   , v2beta1ExternalMetricStatusMetricSelector :: !(Maybe V1LabelSelector) -- ^ "metricSelector"
   } deriving (P.Show, P.Eq, P.Typeable)
@@ -23470,7 +23471,7 @@ instance A.ToJSON V2beta1ExternalMetricStatus where
 
 -- | Construct a value of type 'V2beta1ExternalMetricStatus' (by applying it's required fields, if any)
 mkV2beta1ExternalMetricStatus
-  :: Text -- ^ 'v2beta1ExternalMetricStatusCurrentValue': currentValue is the current value of the metric (as a quantity)
+  :: Quantity -- ^ 'v2beta1ExternalMetricStatusCurrentValue' 
   -> Text -- ^ 'v2beta1ExternalMetricStatusMetricName': metricName is the name of a metric used for autoscaling in metric system.
   -> V2beta1ExternalMetricStatus
 mkV2beta1ExternalMetricStatus v2beta1ExternalMetricStatusCurrentValue v2beta1ExternalMetricStatusMetricName =
@@ -23806,11 +23807,11 @@ mkV2beta1MetricStatus v2beta1MetricStatusType =
 -- | V2beta1ObjectMetricSource
 -- ObjectMetricSource indicates how to scale on a metric describing a kubernetes object (for example, hits-per-second on an Ingress object).
 data V2beta1ObjectMetricSource = V2beta1ObjectMetricSource
-  { v2beta1ObjectMetricSourceAverageValue :: !(Maybe Text) -- ^ "averageValue" - averageValue is the target value of the average of the metric across all relevant pods (as a quantity)
+  { v2beta1ObjectMetricSourceAverageValue :: !(Maybe Quantity) -- ^ "averageValue"
   , v2beta1ObjectMetricSourceMetricName :: !(Text) -- ^ /Required/ "metricName" - metricName is the name of the metric in question.
   , v2beta1ObjectMetricSourceSelector :: !(Maybe V1LabelSelector) -- ^ "selector"
   , v2beta1ObjectMetricSourceTarget :: !(V2beta1CrossVersionObjectReference) -- ^ /Required/ "target"
-  , v2beta1ObjectMetricSourceTargetValue :: !(Text) -- ^ /Required/ "targetValue" - targetValue is the target value of the metric (as a quantity).
+  , v2beta1ObjectMetricSourceTargetValue :: !(Quantity) -- ^ /Required/ "targetValue"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V2beta1ObjectMetricSource
@@ -23839,7 +23840,7 @@ instance A.ToJSON V2beta1ObjectMetricSource where
 mkV2beta1ObjectMetricSource
   :: Text -- ^ 'v2beta1ObjectMetricSourceMetricName': metricName is the name of the metric in question.
   -> V2beta1CrossVersionObjectReference -- ^ 'v2beta1ObjectMetricSourceTarget' 
-  -> Text -- ^ 'v2beta1ObjectMetricSourceTargetValue': targetValue is the target value of the metric (as a quantity).
+  -> Quantity -- ^ 'v2beta1ObjectMetricSourceTargetValue' 
   -> V2beta1ObjectMetricSource
 mkV2beta1ObjectMetricSource v2beta1ObjectMetricSourceMetricName v2beta1ObjectMetricSourceTarget v2beta1ObjectMetricSourceTargetValue =
   V2beta1ObjectMetricSource
@@ -23854,8 +23855,8 @@ mkV2beta1ObjectMetricSource v2beta1ObjectMetricSourceMetricName v2beta1ObjectMet
 -- | V2beta1ObjectMetricStatus
 -- ObjectMetricStatus indicates the current value of a metric describing a kubernetes object (for example, hits-per-second on an Ingress object).
 data V2beta1ObjectMetricStatus = V2beta1ObjectMetricStatus
-  { v2beta1ObjectMetricStatusAverageValue :: !(Maybe Text) -- ^ "averageValue" - averageValue is the current value of the average of the metric across all relevant pods (as a quantity)
-  , v2beta1ObjectMetricStatusCurrentValue :: !(Text) -- ^ /Required/ "currentValue" - currentValue is the current value of the metric (as a quantity).
+  { v2beta1ObjectMetricStatusAverageValue :: !(Maybe Quantity) -- ^ "averageValue"
+  , v2beta1ObjectMetricStatusCurrentValue :: !(Quantity) -- ^ /Required/ "currentValue"
   , v2beta1ObjectMetricStatusMetricName :: !(Text) -- ^ /Required/ "metricName" - metricName is the name of the metric in question.
   , v2beta1ObjectMetricStatusSelector :: !(Maybe V1LabelSelector) -- ^ "selector"
   , v2beta1ObjectMetricStatusTarget :: !(V2beta1CrossVersionObjectReference) -- ^ /Required/ "target"
@@ -23885,7 +23886,7 @@ instance A.ToJSON V2beta1ObjectMetricStatus where
 
 -- | Construct a value of type 'V2beta1ObjectMetricStatus' (by applying it's required fields, if any)
 mkV2beta1ObjectMetricStatus
-  :: Text -- ^ 'v2beta1ObjectMetricStatusCurrentValue': currentValue is the current value of the metric (as a quantity).
+  :: Quantity -- ^ 'v2beta1ObjectMetricStatusCurrentValue' 
   -> Text -- ^ 'v2beta1ObjectMetricStatusMetricName': metricName is the name of the metric in question.
   -> V2beta1CrossVersionObjectReference -- ^ 'v2beta1ObjectMetricStatusTarget' 
   -> V2beta1ObjectMetricStatus
@@ -23904,7 +23905,7 @@ mkV2beta1ObjectMetricStatus v2beta1ObjectMetricStatusCurrentValue v2beta1ObjectM
 data V2beta1PodsMetricSource = V2beta1PodsMetricSource
   { v2beta1PodsMetricSourceMetricName :: !(Text) -- ^ /Required/ "metricName" - metricName is the name of the metric in question
   , v2beta1PodsMetricSourceSelector :: !(Maybe V1LabelSelector) -- ^ "selector"
-  , v2beta1PodsMetricSourceTargetAverageValue :: !(Text) -- ^ /Required/ "targetAverageValue" - targetAverageValue is the target value of the average of the metric across all relevant pods (as a quantity)
+  , v2beta1PodsMetricSourceTargetAverageValue :: !(Quantity) -- ^ /Required/ "targetAverageValue"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V2beta1PodsMetricSource
@@ -23928,7 +23929,7 @@ instance A.ToJSON V2beta1PodsMetricSource where
 -- | Construct a value of type 'V2beta1PodsMetricSource' (by applying it's required fields, if any)
 mkV2beta1PodsMetricSource
   :: Text -- ^ 'v2beta1PodsMetricSourceMetricName': metricName is the name of the metric in question
-  -> Text -- ^ 'v2beta1PodsMetricSourceTargetAverageValue': targetAverageValue is the target value of the average of the metric across all relevant pods (as a quantity)
+  -> Quantity -- ^ 'v2beta1PodsMetricSourceTargetAverageValue' 
   -> V2beta1PodsMetricSource
 mkV2beta1PodsMetricSource v2beta1PodsMetricSourceMetricName v2beta1PodsMetricSourceTargetAverageValue =
   V2beta1PodsMetricSource
@@ -23941,7 +23942,7 @@ mkV2beta1PodsMetricSource v2beta1PodsMetricSourceMetricName v2beta1PodsMetricSou
 -- | V2beta1PodsMetricStatus
 -- PodsMetricStatus indicates the current value of a metric describing each pod in the current scale target (for example, transactions-processed-per-second).
 data V2beta1PodsMetricStatus = V2beta1PodsMetricStatus
-  { v2beta1PodsMetricStatusCurrentAverageValue :: !(Text) -- ^ /Required/ "currentAverageValue" - currentAverageValue is the current value of the average of the metric across all relevant pods (as a quantity)
+  { v2beta1PodsMetricStatusCurrentAverageValue :: !(Quantity) -- ^ /Required/ "currentAverageValue"
   , v2beta1PodsMetricStatusMetricName :: !(Text) -- ^ /Required/ "metricName" - metricName is the name of the metric in question
   , v2beta1PodsMetricStatusSelector :: !(Maybe V1LabelSelector) -- ^ "selector"
   } deriving (P.Show, P.Eq, P.Typeable)
@@ -23966,7 +23967,7 @@ instance A.ToJSON V2beta1PodsMetricStatus where
 
 -- | Construct a value of type 'V2beta1PodsMetricStatus' (by applying it's required fields, if any)
 mkV2beta1PodsMetricStatus
-  :: Text -- ^ 'v2beta1PodsMetricStatusCurrentAverageValue': currentAverageValue is the current value of the average of the metric across all relevant pods (as a quantity)
+  :: Quantity -- ^ 'v2beta1PodsMetricStatusCurrentAverageValue' 
   -> Text -- ^ 'v2beta1PodsMetricStatusMetricName': metricName is the name of the metric in question
   -> V2beta1PodsMetricStatus
 mkV2beta1PodsMetricStatus v2beta1PodsMetricStatusCurrentAverageValue v2beta1PodsMetricStatusMetricName =
@@ -23982,7 +23983,7 @@ mkV2beta1PodsMetricStatus v2beta1PodsMetricStatusCurrentAverageValue v2beta1Pods
 data V2beta1ResourceMetricSource = V2beta1ResourceMetricSource
   { v2beta1ResourceMetricSourceName :: !(Text) -- ^ /Required/ "name" - name is the name of the resource in question.
   , v2beta1ResourceMetricSourceTargetAverageUtilization :: !(Maybe Int) -- ^ "targetAverageUtilization" - targetAverageUtilization is the target value of the average of the resource metric across all relevant pods, represented as a percentage of the requested value of the resource for the pods.
-  , v2beta1ResourceMetricSourceTargetAverageValue :: !(Maybe Text) -- ^ "targetAverageValue" - targetAverageValue is the target value of the average of the resource metric across all relevant pods, as a raw value (instead of as a percentage of the request), similar to the \&quot;pods\&quot; metric source type.
+  , v2beta1ResourceMetricSourceTargetAverageValue :: !(Maybe Quantity) -- ^ "targetAverageValue"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V2beta1ResourceMetricSource
@@ -24019,7 +24020,7 @@ mkV2beta1ResourceMetricSource v2beta1ResourceMetricSourceName =
 -- ResourceMetricStatus indicates the current value of a resource metric known to Kubernetes, as specified in requests and limits, describing each pod in the current scale target (e.g. CPU or memory).  Such metrics are built in to Kubernetes, and have special scaling options on top of those available to normal per-pod metrics using the \"pods\" source.
 data V2beta1ResourceMetricStatus = V2beta1ResourceMetricStatus
   { v2beta1ResourceMetricStatusCurrentAverageUtilization :: !(Maybe Int) -- ^ "currentAverageUtilization" - currentAverageUtilization is the current value of the average of the resource metric across all relevant pods, represented as a percentage of the requested value of the resource for the pods.  It will only be present if &#x60;targetAverageValue&#x60; was set in the corresponding metric specification.
-  , v2beta1ResourceMetricStatusCurrentAverageValue :: !(Text) -- ^ /Required/ "currentAverageValue" - currentAverageValue is the current value of the average of the resource metric across all relevant pods, as a raw value (instead of as a percentage of the request), similar to the \&quot;pods\&quot; metric source type. It will always be set, regardless of the corresponding metric specification.
+  , v2beta1ResourceMetricStatusCurrentAverageValue :: !(Quantity) -- ^ /Required/ "currentAverageValue"
   , v2beta1ResourceMetricStatusName :: !(Text) -- ^ /Required/ "name" - name is the name of the resource in question.
   } deriving (P.Show, P.Eq, P.Typeable)
 
@@ -24043,7 +24044,7 @@ instance A.ToJSON V2beta1ResourceMetricStatus where
 
 -- | Construct a value of type 'V2beta1ResourceMetricStatus' (by applying it's required fields, if any)
 mkV2beta1ResourceMetricStatus
-  :: Text -- ^ 'v2beta1ResourceMetricStatusCurrentAverageValue': currentAverageValue is the current value of the average of the resource metric across all relevant pods, as a raw value (instead of as a percentage of the request), similar to the \"pods\" metric source type. It will always be set, regardless of the corresponding metric specification.
+  :: Quantity -- ^ 'v2beta1ResourceMetricStatusCurrentAverageValue' 
   -> Text -- ^ 'v2beta1ResourceMetricStatusName': name is the name of the resource in question.
   -> V2beta1ResourceMetricStatus
 mkV2beta1ResourceMetricStatus v2beta1ResourceMetricStatusCurrentAverageValue v2beta1ResourceMetricStatusName =
@@ -24522,9 +24523,9 @@ mkV2beta2MetricStatus v2beta2MetricStatusType =
 -- MetricTarget defines the target value, average value, or average utilization of a specific metric
 data V2beta2MetricTarget = V2beta2MetricTarget
   { v2beta2MetricTargetAverageUtilization :: !(Maybe Int) -- ^ "averageUtilization" - averageUtilization is the target value of the average of the resource metric across all relevant pods, represented as a percentage of the requested value of the resource for the pods. Currently only valid for Resource metric source type
-  , v2beta2MetricTargetAverageValue :: !(Maybe Text) -- ^ "averageValue" - averageValue is the target value of the average of the metric across all relevant pods (as a quantity)
+  , v2beta2MetricTargetAverageValue :: !(Maybe Quantity) -- ^ "averageValue"
   , v2beta2MetricTargetType :: !(Text) -- ^ /Required/ "type" - type represents whether the metric type is Utilization, Value, or AverageValue
-  , v2beta2MetricTargetValue :: !(Maybe Text) -- ^ "value" - value is the target value of the metric (as a quantity).
+  , v2beta2MetricTargetValue :: !(Maybe Quantity) -- ^ "value"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V2beta2MetricTarget
@@ -24564,8 +24565,8 @@ mkV2beta2MetricTarget v2beta2MetricTargetType =
 -- MetricValueStatus holds the current value for a metric
 data V2beta2MetricValueStatus = V2beta2MetricValueStatus
   { v2beta2MetricValueStatusAverageUtilization :: !(Maybe Int) -- ^ "averageUtilization" - currentAverageUtilization is the current value of the average of the resource metric across all relevant pods, represented as a percentage of the requested value of the resource for the pods.
-  , v2beta2MetricValueStatusAverageValue :: !(Maybe Text) -- ^ "averageValue" - averageValue is the current value of the average of the metric across all relevant pods (as a quantity)
-  , v2beta2MetricValueStatusValue :: !(Maybe Text) -- ^ "value" - value is the current value of the metric (as a quantity).
+  , v2beta2MetricValueStatusAverageValue :: !(Maybe Quantity) -- ^ "averageValue"
+  , v2beta2MetricValueStatusValue :: !(Maybe Quantity) -- ^ "value"
   } deriving (P.Show, P.Eq, P.Typeable)
 
 -- | FromJSON V2beta2MetricValueStatus
