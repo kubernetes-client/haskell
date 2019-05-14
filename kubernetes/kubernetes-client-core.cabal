@@ -8,7 +8,7 @@ description:    .
                 .
                 base path: http://localhost
                 .
-                Kubernetes API version: v1.13.4
+                Kubernetes API version: v1.14.2
                 .
                 OpenAPI version: 3.0.1
                 .
@@ -65,7 +65,6 @@ library
   exposed-modules:
       Kubernetes.OpenAPI
       Kubernetes.OpenAPI.API.Admissionregistration
-      Kubernetes.OpenAPI.API.AdmissionregistrationV1alpha1
       Kubernetes.OpenAPI.API.AdmissionregistrationV1beta1
       Kubernetes.OpenAPI.API.Apiextensions
       Kubernetes.OpenAPI.API.ApiextensionsV1beta1
@@ -96,6 +95,7 @@ library
       Kubernetes.OpenAPI.API.Certificates
       Kubernetes.OpenAPI.API.CertificatesV1beta1
       Kubernetes.OpenAPI.API.Coordination
+      Kubernetes.OpenAPI.API.CoordinationV1
       Kubernetes.OpenAPI.API.CoordinationV1beta1
       Kubernetes.OpenAPI.API.Core
       Kubernetes.OpenAPI.API.CoreV1
@@ -107,6 +107,10 @@ library
       Kubernetes.OpenAPI.API.Logs
       Kubernetes.OpenAPI.API.Networking
       Kubernetes.OpenAPI.API.NetworkingV1
+      Kubernetes.OpenAPI.API.NetworkingV1beta1
+      Kubernetes.OpenAPI.API.Node
+      Kubernetes.OpenAPI.API.NodeV1alpha1
+      Kubernetes.OpenAPI.API.NodeV1beta1
       Kubernetes.OpenAPI.API.Policy
       Kubernetes.OpenAPI.API.PolicyV1beta1
       Kubernetes.OpenAPI.API.RbacAuthorization
@@ -114,6 +118,7 @@ library
       Kubernetes.OpenAPI.API.RbacAuthorizationV1alpha1
       Kubernetes.OpenAPI.API.RbacAuthorizationV1beta1
       Kubernetes.OpenAPI.API.Scheduling
+      Kubernetes.OpenAPI.API.SchedulingV1
       Kubernetes.OpenAPI.API.SchedulingV1alpha1
       Kubernetes.OpenAPI.API.SchedulingV1beta1
       Kubernetes.OpenAPI.API.Settings
