@@ -9,7 +9,7 @@
 -}
 
 {-|
-Module : Kubernetes.OpenAPI.API.Networking
+Module : Kubernetes.OpenAPI.API.Node
 -}
 
 {-# LANGUAGE FlexibleContexts #-}
@@ -19,7 +19,7 @@ Module : Kubernetes.OpenAPI.API.Networking
 {-# LANGUAGE OverloadedStrings #-}
 {-# OPTIONS_GHC -fno-warn-name-shadowing -fno-warn-unused-binds -fno-warn-unused-imports #-}
 
-module Kubernetes.OpenAPI.API.Networking where
+module Kubernetes.OpenAPI.API.Node where
 
 import Kubernetes.OpenAPI.Core
 import Kubernetes.OpenAPI.MimeTypes
@@ -55,11 +55,11 @@ import qualified Prelude as P
 -- * Operations
 
 
--- ** Networking
+-- ** Node
 
 -- *** getAPIGroup
 
--- | @GET \/apis\/networking.k8s.io\/@
+-- | @GET \/apis\/node.k8s.io\/@
 -- 
 -- get information of a group
 -- 
@@ -69,7 +69,7 @@ getAPIGroup
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIGroup MimeNoContent V1APIGroup accept
 getAPIGroup  _ =
-  _mkRequest "GET" ["/apis/networking.k8s.io/"]
+  _mkRequest "GET" ["/apis/node.k8s.io/"]
     `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyBearerToken)
 
 data GetAPIGroup  
