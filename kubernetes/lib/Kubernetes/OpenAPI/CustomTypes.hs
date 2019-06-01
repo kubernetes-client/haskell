@@ -4,8 +4,10 @@
 module Kubernetes.OpenAPI.CustomTypes where
 
 import Data.Aeson (FromJSON, ToJSON)
+import qualified Data.Aeson as A
 import Data.Data (Typeable)
 import Data.Text (Text)
+import GHC.Base (mzero)
 
 import GHC.Generics
 
@@ -18,7 +20,16 @@ import GHC.Generics
 data IntOrString
   = IntOrStringS Text
   | IntOrStringI Int
-  deriving (Show, Eq, ToJSON, FromJSON, Typeable, Generic)
+  deriving (Show, Eq, Typeable, Generic)
+
+instance FromJSON IntOrString where
+  parseJSON (A.String t) = return $ IntOrStringS t
+  parseJSON (A.Number n) = return $ IntOrStringI (round n)
+  parseJSON _ = mzero
+
+instance ToJSON IntOrString where
+  toJSON (IntOrStringS t) = A.String t
+  toJSON (IntOrStringI n) = A.Number (fromIntegral n)
 
 {- | `Quantity` is a fixed-point representation of a number.
   
@@ -78,4 +89,11 @@ data IntOrString
   that will cause implementors to also use a fixed point implementation.
 -}
 newtype Quantity = Quantity { unQuantity :: Text }
-  deriving (Show, Eq, ToJSON, FromJSON, Typeable, Generic)
+  deriving (Show, Eq, Typeable, Generic)
+
+instance FromJSON Quantity where
+  parseJSON (A.String t) = return $ Quantity t
+  parseJSON _ = mzero
+
+instance ToJSON Quantity where
+  toJSON (Quantity t) = A.String t
