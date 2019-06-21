@@ -43,7 +43,7 @@ camelToWithOverrides c overrides = defaultOptions
 data Config = Config
   { kind           :: Maybe Text
   , apiVersion     :: Maybe Text
-  , preferences    :: Preferences
+  , preferences    :: Maybe Preferences
   , clusters       :: [NamedEntity Cluster "cluster"]
   , authInfos      :: [NamedEntity AuthInfo "user"]
   , contexts       :: [NamedEntity Context "context"]
