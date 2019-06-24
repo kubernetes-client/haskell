@@ -29,7 +29,7 @@ extra-source-files:
 dependencies:
   - base >=4.7 && <5.0
   - bytestring >=0.10.0 && <0.11
-  - aeson >=1.0 && <2.0
+  - aeson >=1.2.2 && <2.0
   - connection
   - containers
   - data-default-class
