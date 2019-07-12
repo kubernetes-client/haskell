@@ -15,7 +15,8 @@ description:    .
 category:       Web
 homepage:       https://github.com/kubernetes-client/haskell
 author:         Auto Generated
-maintainer:     Shimin Guo <smguo2001@gmail.com>
+maintainer:     Shimin Guo <smguo2001@gmail.com>,
+                Akshay Mankar <itsakshaymankar@gmail.com>
 license:        Apache-2.0
 license-file:   LICENSE
 build-type:     Simple
