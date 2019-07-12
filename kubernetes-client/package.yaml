@@ -1,11 +1,13 @@
 name: kubernetes-client
-version: 0.1.0.0
+version: 0.1.0.1
 description: |
   Client library for interacting with a Kubernetes cluster.
 
   This package contains hand-written code while kubernetes-client-core contains code auto-generated from the OpenAPI spec.
 synopsis: Client library for Kubernetes
-maintainer: Shimin Guo <smguo2001@gmail.com>
+maintainer:
+- Shimin Guo <smguo2001@gmail.com>
+- Akshay Mankar <itsakshaymankar@gmail.com>
 category: Web
 license: Apache-2.0
 license-file: LICENSE
@@ -26,6 +28,7 @@ tests:
       - kubernetes-client
 extra-source-files:
   - test/testdata/*
+  - README.md
 dependencies:
   - base >=4.7 && <5.0
   - bytestring >=0.10.0 && <0.11
