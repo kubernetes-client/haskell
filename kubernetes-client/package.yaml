@@ -26,6 +26,7 @@ tests:
       - kubernetes-client
 extra-source-files:
   - test/testdata/*
+  - README.md
 dependencies:
   - base >=4.7 && <5.0
   - bytestring >=0.10.0 && <0.11
