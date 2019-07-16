@@ -1,125 +1,47 @@
-{-# LANGUAGE OverloadedStrings     #-}
+{-# LANGUAGE OverloadedStrings #-}
 
 module Kubernetes.Client.Config where
 
-import qualified Kubernetes.OpenAPI.Core            as K
-import qualified Kubernetes.OpenAPI.Model           as K
+import qualified Kubernetes.OpenAPI.Core as K
 
-import           Control.Exception.Safe     (Exception, MonadThrow, throwM)
-import           Control.Monad.IO.Class     (MonadIO, liftIO)
-import qualified Data.ByteString            as B
-import qualified Data.ByteString.Lazy       as LazyB
-import           Data.Default.Class         (def)
-import           Data.Either                (rights)
-import           Data.Monoid                ((<>))
-import           Data.PEM                   (pemContent, pemParseBS)
-import qualified Data.Text                  as T
-import qualified Data.Text.Encoding         as T
-import qualified Data.Text.IO               as T
-import           Data.Typeable              (Typeable)
-import           Data.X509                  (SignedCertificate,
-                                             decodeSignedCertificate)
-import qualified Data.X509                  as X509
-import           Data.X509.CertificateStore (CertificateStore, makeCertificateStore)
-import qualified Data.X509.Validation       as X509
-import           Lens.Micro                 (Lens', lens, set)
-import           Network.Connection         (TLSSettings (..))
-import qualified Network.HTTP.Client        as NH
-import           Network.HTTP.Client.TLS    (mkManagerSettings)
-import           Network.TLS                (Credential, defaultParamsClient)
-import qualified Network.TLS                as TLS
-import qualified Network.TLS.Extra          as TLS
-import           System.Environment         (getEnv)
-import           System.X509                (getSystemCertificateStore)
+import           Control.Applicative                 ((<|>))
+import           Control.Exception.Safe              (MonadThrow, throwM)
+import           Control.Monad.IO.Class              (MonadIO, liftIO)
+import qualified Data.ByteString                     as B
+import qualified Data.ByteString.Base64              as B64
+import qualified Data.ByteString.Lazy                as LazyB
+import           Data.Either.Combinators
+import           Data.Function                       ((&))
+import           Data.Maybe
+import           Data.Monoid                         ((<>))
+import qualified Data.Text                           as T
+import qualified Data.Text.Encoding                  as T
+import qualified Data.Text.IO                        as T
+import           Data.Yaml
+import           Kubernetes.Client.Auth.ClientCert
+import           Kubernetes.Client.Auth.GCP
+import           Kubernetes.Client.Auth.OIDC
+import           Kubernetes.Client.Auth.Token
+import           Kubernetes.Client.Internal.TLSUtils
+import           Kubernetes.Client.KubeConfig
+import           Network.Connection                  (TLSSettings (..))
+import qualified Network.HTTP.Client                 as NH
+import           Network.HTTP.Client.TLS             (mkManagerSettings)
+import qualified Network.TLS                         as TLS
+import           System.Environment                  (getEnv)
+import           System.FilePath
 
 -- |Sets the master URI in the 'K.KubernetesClientConfig'.
 setMasterURI
     :: T.Text                -- ^ Master URI
     -> K.KubernetesClientConfig
     -> K.KubernetesClientConfig
-setMasterURI server kcfg =
-    kcfg { K.configHost = (LazyB.fromStrict . T.encodeUtf8) server }
-
--- |Disables the client-side auth methods validation. This is necessary if you are using client cert authentication.
-disableValidateAuthMethods :: K.KubernetesClientConfig -> K.KubernetesClientConfig
-disableValidateAuthMethods kcfg = kcfg { K.configValidateAuthMethods = False }
-
--- |Configures the 'K.KubernetesClientConfig' to use token authentication.
-setTokenAuth
-    :: T.Text             -- ^Authentication token
-    -> K.KubernetesClientConfig
-    -> K.KubernetesClientConfig
-setTokenAuth token kcfg = kcfg
-    { K.configAuthMethods = [K.AnyAuthMethod (K.AuthApiKeyBearerToken $ "Bearer " <> token)]
-    }
+setMasterURI masterURI kcfg =
+    kcfg { K.configHost = (LazyB.fromStrict . T.encodeUtf8) masterURI }
 
 -- |Creates a 'NH.Manager' that can handle TLS.
 newManager :: TLS.ClientParams -> IO NH.Manager
 newManager cp = NH.newManager (mkManagerSettings (TLSSettings cp) Nothing)
-
--- |Default TLS settings using the system CA store.
-defaultTLSClientParams :: IO TLS.ClientParams
-defaultTLSClientParams = do
-    let defParams = defaultParamsClient "" ""
-    systemCAStore <- getSystemCertificateStore
-    return defParams
-        { TLS.clientSupported = def
-            { TLS.supportedCiphers = TLS.ciphersuite_strong
-            }
-        , TLS.clientShared    = (TLS.clientShared defParams)
-            { TLS.sharedCAStore = systemCAStore
-            }
-        }
-
-clientHooksL :: Lens' TLS.ClientParams TLS.ClientHooks
-clientHooksL = lens TLS.clientHooks (\cp ch -> cp { TLS.clientHooks = ch })
-
-onServerCertificateL :: Lens' TLS.ClientParams (CertificateStore -> TLS.ValidationCache -> X509.ServiceID -> X509.CertificateChain -> IO [X509.FailedReason])
-onServerCertificateL =
-  clientHooksL . lens TLS.onServerCertificate (\ch osc -> ch { TLS.onServerCertificate = osc })
-
--- |Don't check whether the cert presented by the server matches the name of the server you are connecting to.
--- This is necessary if you specify the server host by its IP address.
-disableServerNameValidation :: TLS.ClientParams -> TLS.ClientParams
-disableServerNameValidation =
-  set onServerCertificateL (X509.validate X509.HashSHA256 def (def { X509.checkFQHN = False }))
-
--- |Insecure mode. The client will not validate the server cert at all.
-disableServerCertValidation :: TLS.ClientParams -> TLS.ClientParams
-disableServerCertValidation = set onServerCertificateL (\_ _ _ _ -> return [])
-
--- |Use a custom CA store.
-setCAStore :: [SignedCertificate] -> TLS.ClientParams -> TLS.ClientParams
-setCAStore certs cp = cp
-    { TLS.clientShared = (TLS.clientShared cp)
-        { TLS.sharedCAStore = (makeCertificateStore certs)
-        }
-    }
-
-onCertificateRequestL :: Lens' TLS.ClientParams (([TLS.CertificateType], Maybe [TLS.HashAndSignatureAlgorithm], [X509.DistinguishedName]) -> IO (Maybe (X509.CertificateChain, TLS.PrivKey)))
-onCertificateRequestL =
-  clientHooksL . lens TLS.onCertificateRequest (\ch ocr -> ch { TLS.onCertificateRequest = ocr })
-
--- |Use a client cert for authentication.
-setClientCert :: Credential -> TLS.ClientParams -> TLS.ClientParams
-setClientCert cred = set onCertificateRequestL (\_ -> return $ Just cred)
-
--- |Parses a PEM-encoded @ByteString@ into a list of certificates.
-parsePEMCerts :: B.ByteString -> Either String [SignedCertificate]
-parsePEMCerts b = do
-    pems <- pemParseBS b
-    return $ rights $ map (decodeSignedCertificate . pemContent) pems
-
-data ParsePEMCertsException = ParsePEMCertsException String deriving (Typeable, Show)
-
-instance Exception ParsePEMCertsException
-
--- |Loads certificates from a PEM-encoded file.
-loadPEMCerts :: (MonadIO m, MonadThrow m) => FilePath -> m [SignedCertificate]
-loadPEMCerts p = do
-    liftIO (B.readFile p)
-        >>= either (throwM . ParsePEMCertsException) return
-        .   parsePEMCerts
 
 serviceAccountDir :: FilePath
 serviceAccountDir = "/var/run/secrets/kubernetes.io/serviceaccount"
@@ -132,5 +54,75 @@ cluster = do
   tok <- liftIO . T.readFile $ serviceAccountDir ++ "/token"
   host <- liftIO $ getEnv "KUBERNETES_SERVICE_HOST"
   port <- liftIO $ getEnv "KUBERNETES_SERVICE_PORT"
-  config <- setTokenAuth tok . setMasterURI (T.pack $ "https://" ++ host ++ ":" ++ port) <$> liftIO K.newConfig
-  return (mgr, config)
+  cfg <- setTokenAuth tok . setMasterURI (T.pack $ "https://" ++ host ++ ":" ++ port) <$> liftIO K.newConfig
+  return (mgr, cfg)
+
+data KubeConfigSource = KubeConfigFile FilePath
+                      | KubeConfigCluster
+
+kubeClient
+  :: OIDCCache
+  -> KubeConfigSource
+  -> IO (NH.Manager, K.KubernetesClientConfig)
+kubeClient oidcCache (KubeConfigFile f) = do
+  kubeConfigFile <- decodeFileThrow f
+  uri <- getCluster kubeConfigFile
+         & fmap server
+         & either (const $ pure "localhost:8080") return
+  t <- defaultTLSClientParams
+       & fmap (tlsValidation kubeConfigFile)
+       & (>>= (addCACertData kubeConfigFile))
+       & (>>= addCACertFile kubeConfigFile (takeDirectory f))
+  c <- K.newConfig & fmap (setMasterURI uri)
+  (tlsParams, cfg) <-
+    case getAuthInfo kubeConfigFile of
+      Left _          -> return (t,c)
+      Right (_, auth)-> applyAuthSettings oidcCache auth (t, c)
+  mgr <- newManager tlsParams
+  return (mgr, cfg)
+kubeClient _ (KubeConfigCluster) = Kubernetes.Client.Config.cluster
+
+tlsValidation :: Config -> TLS.ClientParams -> TLS.ClientParams
+tlsValidation cfg t = case getCluster cfg of
+                        Left _ -> t
+                        Right c -> case insecureSkipTLSVerify c of
+                                     Just True -> disableServerCertValidation t
+                                     _ -> t
+
+addCACertData :: (MonadThrow m) => Config -> TLS.ClientParams -> m TLS.ClientParams
+addCACertData cfg t =
+  let eitherCertText = getCluster cfg
+                       & (>>= (maybeToRight "cert data not provided" . certificateAuthorityData))
+  in case eitherCertText of
+       Left _ -> pure t
+       Right certText ->
+         (B64.decode $ T.encodeUtf8 certText)
+         >>= updateClientParams t
+         & either (throwM . ParsePEMCertsException) return
+
+addCACertFile :: Config -> FilePath -> TLS.ClientParams -> IO TLS.ClientParams
+addCACertFile cfg dir t = do
+  let certFile = getCluster cfg
+                 >>= maybeToRight "cert file not provided" . certificateAuthority
+                 & fmap T.unpack
+                 & fmap (dir </>)
+  case certFile of
+    Left _ -> return t
+    Right f -> do
+      certText <- B.readFile f
+      return
+        $ updateClientParams t certText
+        & (fromRight t)
+
+applyAuthSettings
+  :: OIDCCache
+  -> AuthInfo
+  -> (TLS.ClientParams, K.KubernetesClientConfig)
+  -> IO (TLS.ClientParams, K.KubernetesClientConfig)
+applyAuthSettings oidcCache auth input = fromMaybe (pure input)
+                                         $ clientCertFileAuth auth input
+                                         <|> clientCertDataAuth auth input
+                                         <|> tokenAuth auth input
+                                         <|> tokenFileAuth auth input
+                                         <|> gcpAuth auth input
+                                         <|> cachedOIDCAuth oidcCache auth input
