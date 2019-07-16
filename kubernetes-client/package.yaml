@@ -29,7 +29,6 @@ tests:
     dependencies:
       - kubernetes-client
 extra-source-files:
-  - README.md
   - test/testdata/*
   - README.md
 dependencies:
