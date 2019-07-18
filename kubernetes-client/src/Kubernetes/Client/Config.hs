@@ -1,6 +1,30 @@
 {-# LANGUAGE OverloadedStrings #-}
 
-module Kubernetes.Client.Config where
+module Kubernetes.Client.Config
+  ( KubeConfigSource(..)
+  , addCACertData
+  , addCACertFile
+  , applyAuthSettings
+  , clientHooksL
+  , cluster
+  , defaultTLSClientParams
+  , disableServerCertValidation
+  , disableServerNameValidation
+  , disableValidateAuthMethods
+  , kubeClient
+  , loadPEMCerts
+  , newManager
+  , onCertificateRequestL
+  , onServerCertificateL
+  , parsePEMCerts
+  , serviceAccountDir
+  , setCAStore
+  , setClientCert
+  , setMasterURI
+  , setTokenAuth
+  , tlsValidation
+  )
+where
 
 import qualified Kubernetes.OpenAPI.Core as K
 
@@ -23,7 +47,7 @@ import           Kubernetes.Client.Auth.GCP
 import           Kubernetes.Client.Auth.OIDC
 import           Kubernetes.Client.Auth.Token
 import           Kubernetes.Client.Internal.TLSUtils
-import           Kubernetes.Client.KubeConfig
+import           Kubernetes.Client.KubeConfig        hiding (cluster)
 import           Network.Connection                  (TLSSettings (..))
 import qualified Network.HTTP.Client                 as NH
 import           Network.HTTP.Client.TLS             (mkManagerSettings)
@@ -31,35 +55,15 @@ import qualified Network.TLS                         as TLS
 import           System.Environment                  (getEnv)
 import           System.FilePath
 
--- |Sets the master URI in the 'K.KubernetesClientConfig'.
-setMasterURI
-    :: T.Text                -- ^ Master URI
-    -> K.KubernetesClientConfig
-    -> K.KubernetesClientConfig
-setMasterURI masterURI kcfg =
-    kcfg { K.configHost = (LazyB.fromStrict . T.encodeUtf8) masterURI }
-
--- |Creates a 'NH.Manager' that can handle TLS.
-newManager :: TLS.ClientParams -> IO NH.Manager
-newManager cp = NH.newManager (mkManagerSettings (TLSSettings cp) Nothing)
-
-serviceAccountDir :: FilePath
-serviceAccountDir = "/var/run/secrets/kubernetes.io/serviceaccount"
-
-cluster :: (MonadIO m, MonadThrow m) => m (NH.Manager, K.KubernetesClientConfig)
-cluster = do
-  caStore <- loadPEMCerts $ serviceAccountDir ++ "/ca.crt"
-  defTlsParams <- liftIO defaultTLSClientParams
-  mgr <- liftIO . newManager . setCAStore caStore $ disableServerNameValidation defTlsParams
-  tok <- liftIO . T.readFile $ serviceAccountDir ++ "/token"
-  host <- liftIO $ getEnv "KUBERNETES_SERVICE_HOST"
-  port <- liftIO $ getEnv "KUBERNETES_SERVICE_PORT"
-  cfg <- setTokenAuth tok . setMasterURI (T.pack $ "https://" ++ host ++ ":" ++ port) <$> liftIO K.newConfig
-  return (mgr, cfg)
-
 data KubeConfigSource = KubeConfigFile FilePath
                       | KubeConfigCluster
 
+{-|
+  Creates 'NH.Manager' and 'K.KubernetesClientConfig' for a given
+  'KubeConfigSource'. It is recommended that multiple 'kubeClient' invocations
+  across an application share an 'OIDCCache', this makes sure updation of OAuth
+  token is synchronized across all the different clients being used.
+-}
 kubeClient
   :: OIDCCache
   -> KubeConfigSource
@@ -80,7 +84,34 @@ kubeClient oidcCache (KubeConfigFile f) = do
       Right (_, auth)-> applyAuthSettings oidcCache auth (t, c)
   mgr <- newManager tlsParams
   return (mgr, cfg)
-kubeClient _ (KubeConfigCluster) = Kubernetes.Client.Config.cluster
+kubeClient _ (KubeConfigCluster) = cluster
+
+-- |Creates 'NH.Manager' and 'K.KubernetesClientConfig' assuming it is being executed in a pod
+cluster :: (MonadIO m, MonadThrow m) => m (NH.Manager, K.KubernetesClientConfig)
+cluster = do
+  caStore <- loadPEMCerts $ serviceAccountDir ++ "/ca.crt"
+  defTlsParams <- liftIO defaultTLSClientParams
+  mgr <- liftIO . newManager . setCAStore caStore $ disableServerNameValidation defTlsParams
+  tok <- liftIO . T.readFile $ serviceAccountDir ++ "/token"
+  host <- liftIO $ getEnv "KUBERNETES_SERVICE_HOST"
+  port <- liftIO $ getEnv "KUBERNETES_SERVICE_PORT"
+  cfg <- setTokenAuth tok . setMasterURI (T.pack $ "https://" ++ host ++ ":" ++ port) <$> liftIO K.newConfig
+  return (mgr, cfg)
+
+-- |Sets the master URI in the 'K.KubernetesClientConfig'.
+setMasterURI
+    :: T.Text                -- ^ Master URI
+    -> K.KubernetesClientConfig
+    -> K.KubernetesClientConfig
+setMasterURI masterURI kcfg =
+    kcfg { K.configHost = (LazyB.fromStrict . T.encodeUtf8) masterURI }
+
+-- |Creates a 'NH.Manager' that can handle TLS.
+newManager :: TLS.ClientParams -> IO NH.Manager
+newManager cp = NH.newManager (mkManagerSettings (TLSSettings cp) Nothing)
+
+serviceAccountDir :: FilePath
+serviceAccountDir = "/var/run/secrets/kubernetes.io/serviceaccount"
 
 tlsValidation :: Config -> TLS.ClientParams -> TLS.ClientParams
 tlsValidation cfg t = case getCluster cfg of
