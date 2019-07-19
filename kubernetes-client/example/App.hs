@@ -2,18 +2,20 @@
 
 module Main where
 
-import           Data.Function                 ((&))
-import           Kubernetes.Client             (defaultTLSClientParams,
-                                                disableServerCertValidation,
-                                                disableServerNameValidation,
-                                                disableValidateAuthMethods,
-                                                loadPEMCerts, newManager,
-                                                setCAStore, setClientCert,
-                                                setMasterURI, setTokenAuth)
-import           Kubernetes.OpenAPI            (Accept (..), MimeJSON (..),
-                                                dispatchMime, newConfig)
+import Control.Concurrent.STM (atomically, newTVar)
+import Data.Function          ((&))
+import Kubernetes.Client      (KubeConfigSource (..), defaultTLSClientParams,
+                               disableServerCertValidation,
+                               disableServerNameValidation,
+                               disableValidateAuthMethods, kubeClient,
+                               loadPEMCerts, newManager, setCAStore,
+                               setClientCert, setMasterURI, setTokenAuth)
+import Kubernetes.OpenAPI     (Accept (..), MimeJSON (..), dispatchMime,
+                               newConfig)
+import Network.TLS            (credentialLoadX509)
+
+import qualified Data.Map                      as Map
 import qualified Kubernetes.OpenAPI.API.CoreV1 as CoreV1
-import           Network.TLS                   (credentialLoadX509)
 
 example :: IO ()
 example = do
@@ -38,6 +40,26 @@ example = do
     manager <- newManager tlsParams
     dispatchMime
             manager
+            kcfg
+            (CoreV1.listPodForAllNamespaces (Accept MimeJSON))
+        >>= print
+
+exampleWithKubeConfig :: IO ()
+exampleWithKubeConfig = do
+    oidcCache <- atomically $ newTVar $ Map.fromList []
+    (mgr, kcfg) <- kubeClient oidcCache $ KubeConfigFile "/path/to/kubeconfig"
+    dispatchMime
+            mgr
+            kcfg
+            (CoreV1.listPodForAllNamespaces (Accept MimeJSON))
+        >>= print
+
+exampleWithInClusterConfig :: IO ()
+exampleWithInClusterConfig = do
+    oidcCache <- atomically $ newTVar $ Map.fromList []
+    (mgr, kcfg) <- kubeClient oidcCache KubeConfigCluster
+    dispatchMime
+            mgr
             kcfg
             (CoreV1.listPodForAllNamespaces (Accept MimeJSON))
         >>= print
