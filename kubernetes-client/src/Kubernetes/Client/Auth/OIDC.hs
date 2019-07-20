@@ -36,8 +36,8 @@ data OIDCAuth = OIDCAuth { issuerURL        :: Text
                          , clientID         :: Text
                          , clientSecret     :: Text
                          , tlsParams        :: TLS.ClientParams
-                         , idTokenMVar      :: TVar(Maybe Text)
-                         , refreshTokenMVar :: TVar(Maybe Text)
+                         , idTokenTVar      :: TVar(Maybe Text)
+                         , refreshTokenTVar :: TVar(Maybe Text)
                          }
 
 -- | Cache OIDCAuth based on issuerURL and clientID.
@@ -55,7 +55,7 @@ getToken :: OIDCAuth -> IO Text
 getToken o@(OIDCAuth{..}) = do
   now <- getPOSIXTime
   mgr <- newManager tlsManagerSettings
-  idToken <- atomically $ readTVar idTokenMVar
+  idToken <- readTVarIO idTokenTVar
   let maybeExp = idToken
                  & (>>= decode)
                  & (fmap claims)
@@ -68,7 +68,7 @@ getToken o@(OIDCAuth{..}) = do
 
 fetchToken :: Manager -> OIDCAuth -> IO Text
 fetchToken mgr o@(OIDCAuth{..}) = do
-  maybeToken <- atomically $ readTVar refreshTokenMVar
+  maybeToken <- readTVarIO refreshTokenTVar
   case maybeToken of
     Nothing -> error "cannot refresh id-token without a refresh token"
     Just token -> do
@@ -85,7 +85,7 @@ fetchToken mgr o@(OIDCAuth{..}) = do
       case OAuth.idToken oauthToken of
         Nothing -> error "token response did not contain an id_token, either the scope \"openid\" wasn't requested upon login, or the provider doesn't support id_tokens as part of the refresh response."
         Just (IdToken t) -> do
-          _ <- atomically $ writeTVar idTokenMVar (Just t)
+          _ <- atomically $ writeTVar idTokenTVar (Just t)
           return t
 
 fetchTokenEndpoint :: Manager -> OIDCAuth -> IO Text
@@ -116,7 +116,7 @@ oidcAuth _ _ = Nothing
 -}
 cachedOIDCAuth :: OIDCCache -> DetectAuth
 cachedOIDCAuth cache AuthInfo{authProvider = Just(AuthProviderConfig "oidc" (Just cfg))} (tls, kubecfg) = Just $ do
-  m <- atomically $ readTVar cache
+  m <- readTVarIO cache
   o <- case findInCache m cfg of
     Left e -> error e
     Right (Just o) -> return o
@@ -137,8 +137,8 @@ findInCache cache cfg = do
 parseOIDCAuthInfo :: Map Text Text -> IO (Either String OIDCAuth)
 parseOIDCAuthInfo m = do
   eitherTLSParams <- parseCA m
-  idTokenMVar <- atomically $ newTVar $ Map.lookup "id-token" m
-  refreshTokenMVar <- atomically $ newTVar $ Map.lookup "refresh-token" m
+  idTokenTVar <- atomically $ newTVar $ Map.lookup "id-token" m
+  refreshTokenTVar <- atomically $ newTVar $ Map.lookup "refresh-token" m
   return $ do
     tlsParams <- eitherTLSParams
     issuerURL <- lookupEither m "idp-issuer-url"
