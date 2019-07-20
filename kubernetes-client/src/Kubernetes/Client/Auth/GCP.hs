@@ -62,8 +62,8 @@ getToken g@(GCPAuth{..}) = getCurrentToken g
 getCurrentToken :: GCPAuth -> IO (Maybe Text)
 getCurrentToken (GCPAuth{..}) = do
   now <- getCurrentTime
-  maybeExpiry <- atomically $ readTVar gcpTokenExpiry
-  maybeToken <- atomically $ readTVar gcpAccessToken
+  maybeExpiry <- readTVarIO gcpTokenExpiry
+  maybeToken <- readTVarIO gcpAccessToken
   return $ do
     expiry <- maybeExpiry
     if expiry > now
@@ -80,8 +80,9 @@ fetchToken GCPAuth{..} = do
       expText = runJSONPath gcpExpiryKey =<< credsJSON
       expiry :: Either Text (Maybe UTCTime)
       expiry = Just <$> (parseExpiryTime =<< expText)
-  atomically $ writeTVar gcpAccessToken (rightToMaybe token)
-  atomically $ writeTVar gcpTokenExpiry (either (const Nothing) id expiry)
+  atomically $ do
+    writeTVar gcpAccessToken (rightToMaybe token)
+    writeTVar gcpTokenExpiry (either (const Nothing) id expiry)
   return token
 
 parseGCPAuthInfo :: Map Text Text -> IO (Either Text GCPAuth)
