@@ -23,13 +23,14 @@ tests:
       - kubernetes-client
       - hspec
       - yaml
+      - file-embed
   example:
     main: App.hs
     source-dirs: example
     dependencies:
       - kubernetes-client
 extra-source-files:
-  - test/testdata/*
+  - test/testdata/**/*
   - README.md
 dependencies:
   - base >=4.7 && <5.0

@@ -1,5 +1,6 @@
 module Kubernetes.Client.Auth.ClientCert where
 
+import Control.Exception.Safe                (Exception, throwM)
 import Data.Text.Encoding
 import Kubernetes.Client.Auth.Internal.Types
 import Kubernetes.Client.Internal.TLSUtils
@@ -13,7 +14,8 @@ clientCertFileAuth auth (tlsParams, cfg) = do
   certFile <- clientCertificate auth
   keyFile <- clientKey auth
   return $ do
-    cert <- credentialLoadX509 certFile keyFile >>= either error return
+    cert <- credentialLoadX509 certFile keyFile
+            >>= either (throwM . CredentialLoadException) return
     let newParams = (setClientCert cert tlsParams)
         newCfg = (disableValidateAuthMethods cfg)
     return (newParams, newCfg)
@@ -33,3 +35,7 @@ clientCertDataAuth auth (tlsParams, cfg) = do
 disableValidateAuthMethods :: KubernetesClientConfig -> KubernetesClientConfig
 disableValidateAuthMethods kcfg = kcfg { configValidateAuthMethods = False }
 
+data CredentialLoadException = CredentialLoadException String
+  deriving Show
+
+instance Exception CredentialLoadException
