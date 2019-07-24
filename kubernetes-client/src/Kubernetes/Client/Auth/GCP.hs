@@ -5,6 +5,7 @@ module Kubernetes.Client.Auth.GCP
 where
 
 import Control.Concurrent.STM
+import Control.Exception.Safe                (Exception, throwM)
 import Data.Attoparsec.Text
 import Data.Either.Combinators
 import Data.Function                         ((&))
@@ -36,7 +37,8 @@ data GCPAuth = GCPAuth { gcpAccessToken :: TVar(Maybe Text)
 
 instance AuthMethod GCPAuth where
   applyAuthMethod _ gcp req = do
-    token <- getToken gcp >>= exceptEither
+    token <- getToken gcp
+             >>= either (throwM . GCPGetTokenException) pure
     pure
       $ setHeader req [("Authorization", "Bearer " <> (Text.encodeUtf8 token))]
       & L.set rAuthTypesL []
@@ -45,15 +47,19 @@ instance AuthMethod GCPAuth where
 gcpAuth :: DetectAuth
 gcpAuth AuthInfo{authProvider = Just(AuthProviderConfig "gcp" (Just cfg))} (tls, kubecfg)
   = Just $ do
-      configOfErr <- parseGCPAuthInfo cfg
-      case configOfErr of
-        Left e    -> error e
+      configOrErr <- parseGCPAuthInfo cfg
+      case configOrErr of
+        Left e    -> throwM $ GCPAuthParsingException e
         Right gcp -> pure (tls, addAuthMethod kubecfg gcp)
 gcpAuth _ _ = Nothing
 
-exceptEither :: Either String a -> IO a
-exceptEither (Right a) = pure a
-exceptEither (Left t)  = error (show t)
+data GCPAuthParsingException = GCPAuthParsingException String
+  deriving Show
+instance Exception GCPAuthParsingException
+
+data GCPGetTokenException = GCPGetTokenException String
+  deriving Show
+instance Exception GCPGetTokenException
 
 getToken :: GCPAuth -> IO (Either String Text)
 getToken g@(GCPAuth{..}) = getCurrentToken g
