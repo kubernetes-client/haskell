@@ -22,6 +22,7 @@ tests:
     dependencies:
       - kubernetes-client
       - hspec
+      - hspec-attoparsec
       - yaml
       - file-embed
   example:
