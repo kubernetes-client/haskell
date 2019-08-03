@@ -36,35 +36,35 @@ extra-source-files:
 dependencies:
   - base >=4.7 && <5.0
   - base64-bytestring
-  - bytestring >=0.10.0 && <0.11
-  - aeson >=1.2.2 && <1.5
-  - attoparsec >=0.13.0.0 && <0.14
-  - jsonpath >=0.1.0.0 && <0.2
-  - connection >=0.2.8
-  - containers >= 0.6.0.1
-  - data-default-class >=0.1.2.0
+  - bytestring >=0.10 && <0.11
+  - aeson >=1.2 && <1.5
+  - attoparsec >=0.13 && <0.14
+  - jsonpath >=0.1 && <0.2
+  - connection >=0.2
+  - containers >= 0.5
+  - data-default-class >=0.1
   - either
   - filepath
   - hoauth2
   - http-client >=0.5 && <0.7
-  - http-client-tls >=0.3.5.3
+  - http-client-tls >=0.3
   - jwt
   - kubernetes-client-core ==0.1.0.1
-  - microlens >=0.4.3 && <0.5
-  - mtl >=2.2.1
+  - microlens >=0.4 && <0.5
+  - mtl >=2.2
   - oidc-client
-  - pem >=0.2.4
+  - pem >=0.2
   - safe-exceptions >=0.1.0.0
   - stm
-  - streaming-bytestring >= 0.1.5 && < 0.2.0
+  - streaming-bytestring >= 0.1 && < 0.2.0
   - text >=0.11 && <1.3
   - time
   - timerep
   - tls >=1.4.1
   - typed-process
   - uri-bytestring
-  - x509 >=1.7.5
-  - x509-system >=1.6.6
-  - x509-store >=1.6.7
-  - x509-validation >=1.6.11
+  - x509 >=1.7
+  - x509-system >=1.6
+  - x509-store >=1.6
+  - x509-validation >=1.6
   - yaml
