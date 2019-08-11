@@ -48,7 +48,7 @@ dependencies:
   - hoauth2
   - http-client >=0.5 && <0.7
   - http-client-tls >=0.3
-  - jwt
+  - jose-jwt
   - kubernetes-client-core ==0.1.0.1
   - microlens >=0.4 && <0.5
   - mtl >=2.2

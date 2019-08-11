@@ -23,8 +23,8 @@ import Network.HTTP.Client.TLS
 import Network.OAuth.OAuth2                  as OAuth
 import Network.TLS                           as TLS
 import URI.ByteString
-import Web.JWT                               as JWT
 import Web.OIDC.Client.Discovery             as OIDC
+import Jose.Jwt
 
 import qualified Data.ByteString                   as BS
 import qualified Data.ByteString.Base64            as B64
@@ -66,20 +66,23 @@ instance Exception OIDCAuthParsingException
 getToken :: OIDCAuth -> IO Text
 getToken o@(OIDCAuth{..}) = do
   now <- getPOSIXTime
-  mgr <- newManager tlsManagerSettings
-  idToken <- readTVarIO idTokenTVar
-  let maybeExp = idToken
-                 & (>>= decode)
-                 & (fmap claims)
-                 & (>>= JWT.exp)
-                 & (fmap secondsSinceEpoch)
-      isValidToken = fromMaybe False (fmap (now <) maybeExp)
-  if not isValidToken
-    then fetchToken mgr o
-    else maybe (throwM $ OIDCGetTokenException "impossible") pure idToken
+  maybeIdToken <- readTVarIO idTokenTVar
+  case maybeIdToken of
+    Nothing -> fetchToken o
+    Just idToken -> do
+      let maybeExp = decodeClaims (Text.encodeUtf8 idToken)
+                   & rightToMaybe
+                   & fmap snd
+                   & (>>= jwtExp)
+      case maybeExp of
+        Nothing -> fetchToken o
+        Just (IntDate expiryDate) -> if now < expiryDate
+                                     then pure idToken
+                                     else fetchToken o
 
-fetchToken :: Manager -> OIDCAuth -> IO Text
-fetchToken mgr o@(OIDCAuth{..}) = do
+fetchToken :: OIDCAuth -> IO Text
+fetchToken o@(OIDCAuth{..}) = do
+  mgr <- newManager tlsManagerSettings
   maybeToken <- readTVarIO refreshTokenTVar
   case maybeToken of
     Nothing -> throwM $ OIDCGetTokenException "cannot refresh id-token without a refresh token"
