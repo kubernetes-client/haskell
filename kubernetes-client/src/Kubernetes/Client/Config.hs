@@ -37,7 +37,6 @@ import qualified Data.ByteString.Lazy                as LazyB
 import           Data.Either.Combinators
 import           Data.Function                       ((&))
 import           Data.Maybe
-import           Data.Monoid                         ((<>))
 import qualified Data.Text                           as T
 import qualified Data.Text.Encoding                  as T
 import qualified Data.Text.IO                        as T

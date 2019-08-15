@@ -1,6 +1,7 @@
 {-# LANGUAGE OverloadedStrings #-}
 module Kubernetes.Client.Auth.Token where
 
+import Data.Monoid                           ((<>))
 import Kubernetes.Client.Auth.Internal.Types
 import Kubernetes.Client.KubeConfig          (AuthInfo (..))
 import Kubernetes.OpenAPI.Core               (AnyAuthMethod (..),

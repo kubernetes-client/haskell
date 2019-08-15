@@ -11,6 +11,7 @@ import Data.Either.Combinators
 import Data.Function                         ((&))
 import Data.JSONPath
 import Data.Map                              (Map)
+import Data.Monoid                           ((<>))
 import Data.Text                             (Text)
 import Data.Time.Clock
 import Data.Time.LocalTime

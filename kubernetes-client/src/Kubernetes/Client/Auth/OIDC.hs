@@ -12,8 +12,10 @@ import Data.Either.Combinators
 import Data.Function                         ((&))
 import Data.Map                              (Map)
 import Data.Maybe
+import Data.Monoid                           ((<>))
 import Data.Text
 import Data.Time.Clock.POSIX                 (getPOSIXTime)
+import Jose.Jwt
 import Kubernetes.Client.Auth.Internal.Types
 import Kubernetes.Client.Internal.TLSUtils
 import Kubernetes.Client.KubeConfig
@@ -24,7 +26,6 @@ import Network.OAuth.OAuth2                  as OAuth
 import Network.TLS                           as TLS
 import URI.ByteString
 import Web.OIDC.Client.Discovery             as OIDC
-import Jose.Jwt
 
 import qualified Data.ByteString                   as BS
 import qualified Data.ByteString.Base64            as B64
