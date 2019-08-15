@@ -6,7 +6,7 @@ module Kubernetes.Client.Config
   , addCACertFile
   , applyAuthSettings
   , clientHooksL
-  , cluster
+  , Kubernetes.Client.Config.cluster
   , defaultTLSClientParams
   , disableServerCertValidation
   , disableServerNameValidation
@@ -46,7 +46,7 @@ import           Kubernetes.Client.Auth.GCP
 import           Kubernetes.Client.Auth.OIDC
 import           Kubernetes.Client.Auth.Token
 import           Kubernetes.Client.Internal.TLSUtils
-import           Kubernetes.Client.KubeConfig        hiding (cluster)
+import           Kubernetes.Client.KubeConfig
 import           Network.Connection                  (TLSSettings (..))
 import qualified Network.HTTP.Client                 as NH
 import           Network.HTTP.Client.TLS             (mkManagerSettings)
@@ -80,10 +80,10 @@ kubeClient oidcCache (KubeConfigFile f) = do
   (tlsParams, cfg) <-
     case getAuthInfo kubeConfigFile of
       Left _          -> return (t,c)
-      Right (_, auth)-> applyAuthSettings oidcCache auth (t, c)
+      Right (_, auth) -> applyAuthSettings oidcCache auth (t, c)
   mgr <- newManager tlsParams
   return (mgr, cfg)
-kubeClient _ (KubeConfigCluster) = cluster
+kubeClient _ (KubeConfigCluster) = Kubernetes.Client.Config.cluster
 
 -- |Creates 'NH.Manager' and 'K.KubernetesClientConfig' assuming it is being executed in a pod
 cluster :: (MonadIO m, MonadThrow m) => m (NH.Manager, K.KubernetesClientConfig)
