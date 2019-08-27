@@ -125,10 +125,11 @@ addCACertData cfg t =
                        & (>>= (maybeToRight "cert data not provided" . certificateAuthorityData))
   in case eitherCertText of
        Left _ -> pure t
-       Right certText ->
-         (B64.decode $ T.encodeUtf8 certText)
-         >>= updateClientParams t
-         & either (throwM . ParsePEMCertsException) return
+       Right certBase64 -> do
+         certText <- B64.decode (T.encodeUtf8 certBase64)
+                     & either (throwM . Base64ParsingFailed) pure
+         updateClientParams t certText
+           & either throwM return
 
 addCACertFile :: Config -> FilePath -> TLS.ClientParams -> IO TLS.ClientParams
 addCACertFile cfg dir t = do

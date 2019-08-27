@@ -59,7 +59,8 @@ data OIDCGetTokenException = OIDCOAuthException (OAuth2Error OAuth2TokenRequest.
   deriving Show
 instance Exception OIDCGetTokenException
 
-data OIDCAuthParsingException = OIDCAuthParsingException String
+data OIDCAuthParsingException = OIDCAuthCAParsingFailed ParseCertException
+                              | OIDCAuthMissingInformation String
   deriving Show
 instance Exception OIDCAuthParsingException
 
@@ -119,7 +120,7 @@ oidcAuth :: DetectAuth
 oidcAuth AuthInfo{authProvider = Just(AuthProviderConfig "oidc" (Just cfg))} (tls, kubecfg)
   = Just
     $ parseOIDCAuthInfo cfg
-    >>= either (throwM . OIDCAuthParsingException) (\oidc -> pure (tls, addAuthMethod kubecfg oidc))
+    >>= either throwM (\oidc -> pure (tls, addAuthMethod kubecfg oidc))
 oidcAuth _ _ = Nothing
 
 -- TODO: Consider doing this whole function atomically, as two threads may miss the cache simultaneously
@@ -129,54 +130,53 @@ oidcAuth _ _ = Nothing
 -}
 cachedOIDCAuth :: OIDCCache -> DetectAuth
 cachedOIDCAuth cache AuthInfo{authProvider = Just(AuthProviderConfig "oidc" (Just cfg))} (tls, kubecfg) = Just $ do
-  m <- readTVarIO cache
-  o <- case findInCache m cfg of
-    Left e -> throwM $ OIDCAuthParsingException e
-    Right (Just o) -> return o
-    Right Nothing -> do
-      o@(OIDCAuth{..}) <- parseOIDCAuthInfo cfg
-                          >>= either (throwM . OIDCAuthParsingException) pure
-      let newCache = Map.insert (issuerURL, clientID) o m
+  latestCache <- readTVarIO cache
+  issuerURL <- lookupOrThrow "idp-issuer-url"
+  clientID <- lookupOrThrow "client-id"
+  case Map.lookup (issuerURL, clientID) latestCache of
+    Just cacheHit -> return $ newTLSAndAuth cacheHit
+    Nothing -> do
+      parsedAuth <- parseOIDCAuthInfo cfg
+                    >>= either throwM pure
+      let newCache = Map.insert (issuerURL, clientID) parsedAuth latestCache
       _ <- atomically $ swapTVar cache newCache
-      return o
-  pure (tls, addAuthMethod kubecfg o)
+      return $ newTLSAndAuth parsedAuth
+  where lookupOrThrow k = Map.lookup k cfg
+                         & maybe (throwM $ OIDCAuthMissingInformation $ Text.unpack k) pure
+        newTLSAndAuth auth = (tls, addAuthMethod kubecfg auth)
 cachedOIDCAuth _ _ _ = Nothing
 
-findInCache :: Map (Text, Text) a -> Map Text Text -> Either String (Maybe a)
-findInCache cache cfg = do
-  issuerURL <- lookupEither cfg "idp-issuer-url"
-  clientID <- lookupEither cfg "client-id"
-  return $ Map.lookup (issuerURL, clientID) cache
-
-parseOIDCAuthInfo :: Map Text Text -> IO (Either String OIDCAuth)
+parseOIDCAuthInfo :: Map Text Text -> IO (Either OIDCAuthParsingException OIDCAuth)
 parseOIDCAuthInfo m = do
   eitherTLSParams <- parseCA m
   idTokenTVar <- atomically $ newTVar $ Map.lookup "id-token" m
   refreshTokenTVar <- atomically $ newTVar $ Map.lookup "refresh-token" m
   return $ do
-    tlsParams <- eitherTLSParams
-    issuerURL <- lookupEither m "idp-issuer-url"
-    clientID <- lookupEither m "client-id"
-    clientSecret <- lookupEither m "client-secret"
+    tlsParams <- mapLeft OIDCAuthCAParsingFailed eitherTLSParams
+    issuerURL <- lookupEither "idp-issuer-url"
+    clientID <- lookupEither "client-id"
+    clientSecret <- lookupEither "client-secret"
     return OIDCAuth{..}
+    where lookupEither k = Map.lookup k m
+                           & maybeToRight (OIDCAuthMissingInformation $ Text.unpack k)
 
-parseCA :: Map Text Text -> IO (Either String TLS.ClientParams)
+parseCA :: Map Text Text -> IO (Either ParseCertException TLS.ClientParams)
 parseCA m = do
   t <- defaultTLSClientParams
   fromMaybe (pure $ pure t) (parseCAFile t m <|> parseCAData t m)
 
-parseCAFile :: TLS.ClientParams -> Map Text Text -> Maybe (IO (Either String TLS.ClientParams))
+parseCAFile :: TLS.ClientParams -> Map Text Text -> Maybe (IO (Either ParseCertException TLS.ClientParams))
 parseCAFile t m = do
   caFile <- Text.unpack <$> Map.lookup "idp-certificate-authority" m
-  return $ updateClientParams t <$> BS.readFile caFile
+  Just $ do
+    caText <- BS.readFile caFile
+    return $ updateClientParams t caText
 
-parseCAData :: TLS.ClientParams -> Map Text Text -> Maybe (IO (Either String TLS.ClientParams))
+parseCAData :: TLS.ClientParams -> Map Text Text -> Maybe (IO (Either ParseCertException TLS.ClientParams))
 parseCAData t m = do
-  caText <- Map.lookup "idp-certificate-authority-data" m
-  pure . pure
-    $ (B64.decode $ Text.encodeUtf8 caText)
-    >>= updateClientParams t
-
-lookupEither :: (Show key, Ord key) => Map key val -> key -> Either String val
-lookupEither m k = maybeToRight e $ Map.lookup k m
-                   where e = "Couldn't find key: " <> show k <> " in OIDC auth info"
+  caBase64 <- Map.lookup "idp-certificate-authority-data" m
+  Just $ pure $ do
+    caText <- Text.encodeUtf8 caBase64
+              & B64.decode
+              & mapLeft Base64ParsingFailed
+    updateClientParams t caText

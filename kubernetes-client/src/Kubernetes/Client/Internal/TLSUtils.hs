@@ -6,9 +6,9 @@ import Control.Monad.IO.Class     (MonadIO, liftIO)
 import Data.ByteString            (ByteString)
 import Data.Default.Class         (def)
 import Data.Either                (rights)
+import Data.Either.Combinators    (mapLeft)
 import Data.Function              ((&))
 import Data.PEM                   (pemContent, pemParseBS)
-import Data.Typeable              (Typeable)
 import Data.X509                  (SignedCertificate, decodeSignedCertificate)
 import Data.X509.CertificateStore (CertificateStore, makeCertificateStore)
 import Lens.Micro
@@ -38,12 +38,14 @@ defaultTLSClientParams = do
         }
 
 -- |Parses a PEM-encoded @ByteString@ into a list of certificates.
-parsePEMCerts :: B.ByteString -> Either String [SignedCertificate]
+parsePEMCerts :: B.ByteString -> Either ParseCertException [SignedCertificate]
 parsePEMCerts b = do
     pems <- pemParseBS b
+            & mapLeft PEMParsingFailed
     return $ rights $ map (decodeSignedCertificate . pemContent) pems
 
-updateClientParams :: TLS.ClientParams -> ByteString -> Either String TLS.ClientParams
+-- | Updates client params, sets CA store to passed bytestring of CA certificates
+updateClientParams :: TLS.ClientParams -> ByteString -> Either ParseCertException TLS.ClientParams
 updateClientParams cp certText = parsePEMCerts certText
                                  & (fmap (flip setCAStore cp))
 
@@ -80,23 +82,26 @@ onCertificateRequestL :: Lens' TLS.ClientParams (([TLS.CertificateType], Maybe [
 onCertificateRequestL =
   clientHooksL . lens TLS.onCertificateRequest (\ch ocr -> ch { TLS.onCertificateRequest = ocr })
 
-data ParsePEMCertsException = ParsePEMCertsException String deriving (Typeable, Show)
-
-instance Exception ParsePEMCertsException
-
 -- |Loads certificates from a PEM-encoded file.
 loadPEMCerts :: (MonadIO m, MonadThrow m) => FilePath -> m [SignedCertificate]
 loadPEMCerts p = do
     liftIO (B.readFile p)
-        >>= throwLeft
+        >>= (either throwM return)
         .   parsePEMCerts
 
 -- |Loads Base64 encoded certificate and private key
 loadB64EncodedCert :: (MonadThrow m) => B.ByteString -> B.ByteString -> m Credential
-loadB64EncodedCert certB64 keyB64 =  throwLeft $ do
+loadB64EncodedCert certB64 keyB64 = either throwM pure $ do
   certText <- B64.decode certB64
+              & mapLeft Base64ParsingFailed
   keyText <- B64.decode keyB64
+              & mapLeft Base64ParsingFailed
   credentialLoadX509FromMemory certText keyText
+    & mapLeft FailedToLoadCredential
 
-throwLeft :: (MonadThrow m) => Either String a -> m a
-throwLeft = either (throwM . ParsePEMCertsException) return
+data ParseCertException = PEMParsingFailed String
+                        | Base64ParsingFailed String
+                        | FailedToLoadCredential String
+  deriving Show
+
+instance Exception ParseCertException
