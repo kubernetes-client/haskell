@@ -6,7 +6,7 @@
 
 ```haskell
 import Control.Concurrent.STM (atomically, newTVar)
-import Kubernetes.Client      (KubeConfigSource (..), kubeClient)
+import Kubernetes.Client      (KubeConfigSource (..), mkKubeClientConfig)
 import Kubernetes.OpenAPI     (Accept (..), MimeJSON (..), dispatchMime)
 
 import qualified Data.Map                      as Map
@@ -15,7 +15,7 @@ import qualified Kubernetes.OpenAPI.API.CoreV1 as CoreV1
 main :: IO ()
 main = do
     oidcCache <- atomically $ newTVar $ Map.fromList []
-    (mgr, kcfg) <- kubeClient oidcCache $ KubeConfigFile "/path/to/kubeconfig"
+    (mgr, kcfg) <- mkKubeClientConfig oidcCache $ KubeConfigFile "/path/to/kubeconfig"
     dispatchMime
             mgr
             kcfg
@@ -28,7 +28,7 @@ main = do
 ```haskell
 import Control.Concurrent.STM (atomically, newTVar)
 import Data.Function          ((&))
-import Kubernetes.Client      (KubeConfigSource (..), kubeClient)
+import Kubernetes.Client      (KubeConfigSource (..), mkKubeClientConfig)
 import Kubernetes.OpenAPI     (Accept (..), MimeJSON (..), dispatchMime)
 import Network.TLS            (credentialLoadX509)
 
@@ -38,7 +38,7 @@ import qualified Kubernetes.OpenAPI.API.CoreV1 as CoreV1
 main :: IO ()
 main = do
     oidcCache <- atomically $ newTVar $ Map.fromList []
-    (mgr, kcfg) <- kubeClient oidcCache KubeConfigCluster
+    (mgr, kcfg) <- mkKubeClientConfig oidcCache KubeConfigCluster
     dispatchMime
             mgr
             kcfg

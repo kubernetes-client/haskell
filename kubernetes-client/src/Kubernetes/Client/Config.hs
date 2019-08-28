@@ -6,13 +6,13 @@ module Kubernetes.Client.Config
   , addCACertFile
   , applyAuthSettings
   , clientHooksL
-  , Kubernetes.Client.Config.cluster
   , defaultTLSClientParams
   , disableServerCertValidation
   , disableServerNameValidation
   , disableValidateAuthMethods
-  , kubeClient
   , loadPEMCerts
+  , mkInClusterClientConfig
+  , mkKubeClientConfig
   , newManager
   , onCertificateRequestL
   , onServerCertificateL
@@ -63,11 +63,11 @@ data KubeConfigSource = KubeConfigFile FilePath
   across an application share an 'OIDCCache', this makes sure updation of OAuth
   token is synchronized across all the different clients being used.
 -}
-kubeClient
+mkKubeClientConfig
   :: OIDCCache
   -> KubeConfigSource
   -> IO (NH.Manager, K.KubernetesClientConfig)
-kubeClient oidcCache (KubeConfigFile f) = do
+mkKubeClientConfig oidcCache (KubeConfigFile f) = do
   kubeConfigFile <- decodeFileThrow f
   masterURI <- getCluster kubeConfigFile
          & fmap server
@@ -83,11 +83,11 @@ kubeClient oidcCache (KubeConfigFile f) = do
       Right (_, auth) -> applyAuthSettings oidcCache auth (tlsParams, clientConfig)
   mgr <- newManager tlsParamsWithAuth
   return (mgr, clientConfigWithAuth)
-kubeClient _ (KubeConfigCluster) = Kubernetes.Client.Config.cluster
+mkKubeClientConfig _ (KubeConfigCluster) = mkInClusterClientConfig
 
 -- |Creates 'NH.Manager' and 'K.KubernetesClientConfig' assuming it is being executed in a pod
-cluster :: (MonadIO m, MonadThrow m) => m (NH.Manager, K.KubernetesClientConfig)
-cluster = do
+mkInClusterClientConfig :: (MonadIO m, MonadThrow m) => m (NH.Manager, K.KubernetesClientConfig)
+mkInClusterClientConfig = do
   caStore <- loadPEMCerts $ serviceAccountDir ++ "/ca.crt"
   defTlsParams <- liftIO defaultTLSClientParams
   mgr <- liftIO . newManager . setCAStore caStore $ disableServerNameValidation defTlsParams

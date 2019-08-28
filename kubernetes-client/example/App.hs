@@ -7,7 +7,7 @@ import Data.Function          ((&))
 import Kubernetes.Client      (KubeConfigSource (..), defaultTLSClientParams,
                                disableServerCertValidation,
                                disableServerNameValidation,
-                               disableValidateAuthMethods, kubeClient,
+                               disableValidateAuthMethods, mkKubeClientConfig,
                                loadPEMCerts, newManager, setCAStore,
                                setClientCert, setMasterURI, setTokenAuth)
 import Kubernetes.OpenAPI     (Accept (..), MimeJSON (..), dispatchMime,
@@ -47,7 +47,7 @@ example = do
 exampleWithKubeConfig :: IO ()
 exampleWithKubeConfig = do
     oidcCache <- atomically $ newTVar $ Map.fromList []
-    (mgr, kcfg) <- kubeClient oidcCache $ KubeConfigFile "/path/to/kubeconfig"
+    (mgr, kcfg) <- mkKubeClientConfig oidcCache $ KubeConfigFile "/path/to/kubeconfig"
     dispatchMime
             mgr
             kcfg
@@ -57,7 +57,7 @@ exampleWithKubeConfig = do
 exampleWithInClusterConfig :: IO ()
 exampleWithInClusterConfig = do
     oidcCache <- atomically $ newTVar $ Map.fromList []
-    (mgr, kcfg) <- kubeClient oidcCache KubeConfigCluster
+    (mgr, kcfg) <- mkKubeClientConfig oidcCache KubeConfigCluster
     dispatchMime
             mgr
             kcfg
