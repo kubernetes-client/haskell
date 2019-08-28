@@ -46,12 +46,12 @@ instance AuthMethod GCPAuth where
 
 -- |Detects if auth-provier name is gcp, if it is configures the 'KubernetesClientConfig' with GCPAuth 'AuthMethod'
 gcpAuth :: DetectAuth
-gcpAuth AuthInfo{authProvider = Just(AuthProviderConfig "gcp" (Just cfg))} (tls, kubecfg)
+gcpAuth AuthInfo{authProvider = Just(AuthProviderConfig "gcp" (Just cfg))} (tlsParams, kubecfg)
   = Just $ do
       configOrErr <- parseGCPAuthInfo cfg
       case configOrErr of
-        Left e    -> throwM e
-        Right gcp -> pure (tls, addAuthMethod kubecfg gcp)
+        Left err  -> throwM err
+        Right gcp -> pure (tlsParams, addAuthMethod kubecfg gcp)
 gcpAuth _ _ = Nothing
 
 data GCPAuthParsingException = GCPAuthMissingInformation String
@@ -69,8 +69,8 @@ data GCPGetTokenException = GCPCmdProducedInvalidJSON String
 instance Exception GCPGetTokenException
 
 getToken :: GCPAuth -> IO (Either GCPGetTokenException Text)
-getToken g@(GCPAuth{..}) = getCurrentToken g
-                           >>= maybe (fetchToken g) (return . Right)
+getToken auth@(GCPAuth{..}) = getCurrentToken auth
+                              >>= maybe (fetchToken auth) (return . Right)
 
 getCurrentToken :: GCPAuth -> IO (Maybe Text)
 getCurrentToken (GCPAuth{..}) = do
@@ -87,12 +87,12 @@ fetchToken :: GCPAuth -> IO (Either GCPGetTokenException Text)
 fetchToken GCPAuth{..} = do
   (stdOut, _) <- readProcess_ gcpCmd
   case parseTokenAndExpiry stdOut of
+    Left err -> return $ Left err
     Right (token, expiry) -> do
       atomically $ do
         writeTVar gcpAccessToken (Just token)
         writeTVar gcpTokenExpiry (Just expiry)
       return $ Right token
-    Left x -> return $ Left x
   where
     parseTokenAndExpiry credsStr = do
       credsJSON <- Aeson.eitherDecode credsStr
@@ -106,35 +106,31 @@ fetchToken GCPAuth{..} = do
       return (token, expiry)
 
 parseGCPAuthInfo :: Map Text Text -> IO (Either GCPAuthParsingException GCPAuth)
-parseGCPAuthInfo m = do
-  gcpAccessToken <- atomically $ newTVar $ Map.lookup "access-token" m
+parseGCPAuthInfo authInfo = do
+  gcpAccessToken <- atomically $ newTVar $ Map.lookup "access-token" authInfo
   eitherGCPExpiryToken <- sequence $ fmap (atomically . newTVar) lookupAndParseExpiry
   return $ do
     gcpTokenExpiry <- mapLeft GCPAuthInvalidExpiry eitherGCPExpiryToken
     cmdPath <- Text.unpack <$> lookupEither "cmd-path"
     cmdArgs <- Text.splitOn " " <$> lookupEither "cmd-args"
-    gcpTokenKey <- readJSONPath m "token-key" [JSONPath [KeyChild "token_expiry"]]
+    gcpTokenKey <- readJSONPath "token-key" [JSONPath [KeyChild "token_expiry"]]
                    & mapLeft GCPAuthInvalidTokenJSONPath
-    gcpExpiryKey <- readJSONPath m "expiry-key" [JSONPath [KeyChild "access_token"]]
+    gcpExpiryKey <- readJSONPath "expiry-key" [JSONPath [KeyChild "access_token"]]
                     & mapLeft GCPAuthInvalidExpiryJSONPath
     let gcpCmd = proc cmdPath (map Text.unpack cmdArgs)
     pure $ GCPAuth{..}
   where
     lookupAndParseExpiry =
-      case Map.lookup "expiry" m of
+      case Map.lookup "expiry" authInfo of
         Nothing         -> Right Nothing
         Just expiryText -> Just <$> parseExpiryTime expiryText
-    lookupEither key = Map.lookup key m
+    lookupEither key = Map.lookup key authInfo
                        & maybeToRight (GCPAuthMissingInformation $ Text.unpack key)
+    parseK8sJSONPath = parseOnly (k8sJSONPath <* endOfInput)
+    readJSONPath key defaultPath =
+      maybe (Right defaultPath) parseK8sJSONPath $ Map.lookup key authInfo
 
 parseExpiryTime :: Text -> Either String UTCTime
-parseExpiryTime s = zonedTimeToUTC <$> parseTimeRFC3339 s
-                    & maybeToRight ("failed to parse token expiry time " <> Text.unpack s)
-
-readJSONPath :: Map Text Text
-             -> Text
-             -> [K8sPathElement]
-             -> Either String [K8sPathElement]
-readJSONPath m key def = case Map.lookup key m of
-                           Nothing -> pure def
-                           Just str -> parseOnly (k8sJSONPath <* endOfInput) str
+parseExpiryTime expiryText =
+  zonedTimeToUTC <$> parseTimeRFC3339 expiryText
+  & maybeToRight ("failed to parse token expiry time " <> Text.unpack expiryText)

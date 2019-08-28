@@ -69,20 +69,20 @@ kubeClient
   -> IO (NH.Manager, K.KubernetesClientConfig)
 kubeClient oidcCache (KubeConfigFile f) = do
   kubeConfigFile <- decodeFileThrow f
-  uri <- getCluster kubeConfigFile
+  masterURI <- getCluster kubeConfigFile
          & fmap server
          & either (const $ pure "localhost:8080") return
-  t <- defaultTLSClientParams
-       & fmap (tlsValidation kubeConfigFile)
-       & (>>= (addCACertData kubeConfigFile))
-       & (>>= addCACertFile kubeConfigFile (takeDirectory f))
-  c <- K.newConfig & fmap (setMasterURI uri)
-  (tlsParams, cfg) <-
+  tlsParams <- defaultTLSClientParams
+               & fmap (tlsValidation kubeConfigFile)
+               & (>>= (addCACertData kubeConfigFile))
+               & (>>= addCACertFile kubeConfigFile (takeDirectory f))
+  clientConfig <- K.newConfig & fmap (setMasterURI masterURI)
+  (tlsParamsWithAuth, clientConfigWithAuth) <-
     case getAuthInfo kubeConfigFile of
-      Left _          -> return (t,c)
-      Right (_, auth) -> applyAuthSettings oidcCache auth (t, c)
-  mgr <- newManager tlsParams
-  return (mgr, cfg)
+      Left _          -> return (tlsParams,clientConfig)
+      Right (_, auth) -> applyAuthSettings oidcCache auth (tlsParams, clientConfig)
+  mgr <- newManager tlsParamsWithAuth
+  return (mgr, clientConfigWithAuth)
 kubeClient _ (KubeConfigCluster) = Kubernetes.Client.Config.cluster
 
 -- |Creates 'NH.Manager' and 'K.KubernetesClientConfig' assuming it is being executed in a pod
@@ -113,37 +113,39 @@ serviceAccountDir :: FilePath
 serviceAccountDir = "/var/run/secrets/kubernetes.io/serviceaccount"
 
 tlsValidation :: Config -> TLS.ClientParams -> TLS.ClientParams
-tlsValidation cfg t = case getCluster cfg of
-                        Left _ -> t
-                        Right c -> case insecureSkipTLSVerify c of
-                                     Just True -> disableServerCertValidation t
-                                     _ -> t
+tlsValidation cfg tlsParams =
+  case getCluster cfg of
+    Left _ -> tlsParams
+    Right c ->
+      case insecureSkipTLSVerify c of
+        Just True -> disableServerCertValidation tlsParams
+        _ -> tlsParams
 
 addCACertData :: (MonadThrow m) => Config -> TLS.ClientParams -> m TLS.ClientParams
-addCACertData cfg t =
+addCACertData cfg tlsParams =
   let eitherCertText = getCluster cfg
                        & (>>= (maybeToRight "cert data not provided" . certificateAuthorityData))
   in case eitherCertText of
-       Left _ -> pure t
+       Left _ -> pure tlsParams
        Right certBase64 -> do
          certText <- B64.decode (T.encodeUtf8 certBase64)
                      & either (throwM . Base64ParsingFailed) pure
-         updateClientParams t certText
+         updateClientParams tlsParams certText
            & either throwM return
 
 addCACertFile :: Config -> FilePath -> TLS.ClientParams -> IO TLS.ClientParams
-addCACertFile cfg dir t = do
-  let certFile = getCluster cfg
-                 >>= maybeToRight "cert file not provided" . certificateAuthority
-                 & fmap T.unpack
-                 & fmap (dir </>)
-  case certFile of
-    Left _ -> return t
-    Right f -> do
-      certText <- B.readFile f
+addCACertFile cfg dir tlsParams = do
+  let eitherCertFile = getCluster cfg
+                       >>= maybeToRight "cert file not provided" . certificateAuthority
+                       & fmap T.unpack
+                       & fmap (dir </>)
+  case eitherCertFile of
+    Left _ -> return tlsParams
+    Right certFile -> do
+      certText <- B.readFile certFile
       return
-        $ updateClientParams t certText
-        & (fromRight t)
+        $ updateClientParams tlsParams certText
+        & (fromRight tlsParams)
 
 applyAuthSettings
   :: OIDCCache

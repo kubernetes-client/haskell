@@ -66,30 +66,30 @@ instance Exception OIDCAuthParsingException
 
 -- TODO: Consider a token expired few seconds before actual expiry to account for time skew
 getToken :: OIDCAuth -> IO Text
-getToken o@(OIDCAuth{..}) = do
+getToken auth@(OIDCAuth{..}) = do
   now <- getPOSIXTime
   maybeIdToken <- readTVarIO idTokenTVar
   case maybeIdToken of
-    Nothing -> fetchToken o
+    Nothing -> fetchToken auth
     Just idToken -> do
       let maybeExp = decodeClaims (Text.encodeUtf8 idToken)
                    & rightToMaybe
                    & fmap snd
                    & (>>= jwtExp)
       case maybeExp of
-        Nothing -> fetchToken o
+        Nothing -> fetchToken auth
         Just (IntDate expiryDate) -> if now < expiryDate
                                      then pure idToken
-                                     else fetchToken o
+                                     else fetchToken auth
 
 fetchToken :: OIDCAuth -> IO Text
-fetchToken o@(OIDCAuth{..}) = do
+fetchToken auth@(OIDCAuth{..}) = do
   mgr <- newManager tlsManagerSettings
   maybeToken <- readTVarIO refreshTokenTVar
   case maybeToken of
     Nothing -> throwM $ OIDCGetTokenException "cannot refresh id-token without a refresh token"
     Just token -> do
-      tokenEndpoint <- fetchTokenEndpoint mgr o
+      tokenEndpoint <- fetchTokenEndpoint mgr auth
       tokenURI <- parseURI strictURIParserOptions (Text.encodeUtf8 tokenEndpoint)
                   & either (throwM . OIDCURIException) pure
       let oauth = OAuth2{ oauthClientId = clientID
@@ -147,36 +147,38 @@ cachedOIDCAuth cache AuthInfo{authProvider = Just(AuthProviderConfig "oidc" (Jus
 cachedOIDCAuth _ _ _ = Nothing
 
 parseOIDCAuthInfo :: Map Text Text -> IO (Either OIDCAuthParsingException OIDCAuth)
-parseOIDCAuthInfo m = do
-  eitherTLSParams <- parseCA m
-  idTokenTVar <- atomically $ newTVar $ Map.lookup "id-token" m
-  refreshTokenTVar <- atomically $ newTVar $ Map.lookup "refresh-token" m
+parseOIDCAuthInfo authInfo = do
+  eitherTLSParams <- parseCA authInfo
+  idTokenTVar <- atomically $ newTVar $ Map.lookup "id-token" authInfo
+  refreshTokenTVar <- atomically $ newTVar $ Map.lookup "refresh-token" authInfo
   return $ do
     tlsParams <- mapLeft OIDCAuthCAParsingFailed eitherTLSParams
     issuerURL <- lookupEither "idp-issuer-url"
     clientID <- lookupEither "client-id"
     clientSecret <- lookupEither "client-secret"
     return OIDCAuth{..}
-    where lookupEither k = Map.lookup k m
+    where lookupEither k = Map.lookup k authInfo
                            & maybeToRight (OIDCAuthMissingInformation $ Text.unpack k)
 
 parseCA :: Map Text Text -> IO (Either ParseCertException TLS.ClientParams)
-parseCA m = do
-  t <- defaultTLSClientParams
-  fromMaybe (pure $ pure t) (parseCAFile t m <|> parseCAData t m)
+parseCA authInfo = do
+  tlsParams <- defaultTLSClientParams
+  let maybeNewParams = (parseCAFile tlsParams authInfo
+                        <|> parseCAData tlsParams authInfo)
+  fromMaybe (pure $ Right tlsParams) maybeNewParams
 
 parseCAFile :: TLS.ClientParams -> Map Text Text -> Maybe (IO (Either ParseCertException TLS.ClientParams))
-parseCAFile t m = do
-  caFile <- Text.unpack <$> Map.lookup "idp-certificate-authority" m
+parseCAFile tlsParams authInfo = do
+  caFile <- Text.unpack <$> Map.lookup "idp-certificate-authority" authInfo
   Just $ do
     caText <- BS.readFile caFile
-    return $ updateClientParams t caText
+    return $ updateClientParams tlsParams caText
 
 parseCAData :: TLS.ClientParams -> Map Text Text -> Maybe (IO (Either ParseCertException TLS.ClientParams))
-parseCAData t m = do
-  caBase64 <- Map.lookup "idp-certificate-authority-data" m
+parseCAData tlsParams authInfo = do
+  caBase64 <- Map.lookup "idp-certificate-authority-data" authInfo
   Just $ pure $ do
     caText <- Text.encodeUtf8 caBase64
               & B64.decode
               & mapLeft Base64ParsingFailed
-    updateClientParams t caText
+    updateClientParams tlsParams caText

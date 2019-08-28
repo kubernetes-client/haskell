@@ -39,8 +39,8 @@ defaultTLSClientParams = do
 
 -- |Parses a PEM-encoded @ByteString@ into a list of certificates.
 parsePEMCerts :: B.ByteString -> Either ParseCertException [SignedCertificate]
-parsePEMCerts b = do
-    pems <- pemParseBS b
+parsePEMCerts pemBS = do
+    pems <- pemParseBS pemBS
             & mapLeft PEMParsingFailed
     return $ rights $ map (decodeSignedCertificate . pemContent) pems
 
@@ -51,11 +51,8 @@ updateClientParams cp certText = parsePEMCerts certText
 
 -- |Use a custom CA store.
 setCAStore :: [SignedCertificate] -> TLS.ClientParams -> TLS.ClientParams
-setCAStore certs cp = cp
-    { TLS.clientShared = (TLS.clientShared cp)
-        { TLS.sharedCAStore = (makeCertificateStore certs)
-        }
-    }
+setCAStore certs tlsParams =
+  tlsParams & clientSharedL . sharedCAStoreL .~ makeCertificateStore certs
 
 -- |Use a client cert for authentication.
 setClientCert :: Credential -> TLS.ClientParams -> TLS.ClientParams
@@ -67,6 +64,12 @@ clientHooksL = lens TLS.clientHooks (\cp ch -> cp { TLS.clientHooks = ch })
 onServerCertificateL :: Lens' TLS.ClientParams (CertificateStore -> TLS.ValidationCache -> X509.ServiceID -> X509.CertificateChain -> IO [X509.FailedReason])
 onServerCertificateL =
   clientHooksL . lens TLS.onServerCertificate (\ch osc -> ch { TLS.onServerCertificate = osc })
+
+clientSharedL :: Lens' TLS.ClientParams TLS.Shared
+clientSharedL = lens TLS.clientShared (\tlsParams cs -> tlsParams {TLS.clientShared = cs} )
+
+sharedCAStoreL :: Lens' TLS.Shared CertificateStore
+sharedCAStoreL = lens TLS.sharedCAStore (\shared store -> shared{TLS.sharedCAStore = store})
 
 -- |Don't check whether the cert presented by the server matches the name of the server you are connecting to.
 -- This is necessary if you specify the server host by its IP address.
@@ -84,8 +87,8 @@ onCertificateRequestL =
 
 -- |Loads certificates from a PEM-encoded file.
 loadPEMCerts :: (MonadIO m, MonadThrow m) => FilePath -> m [SignedCertificate]
-loadPEMCerts p = do
-    liftIO (B.readFile p)
+loadPEMCerts pemFile = do
+    liftIO (B.readFile pemFile)
         >>= (either throwM return)
         .   parsePEMCerts
 
