@@ -68,17 +68,13 @@ mkKubeClientConfig
   -> KubeConfigSource
   -> IO (NH.Manager, K.KubernetesClientConfig)
 mkKubeClientConfig oidcCache (KubeConfigFile f) = do
-  kubeConfigFile <- decodeFileThrow f
-  masterURI <- getCluster kubeConfigFile
-         & fmap server
-         & either (const $ pure "localhost:8080") return
-  tlsParams <- defaultTLSClientParams
-               & fmap (tlsValidation kubeConfigFile)
-               & (>>= (addCACertData kubeConfigFile))
-               & (>>= addCACertFile kubeConfigFile (takeDirectory f))
+  kubeConfig <- decodeFileThrow f
+  masterURI <-  server <$> getCluster kubeConfig
+                & either (const $ pure "localhost:8080") return
+  tlsParams <- configureTLSParams kubeConfig (takeDirectory f)
   clientConfig <- K.newConfig & fmap (setMasterURI masterURI)
   (tlsParamsWithAuth, clientConfigWithAuth) <-
-    case getAuthInfo kubeConfigFile of
+    case getAuthInfo kubeConfig of
       Left _          -> return (tlsParams,clientConfig)
       Right (_, auth) -> applyAuthSettings oidcCache auth (tlsParams, clientConfig)
   mgr <- newManager tlsParamsWithAuth
@@ -111,6 +107,13 @@ newManager cp = NH.newManager (mkManagerSettings (TLSSettings cp) Nothing)
 
 serviceAccountDir :: FilePath
 serviceAccountDir = "/var/run/secrets/kubernetes.io/serviceaccount"
+
+configureTLSParams :: Config -> FilePath -> IO TLS.ClientParams
+configureTLSParams cfg dir = do
+  defaultTLS <- defaultTLSClientParams
+  withCACertData <- addCACertData cfg defaultTLS
+  withCACertFile <- addCACertFile cfg dir withCACertData
+  return $ tlsValidation cfg withCACertFile
 
 tlsValidation :: Config -> TLS.ClientParams -> TLS.ClientParams
 tlsValidation cfg tlsParams =

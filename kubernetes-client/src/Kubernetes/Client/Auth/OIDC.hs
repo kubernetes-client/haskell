@@ -72,15 +72,16 @@ getToken auth@(OIDCAuth{..}) = do
   case maybeIdToken of
     Nothing -> fetchToken auth
     Just idToken -> do
-      let maybeExp = decodeClaims (Text.encodeUtf8 idToken)
-                   & rightToMaybe
-                   & fmap snd
-                   & (>>= jwtExp)
-      case maybeExp of
+      let maybeExpiry = do
+            (_, claims) <- decodeClaims (Text.encodeUtf8 idToken)
+                           & rightToMaybe
+            jwtExp claims
+      case maybeExpiry of
         Nothing -> fetchToken auth
-        Just (IntDate expiryDate) -> if now < expiryDate
-                                     then pure idToken
-                                     else fetchToken auth
+        Just (IntDate expiryDate) ->
+          if now < expiryDate
+          then pure idToken
+          else fetchToken auth
 
 fetchToken :: OIDCAuth -> IO Text
 fetchToken auth@(OIDCAuth{..}) = do
@@ -178,7 +179,6 @@ parseCAData :: TLS.ClientParams -> Map Text Text -> Maybe (IO (Either ParseCertE
 parseCAData tlsParams authInfo = do
   caBase64 <- Map.lookup "idp-certificate-authority-data" authInfo
   Just $ pure $ do
-    caText <- Text.encodeUtf8 caBase64
-              & B64.decode
+    caText <- B64.decode (Text.encodeUtf8 caBase64)
               & mapLeft Base64ParsingFailed
     updateClientParams tlsParams caText
