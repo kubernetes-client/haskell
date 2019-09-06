@@ -39,6 +39,54 @@ packages:
       sha256: 21c7e61fceea98d14b453fc74c947b715ce33fe4c665c65b1f28c6f417d4ab7e
   original:
     hackage: string-random-0.1.2.0
+- completed:
+    subdir: foundation
+    cabal-file:
+      size: 11653
+      sha256: 7d6b57d3b293a46680a6c044ded62655e7b7477d1082f710162b018333ae35f5
+    name: foundation
+    version: 0.0.24
+    git: https://github.com/akshaymankar/foundation.git
+    pantry-tree:
+      size: 11225
+      sha256: 7bafcf8799e366958a20533daa5a574d5d7babb798bc26be4ef7ed48d7c580d2
+    commit: 31d978d94d1493a53565e1050450c434e8808bd6
+  original:
+    subdir: foundation
+    git: https://github.com/akshaymankar/foundation.git
+    commit: 31d978d94d1493a53565e1050450c434e8808bd6
+- completed:
+    subdir: basement
+    cabal-file:
+      size: 5487
+      sha256: 6461d82f236ca33cd6cc502e6339f67c48506d3ebfd5de9305e3428d6f541499
+    name: basement
+    version: 0.0.11
+    git: https://github.com/akshaymankar/foundation.git
+    pantry-tree:
+      size: 5859
+      sha256: 19396c8068f1f94a17dec91a9f39cd3028a5e752837435e769ec783400711a3e
+    commit: 31d978d94d1493a53565e1050450c434e8808bd6
+  original:
+    subdir: basement
+    git: https://github.com/akshaymankar/foundation.git
+    commit: 31d978d94d1493a53565e1050450c434e8808bd6
+- completed:
+    subdir: x509-validation
+    cabal-file:
+      size: 2211
+      sha256: 4c9d897070bf5d36e437b3b9a04c28ebb6fce90138da7b5e8fa5c100192ef7b2
+    name: x509-validation
+    version: 1.6.11
+    git: https://github.com/akshaymankar/hs-certificate.git
+    pantry-tree:
+      size: 631
+      sha256: b85641fe35b21d23b93c3b0e158ebdc77ee2877568003854d3031387f676daf7
+    commit: cdfff1a735ddf44cf04a9712828fd62bf4a52e47
+  original:
+    subdir: x509-validation
+    git: https://github.com/akshaymankar/hs-certificate.git
+    commit: cdfff1a735ddf44cf04a9712828fd62bf4a52e47
 snapshots:
 - completed:
     size: 496697

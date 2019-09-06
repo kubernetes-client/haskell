@@ -3,19 +3,35 @@ language: generic
 services:
 - docker
 
+cache:
+  directories:
+  - $HOME/.stack
+  - $TRAVIS_BUILD_DIR/examples/.stack-work
+
 jobs:
   include:
   - stage: Integration Tests
-    before_script:
+    install:
+    # Download and install stack
+    - travis_retry curl -sSL https://get.haskellstack.org/ | sh
+
     # Download and install kubectl
     - curl -LO https://storage.googleapis.com/kubernetes-release/release/$(curl -s https://storage.googleapis.com/kubernetes-release/release/stable.txt)/bin/linux/amd64/kubectl && chmod +x kubectl && sudo mv kubectl /usr/local/bin/
 
     # Download and install kind
     - curl -LO https://github.com/kubernetes-sigs/kind/releases/download/v0.4.0/kind-linux-amd64 && chmod +x kind-linux-amd64 && sudo mv kind-linux-amd64 /usr/local/bin/kind
-
+    before_script:
     # Create a new Kubernetes cluster using KinD
     - kind create cluster
 
     # Set KUBECONFIG environment variable
     - export KUBECONFIG="$(kind get kubeconfig-path)"
-    script: kubectl get pods -A
+    script:
+    # Verify if kubernetes installation is alright
+    - kubectl get pods -A
+
+    # Run simple test
+    - |
+      cd examples
+      stack build --no-terminal
+      stack exec simple
