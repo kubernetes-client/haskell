@@ -1,0 +1,29 @@
+name: kubernetes-examples
+version: 0.1.0.1
+description: |
+  Examples to interact with Kubernetes using kubernetes-client and kubernetes-client-core
+synopsis: Kubernetes examples with Haskell
+maintainer:
+- Shimin Guo <smguo2001@gmail.com>
+- Akshay Mankar <itsakshaymankar@gmail.com>
+category: Examples, Kubernetes
+license: Apache-2.0
+license-file: LICENSE
+
+executables:
+  simple:
+    main: Main.hs
+    source-dirs: simple
+    ghc-options:
+    - -Wall
+
+dependencies:
+- base
+- containers
+- http-client
+- http-types
+- kubernetes-client
+- kubernetes-client-core
+- safe-exceptions
+- stm
+- text
