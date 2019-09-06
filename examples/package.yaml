@@ -16,7 +16,11 @@ executables:
     source-dirs: simple
     ghc-options:
     - -Wall
-
+  in-cluster:
+    main: Main.hs
+    source-dirs: in-cluster
+    ghc-options:
+    - -Wall
 dependencies:
 - base
 - containers

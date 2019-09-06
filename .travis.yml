@@ -7,6 +7,8 @@ cache:
   directories:
   - $HOME/.stack
   - $TRAVIS_BUILD_DIR/examples/.stack-work
+  - $TRAVIS_BUILD_DIR/kubernetes/.stack-work
+  - $TRAVIS_BUILD_DIR/kubernetes-client/.stack-work
 
 jobs:
   include:
@@ -32,6 +34,7 @@ jobs:
 
     # Run simple test
     - |
-      cd examples
-      stack build --no-terminal
-      stack exec simple
+      pushd examples \
+      && stack build --no-terminal \
+      && stack exec simple \
+      && popd
