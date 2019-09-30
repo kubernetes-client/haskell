@@ -96,11 +96,11 @@ matrix:
   #  compiler: ": #stack 8.0.2"
   #  addons: {apt: {packages: [libgmp-dev]}}
 
-  - env: BUILD=stack ARGS="--resolver lts-11"
+  - env: BUILD=stack ARGS="--resolver lts-11 --stack-yaml stack-8.2.2.yaml"
     compiler: ": #stack 8.2.2"
     addons: {apt: {packages: [libgmp-dev]}}
 
-  - env: BUILD=stack ARGS="--resolver lts-12"
+  - env: BUILD=stack ARGS="--resolver lts-12 --stack-yaml stack-8.4.4.yaml"
     compiler: ": #stack 8.4.4"
     addons: {apt: {packages: [libgmp-dev]}}
 
@@ -139,11 +139,11 @@ matrix:
   #  compiler: ": #stack 8.0.2 osx"
   #  os: osx
 
-  - env: BUILD=stack ARGS="--resolver lts-11"
+  - env: BUILD=stack ARGS="--resolver lts-11 --stack-yaml stack-8.2.2.yaml"
     compiler: ": #stack 8.2.2 osx"
     os: osx
 
-  - env: BUILD=stack ARGS="--resolver lts-12"
+  - env: BUILD=stack ARGS="--resolver lts-12 --stack-yaml stack-8.4.4.yaml"
     compiler: ": #stack 8.4.4 osx"
     os: osx
 
@@ -223,7 +223,7 @@ script:
   set -ex
   case "$BUILD" in
     stack)
-      travis_wait 30 stack --no-terminal $ARGS test --bench --no-run-benchmarks --haddock --no-haddock-deps
+      stack --no-terminal $ARGS test --bench --no-run-benchmarks --haddock --no-haddock-deps
       ;;
     cabal)
       cabal install --enable-tests --enable-benchmarks --force-reinstalls --ghc-options=-O0 --reorder-goals --max-backjumps=-1 $CABALARGS $PACKAGES
