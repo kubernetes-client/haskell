@@ -435,7 +435,7 @@ instance MimeRender MimeMultipartFormData DateTime where
   mimeRender _ = mimeRenderDefaultMultipartFormData
 
 -- | @TI.parseTimeM True TI.defaultTimeLocale "%FT%T%6QZ"@
-_readDateTime :: (TI.ParseTime t, Monad m, ) => String -> m t
+_readDateTime :: (TI.ParseTime t, Monad m) => String -> m t
 _readDateTime =
   TI.parseTimeM True TI.defaultTimeLocale "%FT%T%6QZ"
 {-# INLINE _readDateTime #-}
