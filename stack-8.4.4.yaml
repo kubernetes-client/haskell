@@ -1,0 +1,11 @@
+resolver: lts-12
+extra-deps:
+- hoauth2-1.8.8
+- jose-jwt-0.8.0
+- jsonpath-0.1.0.1
+- katip-0.8.0.0
+- oidc-client-0.4.0.1
+- uri-bytestring-aeson-0.1.0.7
+packages:
+- kubernetes
+- kubernetes-client

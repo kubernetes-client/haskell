@@ -2,6 +2,52 @@
 
 ## Example
 
+### Load KubeConfig file
+
+```haskell
+import Control.Concurrent.STM (atomically, newTVar)
+import Kubernetes.Client      (KubeConfigSource (..), mkKubeClientConfig)
+import Kubernetes.OpenAPI     (Accept (..), MimeJSON (..), dispatchMime)
+
+import qualified Data.Map                      as Map
+import qualified Kubernetes.OpenAPI.API.CoreV1 as CoreV1
+
+main :: IO ()
+main = do
+    oidcCache <- atomically $ newTVar $ Map.fromList []
+    (mgr, kcfg) <- mkKubeClientConfig oidcCache $ KubeConfigFile "/path/to/kubeconfig"
+    dispatchMime
+            mgr
+            kcfg
+            (CoreV1.listPodForAllNamespaces (Accept MimeJSON))
+        >>= print
+```
+
+### Load InCluster Config
+
+```haskell
+import Control.Concurrent.STM (atomically, newTVar)
+import Data.Function          ((&))
+import Kubernetes.Client      (KubeConfigSource (..), mkKubeClientConfig)
+import Kubernetes.OpenAPI     (Accept (..), MimeJSON (..), dispatchMime)
+import Network.TLS            (credentialLoadX509)
+
+import qualified Data.Map                      as Map
+import qualified Kubernetes.OpenAPI.API.CoreV1 as CoreV1
+
+main :: IO ()
+main = do
+    oidcCache <- atomically $ newTVar $ Map.fromList []
+    (mgr, kcfg) <- mkKubeClientConfig oidcCache KubeConfigCluster
+    dispatchMime
+            mgr
+            kcfg
+            (CoreV1.listPodForAllNamespaces (Accept MimeJSON))
+        >>= print
+```
+
+### Load config from URL and paths
+
 ```haskell
 {-# LANGUAGE OverloadedStrings #-}
 
