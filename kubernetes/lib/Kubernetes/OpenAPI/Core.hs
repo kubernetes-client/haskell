@@ -434,16 +434,16 @@ instance P.Show DateTime where
 instance MimeRender MimeMultipartFormData DateTime where
   mimeRender _ = mimeRenderDefaultMultipartFormData
 
--- | @_parseISO8601@
-_readDateTime :: (TI.ParseTime t, Monad m, Alternative m) => String -> m t
+-- | @TI.parseTimeM True TI.defaultTimeLocale "%FT%T%6QZ"@
+_readDateTime :: (TI.ParseTime t, Monad m, ) => String -> m t
 _readDateTime =
-  _parseISO8601
+  TI.parseTimeM True TI.defaultTimeLocale "%FT%T%6QZ"
 {-# INLINE _readDateTime #-}
 
--- | @TI.formatISO8601Micros@
-_showDateTime :: (t ~ TI.UTCTime, TI.FormatTime t) => t -> String
+-- | @TI.formatTime TI.defaultTimeLocale "%FT%T%6QZ"@
+_showDateTime :: (TI.FormatTime t) => t -> String
 _showDateTime =
-  TI.formatISO8601Micros
+  TI.formatTime TI.defaultTimeLocale "%FT%T%6QZ"
 {-# INLINE _showDateTime #-}
 
 -- | parse an ISO8601 date-time string
