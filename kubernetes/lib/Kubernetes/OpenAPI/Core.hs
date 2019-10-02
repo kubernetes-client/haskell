@@ -440,10 +440,10 @@ _readDateTime =
   _parseISO8601
 {-# INLINE _readDateTime #-}
 
--- | @TI.formatISO8601Millis@
+-- | @TI.formatISO8601Micros@
 _showDateTime :: (t ~ TI.UTCTime, TI.FormatTime t) => t -> String
 _showDateTime =
-  TI.formatISO8601Millis
+  TI.formatISO8601Micros
 {-# INLINE _showDateTime #-}
 
 -- | parse an ISO8601 date-time string
