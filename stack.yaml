@@ -1,8 +1,7 @@
-resolver: lts-13.9
+resolver: lts-14.7
 extra-deps:
 - jsonpath-0.1.0.1
 - jwt-0.10.0
-- katip-0.8.0.0
 - oidc-client-0.4.0.0
 packages:
 - kubernetes
