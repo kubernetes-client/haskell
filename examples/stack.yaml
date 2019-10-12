@@ -1,4 +1,4 @@
-resolver: lts-13.9
+resolver: lts-14.7
 packages:
 - .
 - ../kubernetes-client
@@ -6,15 +6,8 @@ packages:
 extra-deps:
 - jsonpath-0.1.0.1
 - jwt-0.10.0
-- katip-0.8.0.0
 - oidc-client-0.4.0.0
-- string-random-0.1.2.0
-- git: https://github.com/akshaymankar/foundation.git
-  commit: 31d978d94d1493a53565e1050450c434e8808bd6
-  subdirs:
-  - foundation
-  - basement
 - git: https://github.com/akshaymankar/hs-certificate.git
-  commit: cdfff1a735ddf44cf04a9712828fd62bf4a52e47
+  commit: 2a71b5271b83e87a1fd14c53cc5987bef6e07a06
   subdirs:
   - x509-validation
