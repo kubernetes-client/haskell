@@ -44,6 +44,7 @@ import           Data.Maybe
 import qualified Data.Text                     as T
 import qualified Data.Text.Encoding            as T
 import           Data.Yaml
+import           Kubernetes.Client.Auth.Basic
 import           Kubernetes.Client.Auth.ClientCert
 import           Kubernetes.Client.Auth.GCP
 import           Kubernetes.Client.Auth.OIDC
@@ -172,3 +173,4 @@ applyAuthSettings oidcCache auth input =
     <|> tokenFileAuth auth input
     <|> gcpAuth auth input
     <|> cachedOIDCAuth oidcCache auth input
+    <|> basicAuth auth input
