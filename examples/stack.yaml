@@ -1,0 +1,13 @@
+resolver: lts-14.7
+packages:
+- .
+- ../kubernetes-client
+- ../kubernetes
+extra-deps:
+- jsonpath-0.1.0.1
+- jwt-0.10.0
+- oidc-client-0.4.0.0
+- git: https://github.com/akshaymankar/hs-certificate.git
+  commit: 2a71b5271b83e87a1fd14c53cc5987bef6e07a06
+  subdirs:
+  - x509-validation
