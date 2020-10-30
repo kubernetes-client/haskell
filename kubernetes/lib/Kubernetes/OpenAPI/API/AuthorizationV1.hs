@@ -83,17 +83,17 @@ instance HasBodyParam CreateNamespacedLocalSubjectAccessReview V1LocalSubjectAcc
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedLocalSubjectAccessReview DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedLocalSubjectAccessReview FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedLocalSubjectAccessReview Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedLocalSubjectAccessReview mtype
@@ -131,17 +131,17 @@ instance HasBodyParam CreateSelfSubjectAccessReview V1SelfSubjectAccessReview
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateSelfSubjectAccessReview DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateSelfSubjectAccessReview FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateSelfSubjectAccessReview Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateSelfSubjectAccessReview mtype
@@ -179,17 +179,17 @@ instance HasBodyParam CreateSelfSubjectRulesReview V1SelfSubjectRulesReview
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateSelfSubjectRulesReview DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateSelfSubjectRulesReview FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateSelfSubjectRulesReview Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateSelfSubjectRulesReview mtype
@@ -227,17 +227,17 @@ instance HasBodyParam CreateSubjectAccessReview V1SubjectAccessReview
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateSubjectAccessReview DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateSubjectAccessReview FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateSubjectAccessReview Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateSubjectAccessReview mtype

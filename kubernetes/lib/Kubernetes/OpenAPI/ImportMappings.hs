@@ -2,5 +2,5 @@
 
 module Kubernetes.OpenAPI.ImportMappings (module ImportMappings) where
 
-import Kubernetes.OpenAPI.CustomTypes as ImportMappings (IntOrString(..))
 import Kubernetes.OpenAPI.CustomTypes as ImportMappings (Quantity(..))
+import Kubernetes.OpenAPI.CustomTypes as ImportMappings (IntOrString(..))

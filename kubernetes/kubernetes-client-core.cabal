@@ -1,5 +1,5 @@
 name:           kubernetes-client-core
-version:        0.3.0.0
+version:        0.3.1.0
 synopsis:       Auto-generated kubernetes-client-core API Client
 description:    .
                 Client library for calling the Kubernetes API based on http-client.

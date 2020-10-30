@@ -79,7 +79,7 @@ data ConnectDeleteNamespacedPodProxy
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to pod.
 instance HasOptionalParam ConnectDeleteNamespacedPodProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectDeleteNamespacedPodProxy mtype
 
@@ -107,7 +107,7 @@ data ConnectDeleteNamespacedPodProxyWithPath
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to pod.
 instance HasOptionalParam ConnectDeleteNamespacedPodProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectDeleteNamespacedPodProxyWithPath mtype
 
@@ -134,7 +134,7 @@ data ConnectDeleteNamespacedServiceProxy
 -- | /Optional Param/ "path" - Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy.
 instance HasOptionalParam ConnectDeleteNamespacedServiceProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectDeleteNamespacedServiceProxy mtype
 
@@ -162,7 +162,7 @@ data ConnectDeleteNamespacedServiceProxyWithPath
 -- | /Optional Param/ "path" - Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy.
 instance HasOptionalParam ConnectDeleteNamespacedServiceProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectDeleteNamespacedServiceProxyWithPath mtype
 
@@ -188,7 +188,7 @@ data ConnectDeleteNodeProxy
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to node.
 instance HasOptionalParam ConnectDeleteNodeProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectDeleteNodeProxy mtype
 
@@ -215,7 +215,7 @@ data ConnectDeleteNodeProxyWithPath
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to node.
 instance HasOptionalParam ConnectDeleteNodeProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectDeleteNodeProxyWithPath mtype
 
@@ -242,27 +242,27 @@ data ConnectGetNamespacedPodAttach
 -- | /Optional Param/ "container" - The container in which to execute the command. Defaults to only container if there is only one container in the pod.
 instance HasOptionalParam ConnectGetNamespacedPodAttach Container where
   applyOptionalParam req (Container xs) =
-    req `setQuery` toQuery ("container", Just xs)
+    req `addQuery` toQuery ("container", Just xs)
 
 -- | /Optional Param/ "stderr" - Stderr if true indicates that stderr is to be redirected for the attach call. Defaults to true.
 instance HasOptionalParam ConnectGetNamespacedPodAttach Stderr where
   applyOptionalParam req (Stderr xs) =
-    req `setQuery` toQuery ("stderr", Just xs)
+    req `addQuery` toQuery ("stderr", Just xs)
 
 -- | /Optional Param/ "stdin" - Stdin if true, redirects the standard input stream of the pod for this call. Defaults to false.
 instance HasOptionalParam ConnectGetNamespacedPodAttach Stdin where
   applyOptionalParam req (Stdin xs) =
-    req `setQuery` toQuery ("stdin", Just xs)
+    req `addQuery` toQuery ("stdin", Just xs)
 
 -- | /Optional Param/ "stdout" - Stdout if true indicates that stdout is to be redirected for the attach call. Defaults to true.
 instance HasOptionalParam ConnectGetNamespacedPodAttach Stdout where
   applyOptionalParam req (Stdout xs) =
-    req `setQuery` toQuery ("stdout", Just xs)
+    req `addQuery` toQuery ("stdout", Just xs)
 
 -- | /Optional Param/ "tty" - TTY if true indicates that a tty will be allocated for the attach call. This is passed through the container runtime so the tty is allocated on the worker node by the container runtime. Defaults to false.
 instance HasOptionalParam ConnectGetNamespacedPodAttach Tty where
   applyOptionalParam req (Tty xs) =
-    req `setQuery` toQuery ("tty", Just xs)
+    req `addQuery` toQuery ("tty", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectGetNamespacedPodAttach mtype
 
@@ -289,32 +289,32 @@ data ConnectGetNamespacedPodExec
 -- | /Optional Param/ "command" - Command is the remote command to execute. argv array. Not executed within a shell.
 instance HasOptionalParam ConnectGetNamespacedPodExec Command where
   applyOptionalParam req (Command xs) =
-    req `setQuery` toQuery ("command", Just xs)
+    req `addQuery` toQuery ("command", Just xs)
 
 -- | /Optional Param/ "container" - Container in which to execute the command. Defaults to only container if there is only one container in the pod.
 instance HasOptionalParam ConnectGetNamespacedPodExec Container where
   applyOptionalParam req (Container xs) =
-    req `setQuery` toQuery ("container", Just xs)
+    req `addQuery` toQuery ("container", Just xs)
 
 -- | /Optional Param/ "stderr" - Redirect the standard error stream of the pod for this call. Defaults to true.
 instance HasOptionalParam ConnectGetNamespacedPodExec Stderr where
   applyOptionalParam req (Stderr xs) =
-    req `setQuery` toQuery ("stderr", Just xs)
+    req `addQuery` toQuery ("stderr", Just xs)
 
 -- | /Optional Param/ "stdin" - Redirect the standard input stream of the pod for this call. Defaults to false.
 instance HasOptionalParam ConnectGetNamespacedPodExec Stdin where
   applyOptionalParam req (Stdin xs) =
-    req `setQuery` toQuery ("stdin", Just xs)
+    req `addQuery` toQuery ("stdin", Just xs)
 
 -- | /Optional Param/ "stdout" - Redirect the standard output stream of the pod for this call. Defaults to true.
 instance HasOptionalParam ConnectGetNamespacedPodExec Stdout where
   applyOptionalParam req (Stdout xs) =
-    req `setQuery` toQuery ("stdout", Just xs)
+    req `addQuery` toQuery ("stdout", Just xs)
 
 -- | /Optional Param/ "tty" - TTY if true indicates that a tty will be allocated for the exec call. Defaults to false.
 instance HasOptionalParam ConnectGetNamespacedPodExec Tty where
   applyOptionalParam req (Tty xs) =
-    req `setQuery` toQuery ("tty", Just xs)
+    req `addQuery` toQuery ("tty", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectGetNamespacedPodExec mtype
 
@@ -341,7 +341,7 @@ data ConnectGetNamespacedPodPortforward
 -- | /Optional Param/ "ports" - List of ports to forward Required when using WebSockets
 instance HasOptionalParam ConnectGetNamespacedPodPortforward Ports where
   applyOptionalParam req (Ports xs) =
-    req `setQuery` toQuery ("ports", Just xs)
+    req `addQuery` toQuery ("ports", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectGetNamespacedPodPortforward mtype
 
@@ -368,7 +368,7 @@ data ConnectGetNamespacedPodProxy
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to pod.
 instance HasOptionalParam ConnectGetNamespacedPodProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectGetNamespacedPodProxy mtype
 
@@ -396,7 +396,7 @@ data ConnectGetNamespacedPodProxyWithPath
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to pod.
 instance HasOptionalParam ConnectGetNamespacedPodProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectGetNamespacedPodProxyWithPath mtype
 
@@ -423,7 +423,7 @@ data ConnectGetNamespacedServiceProxy
 -- | /Optional Param/ "path" - Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy.
 instance HasOptionalParam ConnectGetNamespacedServiceProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectGetNamespacedServiceProxy mtype
 
@@ -451,7 +451,7 @@ data ConnectGetNamespacedServiceProxyWithPath
 -- | /Optional Param/ "path" - Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy.
 instance HasOptionalParam ConnectGetNamespacedServiceProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectGetNamespacedServiceProxyWithPath mtype
 
@@ -477,7 +477,7 @@ data ConnectGetNodeProxy
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to node.
 instance HasOptionalParam ConnectGetNodeProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectGetNodeProxy mtype
 
@@ -504,7 +504,7 @@ data ConnectGetNodeProxyWithPath
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to node.
 instance HasOptionalParam ConnectGetNodeProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectGetNodeProxyWithPath mtype
 
@@ -531,7 +531,7 @@ data ConnectHeadNamespacedPodProxy
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to pod.
 instance HasOptionalParam ConnectHeadNamespacedPodProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectHeadNamespacedPodProxy mtype
 
@@ -559,7 +559,7 @@ data ConnectHeadNamespacedPodProxyWithPath
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to pod.
 instance HasOptionalParam ConnectHeadNamespacedPodProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectHeadNamespacedPodProxyWithPath mtype
 
@@ -586,7 +586,7 @@ data ConnectHeadNamespacedServiceProxy
 -- | /Optional Param/ "path" - Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy.
 instance HasOptionalParam ConnectHeadNamespacedServiceProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectHeadNamespacedServiceProxy mtype
 
@@ -614,7 +614,7 @@ data ConnectHeadNamespacedServiceProxyWithPath
 -- | /Optional Param/ "path" - Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy.
 instance HasOptionalParam ConnectHeadNamespacedServiceProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectHeadNamespacedServiceProxyWithPath mtype
 
@@ -640,7 +640,7 @@ data ConnectHeadNodeProxy
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to node.
 instance HasOptionalParam ConnectHeadNodeProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectHeadNodeProxy mtype
 
@@ -667,7 +667,7 @@ data ConnectHeadNodeProxyWithPath
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to node.
 instance HasOptionalParam ConnectHeadNodeProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectHeadNodeProxyWithPath mtype
 
@@ -694,7 +694,7 @@ data ConnectOptionsNamespacedPodProxy
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to pod.
 instance HasOptionalParam ConnectOptionsNamespacedPodProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectOptionsNamespacedPodProxy mtype
 
@@ -722,7 +722,7 @@ data ConnectOptionsNamespacedPodProxyWithPath
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to pod.
 instance HasOptionalParam ConnectOptionsNamespacedPodProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectOptionsNamespacedPodProxyWithPath mtype
 
@@ -749,7 +749,7 @@ data ConnectOptionsNamespacedServiceProxy
 -- | /Optional Param/ "path" - Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy.
 instance HasOptionalParam ConnectOptionsNamespacedServiceProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectOptionsNamespacedServiceProxy mtype
 
@@ -777,7 +777,7 @@ data ConnectOptionsNamespacedServiceProxyWithPath
 -- | /Optional Param/ "path" - Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy.
 instance HasOptionalParam ConnectOptionsNamespacedServiceProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectOptionsNamespacedServiceProxyWithPath mtype
 
@@ -803,7 +803,7 @@ data ConnectOptionsNodeProxy
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to node.
 instance HasOptionalParam ConnectOptionsNodeProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectOptionsNodeProxy mtype
 
@@ -830,7 +830,7 @@ data ConnectOptionsNodeProxyWithPath
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to node.
 instance HasOptionalParam ConnectOptionsNodeProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectOptionsNodeProxyWithPath mtype
 
@@ -857,7 +857,7 @@ data ConnectPatchNamespacedPodProxy
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to pod.
 instance HasOptionalParam ConnectPatchNamespacedPodProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPatchNamespacedPodProxy mtype
 
@@ -885,7 +885,7 @@ data ConnectPatchNamespacedPodProxyWithPath
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to pod.
 instance HasOptionalParam ConnectPatchNamespacedPodProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPatchNamespacedPodProxyWithPath mtype
 
@@ -912,7 +912,7 @@ data ConnectPatchNamespacedServiceProxy
 -- | /Optional Param/ "path" - Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy.
 instance HasOptionalParam ConnectPatchNamespacedServiceProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPatchNamespacedServiceProxy mtype
 
@@ -940,7 +940,7 @@ data ConnectPatchNamespacedServiceProxyWithPath
 -- | /Optional Param/ "path" - Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy.
 instance HasOptionalParam ConnectPatchNamespacedServiceProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPatchNamespacedServiceProxyWithPath mtype
 
@@ -966,7 +966,7 @@ data ConnectPatchNodeProxy
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to node.
 instance HasOptionalParam ConnectPatchNodeProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPatchNodeProxy mtype
 
@@ -993,7 +993,7 @@ data ConnectPatchNodeProxyWithPath
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to node.
 instance HasOptionalParam ConnectPatchNodeProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPatchNodeProxyWithPath mtype
 
@@ -1020,27 +1020,27 @@ data ConnectPostNamespacedPodAttach
 -- | /Optional Param/ "container" - The container in which to execute the command. Defaults to only container if there is only one container in the pod.
 instance HasOptionalParam ConnectPostNamespacedPodAttach Container where
   applyOptionalParam req (Container xs) =
-    req `setQuery` toQuery ("container", Just xs)
+    req `addQuery` toQuery ("container", Just xs)
 
 -- | /Optional Param/ "stderr" - Stderr if true indicates that stderr is to be redirected for the attach call. Defaults to true.
 instance HasOptionalParam ConnectPostNamespacedPodAttach Stderr where
   applyOptionalParam req (Stderr xs) =
-    req `setQuery` toQuery ("stderr", Just xs)
+    req `addQuery` toQuery ("stderr", Just xs)
 
 -- | /Optional Param/ "stdin" - Stdin if true, redirects the standard input stream of the pod for this call. Defaults to false.
 instance HasOptionalParam ConnectPostNamespacedPodAttach Stdin where
   applyOptionalParam req (Stdin xs) =
-    req `setQuery` toQuery ("stdin", Just xs)
+    req `addQuery` toQuery ("stdin", Just xs)
 
 -- | /Optional Param/ "stdout" - Stdout if true indicates that stdout is to be redirected for the attach call. Defaults to true.
 instance HasOptionalParam ConnectPostNamespacedPodAttach Stdout where
   applyOptionalParam req (Stdout xs) =
-    req `setQuery` toQuery ("stdout", Just xs)
+    req `addQuery` toQuery ("stdout", Just xs)
 
 -- | /Optional Param/ "tty" - TTY if true indicates that a tty will be allocated for the attach call. This is passed through the container runtime so the tty is allocated on the worker node by the container runtime. Defaults to false.
 instance HasOptionalParam ConnectPostNamespacedPodAttach Tty where
   applyOptionalParam req (Tty xs) =
-    req `setQuery` toQuery ("tty", Just xs)
+    req `addQuery` toQuery ("tty", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPostNamespacedPodAttach mtype
 
@@ -1067,32 +1067,32 @@ data ConnectPostNamespacedPodExec
 -- | /Optional Param/ "command" - Command is the remote command to execute. argv array. Not executed within a shell.
 instance HasOptionalParam ConnectPostNamespacedPodExec Command where
   applyOptionalParam req (Command xs) =
-    req `setQuery` toQuery ("command", Just xs)
+    req `addQuery` toQuery ("command", Just xs)
 
 -- | /Optional Param/ "container" - Container in which to execute the command. Defaults to only container if there is only one container in the pod.
 instance HasOptionalParam ConnectPostNamespacedPodExec Container where
   applyOptionalParam req (Container xs) =
-    req `setQuery` toQuery ("container", Just xs)
+    req `addQuery` toQuery ("container", Just xs)
 
 -- | /Optional Param/ "stderr" - Redirect the standard error stream of the pod for this call. Defaults to true.
 instance HasOptionalParam ConnectPostNamespacedPodExec Stderr where
   applyOptionalParam req (Stderr xs) =
-    req `setQuery` toQuery ("stderr", Just xs)
+    req `addQuery` toQuery ("stderr", Just xs)
 
 -- | /Optional Param/ "stdin" - Redirect the standard input stream of the pod for this call. Defaults to false.
 instance HasOptionalParam ConnectPostNamespacedPodExec Stdin where
   applyOptionalParam req (Stdin xs) =
-    req `setQuery` toQuery ("stdin", Just xs)
+    req `addQuery` toQuery ("stdin", Just xs)
 
 -- | /Optional Param/ "stdout" - Redirect the standard output stream of the pod for this call. Defaults to true.
 instance HasOptionalParam ConnectPostNamespacedPodExec Stdout where
   applyOptionalParam req (Stdout xs) =
-    req `setQuery` toQuery ("stdout", Just xs)
+    req `addQuery` toQuery ("stdout", Just xs)
 
 -- | /Optional Param/ "tty" - TTY if true indicates that a tty will be allocated for the exec call. Defaults to false.
 instance HasOptionalParam ConnectPostNamespacedPodExec Tty where
   applyOptionalParam req (Tty xs) =
-    req `setQuery` toQuery ("tty", Just xs)
+    req `addQuery` toQuery ("tty", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPostNamespacedPodExec mtype
 
@@ -1119,7 +1119,7 @@ data ConnectPostNamespacedPodPortforward
 -- | /Optional Param/ "ports" - List of ports to forward Required when using WebSockets
 instance HasOptionalParam ConnectPostNamespacedPodPortforward Ports where
   applyOptionalParam req (Ports xs) =
-    req `setQuery` toQuery ("ports", Just xs)
+    req `addQuery` toQuery ("ports", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPostNamespacedPodPortforward mtype
 
@@ -1146,7 +1146,7 @@ data ConnectPostNamespacedPodProxy
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to pod.
 instance HasOptionalParam ConnectPostNamespacedPodProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPostNamespacedPodProxy mtype
 
@@ -1174,7 +1174,7 @@ data ConnectPostNamespacedPodProxyWithPath
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to pod.
 instance HasOptionalParam ConnectPostNamespacedPodProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPostNamespacedPodProxyWithPath mtype
 
@@ -1201,7 +1201,7 @@ data ConnectPostNamespacedServiceProxy
 -- | /Optional Param/ "path" - Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy.
 instance HasOptionalParam ConnectPostNamespacedServiceProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPostNamespacedServiceProxy mtype
 
@@ -1229,7 +1229,7 @@ data ConnectPostNamespacedServiceProxyWithPath
 -- | /Optional Param/ "path" - Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy.
 instance HasOptionalParam ConnectPostNamespacedServiceProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPostNamespacedServiceProxyWithPath mtype
 
@@ -1255,7 +1255,7 @@ data ConnectPostNodeProxy
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to node.
 instance HasOptionalParam ConnectPostNodeProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPostNodeProxy mtype
 
@@ -1282,7 +1282,7 @@ data ConnectPostNodeProxyWithPath
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to node.
 instance HasOptionalParam ConnectPostNodeProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPostNodeProxyWithPath mtype
 
@@ -1309,7 +1309,7 @@ data ConnectPutNamespacedPodProxy
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to pod.
 instance HasOptionalParam ConnectPutNamespacedPodProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPutNamespacedPodProxy mtype
 
@@ -1337,7 +1337,7 @@ data ConnectPutNamespacedPodProxyWithPath
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to pod.
 instance HasOptionalParam ConnectPutNamespacedPodProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPutNamespacedPodProxyWithPath mtype
 
@@ -1364,7 +1364,7 @@ data ConnectPutNamespacedServiceProxy
 -- | /Optional Param/ "path" - Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy.
 instance HasOptionalParam ConnectPutNamespacedServiceProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPutNamespacedServiceProxy mtype
 
@@ -1392,7 +1392,7 @@ data ConnectPutNamespacedServiceProxyWithPath
 -- | /Optional Param/ "path" - Path is the part of URLs that include service endpoints, suffixes, and parameters to use for the current proxy request to service. For example, the whole request URL is http://localhost/api/v1/namespaces/kube-system/services/elasticsearch-logging/_search?q=user:kimchy. Path is _search?q=user:kimchy.
 instance HasOptionalParam ConnectPutNamespacedServiceProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPutNamespacedServiceProxyWithPath mtype
 
@@ -1418,7 +1418,7 @@ data ConnectPutNodeProxy
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to node.
 instance HasOptionalParam ConnectPutNodeProxy Path where
   applyOptionalParam req (Path xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPutNodeProxy mtype
 
@@ -1445,7 +1445,7 @@ data ConnectPutNodeProxyWithPath
 -- | /Optional Param/ "path" - Path is the URL path to use for the current proxy request to node.
 instance HasOptionalParam ConnectPutNodeProxyWithPath Path2 where
   applyOptionalParam req (Path2 xs) =
-    req `setQuery` toQuery ("path", Just xs)
+    req `addQuery` toQuery ("path", Just xs)
 -- | @*/*@
 instance MimeType mtype => Produces ConnectPutNodeProxyWithPath mtype
 
@@ -1475,17 +1475,17 @@ instance HasBodyParam CreateNamespace V1Namespace
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespace Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespace DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespace FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespace mtype
@@ -1524,17 +1524,17 @@ instance HasBodyParam CreateNamespacedBinding V1Binding
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedBinding DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedBinding FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedBinding Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedBinding mtype
@@ -1573,17 +1573,17 @@ instance HasBodyParam CreateNamespacedConfigMap V1ConfigMap
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedConfigMap Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedConfigMap DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedConfigMap FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedConfigMap mtype
@@ -1622,17 +1622,17 @@ instance HasBodyParam CreateNamespacedEndpoints V1Endpoints
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedEndpoints Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedEndpoints DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedEndpoints FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedEndpoints mtype
@@ -1671,17 +1671,17 @@ instance HasBodyParam CreateNamespacedEvent V1Event
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedEvent Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedEvent DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedEvent FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedEvent mtype
@@ -1720,17 +1720,17 @@ instance HasBodyParam CreateNamespacedLimitRange V1LimitRange
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedLimitRange Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedLimitRange DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedLimitRange FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedLimitRange mtype
@@ -1769,17 +1769,17 @@ instance HasBodyParam CreateNamespacedPersistentVolumeClaim V1PersistentVolumeCl
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedPersistentVolumeClaim Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedPersistentVolumeClaim DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedPersistentVolumeClaim FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedPersistentVolumeClaim mtype
@@ -1818,17 +1818,17 @@ instance HasBodyParam CreateNamespacedPod V1Pod
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedPod Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedPod DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedPod FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedPod mtype
@@ -1868,17 +1868,17 @@ instance HasBodyParam CreateNamespacedPodBinding V1Binding
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedPodBinding DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedPodBinding FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedPodBinding Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedPodBinding mtype
@@ -1918,17 +1918,17 @@ instance HasBodyParam CreateNamespacedPodEviction V1beta1Eviction
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedPodEviction DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedPodEviction FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedPodEviction Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedPodEviction mtype
@@ -1967,17 +1967,17 @@ instance HasBodyParam CreateNamespacedPodTemplate V1PodTemplate
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedPodTemplate Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedPodTemplate DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedPodTemplate FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedPodTemplate mtype
@@ -2016,17 +2016,17 @@ instance HasBodyParam CreateNamespacedReplicationController V1ReplicationControl
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedReplicationController Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedReplicationController DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedReplicationController FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedReplicationController mtype
@@ -2065,17 +2065,17 @@ instance HasBodyParam CreateNamespacedResourceQuota V1ResourceQuota
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedResourceQuota Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedResourceQuota DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedResourceQuota FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedResourceQuota mtype
@@ -2114,17 +2114,17 @@ instance HasBodyParam CreateNamespacedSecret V1Secret
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedSecret Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedSecret DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedSecret FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedSecret mtype
@@ -2163,17 +2163,17 @@ instance HasBodyParam CreateNamespacedService V1Service
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedService Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedService DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedService FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedService mtype
@@ -2212,17 +2212,17 @@ instance HasBodyParam CreateNamespacedServiceAccount V1ServiceAccount
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedServiceAccount Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedServiceAccount DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedServiceAccount FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedServiceAccount mtype
@@ -2262,17 +2262,17 @@ instance HasBodyParam CreateNamespacedServiceAccountToken V1TokenRequest
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedServiceAccountToken DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedServiceAccountToken FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedServiceAccountToken Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedServiceAccountToken mtype
@@ -2310,17 +2310,17 @@ instance HasBodyParam CreateNode V1Node
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNode Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNode DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNode FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNode mtype
@@ -2358,17 +2358,17 @@ instance HasBodyParam CreatePersistentVolume V1PersistentVolume
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreatePersistentVolume Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreatePersistentVolume DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreatePersistentVolume FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreatePersistentVolume mtype
@@ -2405,57 +2405,57 @@ instance HasBodyParam DeleteCollectionNamespacedConfigMap V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteCollectionNamespacedConfigMap Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam DeleteCollectionNamespacedConfigMap Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteCollectionNamespacedConfigMap DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedConfigMap FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteCollectionNamespacedConfigMap GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedConfigMap LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam DeleteCollectionNamespacedConfigMap Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteCollectionNamespacedConfigMap OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteCollectionNamespacedConfigMap PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam DeleteCollectionNamespacedConfigMap ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam DeleteCollectionNamespacedConfigMap TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedConfigMap mtype
@@ -2492,57 +2492,57 @@ instance HasBodyParam DeleteCollectionNamespacedEndpoints V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteCollectionNamespacedEndpoints Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam DeleteCollectionNamespacedEndpoints Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteCollectionNamespacedEndpoints DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedEndpoints FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteCollectionNamespacedEndpoints GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedEndpoints LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam DeleteCollectionNamespacedEndpoints Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteCollectionNamespacedEndpoints OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteCollectionNamespacedEndpoints PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam DeleteCollectionNamespacedEndpoints ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam DeleteCollectionNamespacedEndpoints TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedEndpoints mtype
@@ -2579,57 +2579,57 @@ instance HasBodyParam DeleteCollectionNamespacedEvent V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteCollectionNamespacedEvent Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam DeleteCollectionNamespacedEvent Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteCollectionNamespacedEvent DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedEvent FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteCollectionNamespacedEvent GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedEvent LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam DeleteCollectionNamespacedEvent Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteCollectionNamespacedEvent OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteCollectionNamespacedEvent PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam DeleteCollectionNamespacedEvent ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam DeleteCollectionNamespacedEvent TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedEvent mtype
@@ -2666,57 +2666,57 @@ instance HasBodyParam DeleteCollectionNamespacedLimitRange V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteCollectionNamespacedLimitRange Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam DeleteCollectionNamespacedLimitRange Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteCollectionNamespacedLimitRange DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedLimitRange FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteCollectionNamespacedLimitRange GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedLimitRange LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam DeleteCollectionNamespacedLimitRange Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteCollectionNamespacedLimitRange OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteCollectionNamespacedLimitRange PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam DeleteCollectionNamespacedLimitRange ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam DeleteCollectionNamespacedLimitRange TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedLimitRange mtype
@@ -2753,57 +2753,57 @@ instance HasBodyParam DeleteCollectionNamespacedPersistentVolumeClaim V1DeleteOp
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteCollectionNamespacedPersistentVolumeClaim Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam DeleteCollectionNamespacedPersistentVolumeClaim Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteCollectionNamespacedPersistentVolumeClaim DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedPersistentVolumeClaim FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteCollectionNamespacedPersistentVolumeClaim GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedPersistentVolumeClaim LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam DeleteCollectionNamespacedPersistentVolumeClaim Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteCollectionNamespacedPersistentVolumeClaim OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteCollectionNamespacedPersistentVolumeClaim PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam DeleteCollectionNamespacedPersistentVolumeClaim ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam DeleteCollectionNamespacedPersistentVolumeClaim TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedPersistentVolumeClaim mtype
@@ -2840,57 +2840,57 @@ instance HasBodyParam DeleteCollectionNamespacedPod V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteCollectionNamespacedPod Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam DeleteCollectionNamespacedPod Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteCollectionNamespacedPod DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedPod FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteCollectionNamespacedPod GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedPod LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam DeleteCollectionNamespacedPod Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteCollectionNamespacedPod OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteCollectionNamespacedPod PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam DeleteCollectionNamespacedPod ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam DeleteCollectionNamespacedPod TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedPod mtype
@@ -2927,57 +2927,57 @@ instance HasBodyParam DeleteCollectionNamespacedPodTemplate V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteCollectionNamespacedPodTemplate Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam DeleteCollectionNamespacedPodTemplate Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteCollectionNamespacedPodTemplate DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedPodTemplate FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteCollectionNamespacedPodTemplate GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedPodTemplate LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam DeleteCollectionNamespacedPodTemplate Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteCollectionNamespacedPodTemplate OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteCollectionNamespacedPodTemplate PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam DeleteCollectionNamespacedPodTemplate ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam DeleteCollectionNamespacedPodTemplate TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedPodTemplate mtype
@@ -3014,57 +3014,57 @@ instance HasBodyParam DeleteCollectionNamespacedReplicationController V1DeleteOp
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteCollectionNamespacedReplicationController Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam DeleteCollectionNamespacedReplicationController Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteCollectionNamespacedReplicationController DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedReplicationController FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteCollectionNamespacedReplicationController GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedReplicationController LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam DeleteCollectionNamespacedReplicationController Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteCollectionNamespacedReplicationController OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteCollectionNamespacedReplicationController PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam DeleteCollectionNamespacedReplicationController ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam DeleteCollectionNamespacedReplicationController TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedReplicationController mtype
@@ -3101,57 +3101,57 @@ instance HasBodyParam DeleteCollectionNamespacedResourceQuota V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteCollectionNamespacedResourceQuota Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam DeleteCollectionNamespacedResourceQuota Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteCollectionNamespacedResourceQuota DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedResourceQuota FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteCollectionNamespacedResourceQuota GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedResourceQuota LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam DeleteCollectionNamespacedResourceQuota Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteCollectionNamespacedResourceQuota OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteCollectionNamespacedResourceQuota PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam DeleteCollectionNamespacedResourceQuota ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam DeleteCollectionNamespacedResourceQuota TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedResourceQuota mtype
@@ -3188,57 +3188,57 @@ instance HasBodyParam DeleteCollectionNamespacedSecret V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteCollectionNamespacedSecret Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam DeleteCollectionNamespacedSecret Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteCollectionNamespacedSecret DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedSecret FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteCollectionNamespacedSecret GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedSecret LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam DeleteCollectionNamespacedSecret Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteCollectionNamespacedSecret OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteCollectionNamespacedSecret PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam DeleteCollectionNamespacedSecret ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam DeleteCollectionNamespacedSecret TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedSecret mtype
@@ -3275,57 +3275,57 @@ instance HasBodyParam DeleteCollectionNamespacedServiceAccount V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteCollectionNamespacedServiceAccount Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam DeleteCollectionNamespacedServiceAccount Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteCollectionNamespacedServiceAccount DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedServiceAccount FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteCollectionNamespacedServiceAccount GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNamespacedServiceAccount LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam DeleteCollectionNamespacedServiceAccount Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteCollectionNamespacedServiceAccount OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteCollectionNamespacedServiceAccount PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam DeleteCollectionNamespacedServiceAccount ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam DeleteCollectionNamespacedServiceAccount TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedServiceAccount mtype
@@ -3361,57 +3361,57 @@ instance HasBodyParam DeleteCollectionNode V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteCollectionNode Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam DeleteCollectionNode Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteCollectionNode DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNode FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteCollectionNode GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam DeleteCollectionNode LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam DeleteCollectionNode Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteCollectionNode OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteCollectionNode PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam DeleteCollectionNode ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam DeleteCollectionNode TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNode mtype
@@ -3447,57 +3447,57 @@ instance HasBodyParam DeleteCollectionPersistentVolume V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteCollectionPersistentVolume Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam DeleteCollectionPersistentVolume Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteCollectionPersistentVolume DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam DeleteCollectionPersistentVolume FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteCollectionPersistentVolume GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam DeleteCollectionPersistentVolume LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam DeleteCollectionPersistentVolume Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteCollectionPersistentVolume OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteCollectionPersistentVolume PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam DeleteCollectionPersistentVolume ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam DeleteCollectionPersistentVolume TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionPersistentVolume mtype
@@ -3534,27 +3534,27 @@ instance HasBodyParam DeleteNamespace V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteNamespace Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteNamespace DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteNamespace GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteNamespace OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteNamespace PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespace mtype
@@ -3592,27 +3592,27 @@ instance HasBodyParam DeleteNamespacedConfigMap V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteNamespacedConfigMap Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteNamespacedConfigMap DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteNamespacedConfigMap GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteNamespacedConfigMap OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteNamespacedConfigMap PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedConfigMap mtype
@@ -3650,27 +3650,27 @@ instance HasBodyParam DeleteNamespacedEndpoints V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteNamespacedEndpoints Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteNamespacedEndpoints DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteNamespacedEndpoints GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteNamespacedEndpoints OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteNamespacedEndpoints PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedEndpoints mtype
@@ -3708,27 +3708,27 @@ instance HasBodyParam DeleteNamespacedEvent V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteNamespacedEvent Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteNamespacedEvent DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteNamespacedEvent GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteNamespacedEvent OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteNamespacedEvent PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedEvent mtype
@@ -3766,27 +3766,27 @@ instance HasBodyParam DeleteNamespacedLimitRange V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteNamespacedLimitRange Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteNamespacedLimitRange DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteNamespacedLimitRange GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteNamespacedLimitRange OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteNamespacedLimitRange PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedLimitRange mtype
@@ -3824,27 +3824,27 @@ instance HasBodyParam DeleteNamespacedPersistentVolumeClaim V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteNamespacedPersistentVolumeClaim Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteNamespacedPersistentVolumeClaim DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteNamespacedPersistentVolumeClaim GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteNamespacedPersistentVolumeClaim OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteNamespacedPersistentVolumeClaim PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedPersistentVolumeClaim mtype
@@ -3882,27 +3882,27 @@ instance HasBodyParam DeleteNamespacedPod V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteNamespacedPod Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteNamespacedPod DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteNamespacedPod GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteNamespacedPod OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteNamespacedPod PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedPod mtype
@@ -3940,27 +3940,27 @@ instance HasBodyParam DeleteNamespacedPodTemplate V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteNamespacedPodTemplate Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteNamespacedPodTemplate DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteNamespacedPodTemplate GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteNamespacedPodTemplate OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteNamespacedPodTemplate PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedPodTemplate mtype
@@ -3998,27 +3998,27 @@ instance HasBodyParam DeleteNamespacedReplicationController V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteNamespacedReplicationController Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteNamespacedReplicationController DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteNamespacedReplicationController GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteNamespacedReplicationController OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteNamespacedReplicationController PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedReplicationController mtype
@@ -4056,27 +4056,27 @@ instance HasBodyParam DeleteNamespacedResourceQuota V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteNamespacedResourceQuota Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteNamespacedResourceQuota DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteNamespacedResourceQuota GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteNamespacedResourceQuota OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteNamespacedResourceQuota PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedResourceQuota mtype
@@ -4114,27 +4114,27 @@ instance HasBodyParam DeleteNamespacedSecret V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteNamespacedSecret Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteNamespacedSecret DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteNamespacedSecret GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteNamespacedSecret OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteNamespacedSecret PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedSecret mtype
@@ -4172,27 +4172,27 @@ instance HasBodyParam DeleteNamespacedService V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteNamespacedService Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteNamespacedService DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteNamespacedService GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteNamespacedService OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteNamespacedService PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedService mtype
@@ -4230,27 +4230,27 @@ instance HasBodyParam DeleteNamespacedServiceAccount V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteNamespacedServiceAccount Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteNamespacedServiceAccount DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteNamespacedServiceAccount GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteNamespacedServiceAccount OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteNamespacedServiceAccount PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedServiceAccount mtype
@@ -4287,27 +4287,27 @@ instance HasBodyParam DeleteNode V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteNode Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteNode DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteNode GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteNode OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeleteNode PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNode mtype
@@ -4344,27 +4344,27 @@ instance HasBodyParam DeletePersistentVolume V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeletePersistentVolume Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeletePersistentVolume DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeletePersistentVolume GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeletePersistentVolume OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy. Acceptable values are: 'Orphan' - orphan the dependents; 'Background' - allow the garbage collector to delete the dependents in the background; 'Foreground' - a cascading policy that deletes all dependents in the foreground.
 instance HasOptionalParam DeletePersistentVolume PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeletePersistentVolume mtype
@@ -4421,47 +4421,47 @@ data ListComponentStatus
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListComponentStatus AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListComponentStatus Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListComponentStatus FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListComponentStatus LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListComponentStatus Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListComponentStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListComponentStatus ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListComponentStatus TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListComponentStatus Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListComponentStatus MimeJSON
 -- | @application/json;stream=watch@
@@ -4494,47 +4494,47 @@ data ListConfigMapForAllNamespaces
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListConfigMapForAllNamespaces AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListConfigMapForAllNamespaces Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListConfigMapForAllNamespaces FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListConfigMapForAllNamespaces LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListConfigMapForAllNamespaces Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListConfigMapForAllNamespaces Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListConfigMapForAllNamespaces ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListConfigMapForAllNamespaces TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListConfigMapForAllNamespaces Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListConfigMapForAllNamespaces MimeJSON
 -- | @application/json;stream=watch@
@@ -4567,47 +4567,47 @@ data ListEndpointsForAllNamespaces
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListEndpointsForAllNamespaces AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListEndpointsForAllNamespaces Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListEndpointsForAllNamespaces FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListEndpointsForAllNamespaces LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListEndpointsForAllNamespaces Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListEndpointsForAllNamespaces Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListEndpointsForAllNamespaces ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListEndpointsForAllNamespaces TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListEndpointsForAllNamespaces Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListEndpointsForAllNamespaces MimeJSON
 -- | @application/json;stream=watch@
@@ -4640,47 +4640,47 @@ data ListEventForAllNamespaces
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListEventForAllNamespaces AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListEventForAllNamespaces Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListEventForAllNamespaces FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListEventForAllNamespaces LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListEventForAllNamespaces Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListEventForAllNamespaces Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListEventForAllNamespaces ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListEventForAllNamespaces TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListEventForAllNamespaces Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListEventForAllNamespaces MimeJSON
 -- | @application/json;stream=watch@
@@ -4713,47 +4713,47 @@ data ListLimitRangeForAllNamespaces
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListLimitRangeForAllNamespaces AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListLimitRangeForAllNamespaces Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListLimitRangeForAllNamespaces FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListLimitRangeForAllNamespaces LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListLimitRangeForAllNamespaces Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListLimitRangeForAllNamespaces Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListLimitRangeForAllNamespaces ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListLimitRangeForAllNamespaces TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListLimitRangeForAllNamespaces Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListLimitRangeForAllNamespaces MimeJSON
 -- | @application/json;stream=watch@
@@ -4786,47 +4786,47 @@ data ListNamespace
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListNamespace Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListNamespace AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListNamespace Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListNamespace FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListNamespace LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListNamespace Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListNamespace ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListNamespace TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListNamespace Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListNamespace MimeJSON
 -- | @application/json;stream=watch@
@@ -4860,47 +4860,47 @@ data ListNamespacedConfigMap
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListNamespacedConfigMap Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListNamespacedConfigMap AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListNamespacedConfigMap Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListNamespacedConfigMap FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListNamespacedConfigMap LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListNamespacedConfigMap Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListNamespacedConfigMap ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListNamespacedConfigMap TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListNamespacedConfigMap Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListNamespacedConfigMap MimeJSON
 -- | @application/json;stream=watch@
@@ -4934,47 +4934,47 @@ data ListNamespacedEndpoints
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListNamespacedEndpoints Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListNamespacedEndpoints AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListNamespacedEndpoints Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListNamespacedEndpoints FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListNamespacedEndpoints LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListNamespacedEndpoints Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListNamespacedEndpoints ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListNamespacedEndpoints TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListNamespacedEndpoints Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListNamespacedEndpoints MimeJSON
 -- | @application/json;stream=watch@
@@ -5008,47 +5008,47 @@ data ListNamespacedEvent
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListNamespacedEvent Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListNamespacedEvent AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListNamespacedEvent Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListNamespacedEvent FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListNamespacedEvent LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListNamespacedEvent Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListNamespacedEvent ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListNamespacedEvent TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListNamespacedEvent Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListNamespacedEvent MimeJSON
 -- | @application/json;stream=watch@
@@ -5082,47 +5082,47 @@ data ListNamespacedLimitRange
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListNamespacedLimitRange Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListNamespacedLimitRange AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListNamespacedLimitRange Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListNamespacedLimitRange FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListNamespacedLimitRange LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListNamespacedLimitRange Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListNamespacedLimitRange ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListNamespacedLimitRange TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListNamespacedLimitRange Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListNamespacedLimitRange MimeJSON
 -- | @application/json;stream=watch@
@@ -5156,47 +5156,47 @@ data ListNamespacedPersistentVolumeClaim
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListNamespacedPersistentVolumeClaim Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListNamespacedPersistentVolumeClaim AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListNamespacedPersistentVolumeClaim Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListNamespacedPersistentVolumeClaim FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListNamespacedPersistentVolumeClaim LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListNamespacedPersistentVolumeClaim Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListNamespacedPersistentVolumeClaim ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListNamespacedPersistentVolumeClaim TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListNamespacedPersistentVolumeClaim Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListNamespacedPersistentVolumeClaim MimeJSON
 -- | @application/json;stream=watch@
@@ -5230,47 +5230,47 @@ data ListNamespacedPod
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListNamespacedPod Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListNamespacedPod AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListNamespacedPod Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListNamespacedPod FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListNamespacedPod LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListNamespacedPod Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListNamespacedPod ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListNamespacedPod TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListNamespacedPod Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListNamespacedPod MimeJSON
 -- | @application/json;stream=watch@
@@ -5304,47 +5304,47 @@ data ListNamespacedPodTemplate
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListNamespacedPodTemplate Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListNamespacedPodTemplate AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListNamespacedPodTemplate Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListNamespacedPodTemplate FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListNamespacedPodTemplate LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListNamespacedPodTemplate Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListNamespacedPodTemplate ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListNamespacedPodTemplate TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListNamespacedPodTemplate Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListNamespacedPodTemplate MimeJSON
 -- | @application/json;stream=watch@
@@ -5378,47 +5378,47 @@ data ListNamespacedReplicationController
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListNamespacedReplicationController Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListNamespacedReplicationController AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListNamespacedReplicationController Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListNamespacedReplicationController FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListNamespacedReplicationController LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListNamespacedReplicationController Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListNamespacedReplicationController ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListNamespacedReplicationController TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListNamespacedReplicationController Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListNamespacedReplicationController MimeJSON
 -- | @application/json;stream=watch@
@@ -5452,47 +5452,47 @@ data ListNamespacedResourceQuota
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListNamespacedResourceQuota Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListNamespacedResourceQuota AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListNamespacedResourceQuota Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListNamespacedResourceQuota FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListNamespacedResourceQuota LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListNamespacedResourceQuota Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListNamespacedResourceQuota ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListNamespacedResourceQuota TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListNamespacedResourceQuota Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListNamespacedResourceQuota MimeJSON
 -- | @application/json;stream=watch@
@@ -5526,47 +5526,47 @@ data ListNamespacedSecret
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListNamespacedSecret Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListNamespacedSecret AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListNamespacedSecret Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListNamespacedSecret FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListNamespacedSecret LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListNamespacedSecret Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListNamespacedSecret ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListNamespacedSecret TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListNamespacedSecret Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListNamespacedSecret MimeJSON
 -- | @application/json;stream=watch@
@@ -5600,47 +5600,47 @@ data ListNamespacedService
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListNamespacedService Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListNamespacedService AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListNamespacedService Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListNamespacedService FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListNamespacedService LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListNamespacedService Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListNamespacedService ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListNamespacedService TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListNamespacedService Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListNamespacedService MimeJSON
 -- | @application/json;stream=watch@
@@ -5674,47 +5674,47 @@ data ListNamespacedServiceAccount
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListNamespacedServiceAccount Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListNamespacedServiceAccount AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListNamespacedServiceAccount Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListNamespacedServiceAccount FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListNamespacedServiceAccount LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListNamespacedServiceAccount Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListNamespacedServiceAccount ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListNamespacedServiceAccount TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListNamespacedServiceAccount Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListNamespacedServiceAccount MimeJSON
 -- | @application/json;stream=watch@
@@ -5747,47 +5747,47 @@ data ListNode
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListNode Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListNode AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListNode Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListNode FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListNode LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListNode Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListNode ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListNode TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListNode Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListNode MimeJSON
 -- | @application/json;stream=watch@
@@ -5820,47 +5820,47 @@ data ListPersistentVolume
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListPersistentVolume Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListPersistentVolume AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListPersistentVolume Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListPersistentVolume FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListPersistentVolume LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListPersistentVolume Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListPersistentVolume ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListPersistentVolume TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListPersistentVolume Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListPersistentVolume MimeJSON
 -- | @application/json;stream=watch@
@@ -5893,47 +5893,47 @@ data ListPersistentVolumeClaimForAllNamespaces
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListPersistentVolumeClaimForAllNamespaces AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListPersistentVolumeClaimForAllNamespaces Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListPersistentVolumeClaimForAllNamespaces FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListPersistentVolumeClaimForAllNamespaces LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListPersistentVolumeClaimForAllNamespaces Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListPersistentVolumeClaimForAllNamespaces Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListPersistentVolumeClaimForAllNamespaces ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListPersistentVolumeClaimForAllNamespaces TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListPersistentVolumeClaimForAllNamespaces Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListPersistentVolumeClaimForAllNamespaces MimeJSON
 -- | @application/json;stream=watch@
@@ -5966,47 +5966,47 @@ data ListPodForAllNamespaces
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListPodForAllNamespaces AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListPodForAllNamespaces Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListPodForAllNamespaces FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListPodForAllNamespaces LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListPodForAllNamespaces Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListPodForAllNamespaces Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListPodForAllNamespaces ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListPodForAllNamespaces TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListPodForAllNamespaces Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListPodForAllNamespaces MimeJSON
 -- | @application/json;stream=watch@
@@ -6039,47 +6039,47 @@ data ListPodTemplateForAllNamespaces
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListPodTemplateForAllNamespaces AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListPodTemplateForAllNamespaces Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListPodTemplateForAllNamespaces FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListPodTemplateForAllNamespaces LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListPodTemplateForAllNamespaces Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListPodTemplateForAllNamespaces Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListPodTemplateForAllNamespaces ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListPodTemplateForAllNamespaces TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListPodTemplateForAllNamespaces Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListPodTemplateForAllNamespaces MimeJSON
 -- | @application/json;stream=watch@
@@ -6112,47 +6112,47 @@ data ListReplicationControllerForAllNamespaces
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListReplicationControllerForAllNamespaces AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListReplicationControllerForAllNamespaces Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListReplicationControllerForAllNamespaces FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListReplicationControllerForAllNamespaces LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListReplicationControllerForAllNamespaces Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListReplicationControllerForAllNamespaces Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListReplicationControllerForAllNamespaces ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListReplicationControllerForAllNamespaces TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListReplicationControllerForAllNamespaces Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListReplicationControllerForAllNamespaces MimeJSON
 -- | @application/json;stream=watch@
@@ -6185,47 +6185,47 @@ data ListResourceQuotaForAllNamespaces
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListResourceQuotaForAllNamespaces AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListResourceQuotaForAllNamespaces Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListResourceQuotaForAllNamespaces FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListResourceQuotaForAllNamespaces LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListResourceQuotaForAllNamespaces Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListResourceQuotaForAllNamespaces Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListResourceQuotaForAllNamespaces ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListResourceQuotaForAllNamespaces TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListResourceQuotaForAllNamespaces Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListResourceQuotaForAllNamespaces MimeJSON
 -- | @application/json;stream=watch@
@@ -6258,47 +6258,47 @@ data ListSecretForAllNamespaces
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListSecretForAllNamespaces AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListSecretForAllNamespaces Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListSecretForAllNamespaces FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListSecretForAllNamespaces LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListSecretForAllNamespaces Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListSecretForAllNamespaces Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListSecretForAllNamespaces ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListSecretForAllNamespaces TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListSecretForAllNamespaces Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListSecretForAllNamespaces MimeJSON
 -- | @application/json;stream=watch@
@@ -6331,47 +6331,47 @@ data ListServiceAccountForAllNamespaces
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListServiceAccountForAllNamespaces AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListServiceAccountForAllNamespaces Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListServiceAccountForAllNamespaces FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListServiceAccountForAllNamespaces LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListServiceAccountForAllNamespaces Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListServiceAccountForAllNamespaces Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListServiceAccountForAllNamespaces ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListServiceAccountForAllNamespaces TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListServiceAccountForAllNamespaces Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListServiceAccountForAllNamespaces MimeJSON
 -- | @application/json;stream=watch@
@@ -6404,47 +6404,47 @@ data ListServiceForAllNamespaces
 -- | /Optional Param/ "allowWatchBookmarks" - allowWatchBookmarks requests watch events with type \"BOOKMARK\". Servers that do not implement bookmarks may ignore this flag and bookmarks are sent at the server's discretion. Clients should not assume bookmarks are returned at any specific interval, nor may they assume the server will send any BOOKMARK event during a session. If this is not a watch, this field is ignored. If the feature gate WatchBookmarks is not enabled in apiserver, this field is ignored.  This field is beta.
 instance HasOptionalParam ListServiceForAllNamespaces AllowWatchBookmarks where
   applyOptionalParam req (AllowWatchBookmarks xs) =
-    req `setQuery` toQuery ("allowWatchBookmarks", Just xs)
+    req `addQuery` toQuery ("allowWatchBookmarks", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListServiceForAllNamespaces Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListServiceForAllNamespaces FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListServiceForAllNamespaces LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListServiceForAllNamespaces Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListServiceForAllNamespaces Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListServiceForAllNamespaces ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListServiceForAllNamespaces TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications. Specify resourceVersion.
 instance HasOptionalParam ListServiceForAllNamespaces Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListServiceForAllNamespaces MimeJSON
 -- | @application/json;stream=watch@
@@ -6483,22 +6483,22 @@ instance HasBodyParam PatchNamespace Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespace Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespace DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespace FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespace Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespace MimeApplyPatchyaml
@@ -6543,22 +6543,22 @@ instance HasBodyParam PatchNamespaceStatus Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespaceStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespaceStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespaceStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespaceStatus Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespaceStatus MimeApplyPatchyaml
@@ -6604,22 +6604,22 @@ instance HasBodyParam PatchNamespacedConfigMap Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedConfigMap Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedConfigMap DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedConfigMap FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedConfigMap Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedConfigMap MimeApplyPatchyaml
@@ -6665,22 +6665,22 @@ instance HasBodyParam PatchNamespacedEndpoints Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedEndpoints Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedEndpoints DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedEndpoints FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedEndpoints Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedEndpoints MimeApplyPatchyaml
@@ -6726,22 +6726,22 @@ instance HasBodyParam PatchNamespacedEvent Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedEvent Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedEvent DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedEvent FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedEvent Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedEvent MimeApplyPatchyaml
@@ -6787,22 +6787,22 @@ instance HasBodyParam PatchNamespacedLimitRange Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedLimitRange Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedLimitRange DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedLimitRange FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedLimitRange Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedLimitRange MimeApplyPatchyaml
@@ -6848,22 +6848,22 @@ instance HasBodyParam PatchNamespacedPersistentVolumeClaim Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedPersistentVolumeClaim Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedPersistentVolumeClaim DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedPersistentVolumeClaim FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedPersistentVolumeClaim Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedPersistentVolumeClaim MimeApplyPatchyaml
@@ -6909,22 +6909,22 @@ instance HasBodyParam PatchNamespacedPersistentVolumeClaimStatus Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedPersistentVolumeClaimStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedPersistentVolumeClaimStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedPersistentVolumeClaimStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedPersistentVolumeClaimStatus Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedPersistentVolumeClaimStatus MimeApplyPatchyaml
@@ -6970,22 +6970,22 @@ instance HasBodyParam PatchNamespacedPod Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedPod Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedPod DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedPod FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedPod Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedPod MimeApplyPatchyaml
@@ -7031,22 +7031,22 @@ instance HasBodyParam PatchNamespacedPodStatus Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedPodStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedPodStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedPodStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedPodStatus Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedPodStatus MimeApplyPatchyaml
@@ -7092,22 +7092,22 @@ instance HasBodyParam PatchNamespacedPodTemplate Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedPodTemplate Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedPodTemplate DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedPodTemplate FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedPodTemplate Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedPodTemplate MimeApplyPatchyaml
@@ -7153,22 +7153,22 @@ instance HasBodyParam PatchNamespacedReplicationController Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedReplicationController Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedReplicationController DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedReplicationController FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedReplicationController Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedReplicationController MimeApplyPatchyaml
@@ -7214,22 +7214,22 @@ instance HasBodyParam PatchNamespacedReplicationControllerScale Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedReplicationControllerScale Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedReplicationControllerScale DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedReplicationControllerScale FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedReplicationControllerScale Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedReplicationControllerScale MimeApplyPatchyaml
@@ -7275,22 +7275,22 @@ instance HasBodyParam PatchNamespacedReplicationControllerStatus Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedReplicationControllerStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedReplicationControllerStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedReplicationControllerStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedReplicationControllerStatus Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedReplicationControllerStatus MimeApplyPatchyaml
@@ -7336,22 +7336,22 @@ instance HasBodyParam PatchNamespacedResourceQuota Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedResourceQuota Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedResourceQuota DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedResourceQuota FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedResourceQuota Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedResourceQuota MimeApplyPatchyaml
@@ -7397,22 +7397,22 @@ instance HasBodyParam PatchNamespacedResourceQuotaStatus Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedResourceQuotaStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedResourceQuotaStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedResourceQuotaStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedResourceQuotaStatus Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedResourceQuotaStatus MimeApplyPatchyaml
@@ -7458,22 +7458,22 @@ instance HasBodyParam PatchNamespacedSecret Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedSecret Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedSecret DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedSecret FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedSecret Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedSecret MimeApplyPatchyaml
@@ -7519,22 +7519,22 @@ instance HasBodyParam PatchNamespacedService Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedService Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedService DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedService FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedService Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedService MimeApplyPatchyaml
@@ -7580,22 +7580,22 @@ instance HasBodyParam PatchNamespacedServiceAccount Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedServiceAccount Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedServiceAccount DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedServiceAccount FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedServiceAccount Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedServiceAccount MimeApplyPatchyaml
@@ -7641,22 +7641,22 @@ instance HasBodyParam PatchNamespacedServiceStatus Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNamespacedServiceStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedServiceStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedServiceStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedServiceStatus Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedServiceStatus MimeApplyPatchyaml
@@ -7701,22 +7701,22 @@ instance HasBodyParam PatchNode Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNode Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNode DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNode FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNode Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNode MimeApplyPatchyaml
@@ -7761,22 +7761,22 @@ instance HasBodyParam PatchNodeStatus Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchNodeStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNodeStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNodeStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNodeStatus Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNodeStatus MimeApplyPatchyaml
@@ -7821,22 +7821,22 @@ instance HasBodyParam PatchPersistentVolume Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchPersistentVolume Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchPersistentVolume DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchPersistentVolume FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchPersistentVolume Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchPersistentVolume MimeApplyPatchyaml
@@ -7881,22 +7881,22 @@ instance HasBodyParam PatchPersistentVolumeStatus Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam PatchPersistentVolumeStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchPersistentVolumeStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchPersistentVolumeStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchPersistentVolumeStatus Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchPersistentVolumeStatus MimeApplyPatchyaml
@@ -7936,7 +7936,7 @@ data ReadComponentStatus
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadComponentStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 -- | @application/json@
 instance Produces ReadComponentStatus MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -7966,17 +7966,17 @@ data ReadNamespace
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespace Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "exact" - Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespace Exact where
   applyOptionalParam req (Exact xs) =
-    req `setQuery` toQuery ("exact", Just xs)
+    req `addQuery` toQuery ("exact", Just xs)
 
 -- | /Optional Param/ "export" - Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespace Export where
   applyOptionalParam req (Export xs) =
-    req `setQuery` toQuery ("export", Just xs)
+    req `addQuery` toQuery ("export", Just xs)
 -- | @application/json@
 instance Produces ReadNamespace MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8006,7 +8006,7 @@ data ReadNamespaceStatus
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespaceStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 -- | @application/json@
 instance Produces ReadNamespaceStatus MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8037,17 +8037,17 @@ data ReadNamespacedConfigMap
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedConfigMap Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "exact" - Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedConfigMap Exact where
   applyOptionalParam req (Exact xs) =
-    req `setQuery` toQuery ("exact", Just xs)
+    req `addQuery` toQuery ("exact", Just xs)
 
 -- | /Optional Param/ "export" - Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedConfigMap Export where
   applyOptionalParam req (Export xs) =
-    req `setQuery` toQuery ("export", Just xs)
+    req `addQuery` toQuery ("export", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedConfigMap MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8078,17 +8078,17 @@ data ReadNamespacedEndpoints
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedEndpoints Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "exact" - Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedEndpoints Exact where
   applyOptionalParam req (Exact xs) =
-    req `setQuery` toQuery ("exact", Just xs)
+    req `addQuery` toQuery ("exact", Just xs)
 
 -- | /Optional Param/ "export" - Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedEndpoints Export where
   applyOptionalParam req (Export xs) =
-    req `setQuery` toQuery ("export", Just xs)
+    req `addQuery` toQuery ("export", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedEndpoints MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8119,17 +8119,17 @@ data ReadNamespacedEvent
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedEvent Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "exact" - Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedEvent Exact where
   applyOptionalParam req (Exact xs) =
-    req `setQuery` toQuery ("exact", Just xs)
+    req `addQuery` toQuery ("exact", Just xs)
 
 -- | /Optional Param/ "export" - Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedEvent Export where
   applyOptionalParam req (Export xs) =
-    req `setQuery` toQuery ("export", Just xs)
+    req `addQuery` toQuery ("export", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedEvent MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8160,17 +8160,17 @@ data ReadNamespacedLimitRange
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedLimitRange Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "exact" - Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedLimitRange Exact where
   applyOptionalParam req (Exact xs) =
-    req `setQuery` toQuery ("exact", Just xs)
+    req `addQuery` toQuery ("exact", Just xs)
 
 -- | /Optional Param/ "export" - Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedLimitRange Export where
   applyOptionalParam req (Export xs) =
-    req `setQuery` toQuery ("export", Just xs)
+    req `addQuery` toQuery ("export", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedLimitRange MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8201,17 +8201,17 @@ data ReadNamespacedPersistentVolumeClaim
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedPersistentVolumeClaim Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "exact" - Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedPersistentVolumeClaim Exact where
   applyOptionalParam req (Exact xs) =
-    req `setQuery` toQuery ("exact", Just xs)
+    req `addQuery` toQuery ("exact", Just xs)
 
 -- | /Optional Param/ "export" - Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedPersistentVolumeClaim Export where
   applyOptionalParam req (Export xs) =
-    req `setQuery` toQuery ("export", Just xs)
+    req `addQuery` toQuery ("export", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedPersistentVolumeClaim MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8242,7 +8242,7 @@ data ReadNamespacedPersistentVolumeClaimStatus
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedPersistentVolumeClaimStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedPersistentVolumeClaimStatus MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8273,17 +8273,17 @@ data ReadNamespacedPod
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedPod Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "exact" - Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedPod Exact where
   applyOptionalParam req (Exact xs) =
-    req `setQuery` toQuery ("exact", Just xs)
+    req `addQuery` toQuery ("exact", Just xs)
 
 -- | /Optional Param/ "export" - Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedPod Export where
   applyOptionalParam req (Export xs) =
-    req `setQuery` toQuery ("export", Just xs)
+    req `addQuery` toQuery ("export", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedPod MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8314,42 +8314,42 @@ data ReadNamespacedPodLog
 -- | /Optional Param/ "container" - The container for which to stream logs. Defaults to only container if there is one container in the pod.
 instance HasOptionalParam ReadNamespacedPodLog Container where
   applyOptionalParam req (Container xs) =
-    req `setQuery` toQuery ("container", Just xs)
+    req `addQuery` toQuery ("container", Just xs)
 
 -- | /Optional Param/ "follow" - Follow the log stream of the pod. Defaults to false.
 instance HasOptionalParam ReadNamespacedPodLog Follow where
   applyOptionalParam req (Follow xs) =
-    req `setQuery` toQuery ("follow", Just xs)
+    req `addQuery` toQuery ("follow", Just xs)
 
 -- | /Optional Param/ "limitBytes" - If set, the number of bytes to read from the server before terminating the log output. This may not display a complete final line of logging, and may return slightly more or slightly less than the specified limit.
 instance HasOptionalParam ReadNamespacedPodLog LimitBytes where
   applyOptionalParam req (LimitBytes xs) =
-    req `setQuery` toQuery ("limitBytes", Just xs)
+    req `addQuery` toQuery ("limitBytes", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedPodLog Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "previous" - Return previous terminated container logs. Defaults to false.
 instance HasOptionalParam ReadNamespacedPodLog Previous where
   applyOptionalParam req (Previous xs) =
-    req `setQuery` toQuery ("previous", Just xs)
+    req `addQuery` toQuery ("previous", Just xs)
 
 -- | /Optional Param/ "sinceSeconds" - A relative time in seconds before the current time from which to show logs. If this value precedes the time a pod was started, only logs since the pod start will be returned. If this value is in the future, no logs will be returned. Only one of sinceSeconds or sinceTime may be specified.
 instance HasOptionalParam ReadNamespacedPodLog SinceSeconds where
   applyOptionalParam req (SinceSeconds xs) =
-    req `setQuery` toQuery ("sinceSeconds", Just xs)
+    req `addQuery` toQuery ("sinceSeconds", Just xs)
 
 -- | /Optional Param/ "tailLines" - If set, the number of lines from the end of the logs to show. If not specified, logs are shown from the creation of the container or sinceSeconds or sinceTime
 instance HasOptionalParam ReadNamespacedPodLog TailLines where
   applyOptionalParam req (TailLines xs) =
-    req `setQuery` toQuery ("tailLines", Just xs)
+    req `addQuery` toQuery ("tailLines", Just xs)
 
 -- | /Optional Param/ "timestamps" - If true, add an RFC3339 or RFC3339Nano timestamp at the beginning of every line of log output. Defaults to false.
 instance HasOptionalParam ReadNamespacedPodLog Timestamps where
   applyOptionalParam req (Timestamps xs) =
-    req `setQuery` toQuery ("timestamps", Just xs)
+    req `addQuery` toQuery ("timestamps", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedPodLog MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8382,7 +8382,7 @@ data ReadNamespacedPodStatus
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedPodStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedPodStatus MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8413,17 +8413,17 @@ data ReadNamespacedPodTemplate
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedPodTemplate Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "exact" - Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedPodTemplate Exact where
   applyOptionalParam req (Exact xs) =
-    req `setQuery` toQuery ("exact", Just xs)
+    req `addQuery` toQuery ("exact", Just xs)
 
 -- | /Optional Param/ "export" - Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedPodTemplate Export where
   applyOptionalParam req (Export xs) =
-    req `setQuery` toQuery ("export", Just xs)
+    req `addQuery` toQuery ("export", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedPodTemplate MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8454,17 +8454,17 @@ data ReadNamespacedReplicationController
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedReplicationController Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "exact" - Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedReplicationController Exact where
   applyOptionalParam req (Exact xs) =
-    req `setQuery` toQuery ("exact", Just xs)
+    req `addQuery` toQuery ("exact", Just xs)
 
 -- | /Optional Param/ "export" - Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedReplicationController Export where
   applyOptionalParam req (Export xs) =
-    req `setQuery` toQuery ("export", Just xs)
+    req `addQuery` toQuery ("export", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedReplicationController MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8495,7 +8495,7 @@ data ReadNamespacedReplicationControllerScale
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedReplicationControllerScale Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedReplicationControllerScale MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8526,7 +8526,7 @@ data ReadNamespacedReplicationControllerStatus
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedReplicationControllerStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedReplicationControllerStatus MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8557,17 +8557,17 @@ data ReadNamespacedResourceQuota
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedResourceQuota Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "exact" - Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedResourceQuota Exact where
   applyOptionalParam req (Exact xs) =
-    req `setQuery` toQuery ("exact", Just xs)
+    req `addQuery` toQuery ("exact", Just xs)
 
 -- | /Optional Param/ "export" - Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedResourceQuota Export where
   applyOptionalParam req (Export xs) =
-    req `setQuery` toQuery ("export", Just xs)
+    req `addQuery` toQuery ("export", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedResourceQuota MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8598,7 +8598,7 @@ data ReadNamespacedResourceQuotaStatus
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedResourceQuotaStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedResourceQuotaStatus MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8629,17 +8629,17 @@ data ReadNamespacedSecret
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedSecret Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "exact" - Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedSecret Exact where
   applyOptionalParam req (Exact xs) =
-    req `setQuery` toQuery ("exact", Just xs)
+    req `addQuery` toQuery ("exact", Just xs)
 
 -- | /Optional Param/ "export" - Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedSecret Export where
   applyOptionalParam req (Export xs) =
-    req `setQuery` toQuery ("export", Just xs)
+    req `addQuery` toQuery ("export", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedSecret MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8670,17 +8670,17 @@ data ReadNamespacedService
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedService Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "exact" - Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedService Exact where
   applyOptionalParam req (Exact xs) =
-    req `setQuery` toQuery ("exact", Just xs)
+    req `addQuery` toQuery ("exact", Just xs)
 
 -- | /Optional Param/ "export" - Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedService Export where
   applyOptionalParam req (Export xs) =
-    req `setQuery` toQuery ("export", Just xs)
+    req `addQuery` toQuery ("export", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedService MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8711,17 +8711,17 @@ data ReadNamespacedServiceAccount
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedServiceAccount Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "exact" - Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedServiceAccount Exact where
   applyOptionalParam req (Exact xs) =
-    req `setQuery` toQuery ("exact", Just xs)
+    req `addQuery` toQuery ("exact", Just xs)
 
 -- | /Optional Param/ "export" - Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNamespacedServiceAccount Export where
   applyOptionalParam req (Export xs) =
-    req `setQuery` toQuery ("export", Just xs)
+    req `addQuery` toQuery ("export", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedServiceAccount MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8752,7 +8752,7 @@ data ReadNamespacedServiceStatus
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNamespacedServiceStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 -- | @application/json@
 instance Produces ReadNamespacedServiceStatus MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8782,17 +8782,17 @@ data ReadNode
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNode Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "exact" - Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNode Exact where
   applyOptionalParam req (Exact xs) =
-    req `setQuery` toQuery ("exact", Just xs)
+    req `addQuery` toQuery ("exact", Just xs)
 
 -- | /Optional Param/ "export" - Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadNode Export where
   applyOptionalParam req (Export xs) =
-    req `setQuery` toQuery ("export", Just xs)
+    req `addQuery` toQuery ("export", Just xs)
 -- | @application/json@
 instance Produces ReadNode MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8822,7 +8822,7 @@ data ReadNodeStatus
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadNodeStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 -- | @application/json@
 instance Produces ReadNodeStatus MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8852,17 +8852,17 @@ data ReadPersistentVolume
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadPersistentVolume Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "exact" - Should the export be exact.  Exact export maintains cluster-specific fields like 'Namespace'. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadPersistentVolume Exact where
   applyOptionalParam req (Exact xs) =
-    req `setQuery` toQuery ("exact", Just xs)
+    req `addQuery` toQuery ("exact", Just xs)
 
 -- | /Optional Param/ "export" - Should this value be exported.  Export strips fields that a user can not specify. Deprecated. Planned for removal in 1.18.
 instance HasOptionalParam ReadPersistentVolume Export where
   applyOptionalParam req (Export xs) =
-    req `setQuery` toQuery ("export", Just xs)
+    req `addQuery` toQuery ("export", Just xs)
 -- | @application/json@
 instance Produces ReadPersistentVolume MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8892,7 +8892,7 @@ data ReadPersistentVolumeStatus
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReadPersistentVolumeStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 -- | @application/json@
 instance Produces ReadPersistentVolumeStatus MimeJSON
 -- | @application/vnd.kubernetes.protobuf@
@@ -8927,17 +8927,17 @@ instance HasBodyParam ReplaceNamespace V1Namespace
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespace Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespace DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespace FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespace mtype
@@ -8976,17 +8976,17 @@ instance HasBodyParam ReplaceNamespaceFinalize V1Namespace
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespaceFinalize DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespaceFinalize FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespaceFinalize Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespaceFinalize mtype
@@ -9025,17 +9025,17 @@ instance HasBodyParam ReplaceNamespaceStatus V1Namespace
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespaceStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespaceStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespaceStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespaceStatus mtype
@@ -9075,17 +9075,17 @@ instance HasBodyParam ReplaceNamespacedConfigMap V1ConfigMap
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedConfigMap Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedConfigMap DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedConfigMap FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedConfigMap mtype
@@ -9125,17 +9125,17 @@ instance HasBodyParam ReplaceNamespacedEndpoints V1Endpoints
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedEndpoints Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedEndpoints DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedEndpoints FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedEndpoints mtype
@@ -9175,17 +9175,17 @@ instance HasBodyParam ReplaceNamespacedEvent V1Event
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedEvent Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedEvent DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedEvent FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedEvent mtype
@@ -9225,17 +9225,17 @@ instance HasBodyParam ReplaceNamespacedLimitRange V1LimitRange
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedLimitRange Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedLimitRange DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedLimitRange FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedLimitRange mtype
@@ -9275,17 +9275,17 @@ instance HasBodyParam ReplaceNamespacedPersistentVolumeClaim V1PersistentVolumeC
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedPersistentVolumeClaim Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedPersistentVolumeClaim DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedPersistentVolumeClaim FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedPersistentVolumeClaim mtype
@@ -9325,17 +9325,17 @@ instance HasBodyParam ReplaceNamespacedPersistentVolumeClaimStatus V1PersistentV
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedPersistentVolumeClaimStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedPersistentVolumeClaimStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedPersistentVolumeClaimStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedPersistentVolumeClaimStatus mtype
@@ -9375,17 +9375,17 @@ instance HasBodyParam ReplaceNamespacedPod V1Pod
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedPod Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedPod DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedPod FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedPod mtype
@@ -9425,17 +9425,17 @@ instance HasBodyParam ReplaceNamespacedPodStatus V1Pod
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedPodStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedPodStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedPodStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedPodStatus mtype
@@ -9475,17 +9475,17 @@ instance HasBodyParam ReplaceNamespacedPodTemplate V1PodTemplate
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedPodTemplate Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedPodTemplate DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedPodTemplate FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedPodTemplate mtype
@@ -9525,17 +9525,17 @@ instance HasBodyParam ReplaceNamespacedReplicationController V1ReplicationContro
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedReplicationController Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedReplicationController DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedReplicationController FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedReplicationController mtype
@@ -9575,17 +9575,17 @@ instance HasBodyParam ReplaceNamespacedReplicationControllerScale V1Scale
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedReplicationControllerScale Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedReplicationControllerScale DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedReplicationControllerScale FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedReplicationControllerScale mtype
@@ -9625,17 +9625,17 @@ instance HasBodyParam ReplaceNamespacedReplicationControllerStatus V1Replication
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedReplicationControllerStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedReplicationControllerStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedReplicationControllerStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedReplicationControllerStatus mtype
@@ -9675,17 +9675,17 @@ instance HasBodyParam ReplaceNamespacedResourceQuota V1ResourceQuota
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedResourceQuota Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedResourceQuota DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedResourceQuota FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedResourceQuota mtype
@@ -9725,17 +9725,17 @@ instance HasBodyParam ReplaceNamespacedResourceQuotaStatus V1ResourceQuota
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedResourceQuotaStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedResourceQuotaStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedResourceQuotaStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedResourceQuotaStatus mtype
@@ -9775,17 +9775,17 @@ instance HasBodyParam ReplaceNamespacedSecret V1Secret
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedSecret Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedSecret DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedSecret FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedSecret mtype
@@ -9825,17 +9825,17 @@ instance HasBodyParam ReplaceNamespacedService V1Service
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedService Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedService DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedService FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedService mtype
@@ -9875,17 +9875,17 @@ instance HasBodyParam ReplaceNamespacedServiceAccount V1ServiceAccount
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedServiceAccount Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedServiceAccount DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedServiceAccount FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedServiceAccount mtype
@@ -9925,17 +9925,17 @@ instance HasBodyParam ReplaceNamespacedServiceStatus V1Service
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNamespacedServiceStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedServiceStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedServiceStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedServiceStatus mtype
@@ -9974,17 +9974,17 @@ instance HasBodyParam ReplaceNode V1Node
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNode Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNode DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNode FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNode mtype
@@ -10023,17 +10023,17 @@ instance HasBodyParam ReplaceNodeStatus V1Node
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplaceNodeStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNodeStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNodeStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNodeStatus mtype
@@ -10072,17 +10072,17 @@ instance HasBodyParam ReplacePersistentVolume V1PersistentVolume
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplacePersistentVolume Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplacePersistentVolume DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplacePersistentVolume FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplacePersistentVolume mtype
@@ -10121,17 +10121,17 @@ instance HasBodyParam ReplacePersistentVolumeStatus V1PersistentVolume
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ReplacePersistentVolumeStatus Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplacePersistentVolumeStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplacePersistentVolumeStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplacePersistentVolumeStatus mtype

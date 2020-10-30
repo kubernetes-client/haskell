@@ -237,10 +237,19 @@ _mkRequest m u = KubernetesRequest m u _mkParams []
 _mkParams :: Params
 _mkParams = Params [] [] ParamBodyNone
 
-setHeader :: KubernetesRequest req contentType res accept -> [NH.Header] -> KubernetesRequest req contentType res accept
+setHeader ::
+     KubernetesRequest req contentType res accept
+  -> [NH.Header]
+  -> KubernetesRequest req contentType res accept
 setHeader req header =
-  req `removeHeader` P.fmap P.fst header &
-  L.over (rParamsL . paramsHeadersL) (header P.++)
+  req `removeHeader` P.fmap P.fst header
+  & (`addHeader` header)
+
+addHeader ::
+     KubernetesRequest req contentType res accept
+  -> [NH.Header]
+  -> KubernetesRequest req contentType res accept
+addHeader req header = L.over (rParamsL . paramsHeadersL) (header P.++) req
 
 removeHeader :: KubernetesRequest req contentType res accept -> [NH.HeaderName] -> KubernetesRequest req contentType res accept
 removeHeader req header =
@@ -264,14 +273,24 @@ _setAcceptHeader req =
         Just m -> req `setHeader` [("accept", BC.pack $ P.show m)]
         Nothing -> req `removeHeader` ["accept"]
 
-setQuery :: KubernetesRequest req contentType res accept -> [NH.QueryItem] -> KubernetesRequest req contentType res accept
-setQuery req query = 
+setQuery ::
+     KubernetesRequest req contentType res accept
+  -> [NH.QueryItem]
+  -> KubernetesRequest req contentType res accept
+setQuery req query =
   req &
   L.over
     (rParamsL . paramsQueryL)
-    ((query P.++) . P.filter (\q -> cifst q `P.notElem` P.fmap cifst query))
+    (P.filter (\q -> cifst q `P.notElem` P.fmap cifst query)) &
+  (`addQuery` query)
   where
     cifst = CI.mk . P.fst
+
+addQuery ::
+     KubernetesRequest req contentType res accept
+  -> [NH.QueryItem]
+  -> KubernetesRequest req contentType res accept
+addQuery req query = req & L.over (rParamsL . paramsQueryL) (query P.++)
 
 addForm :: KubernetesRequest req contentType res accept -> WH.Form -> KubernetesRequest req contentType res accept
 addForm req newform = 

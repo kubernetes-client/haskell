@@ -86,17 +86,17 @@ instance HasBodyParam CreateClusterCustomObject Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateClusterCustomObject Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateClusterCustomObject DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam CreateClusterCustomObject FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateClusterCustomObject mtype
@@ -135,17 +135,17 @@ instance HasBodyParam CreateNamespacedCustomObject Body
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam CreateNamespacedCustomObject Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam CreateNamespacedCustomObject DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam CreateNamespacedCustomObject FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedCustomObject mtype
@@ -180,22 +180,22 @@ instance HasBodyParam DeleteClusterCustomObject V1DeleteOptions
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteClusterCustomObject GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteClusterCustomObject OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy.
 instance HasOptionalParam DeleteClusterCustomObject PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteClusterCustomObject DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteClusterCustomObject mtype
@@ -229,27 +229,27 @@ instance HasBodyParam DeleteCollectionClusterCustomObject V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteCollectionClusterCustomObject Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteCollectionClusterCustomObject GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteCollectionClusterCustomObject OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy.
 instance HasOptionalParam DeleteCollectionClusterCustomObject PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteCollectionClusterCustomObject DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionClusterCustomObject mtype
@@ -284,27 +284,27 @@ instance HasBodyParam DeleteCollectionNamespacedCustomObject V1DeleteOptions
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam DeleteCollectionNamespacedCustomObject Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteCollectionNamespacedCustomObject GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteCollectionNamespacedCustomObject OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy.
 instance HasOptionalParam DeleteCollectionNamespacedCustomObject PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteCollectionNamespacedCustomObject DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedCustomObject mtype
@@ -340,22 +340,22 @@ instance HasBodyParam DeleteNamespacedCustomObject V1DeleteOptions
 -- | /Optional Param/ "gracePeriodSeconds" - The duration in seconds before the object should be deleted. Value must be non-negative integer. The value zero indicates delete immediately. If this value is nil, the default grace period for the specified type will be used. Defaults to a per object value if not specified. zero means delete immediately.
 instance HasOptionalParam DeleteNamespacedCustomObject GracePeriodSeconds where
   applyOptionalParam req (GracePeriodSeconds xs) =
-    req `setQuery` toQuery ("gracePeriodSeconds", Just xs)
+    req `addQuery` toQuery ("gracePeriodSeconds", Just xs)
 
 -- | /Optional Param/ "orphanDependents" - Deprecated: please use the PropagationPolicy, this field will be deprecated in 1.7. Should the dependent objects be orphaned. If true/false, the \"orphan\" finalizer will be added to/removed from the object's finalizers list. Either this field or PropagationPolicy may be set, but not both.
 instance HasOptionalParam DeleteNamespacedCustomObject OrphanDependents where
   applyOptionalParam req (OrphanDependents xs) =
-    req `setQuery` toQuery ("orphanDependents", Just xs)
+    req `addQuery` toQuery ("orphanDependents", Just xs)
 
 -- | /Optional Param/ "propagationPolicy" - Whether and how garbage collection will be performed. Either this field or OrphanDependents may be set, but not both. The default policy is decided by the existing finalizer set in the metadata.finalizers and the resource-specific default policy.
 instance HasOptionalParam DeleteNamespacedCustomObject PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
-    req `setQuery` toQuery ("propagationPolicy", Just xs)
+    req `addQuery` toQuery ("propagationPolicy", Just xs)
 
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam DeleteNamespacedCustomObject DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedCustomObject mtype
@@ -548,42 +548,42 @@ data ListClusterCustomObject
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListClusterCustomObject Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListClusterCustomObject Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListClusterCustomObject FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListClusterCustomObject LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListClusterCustomObject Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListClusterCustomObject ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListClusterCustomObject TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications.
 instance HasOptionalParam ListClusterCustomObject Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListClusterCustomObject MimeJSON
 -- | @application/json;stream=watch@
@@ -614,42 +614,42 @@ data ListNamespacedCustomObject
 -- | /Optional Param/ "pretty" - If 'true', then the output is pretty printed.
 instance HasOptionalParam ListNamespacedCustomObject Pretty where
   applyOptionalParam req (Pretty xs) =
-    req `setQuery` toQuery ("pretty", Just xs)
+    req `addQuery` toQuery ("pretty", Just xs)
 
 -- | /Optional Param/ "continue" - The continue option should be set when retrieving more results from the server. Since this value is server defined, clients may only use the continue value from a previous query result with identical query parameters (except for the value of continue) and the server may reject a continue value it does not recognize. If the specified continue value is no longer valid whether due to expiration (generally five to fifteen minutes) or a configuration change on the server, the server will respond with a 410 ResourceExpired error together with a continue token. If the client needs a consistent list, it must restart their list without the continue field. Otherwise, the client may send another list request with the token received with the 410 error, the server will respond with a list starting from the next key, but from the latest snapshot, which is inconsistent from the previous list results - objects that are created, modified, or deleted after the first list request will be included in the response, as long as their keys are after the \"next key\".  This field is not supported when watch is true. Clients may start a watch from the last resourceVersion value returned by the server and not miss any modifications.
 instance HasOptionalParam ListNamespacedCustomObject Continue where
   applyOptionalParam req (Continue xs) =
-    req `setQuery` toQuery ("continue", Just xs)
+    req `addQuery` toQuery ("continue", Just xs)
 
 -- | /Optional Param/ "fieldSelector" - A selector to restrict the list of returned objects by their fields. Defaults to everything.
 instance HasOptionalParam ListNamespacedCustomObject FieldSelector where
   applyOptionalParam req (FieldSelector xs) =
-    req `setQuery` toQuery ("fieldSelector", Just xs)
+    req `addQuery` toQuery ("fieldSelector", Just xs)
 
 -- | /Optional Param/ "labelSelector" - A selector to restrict the list of returned objects by their labels. Defaults to everything.
 instance HasOptionalParam ListNamespacedCustomObject LabelSelector where
   applyOptionalParam req (LabelSelector xs) =
-    req `setQuery` toQuery ("labelSelector", Just xs)
+    req `addQuery` toQuery ("labelSelector", Just xs)
 
 -- | /Optional Param/ "limit" - limit is a maximum number of responses to return for a list call. If more items exist, the server will set the `continue` field on the list metadata to a value that can be used with the same initial query to retrieve the next set of results. Setting a limit may return fewer than the requested amount of items (up to zero items) in the event all requested objects are filtered out and clients should only use the presence of the continue field to determine whether more results are available. Servers may choose not to support the limit argument and will return all of the available results. If limit is specified and the continue field is empty, clients may assume that no more results are available. This field is not supported if watch is true.  The server guarantees that the objects returned when using continue will be identical to issuing a single list call without a limit - that is, no objects created, modified, or deleted after the first request is issued will be included in any subsequent continued requests. This is sometimes referred to as a consistent snapshot, and ensures that a client that is using limit to receive smaller chunks of a very large result can ensure they see all possible objects. If objects are updated during a chunked list the version of the object that was present at the time the first list result was calculated is returned.
 instance HasOptionalParam ListNamespacedCustomObject Limit where
   applyOptionalParam req (Limit xs) =
-    req `setQuery` toQuery ("limit", Just xs)
+    req `addQuery` toQuery ("limit", Just xs)
 
 -- | /Optional Param/ "resourceVersion" - When specified with a watch call, shows changes that occur after that particular version of a resource. Defaults to changes from the beginning of history. When specified for list: - if unset, then the result is returned from remote storage based on quorum-read flag; - if it's 0, then we simply return what we currently have in cache, no guarantee; - if set to non zero, then the result is at least as fresh as given rv.
 instance HasOptionalParam ListNamespacedCustomObject ResourceVersion where
   applyOptionalParam req (ResourceVersion xs) =
-    req `setQuery` toQuery ("resourceVersion", Just xs)
+    req `addQuery` toQuery ("resourceVersion", Just xs)
 
 -- | /Optional Param/ "timeoutSeconds" - Timeout for the list/watch call. This limits the duration of the call, regardless of any activity or inactivity.
 instance HasOptionalParam ListNamespacedCustomObject TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
-    req `setQuery` toQuery ("timeoutSeconds", Just xs)
+    req `addQuery` toQuery ("timeoutSeconds", Just xs)
 
 -- | /Optional Param/ "watch" - Watch for changes to the described resources and return them as a stream of add, update, and remove notifications.
 instance HasOptionalParam ListNamespacedCustomObject Watch where
   applyOptionalParam req (Watch xs) =
-    req `setQuery` toQuery ("watch", Just xs)
+    req `addQuery` toQuery ("watch", Just xs)
 -- | @application/json@
 instance Produces ListNamespacedCustomObject MimeJSON
 -- | @application/json;stream=watch@
@@ -686,17 +686,17 @@ instance HasBodyParam PatchClusterCustomObject Body
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchClusterCustomObject DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchClusterCustomObject FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchClusterCustomObject Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/json-patch+json@
 instance Consumes PatchClusterCustomObject MimeJsonPatchjson
@@ -736,17 +736,17 @@ instance HasBodyParam PatchClusterCustomObjectScale Body
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchClusterCustomObjectScale DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchClusterCustomObjectScale FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchClusterCustomObjectScale Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/json-patch+json@
 instance Consumes PatchClusterCustomObjectScale MimeJsonPatchjson
@@ -790,17 +790,17 @@ instance HasBodyParam PatchClusterCustomObjectStatus Body
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchClusterCustomObjectStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchClusterCustomObjectStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchClusterCustomObjectStatus Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/json-patch+json@
 instance Consumes PatchClusterCustomObjectStatus MimeJsonPatchjson
@@ -846,17 +846,17 @@ instance HasBodyParam PatchNamespacedCustomObject Body
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedCustomObject DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedCustomObject FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedCustomObject Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/json-patch+json@
 instance Consumes PatchNamespacedCustomObject MimeJsonPatchjson
@@ -897,17 +897,17 @@ instance HasBodyParam PatchNamespacedCustomObjectScale Body
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedCustomObjectScale DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedCustomObjectScale FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedCustomObjectScale Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedCustomObjectScale MimeApplyPatchyaml
@@ -954,17 +954,17 @@ instance HasBodyParam PatchNamespacedCustomObjectStatus Body
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam PatchNamespacedCustomObjectStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint. This field is required for apply requests (application/apply-patch) but optional for non-apply patch types (JsonPatch, MergePatch, StrategicMergePatch).
 instance HasOptionalParam PatchNamespacedCustomObjectStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
 
 -- | /Optional Param/ "force" - Force is going to \"force\" Apply requests. It means user will re-acquire conflicting fields owned by other people. Force flag must be unset for non-apply patch requests.
 instance HasOptionalParam PatchNamespacedCustomObjectStatus Force where
   applyOptionalParam req (Force xs) =
-    req `setQuery` toQuery ("force", Just xs)
+    req `addQuery` toQuery ("force", Just xs)
 
 -- | @application/apply-patch+yaml@
 instance Consumes PatchNamespacedCustomObjectStatus MimeApplyPatchyaml
@@ -1011,12 +1011,12 @@ instance HasBodyParam ReplaceClusterCustomObject Body
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceClusterCustomObject DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceClusterCustomObject FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceClusterCustomObject mtype
@@ -1054,12 +1054,12 @@ instance HasBodyParam ReplaceClusterCustomObjectScale Body
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceClusterCustomObjectScale DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceClusterCustomObjectScale FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceClusterCustomObjectScale mtype
@@ -1101,12 +1101,12 @@ instance HasBodyParam ReplaceClusterCustomObjectStatus Body
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceClusterCustomObjectStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceClusterCustomObjectStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceClusterCustomObjectStatus mtype
@@ -1150,12 +1150,12 @@ instance HasBodyParam ReplaceNamespacedCustomObject Body
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedCustomObject DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedCustomObject FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedCustomObject mtype
@@ -1194,12 +1194,12 @@ instance HasBodyParam ReplaceNamespacedCustomObjectScale Body
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedCustomObjectScale DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedCustomObjectScale FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedCustomObjectScale mtype
@@ -1242,12 +1242,12 @@ instance HasBodyParam ReplaceNamespacedCustomObjectStatus Body
 -- | /Optional Param/ "dryRun" - When present, indicates that modifications should not be persisted. An invalid or unrecognized dryRun directive will result in an error response and no further processing of the request. Valid values are: - All: all dry run stages will be processed
 instance HasOptionalParam ReplaceNamespacedCustomObjectStatus DryRun where
   applyOptionalParam req (DryRun xs) =
-    req `setQuery` toQuery ("dryRun", Just xs)
+    req `addQuery` toQuery ("dryRun", Just xs)
 
 -- | /Optional Param/ "fieldManager" - fieldManager is a name associated with the actor or entity that is making these changes. The value must be less than or 128 characters long, and only contain printable characters, as defined by https://golang.org/pkg/unicode/#IsPrint.
 instance HasOptionalParam ReplaceNamespacedCustomObjectStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
-    req `setQuery` toQuery ("fieldManager", Just xs)
+    req `addQuery` toQuery ("fieldManager", Just xs)
     
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedCustomObjectStatus mtype
