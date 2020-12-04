@@ -94,7 +94,7 @@ fetchToken auth@(OIDCAuth{..}) = do
       tokenURI <- parseURI strictURIParserOptions (Text.encodeUtf8 tokenEndpoint)
                   & either (throwM . OIDCURIException) pure
       let oauth = OAuth2{ oauthClientId = clientID
-                        , oauthClientSecret = clientSecret
+                        , oauthClientSecret = Just clientSecret
                         , oauthAccessTokenEndpoint = tokenURI
                         , oauthOAuthorizeEndpoint = tokenURI
                         , oauthCallback = Nothing
