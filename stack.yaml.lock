@@ -25,6 +25,13 @@ packages:
       sha256: 68c285c6365360975d50bbb18cb07755d5ef19af8bf0e998d3ea46d35ef4a4e1
   original:
     hackage: oidc-client-0.4.0.0
+- completed:
+    hackage: hoauth2-1.16.0@sha256:161b20369ce80cd8348e448e3b307e7850c3d21e8ae4f1e258dbd04d0da34a65,5629
+    pantry-tree:
+      size: 2046
+      sha256: 55931b378faa4a89275c572ecf9a5ec65a7a71f092819e4f704a285a7d4f6f35
+  original:
+    hackage: hoauth2-1.16.0
 snapshots:
 - completed:
     size: 523700
