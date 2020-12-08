@@ -5,12 +5,12 @@
 
 packages:
 - completed:
-    hackage: jsonpath-0.1.0.1@sha256:55718ac52b25cd8ce80fbdc9079a112344f032b056cfaf30737a29b6bd1a5c12,2377
+    hackage: jsonpath-0.2.0.0@sha256:de8eba99a0a970ea1c82b934ccc338f3b5d3fe8273f9196f368ca7bfcf680434,2195
     pantry-tree:
-      size: 1097
-      sha256: 027749c943abaa6a78adc58e5abd4b3f42644c17c5fb7edf816557424a79448b
+      size: 1098
+      sha256: dd8c7029fab3895f60fef8e1fd537c9ebde4a90006cc0f0582ffd9b87955ad9e
   original:
-    hackage: jsonpath-0.1.0.1
+    hackage: jsonpath-0.2.0.0
 - completed:
     hackage: jwt-0.10.0@sha256:d14551b0c357424fb9441ec9a7a9d5b90b13f805fcc9327ba49db548cd64fc29,4180
     pantry-tree:
