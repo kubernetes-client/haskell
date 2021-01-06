@@ -7,7 +7,7 @@ cabal-version: 1.12
 -- hash: 114671d4f1b4c78c3a32487c9b8589f61d433f2a32488b3ed9e4372614f3972b
 
 name:           kubernetes-client
-version:        0.3.2.0
+version:        0.3.2.1
 synopsis:       Client library for Kubernetes
 description:    Client library for interacting with a Kubernetes cluster.
                 .
@@ -62,7 +62,7 @@ library
     , http-client-tls >=0.3
     , jose-jwt >=0.8
     , jsonpath >=0.1 && <0.3
-    , kubernetes-client-core ==0.3.1.0
+    , kubernetes-client-core ==0.3.2.1
     , microlens >=0.4 && <0.5
     , mtl >=2.2
     , oidc-client >=0.4
@@ -107,7 +107,7 @@ test-suite example
     , jose-jwt >=0.8
     , jsonpath >=0.1 && <0.3
     , kubernetes-client
-    , kubernetes-client-core ==0.3.1.0
+    , kubernetes-client-core ==0.3.2.1
     , microlens >=0.4 && <0.5
     , mtl >=2.2
     , oidc-client >=0.4
@@ -160,7 +160,7 @@ test-suite spec
     , jose-jwt >=0.8
     , jsonpath >=0.1 && <0.3
     , kubernetes-client
-    , kubernetes-client-core ==0.3.1.0
+    , kubernetes-client-core ==0.3.2.1
     , microlens >=0.4 && <0.5
     , mtl >=2.2
     , oidc-client >=0.4
