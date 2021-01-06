@@ -220,6 +220,8 @@ data MimeJsonPatchjson = MimeJsonPatchjson deriving (P.Typeable)
 -- | @application/json-patch+json@
 instance MimeType MimeJsonPatchjson where
   mimeType _ = Just $ P.fromString "application/json-patch+json"
+instance A.ToJSON a => MimeRender MimeJsonPatchjson a where mimeRender _ = A.encode
+instance A.FromJSON a => MimeUnrender MimeJsonPatchjson a where mimeUnrender _ = A.eitherDecode
 -- instance MimeRender MimeJsonPatchjson T.Text where mimeRender _ = undefined
 -- instance MimeUnrender MimeJsonPatchjson T.Text where mimeUnrender _ = undefined
 
@@ -242,6 +244,8 @@ data MimeMergePatchjson = MimeMergePatchjson deriving (P.Typeable)
 -- | @application/merge-patch+json@
 instance MimeType MimeMergePatchjson where
   mimeType _ = Just $ P.fromString "application/merge-patch+json"
+instance A.ToJSON a => MimeRender MimeMergePatchjson a where mimeRender _ = A.encode
+instance A.FromJSON a => MimeUnrender MimeMergePatchjson a where mimeUnrender _ = A.eitherDecode
 -- instance MimeRender MimeMergePatchjson T.Text where mimeRender _ = undefined
 -- instance MimeUnrender MimeMergePatchjson T.Text where mimeUnrender _ = undefined
 
@@ -252,6 +256,8 @@ data MimeStrategicMergePatchjson = MimeStrategicMergePatchjson deriving (P.Typea
 -- | @application/strategic-merge-patch+json@
 instance MimeType MimeStrategicMergePatchjson where
   mimeType _ = Just $ P.fromString "application/strategic-merge-patch+json"
+instance A.ToJSON a => MimeRender MimeStrategicMergePatchjson a where mimeRender _ = A.encode
+instance A.FromJSON a => MimeUnrender MimeStrategicMergePatchjson a where mimeUnrender _ = A.eitherDecode
 -- instance MimeRender MimeStrategicMergePatchjson T.Text where mimeRender _ = undefined
 -- instance MimeUnrender MimeStrategicMergePatchjson T.Text where mimeUnrender _ = undefined
 
