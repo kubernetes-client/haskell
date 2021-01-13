@@ -4,7 +4,7 @@ cabal-version: 1.12
 --
 -- see: https://github.com/sol/hpack
 --
--- hash: 114671d4f1b4c78c3a32487c9b8589f61d433f2a32488b3ed9e4372614f3972b
+-- hash: 97ce2006e2052045ec904ed0fde27fa643abcf33e85610d14660867f4652d001
 
 name:           kubernetes-client
 version:        0.3.2.1
