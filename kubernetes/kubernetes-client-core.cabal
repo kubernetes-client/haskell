@@ -1,5 +1,5 @@
 name:           kubernetes-client-core
-version:        0.3.2.1
+version:        0.4.0.0
 synopsis:       Auto-generated kubernetes-client-core API Client
 description:    .
                 Client library for calling the Kubernetes API based on http-client.
@@ -8,7 +8,7 @@ description:    .
                 .
                 base path: http://localhost
                 .
-                Kubernetes API version: release-1.16
+                Kubernetes API version: release-1.20
                 .
                 OpenAPI version: 3.0.1
                 .
@@ -76,10 +76,6 @@ library
       Kubernetes.OpenAPI.API.Apis
       Kubernetes.OpenAPI.API.Apps
       Kubernetes.OpenAPI.API.AppsV1
-      Kubernetes.OpenAPI.API.AppsV1beta1
-      Kubernetes.OpenAPI.API.AppsV1beta2
-      Kubernetes.OpenAPI.API.Auditregistration
-      Kubernetes.OpenAPI.API.AuditregistrationV1alpha1
       Kubernetes.OpenAPI.API.Authentication
       Kubernetes.OpenAPI.API.AuthenticationV1
       Kubernetes.OpenAPI.API.AuthenticationV1beta1
@@ -95,6 +91,7 @@ library
       Kubernetes.OpenAPI.API.BatchV1beta1
       Kubernetes.OpenAPI.API.BatchV2alpha1
       Kubernetes.OpenAPI.API.Certificates
+      Kubernetes.OpenAPI.API.CertificatesV1
       Kubernetes.OpenAPI.API.CertificatesV1beta1
       Kubernetes.OpenAPI.API.Coordination
       Kubernetes.OpenAPI.API.CoordinationV1
@@ -103,18 +100,26 @@ library
       Kubernetes.OpenAPI.API.CoreV1
       Kubernetes.OpenAPI.API.CustomObjects
       Kubernetes.OpenAPI.API.Discovery
-      Kubernetes.OpenAPI.API.DiscoveryV1alpha1
+      Kubernetes.OpenAPI.API.DiscoveryV1beta1
       Kubernetes.OpenAPI.API.Events
+      Kubernetes.OpenAPI.API.EventsV1
       Kubernetes.OpenAPI.API.EventsV1beta1
       Kubernetes.OpenAPI.API.Extensions
       Kubernetes.OpenAPI.API.ExtensionsV1beta1
+      Kubernetes.OpenAPI.API.FlowcontrolApiserver
+      Kubernetes.OpenAPI.API.FlowcontrolApiserverV1alpha1
+      Kubernetes.OpenAPI.API.FlowcontrolApiserverV1beta1
+      Kubernetes.OpenAPI.API.InternalApiserver
+      Kubernetes.OpenAPI.API.InternalApiserverV1alpha1
       Kubernetes.OpenAPI.API.Logs
       Kubernetes.OpenAPI.API.Networking
       Kubernetes.OpenAPI.API.NetworkingV1
       Kubernetes.OpenAPI.API.NetworkingV1beta1
       Kubernetes.OpenAPI.API.Node
+      Kubernetes.OpenAPI.API.NodeV1
       Kubernetes.OpenAPI.API.NodeV1alpha1
       Kubernetes.OpenAPI.API.NodeV1beta1
+      Kubernetes.OpenAPI.API.Openid
       Kubernetes.OpenAPI.API.Policy
       Kubernetes.OpenAPI.API.PolicyV1beta1
       Kubernetes.OpenAPI.API.RbacAuthorization
@@ -125,13 +130,12 @@ library
       Kubernetes.OpenAPI.API.SchedulingV1
       Kubernetes.OpenAPI.API.SchedulingV1alpha1
       Kubernetes.OpenAPI.API.SchedulingV1beta1
-      Kubernetes.OpenAPI.API.Settings
-      Kubernetes.OpenAPI.API.SettingsV1alpha1
       Kubernetes.OpenAPI.API.Storage
       Kubernetes.OpenAPI.API.StorageV1
       Kubernetes.OpenAPI.API.StorageV1alpha1
       Kubernetes.OpenAPI.API.StorageV1beta1
       Kubernetes.OpenAPI.API.Version
+      Kubernetes.OpenAPI.API.WellKnown
       Kubernetes.OpenAPI.Client
       Kubernetes.OpenAPI.Core
       Kubernetes.OpenAPI.Logging
