@@ -34,7 +34,7 @@ main = do
     <> "\nStatus Code: " <> show (responseStatus deleteNamespaceResponse)
     <> "\nBody: " <> show (responseBody deleteNamespaceResponse)
     else return ()
-  putStrLn "Clenaup complete!"
+  putStrLn "Cleanup complete!"
 
 testDeployment :: V1Deployment
 testDeployment =
