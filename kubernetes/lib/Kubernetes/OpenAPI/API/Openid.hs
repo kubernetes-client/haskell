@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getServiceAccountIssuerOpenIDKeyset 
+getServiceAccountIssuerOpenIDKeyset
   :: KubernetesRequest GetServiceAccountIssuerOpenIDKeyset MimeNoContent Text MimeJwkSetjson
 getServiceAccountIssuerOpenIDKeyset =
   _mkRequest "GET" ["/openid/v1/jwks/"]

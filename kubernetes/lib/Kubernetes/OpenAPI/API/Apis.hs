@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIVersions 
+getAPIVersions
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIVersions MimeNoContent V1APIGroupList accept
 getAPIVersions  _ =

@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createMutatingWebhookConfiguration 
+createMutatingWebhookConfiguration
   :: (Consumes CreateMutatingWebhookConfiguration contentType, MimeRender contentType V1MutatingWebhookConfiguration)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -93,7 +93,7 @@ instance HasOptionalParam CreateMutatingWebhookConfiguration DryRun where
 instance HasOptionalParam CreateMutatingWebhookConfiguration FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateMutatingWebhookConfiguration mtype
 
@@ -113,7 +113,7 @@ instance Produces CreateMutatingWebhookConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createValidatingWebhookConfiguration 
+createValidatingWebhookConfiguration
   :: (Consumes CreateValidatingWebhookConfiguration contentType, MimeRender contentType V1ValidatingWebhookConfiguration)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -141,7 +141,7 @@ instance HasOptionalParam CreateValidatingWebhookConfiguration DryRun where
 instance HasOptionalParam CreateValidatingWebhookConfiguration FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateValidatingWebhookConfiguration mtype
 
@@ -161,7 +161,7 @@ instance Produces CreateValidatingWebhookConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionMutatingWebhookConfiguration 
+deleteCollectionMutatingWebhookConfiguration
   :: (Consumes DeleteCollectionMutatingWebhookConfiguration contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -232,7 +232,7 @@ instance HasOptionalParam DeleteCollectionMutatingWebhookConfiguration ResourceV
 instance HasOptionalParam DeleteCollectionMutatingWebhookConfiguration TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionMutatingWebhookConfiguration mtype
 
@@ -252,7 +252,7 @@ instance Produces DeleteCollectionMutatingWebhookConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionValidatingWebhookConfiguration 
+deleteCollectionValidatingWebhookConfiguration
   :: (Consumes DeleteCollectionValidatingWebhookConfiguration contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -323,7 +323,7 @@ instance HasOptionalParam DeleteCollectionValidatingWebhookConfiguration Resourc
 instance HasOptionalParam DeleteCollectionValidatingWebhookConfiguration TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionValidatingWebhookConfiguration mtype
 
@@ -343,7 +343,7 @@ instance Produces DeleteCollectionValidatingWebhookConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteMutatingWebhookConfiguration 
+deleteMutatingWebhookConfiguration
   :: (Consumes DeleteMutatingWebhookConfiguration contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -380,7 +380,7 @@ instance HasOptionalParam DeleteMutatingWebhookConfiguration OrphanDependents wh
 instance HasOptionalParam DeleteMutatingWebhookConfiguration PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteMutatingWebhookConfiguration mtype
 
@@ -400,7 +400,7 @@ instance Produces DeleteMutatingWebhookConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteValidatingWebhookConfiguration 
+deleteValidatingWebhookConfiguration
   :: (Consumes DeleteValidatingWebhookConfiguration contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -437,7 +437,7 @@ instance HasOptionalParam DeleteValidatingWebhookConfiguration OrphanDependents 
 instance HasOptionalParam DeleteValidatingWebhookConfiguration PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteValidatingWebhookConfiguration mtype
 
@@ -457,7 +457,7 @@ instance Produces DeleteValidatingWebhookConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -481,7 +481,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listMutatingWebhookConfiguration 
+listMutatingWebhookConfiguration
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListMutatingWebhookConfiguration MimeNoContent V1MutatingWebhookConfigurationList accept
 listMutatingWebhookConfiguration  _ =
@@ -559,7 +559,7 @@ instance Produces ListMutatingWebhookConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listValidatingWebhookConfiguration 
+listValidatingWebhookConfiguration
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListValidatingWebhookConfiguration MimeNoContent V1ValidatingWebhookConfigurationList accept
 listValidatingWebhookConfiguration  _ =
@@ -637,7 +637,7 @@ instance Produces ListValidatingWebhookConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchMutatingWebhookConfiguration 
+patchMutatingWebhookConfiguration
   :: (Consumes PatchMutatingWebhookConfiguration contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -697,7 +697,7 @@ instance Produces PatchMutatingWebhookConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchValidatingWebhookConfiguration 
+patchValidatingWebhookConfiguration
   :: (Consumes PatchValidatingWebhookConfiguration contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -757,7 +757,7 @@ instance Produces PatchValidatingWebhookConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readMutatingWebhookConfiguration 
+readMutatingWebhookConfiguration
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the MutatingWebhookConfiguration
   -> KubernetesRequest ReadMutatingWebhookConfiguration MimeNoContent V1MutatingWebhookConfiguration accept
@@ -797,7 +797,7 @@ instance Produces ReadMutatingWebhookConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readValidatingWebhookConfiguration 
+readValidatingWebhookConfiguration
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the ValidatingWebhookConfiguration
   -> KubernetesRequest ReadValidatingWebhookConfiguration MimeNoContent V1ValidatingWebhookConfiguration accept
@@ -837,7 +837,7 @@ instance Produces ReadValidatingWebhookConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceMutatingWebhookConfiguration 
+replaceMutatingWebhookConfiguration
   :: (Consumes ReplaceMutatingWebhookConfiguration contentType, MimeRender contentType V1MutatingWebhookConfiguration)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -866,7 +866,7 @@ instance HasOptionalParam ReplaceMutatingWebhookConfiguration DryRun where
 instance HasOptionalParam ReplaceMutatingWebhookConfiguration FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceMutatingWebhookConfiguration mtype
 
@@ -886,7 +886,7 @@ instance Produces ReplaceMutatingWebhookConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceValidatingWebhookConfiguration 
+replaceValidatingWebhookConfiguration
   :: (Consumes ReplaceValidatingWebhookConfiguration contentType, MimeRender contentType V1ValidatingWebhookConfiguration)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -915,7 +915,7 @@ instance HasOptionalParam ReplaceValidatingWebhookConfiguration DryRun where
 instance HasOptionalParam ReplaceValidatingWebhookConfiguration FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceValidatingWebhookConfiguration mtype
 

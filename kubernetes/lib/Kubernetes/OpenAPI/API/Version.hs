@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getCode 
+getCode
   :: KubernetesRequest GetCode MimeNoContent VersionInfo MimeJSON
 getCode =
   _mkRequest "GET" ["/version/"]

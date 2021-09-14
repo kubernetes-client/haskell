@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedControllerRevision 
+createNamespacedControllerRevision
   :: (Consumes CreateNamespacedControllerRevision contentType, MimeRender contentType V1ControllerRevision)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -94,7 +94,7 @@ instance HasOptionalParam CreateNamespacedControllerRevision DryRun where
 instance HasOptionalParam CreateNamespacedControllerRevision FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedControllerRevision mtype
 
@@ -114,7 +114,7 @@ instance Produces CreateNamespacedControllerRevision MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedDaemonSet 
+createNamespacedDaemonSet
   :: (Consumes CreateNamespacedDaemonSet contentType, MimeRender contentType V1DaemonSet)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -143,7 +143,7 @@ instance HasOptionalParam CreateNamespacedDaemonSet DryRun where
 instance HasOptionalParam CreateNamespacedDaemonSet FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedDaemonSet mtype
 
@@ -163,7 +163,7 @@ instance Produces CreateNamespacedDaemonSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedDeployment 
+createNamespacedDeployment
   :: (Consumes CreateNamespacedDeployment contentType, MimeRender contentType V1Deployment)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -192,7 +192,7 @@ instance HasOptionalParam CreateNamespacedDeployment DryRun where
 instance HasOptionalParam CreateNamespacedDeployment FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedDeployment mtype
 
@@ -212,7 +212,7 @@ instance Produces CreateNamespacedDeployment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedReplicaSet 
+createNamespacedReplicaSet
   :: (Consumes CreateNamespacedReplicaSet contentType, MimeRender contentType V1ReplicaSet)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -241,7 +241,7 @@ instance HasOptionalParam CreateNamespacedReplicaSet DryRun where
 instance HasOptionalParam CreateNamespacedReplicaSet FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedReplicaSet mtype
 
@@ -261,7 +261,7 @@ instance Produces CreateNamespacedReplicaSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedStatefulSet 
+createNamespacedStatefulSet
   :: (Consumes CreateNamespacedStatefulSet contentType, MimeRender contentType V1StatefulSet)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -290,7 +290,7 @@ instance HasOptionalParam CreateNamespacedStatefulSet DryRun where
 instance HasOptionalParam CreateNamespacedStatefulSet FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedStatefulSet mtype
 
@@ -310,7 +310,7 @@ instance Produces CreateNamespacedStatefulSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedControllerRevision 
+deleteCollectionNamespacedControllerRevision
   :: (Consumes DeleteCollectionNamespacedControllerRevision contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -382,7 +382,7 @@ instance HasOptionalParam DeleteCollectionNamespacedControllerRevision ResourceV
 instance HasOptionalParam DeleteCollectionNamespacedControllerRevision TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedControllerRevision mtype
 
@@ -402,7 +402,7 @@ instance Produces DeleteCollectionNamespacedControllerRevision MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedDaemonSet 
+deleteCollectionNamespacedDaemonSet
   :: (Consumes DeleteCollectionNamespacedDaemonSet contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -474,7 +474,7 @@ instance HasOptionalParam DeleteCollectionNamespacedDaemonSet ResourceVersionMat
 instance HasOptionalParam DeleteCollectionNamespacedDaemonSet TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedDaemonSet mtype
 
@@ -494,7 +494,7 @@ instance Produces DeleteCollectionNamespacedDaemonSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedDeployment 
+deleteCollectionNamespacedDeployment
   :: (Consumes DeleteCollectionNamespacedDeployment contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -566,7 +566,7 @@ instance HasOptionalParam DeleteCollectionNamespacedDeployment ResourceVersionMa
 instance HasOptionalParam DeleteCollectionNamespacedDeployment TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedDeployment mtype
 
@@ -586,7 +586,7 @@ instance Produces DeleteCollectionNamespacedDeployment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedReplicaSet 
+deleteCollectionNamespacedReplicaSet
   :: (Consumes DeleteCollectionNamespacedReplicaSet contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -658,7 +658,7 @@ instance HasOptionalParam DeleteCollectionNamespacedReplicaSet ResourceVersionMa
 instance HasOptionalParam DeleteCollectionNamespacedReplicaSet TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedReplicaSet mtype
 
@@ -678,7 +678,7 @@ instance Produces DeleteCollectionNamespacedReplicaSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedStatefulSet 
+deleteCollectionNamespacedStatefulSet
   :: (Consumes DeleteCollectionNamespacedStatefulSet contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -750,7 +750,7 @@ instance HasOptionalParam DeleteCollectionNamespacedStatefulSet ResourceVersionM
 instance HasOptionalParam DeleteCollectionNamespacedStatefulSet TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedStatefulSet mtype
 
@@ -770,7 +770,7 @@ instance Produces DeleteCollectionNamespacedStatefulSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedControllerRevision 
+deleteNamespacedControllerRevision
   :: (Consumes DeleteNamespacedControllerRevision contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -808,7 +808,7 @@ instance HasOptionalParam DeleteNamespacedControllerRevision OrphanDependents wh
 instance HasOptionalParam DeleteNamespacedControllerRevision PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedControllerRevision mtype
 
@@ -828,7 +828,7 @@ instance Produces DeleteNamespacedControllerRevision MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedDaemonSet 
+deleteNamespacedDaemonSet
   :: (Consumes DeleteNamespacedDaemonSet contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -866,7 +866,7 @@ instance HasOptionalParam DeleteNamespacedDaemonSet OrphanDependents where
 instance HasOptionalParam DeleteNamespacedDaemonSet PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedDaemonSet mtype
 
@@ -886,7 +886,7 @@ instance Produces DeleteNamespacedDaemonSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedDeployment 
+deleteNamespacedDeployment
   :: (Consumes DeleteNamespacedDeployment contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -924,7 +924,7 @@ instance HasOptionalParam DeleteNamespacedDeployment OrphanDependents where
 instance HasOptionalParam DeleteNamespacedDeployment PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedDeployment mtype
 
@@ -944,7 +944,7 @@ instance Produces DeleteNamespacedDeployment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedReplicaSet 
+deleteNamespacedReplicaSet
   :: (Consumes DeleteNamespacedReplicaSet contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -982,7 +982,7 @@ instance HasOptionalParam DeleteNamespacedReplicaSet OrphanDependents where
 instance HasOptionalParam DeleteNamespacedReplicaSet PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedReplicaSet mtype
 
@@ -1002,7 +1002,7 @@ instance Produces DeleteNamespacedReplicaSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedStatefulSet 
+deleteNamespacedStatefulSet
   :: (Consumes DeleteNamespacedStatefulSet contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1040,7 +1040,7 @@ instance HasOptionalParam DeleteNamespacedStatefulSet OrphanDependents where
 instance HasOptionalParam DeleteNamespacedStatefulSet PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedStatefulSet mtype
 
@@ -1060,7 +1060,7 @@ instance Produces DeleteNamespacedStatefulSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -1084,7 +1084,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listControllerRevisionForAllNamespaces 
+listControllerRevisionForAllNamespaces
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListControllerRevisionForAllNamespaces MimeNoContent V1ControllerRevisionList accept
 listControllerRevisionForAllNamespaces  _ =
@@ -1162,7 +1162,7 @@ instance Produces ListControllerRevisionForAllNamespaces MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listDaemonSetForAllNamespaces 
+listDaemonSetForAllNamespaces
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListDaemonSetForAllNamespaces MimeNoContent V1DaemonSetList accept
 listDaemonSetForAllNamespaces  _ =
@@ -1240,7 +1240,7 @@ instance Produces ListDaemonSetForAllNamespaces MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listDeploymentForAllNamespaces 
+listDeploymentForAllNamespaces
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListDeploymentForAllNamespaces MimeNoContent V1DeploymentList accept
 listDeploymentForAllNamespaces  _ =
@@ -1318,7 +1318,7 @@ instance Produces ListDeploymentForAllNamespaces MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedControllerRevision 
+listNamespacedControllerRevision
   :: Accept accept -- ^ request accept ('MimeType')
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
   -> KubernetesRequest ListNamespacedControllerRevision MimeNoContent V1ControllerRevisionList accept
@@ -1397,7 +1397,7 @@ instance Produces ListNamespacedControllerRevision MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedDaemonSet 
+listNamespacedDaemonSet
   :: Accept accept -- ^ request accept ('MimeType')
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
   -> KubernetesRequest ListNamespacedDaemonSet MimeNoContent V1DaemonSetList accept
@@ -1476,7 +1476,7 @@ instance Produces ListNamespacedDaemonSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedDeployment 
+listNamespacedDeployment
   :: Accept accept -- ^ request accept ('MimeType')
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
   -> KubernetesRequest ListNamespacedDeployment MimeNoContent V1DeploymentList accept
@@ -1555,7 +1555,7 @@ instance Produces ListNamespacedDeployment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedReplicaSet 
+listNamespacedReplicaSet
   :: Accept accept -- ^ request accept ('MimeType')
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
   -> KubernetesRequest ListNamespacedReplicaSet MimeNoContent V1ReplicaSetList accept
@@ -1634,7 +1634,7 @@ instance Produces ListNamespacedReplicaSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedStatefulSet 
+listNamespacedStatefulSet
   :: Accept accept -- ^ request accept ('MimeType')
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
   -> KubernetesRequest ListNamespacedStatefulSet MimeNoContent V1StatefulSetList accept
@@ -1713,7 +1713,7 @@ instance Produces ListNamespacedStatefulSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listReplicaSetForAllNamespaces 
+listReplicaSetForAllNamespaces
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListReplicaSetForAllNamespaces MimeNoContent V1ReplicaSetList accept
 listReplicaSetForAllNamespaces  _ =
@@ -1791,7 +1791,7 @@ instance Produces ListReplicaSetForAllNamespaces MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listStatefulSetForAllNamespaces 
+listStatefulSetForAllNamespaces
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListStatefulSetForAllNamespaces MimeNoContent V1StatefulSetList accept
 listStatefulSetForAllNamespaces  _ =
@@ -1869,7 +1869,7 @@ instance Produces ListStatefulSetForAllNamespaces MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedControllerRevision 
+patchNamespacedControllerRevision
   :: (Consumes PatchNamespacedControllerRevision contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1930,7 +1930,7 @@ instance Produces PatchNamespacedControllerRevision MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedDaemonSet 
+patchNamespacedDaemonSet
   :: (Consumes PatchNamespacedDaemonSet contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1991,7 +1991,7 @@ instance Produces PatchNamespacedDaemonSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedDaemonSetStatus 
+patchNamespacedDaemonSetStatus
   :: (Consumes PatchNamespacedDaemonSetStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -2052,7 +2052,7 @@ instance Produces PatchNamespacedDaemonSetStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedDeployment 
+patchNamespacedDeployment
   :: (Consumes PatchNamespacedDeployment contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -2113,7 +2113,7 @@ instance Produces PatchNamespacedDeployment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedDeploymentScale 
+patchNamespacedDeploymentScale
   :: (Consumes PatchNamespacedDeploymentScale contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -2174,7 +2174,7 @@ instance Produces PatchNamespacedDeploymentScale MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedDeploymentStatus 
+patchNamespacedDeploymentStatus
   :: (Consumes PatchNamespacedDeploymentStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -2235,7 +2235,7 @@ instance Produces PatchNamespacedDeploymentStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedReplicaSet 
+patchNamespacedReplicaSet
   :: (Consumes PatchNamespacedReplicaSet contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -2296,7 +2296,7 @@ instance Produces PatchNamespacedReplicaSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedReplicaSetScale 
+patchNamespacedReplicaSetScale
   :: (Consumes PatchNamespacedReplicaSetScale contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -2357,7 +2357,7 @@ instance Produces PatchNamespacedReplicaSetScale MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedReplicaSetStatus 
+patchNamespacedReplicaSetStatus
   :: (Consumes PatchNamespacedReplicaSetStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -2418,7 +2418,7 @@ instance Produces PatchNamespacedReplicaSetStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedStatefulSet 
+patchNamespacedStatefulSet
   :: (Consumes PatchNamespacedStatefulSet contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -2479,7 +2479,7 @@ instance Produces PatchNamespacedStatefulSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedStatefulSetScale 
+patchNamespacedStatefulSetScale
   :: (Consumes PatchNamespacedStatefulSetScale contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -2540,7 +2540,7 @@ instance Produces PatchNamespacedStatefulSetScale MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedStatefulSetStatus 
+patchNamespacedStatefulSetStatus
   :: (Consumes PatchNamespacedStatefulSetStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -2601,7 +2601,7 @@ instance Produces PatchNamespacedStatefulSetStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedControllerRevision 
+readNamespacedControllerRevision
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the ControllerRevision
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -2642,7 +2642,7 @@ instance Produces ReadNamespacedControllerRevision MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedDaemonSet 
+readNamespacedDaemonSet
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the DaemonSet
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -2683,7 +2683,7 @@ instance Produces ReadNamespacedDaemonSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedDaemonSetStatus 
+readNamespacedDaemonSetStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the DaemonSet
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -2714,7 +2714,7 @@ instance Produces ReadNamespacedDaemonSetStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedDeployment 
+readNamespacedDeployment
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the Deployment
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -2755,7 +2755,7 @@ instance Produces ReadNamespacedDeployment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedDeploymentScale 
+readNamespacedDeploymentScale
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the Scale
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -2786,7 +2786,7 @@ instance Produces ReadNamespacedDeploymentScale MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedDeploymentStatus 
+readNamespacedDeploymentStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the Deployment
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -2817,7 +2817,7 @@ instance Produces ReadNamespacedDeploymentStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedReplicaSet 
+readNamespacedReplicaSet
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the ReplicaSet
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -2858,7 +2858,7 @@ instance Produces ReadNamespacedReplicaSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedReplicaSetScale 
+readNamespacedReplicaSetScale
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the Scale
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -2889,7 +2889,7 @@ instance Produces ReadNamespacedReplicaSetScale MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedReplicaSetStatus 
+readNamespacedReplicaSetStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the ReplicaSet
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -2920,7 +2920,7 @@ instance Produces ReadNamespacedReplicaSetStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedStatefulSet 
+readNamespacedStatefulSet
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the StatefulSet
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -2961,7 +2961,7 @@ instance Produces ReadNamespacedStatefulSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedStatefulSetScale 
+readNamespacedStatefulSetScale
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the Scale
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -2992,7 +2992,7 @@ instance Produces ReadNamespacedStatefulSetScale MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedStatefulSetStatus 
+readNamespacedStatefulSetStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the StatefulSet
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -3023,7 +3023,7 @@ instance Produces ReadNamespacedStatefulSetStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedControllerRevision 
+replaceNamespacedControllerRevision
   :: (Consumes ReplaceNamespacedControllerRevision contentType, MimeRender contentType V1ControllerRevision)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -3053,7 +3053,7 @@ instance HasOptionalParam ReplaceNamespacedControllerRevision DryRun where
 instance HasOptionalParam ReplaceNamespacedControllerRevision FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedControllerRevision mtype
 
@@ -3073,7 +3073,7 @@ instance Produces ReplaceNamespacedControllerRevision MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedDaemonSet 
+replaceNamespacedDaemonSet
   :: (Consumes ReplaceNamespacedDaemonSet contentType, MimeRender contentType V1DaemonSet)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -3103,7 +3103,7 @@ instance HasOptionalParam ReplaceNamespacedDaemonSet DryRun where
 instance HasOptionalParam ReplaceNamespacedDaemonSet FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedDaemonSet mtype
 
@@ -3123,7 +3123,7 @@ instance Produces ReplaceNamespacedDaemonSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedDaemonSetStatus 
+replaceNamespacedDaemonSetStatus
   :: (Consumes ReplaceNamespacedDaemonSetStatus contentType, MimeRender contentType V1DaemonSet)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -3153,7 +3153,7 @@ instance HasOptionalParam ReplaceNamespacedDaemonSetStatus DryRun where
 instance HasOptionalParam ReplaceNamespacedDaemonSetStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedDaemonSetStatus mtype
 
@@ -3173,7 +3173,7 @@ instance Produces ReplaceNamespacedDaemonSetStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedDeployment 
+replaceNamespacedDeployment
   :: (Consumes ReplaceNamespacedDeployment contentType, MimeRender contentType V1Deployment)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -3203,7 +3203,7 @@ instance HasOptionalParam ReplaceNamespacedDeployment DryRun where
 instance HasOptionalParam ReplaceNamespacedDeployment FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedDeployment mtype
 
@@ -3223,7 +3223,7 @@ instance Produces ReplaceNamespacedDeployment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedDeploymentScale 
+replaceNamespacedDeploymentScale
   :: (Consumes ReplaceNamespacedDeploymentScale contentType, MimeRender contentType V1Scale)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -3253,7 +3253,7 @@ instance HasOptionalParam ReplaceNamespacedDeploymentScale DryRun where
 instance HasOptionalParam ReplaceNamespacedDeploymentScale FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedDeploymentScale mtype
 
@@ -3273,7 +3273,7 @@ instance Produces ReplaceNamespacedDeploymentScale MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedDeploymentStatus 
+replaceNamespacedDeploymentStatus
   :: (Consumes ReplaceNamespacedDeploymentStatus contentType, MimeRender contentType V1Deployment)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -3303,7 +3303,7 @@ instance HasOptionalParam ReplaceNamespacedDeploymentStatus DryRun where
 instance HasOptionalParam ReplaceNamespacedDeploymentStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedDeploymentStatus mtype
 
@@ -3323,7 +3323,7 @@ instance Produces ReplaceNamespacedDeploymentStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedReplicaSet 
+replaceNamespacedReplicaSet
   :: (Consumes ReplaceNamespacedReplicaSet contentType, MimeRender contentType V1ReplicaSet)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -3353,7 +3353,7 @@ instance HasOptionalParam ReplaceNamespacedReplicaSet DryRun where
 instance HasOptionalParam ReplaceNamespacedReplicaSet FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedReplicaSet mtype
 
@@ -3373,7 +3373,7 @@ instance Produces ReplaceNamespacedReplicaSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedReplicaSetScale 
+replaceNamespacedReplicaSetScale
   :: (Consumes ReplaceNamespacedReplicaSetScale contentType, MimeRender contentType V1Scale)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -3403,7 +3403,7 @@ instance HasOptionalParam ReplaceNamespacedReplicaSetScale DryRun where
 instance HasOptionalParam ReplaceNamespacedReplicaSetScale FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedReplicaSetScale mtype
 
@@ -3423,7 +3423,7 @@ instance Produces ReplaceNamespacedReplicaSetScale MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedReplicaSetStatus 
+replaceNamespacedReplicaSetStatus
   :: (Consumes ReplaceNamespacedReplicaSetStatus contentType, MimeRender contentType V1ReplicaSet)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -3453,7 +3453,7 @@ instance HasOptionalParam ReplaceNamespacedReplicaSetStatus DryRun where
 instance HasOptionalParam ReplaceNamespacedReplicaSetStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedReplicaSetStatus mtype
 
@@ -3473,7 +3473,7 @@ instance Produces ReplaceNamespacedReplicaSetStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedStatefulSet 
+replaceNamespacedStatefulSet
   :: (Consumes ReplaceNamespacedStatefulSet contentType, MimeRender contentType V1StatefulSet)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -3503,7 +3503,7 @@ instance HasOptionalParam ReplaceNamespacedStatefulSet DryRun where
 instance HasOptionalParam ReplaceNamespacedStatefulSet FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedStatefulSet mtype
 
@@ -3523,7 +3523,7 @@ instance Produces ReplaceNamespacedStatefulSet MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedStatefulSetScale 
+replaceNamespacedStatefulSetScale
   :: (Consumes ReplaceNamespacedStatefulSetScale contentType, MimeRender contentType V1Scale)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -3553,7 +3553,7 @@ instance HasOptionalParam ReplaceNamespacedStatefulSetScale DryRun where
 instance HasOptionalParam ReplaceNamespacedStatefulSetScale FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedStatefulSetScale mtype
 
@@ -3573,7 +3573,7 @@ instance Produces ReplaceNamespacedStatefulSetScale MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedStatefulSetStatus 
+replaceNamespacedStatefulSetStatus
   :: (Consumes ReplaceNamespacedStatefulSetStatus contentType, MimeRender contentType V1StatefulSet)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -3603,7 +3603,7 @@ instance HasOptionalParam ReplaceNamespacedStatefulSetStatus DryRun where
 instance HasOptionalParam ReplaceNamespacedStatefulSetStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedStatefulSetStatus mtype
 

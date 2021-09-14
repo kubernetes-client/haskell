@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedCronJob 
+createNamespacedCronJob
   :: (Consumes CreateNamespacedCronJob contentType, MimeRender contentType V1beta1CronJob)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -94,7 +94,7 @@ instance HasOptionalParam CreateNamespacedCronJob DryRun where
 instance HasOptionalParam CreateNamespacedCronJob FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedCronJob mtype
 
@@ -114,7 +114,7 @@ instance Produces CreateNamespacedCronJob MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedCronJob 
+deleteCollectionNamespacedCronJob
   :: (Consumes DeleteCollectionNamespacedCronJob contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -186,7 +186,7 @@ instance HasOptionalParam DeleteCollectionNamespacedCronJob ResourceVersionMatch
 instance HasOptionalParam DeleteCollectionNamespacedCronJob TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedCronJob mtype
 
@@ -206,7 +206,7 @@ instance Produces DeleteCollectionNamespacedCronJob MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedCronJob 
+deleteNamespacedCronJob
   :: (Consumes DeleteNamespacedCronJob contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -244,7 +244,7 @@ instance HasOptionalParam DeleteNamespacedCronJob OrphanDependents where
 instance HasOptionalParam DeleteNamespacedCronJob PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedCronJob mtype
 
@@ -264,7 +264,7 @@ instance Produces DeleteNamespacedCronJob MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -288,7 +288,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listCronJobForAllNamespaces 
+listCronJobForAllNamespaces
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListCronJobForAllNamespaces MimeNoContent V1beta1CronJobList accept
 listCronJobForAllNamespaces  _ =
@@ -366,7 +366,7 @@ instance Produces ListCronJobForAllNamespaces MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedCronJob 
+listNamespacedCronJob
   :: Accept accept -- ^ request accept ('MimeType')
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
   -> KubernetesRequest ListNamespacedCronJob MimeNoContent V1beta1CronJobList accept
@@ -445,7 +445,7 @@ instance Produces ListNamespacedCronJob MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedCronJob 
+patchNamespacedCronJob
   :: (Consumes PatchNamespacedCronJob contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -506,7 +506,7 @@ instance Produces PatchNamespacedCronJob MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedCronJobStatus 
+patchNamespacedCronJobStatus
   :: (Consumes PatchNamespacedCronJobStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -567,7 +567,7 @@ instance Produces PatchNamespacedCronJobStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedCronJob 
+readNamespacedCronJob
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the CronJob
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -608,7 +608,7 @@ instance Produces ReadNamespacedCronJob MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedCronJobStatus 
+readNamespacedCronJobStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the CronJob
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -639,7 +639,7 @@ instance Produces ReadNamespacedCronJobStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedCronJob 
+replaceNamespacedCronJob
   :: (Consumes ReplaceNamespacedCronJob contentType, MimeRender contentType V1beta1CronJob)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -669,7 +669,7 @@ instance HasOptionalParam ReplaceNamespacedCronJob DryRun where
 instance HasOptionalParam ReplaceNamespacedCronJob FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedCronJob mtype
 
@@ -689,7 +689,7 @@ instance Produces ReplaceNamespacedCronJob MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedCronJobStatus 
+replaceNamespacedCronJobStatus
   :: (Consumes ReplaceNamespacedCronJobStatus contentType, MimeRender contentType V1beta1CronJob)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -719,7 +719,7 @@ instance HasOptionalParam ReplaceNamespacedCronJobStatus DryRun where
 instance HasOptionalParam ReplaceNamespacedCronJobStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedCronJobStatus mtype
 

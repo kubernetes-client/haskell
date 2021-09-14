@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createStorageVersion 
+createStorageVersion
   :: (Consumes CreateStorageVersion contentType, MimeRender contentType V1alpha1StorageVersion)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -93,7 +93,7 @@ instance HasOptionalParam CreateStorageVersion DryRun where
 instance HasOptionalParam CreateStorageVersion FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateStorageVersion mtype
 
@@ -113,7 +113,7 @@ instance Produces CreateStorageVersion MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionStorageVersion 
+deleteCollectionStorageVersion
   :: (Consumes DeleteCollectionStorageVersion contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -184,7 +184,7 @@ instance HasOptionalParam DeleteCollectionStorageVersion ResourceVersionMatch wh
 instance HasOptionalParam DeleteCollectionStorageVersion TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionStorageVersion mtype
 
@@ -204,7 +204,7 @@ instance Produces DeleteCollectionStorageVersion MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteStorageVersion 
+deleteStorageVersion
   :: (Consumes DeleteStorageVersion contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -241,7 +241,7 @@ instance HasOptionalParam DeleteStorageVersion OrphanDependents where
 instance HasOptionalParam DeleteStorageVersion PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteStorageVersion mtype
 
@@ -261,7 +261,7 @@ instance Produces DeleteStorageVersion MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -285,7 +285,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listStorageVersion 
+listStorageVersion
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListStorageVersion MimeNoContent V1alpha1StorageVersionList accept
 listStorageVersion  _ =
@@ -363,7 +363,7 @@ instance Produces ListStorageVersion MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchStorageVersion 
+patchStorageVersion
   :: (Consumes PatchStorageVersion contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -423,7 +423,7 @@ instance Produces PatchStorageVersion MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchStorageVersionStatus 
+patchStorageVersionStatus
   :: (Consumes PatchStorageVersionStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -483,7 +483,7 @@ instance Produces PatchStorageVersionStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readStorageVersion 
+readStorageVersion
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the StorageVersion
   -> KubernetesRequest ReadStorageVersion MimeNoContent V1alpha1StorageVersion accept
@@ -523,7 +523,7 @@ instance Produces ReadStorageVersion MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readStorageVersionStatus 
+readStorageVersionStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the StorageVersion
   -> KubernetesRequest ReadStorageVersionStatus MimeNoContent V1alpha1StorageVersion accept
@@ -553,7 +553,7 @@ instance Produces ReadStorageVersionStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceStorageVersion 
+replaceStorageVersion
   :: (Consumes ReplaceStorageVersion contentType, MimeRender contentType V1alpha1StorageVersion)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -582,7 +582,7 @@ instance HasOptionalParam ReplaceStorageVersion DryRun where
 instance HasOptionalParam ReplaceStorageVersion FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceStorageVersion mtype
 
@@ -602,7 +602,7 @@ instance Produces ReplaceStorageVersion MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceStorageVersionStatus 
+replaceStorageVersionStatus
   :: (Consumes ReplaceStorageVersionStatus contentType, MimeRender contentType V1alpha1StorageVersion)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -631,7 +631,7 @@ instance HasOptionalParam ReplaceStorageVersionStatus DryRun where
 instance HasOptionalParam ReplaceStorageVersionStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceStorageVersionStatus mtype
 

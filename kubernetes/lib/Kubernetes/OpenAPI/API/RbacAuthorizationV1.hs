@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createClusterRole 
+createClusterRole
   :: (Consumes CreateClusterRole contentType, MimeRender contentType V1ClusterRole)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -93,7 +93,7 @@ instance HasOptionalParam CreateClusterRole DryRun where
 instance HasOptionalParam CreateClusterRole FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateClusterRole mtype
 
@@ -113,7 +113,7 @@ instance Produces CreateClusterRole MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createClusterRoleBinding 
+createClusterRoleBinding
   :: (Consumes CreateClusterRoleBinding contentType, MimeRender contentType V1ClusterRoleBinding)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -141,7 +141,7 @@ instance HasOptionalParam CreateClusterRoleBinding DryRun where
 instance HasOptionalParam CreateClusterRoleBinding FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateClusterRoleBinding mtype
 
@@ -161,7 +161,7 @@ instance Produces CreateClusterRoleBinding MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedRole 
+createNamespacedRole
   :: (Consumes CreateNamespacedRole contentType, MimeRender contentType V1Role)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -190,7 +190,7 @@ instance HasOptionalParam CreateNamespacedRole DryRun where
 instance HasOptionalParam CreateNamespacedRole FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedRole mtype
 
@@ -210,7 +210,7 @@ instance Produces CreateNamespacedRole MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedRoleBinding 
+createNamespacedRoleBinding
   :: (Consumes CreateNamespacedRoleBinding contentType, MimeRender contentType V1RoleBinding)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -239,7 +239,7 @@ instance HasOptionalParam CreateNamespacedRoleBinding DryRun where
 instance HasOptionalParam CreateNamespacedRoleBinding FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedRoleBinding mtype
 
@@ -259,7 +259,7 @@ instance Produces CreateNamespacedRoleBinding MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteClusterRole 
+deleteClusterRole
   :: (Consumes DeleteClusterRole contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -296,7 +296,7 @@ instance HasOptionalParam DeleteClusterRole OrphanDependents where
 instance HasOptionalParam DeleteClusterRole PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteClusterRole mtype
 
@@ -316,7 +316,7 @@ instance Produces DeleteClusterRole MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteClusterRoleBinding 
+deleteClusterRoleBinding
   :: (Consumes DeleteClusterRoleBinding contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -353,7 +353,7 @@ instance HasOptionalParam DeleteClusterRoleBinding OrphanDependents where
 instance HasOptionalParam DeleteClusterRoleBinding PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteClusterRoleBinding mtype
 
@@ -373,7 +373,7 @@ instance Produces DeleteClusterRoleBinding MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionClusterRole 
+deleteCollectionClusterRole
   :: (Consumes DeleteCollectionClusterRole contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -444,7 +444,7 @@ instance HasOptionalParam DeleteCollectionClusterRole ResourceVersionMatch where
 instance HasOptionalParam DeleteCollectionClusterRole TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionClusterRole mtype
 
@@ -464,7 +464,7 @@ instance Produces DeleteCollectionClusterRole MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionClusterRoleBinding 
+deleteCollectionClusterRoleBinding
   :: (Consumes DeleteCollectionClusterRoleBinding contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -535,7 +535,7 @@ instance HasOptionalParam DeleteCollectionClusterRoleBinding ResourceVersionMatc
 instance HasOptionalParam DeleteCollectionClusterRoleBinding TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionClusterRoleBinding mtype
 
@@ -555,7 +555,7 @@ instance Produces DeleteCollectionClusterRoleBinding MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedRole 
+deleteCollectionNamespacedRole
   :: (Consumes DeleteCollectionNamespacedRole contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -627,7 +627,7 @@ instance HasOptionalParam DeleteCollectionNamespacedRole ResourceVersionMatch wh
 instance HasOptionalParam DeleteCollectionNamespacedRole TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedRole mtype
 
@@ -647,7 +647,7 @@ instance Produces DeleteCollectionNamespacedRole MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedRoleBinding 
+deleteCollectionNamespacedRoleBinding
   :: (Consumes DeleteCollectionNamespacedRoleBinding contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -719,7 +719,7 @@ instance HasOptionalParam DeleteCollectionNamespacedRoleBinding ResourceVersionM
 instance HasOptionalParam DeleteCollectionNamespacedRoleBinding TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedRoleBinding mtype
 
@@ -739,7 +739,7 @@ instance Produces DeleteCollectionNamespacedRoleBinding MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedRole 
+deleteNamespacedRole
   :: (Consumes DeleteNamespacedRole contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -777,7 +777,7 @@ instance HasOptionalParam DeleteNamespacedRole OrphanDependents where
 instance HasOptionalParam DeleteNamespacedRole PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedRole mtype
 
@@ -797,7 +797,7 @@ instance Produces DeleteNamespacedRole MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedRoleBinding 
+deleteNamespacedRoleBinding
   :: (Consumes DeleteNamespacedRoleBinding contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -835,7 +835,7 @@ instance HasOptionalParam DeleteNamespacedRoleBinding OrphanDependents where
 instance HasOptionalParam DeleteNamespacedRoleBinding PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedRoleBinding mtype
 
@@ -855,7 +855,7 @@ instance Produces DeleteNamespacedRoleBinding MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -879,7 +879,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listClusterRole 
+listClusterRole
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListClusterRole MimeNoContent V1ClusterRoleList accept
 listClusterRole  _ =
@@ -957,7 +957,7 @@ instance Produces ListClusterRole MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listClusterRoleBinding 
+listClusterRoleBinding
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListClusterRoleBinding MimeNoContent V1ClusterRoleBindingList accept
 listClusterRoleBinding  _ =
@@ -1035,7 +1035,7 @@ instance Produces ListClusterRoleBinding MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedRole 
+listNamespacedRole
   :: Accept accept -- ^ request accept ('MimeType')
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
   -> KubernetesRequest ListNamespacedRole MimeNoContent V1RoleList accept
@@ -1114,7 +1114,7 @@ instance Produces ListNamespacedRole MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedRoleBinding 
+listNamespacedRoleBinding
   :: Accept accept -- ^ request accept ('MimeType')
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
   -> KubernetesRequest ListNamespacedRoleBinding MimeNoContent V1RoleBindingList accept
@@ -1193,7 +1193,7 @@ instance Produces ListNamespacedRoleBinding MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listRoleBindingForAllNamespaces 
+listRoleBindingForAllNamespaces
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListRoleBindingForAllNamespaces MimeNoContent V1RoleBindingList accept
 listRoleBindingForAllNamespaces  _ =
@@ -1271,7 +1271,7 @@ instance Produces ListRoleBindingForAllNamespaces MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listRoleForAllNamespaces 
+listRoleForAllNamespaces
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListRoleForAllNamespaces MimeNoContent V1RoleList accept
 listRoleForAllNamespaces  _ =
@@ -1349,7 +1349,7 @@ instance Produces ListRoleForAllNamespaces MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchClusterRole 
+patchClusterRole
   :: (Consumes PatchClusterRole contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1409,7 +1409,7 @@ instance Produces PatchClusterRole MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchClusterRoleBinding 
+patchClusterRoleBinding
   :: (Consumes PatchClusterRoleBinding contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1469,7 +1469,7 @@ instance Produces PatchClusterRoleBinding MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedRole 
+patchNamespacedRole
   :: (Consumes PatchNamespacedRole contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1530,7 +1530,7 @@ instance Produces PatchNamespacedRole MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedRoleBinding 
+patchNamespacedRoleBinding
   :: (Consumes PatchNamespacedRoleBinding contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1591,7 +1591,7 @@ instance Produces PatchNamespacedRoleBinding MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readClusterRole 
+readClusterRole
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the ClusterRole
   -> KubernetesRequest ReadClusterRole MimeNoContent V1ClusterRole accept
@@ -1621,7 +1621,7 @@ instance Produces ReadClusterRole MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readClusterRoleBinding 
+readClusterRoleBinding
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the ClusterRoleBinding
   -> KubernetesRequest ReadClusterRoleBinding MimeNoContent V1ClusterRoleBinding accept
@@ -1651,7 +1651,7 @@ instance Produces ReadClusterRoleBinding MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedRole 
+readNamespacedRole
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the Role
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -1682,7 +1682,7 @@ instance Produces ReadNamespacedRole MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedRoleBinding 
+readNamespacedRoleBinding
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the RoleBinding
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -1713,7 +1713,7 @@ instance Produces ReadNamespacedRoleBinding MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceClusterRole 
+replaceClusterRole
   :: (Consumes ReplaceClusterRole contentType, MimeRender contentType V1ClusterRole)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1742,7 +1742,7 @@ instance HasOptionalParam ReplaceClusterRole DryRun where
 instance HasOptionalParam ReplaceClusterRole FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceClusterRole mtype
 
@@ -1762,7 +1762,7 @@ instance Produces ReplaceClusterRole MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceClusterRoleBinding 
+replaceClusterRoleBinding
   :: (Consumes ReplaceClusterRoleBinding contentType, MimeRender contentType V1ClusterRoleBinding)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1791,7 +1791,7 @@ instance HasOptionalParam ReplaceClusterRoleBinding DryRun where
 instance HasOptionalParam ReplaceClusterRoleBinding FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceClusterRoleBinding mtype
 
@@ -1811,7 +1811,7 @@ instance Produces ReplaceClusterRoleBinding MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedRole 
+replaceNamespacedRole
   :: (Consumes ReplaceNamespacedRole contentType, MimeRender contentType V1Role)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1841,7 +1841,7 @@ instance HasOptionalParam ReplaceNamespacedRole DryRun where
 instance HasOptionalParam ReplaceNamespacedRole FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedRole mtype
 
@@ -1861,7 +1861,7 @@ instance Produces ReplaceNamespacedRole MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedRoleBinding 
+replaceNamespacedRoleBinding
   :: (Consumes ReplaceNamespacedRoleBinding contentType, MimeRender contentType V1RoleBinding)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1891,7 +1891,7 @@ instance HasOptionalParam ReplaceNamespacedRoleBinding DryRun where
 instance HasOptionalParam ReplaceNamespacedRoleBinding FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedRoleBinding mtype
 

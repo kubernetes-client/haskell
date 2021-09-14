@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedLocalSubjectAccessReview 
+createNamespacedLocalSubjectAccessReview
   :: (Consumes CreateNamespacedLocalSubjectAccessReview contentType, MimeRender contentType V1beta1LocalSubjectAccessReview)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -94,7 +94,7 @@ instance HasOptionalParam CreateNamespacedLocalSubjectAccessReview FieldManager 
 instance HasOptionalParam CreateNamespacedLocalSubjectAccessReview Pretty where
   applyOptionalParam req (Pretty xs) =
     req `addQuery` toQuery ("pretty", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedLocalSubjectAccessReview mtype
 
@@ -114,7 +114,7 @@ instance Produces CreateNamespacedLocalSubjectAccessReview MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createSelfSubjectAccessReview 
+createSelfSubjectAccessReview
   :: (Consumes CreateSelfSubjectAccessReview contentType, MimeRender contentType V1beta1SelfSubjectAccessReview)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -142,7 +142,7 @@ instance HasOptionalParam CreateSelfSubjectAccessReview FieldManager where
 instance HasOptionalParam CreateSelfSubjectAccessReview Pretty where
   applyOptionalParam req (Pretty xs) =
     req `addQuery` toQuery ("pretty", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateSelfSubjectAccessReview mtype
 
@@ -162,7 +162,7 @@ instance Produces CreateSelfSubjectAccessReview MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createSelfSubjectRulesReview 
+createSelfSubjectRulesReview
   :: (Consumes CreateSelfSubjectRulesReview contentType, MimeRender contentType V1beta1SelfSubjectRulesReview)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -190,7 +190,7 @@ instance HasOptionalParam CreateSelfSubjectRulesReview FieldManager where
 instance HasOptionalParam CreateSelfSubjectRulesReview Pretty where
   applyOptionalParam req (Pretty xs) =
     req `addQuery` toQuery ("pretty", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateSelfSubjectRulesReview mtype
 
@@ -210,7 +210,7 @@ instance Produces CreateSelfSubjectRulesReview MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createSubjectAccessReview 
+createSubjectAccessReview
   :: (Consumes CreateSubjectAccessReview contentType, MimeRender contentType V1beta1SubjectAccessReview)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -238,7 +238,7 @@ instance HasOptionalParam CreateSubjectAccessReview FieldManager where
 instance HasOptionalParam CreateSubjectAccessReview Pretty where
   applyOptionalParam req (Pretty xs) =
     req `addQuery` toQuery ("pretty", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateSubjectAccessReview mtype
 
@@ -258,7 +258,7 @@ instance Produces CreateSubjectAccessReview MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =

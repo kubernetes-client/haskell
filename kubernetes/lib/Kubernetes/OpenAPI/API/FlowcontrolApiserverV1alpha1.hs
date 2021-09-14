@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createFlowSchema 
+createFlowSchema
   :: (Consumes CreateFlowSchema contentType, MimeRender contentType V1alpha1FlowSchema)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -93,7 +93,7 @@ instance HasOptionalParam CreateFlowSchema DryRun where
 instance HasOptionalParam CreateFlowSchema FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateFlowSchema mtype
 
@@ -113,7 +113,7 @@ instance Produces CreateFlowSchema MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createPriorityLevelConfiguration 
+createPriorityLevelConfiguration
   :: (Consumes CreatePriorityLevelConfiguration contentType, MimeRender contentType V1alpha1PriorityLevelConfiguration)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -141,7 +141,7 @@ instance HasOptionalParam CreatePriorityLevelConfiguration DryRun where
 instance HasOptionalParam CreatePriorityLevelConfiguration FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreatePriorityLevelConfiguration mtype
 
@@ -161,7 +161,7 @@ instance Produces CreatePriorityLevelConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionFlowSchema 
+deleteCollectionFlowSchema
   :: (Consumes DeleteCollectionFlowSchema contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -232,7 +232,7 @@ instance HasOptionalParam DeleteCollectionFlowSchema ResourceVersionMatch where
 instance HasOptionalParam DeleteCollectionFlowSchema TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionFlowSchema mtype
 
@@ -252,7 +252,7 @@ instance Produces DeleteCollectionFlowSchema MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionPriorityLevelConfiguration 
+deleteCollectionPriorityLevelConfiguration
   :: (Consumes DeleteCollectionPriorityLevelConfiguration contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -323,7 +323,7 @@ instance HasOptionalParam DeleteCollectionPriorityLevelConfiguration ResourceVer
 instance HasOptionalParam DeleteCollectionPriorityLevelConfiguration TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionPriorityLevelConfiguration mtype
 
@@ -343,7 +343,7 @@ instance Produces DeleteCollectionPriorityLevelConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteFlowSchema 
+deleteFlowSchema
   :: (Consumes DeleteFlowSchema contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -380,7 +380,7 @@ instance HasOptionalParam DeleteFlowSchema OrphanDependents where
 instance HasOptionalParam DeleteFlowSchema PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteFlowSchema mtype
 
@@ -400,7 +400,7 @@ instance Produces DeleteFlowSchema MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deletePriorityLevelConfiguration 
+deletePriorityLevelConfiguration
   :: (Consumes DeletePriorityLevelConfiguration contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -437,7 +437,7 @@ instance HasOptionalParam DeletePriorityLevelConfiguration OrphanDependents wher
 instance HasOptionalParam DeletePriorityLevelConfiguration PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeletePriorityLevelConfiguration mtype
 
@@ -457,7 +457,7 @@ instance Produces DeletePriorityLevelConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -481,7 +481,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listFlowSchema 
+listFlowSchema
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListFlowSchema MimeNoContent V1alpha1FlowSchemaList accept
 listFlowSchema  _ =
@@ -559,7 +559,7 @@ instance Produces ListFlowSchema MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listPriorityLevelConfiguration 
+listPriorityLevelConfiguration
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListPriorityLevelConfiguration MimeNoContent V1alpha1PriorityLevelConfigurationList accept
 listPriorityLevelConfiguration  _ =
@@ -637,7 +637,7 @@ instance Produces ListPriorityLevelConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchFlowSchema 
+patchFlowSchema
   :: (Consumes PatchFlowSchema contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -697,7 +697,7 @@ instance Produces PatchFlowSchema MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchFlowSchemaStatus 
+patchFlowSchemaStatus
   :: (Consumes PatchFlowSchemaStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -757,7 +757,7 @@ instance Produces PatchFlowSchemaStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchPriorityLevelConfiguration 
+patchPriorityLevelConfiguration
   :: (Consumes PatchPriorityLevelConfiguration contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -817,7 +817,7 @@ instance Produces PatchPriorityLevelConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchPriorityLevelConfigurationStatus 
+patchPriorityLevelConfigurationStatus
   :: (Consumes PatchPriorityLevelConfigurationStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -877,7 +877,7 @@ instance Produces PatchPriorityLevelConfigurationStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readFlowSchema 
+readFlowSchema
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the FlowSchema
   -> KubernetesRequest ReadFlowSchema MimeNoContent V1alpha1FlowSchema accept
@@ -917,7 +917,7 @@ instance Produces ReadFlowSchema MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readFlowSchemaStatus 
+readFlowSchemaStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the FlowSchema
   -> KubernetesRequest ReadFlowSchemaStatus MimeNoContent V1alpha1FlowSchema accept
@@ -947,7 +947,7 @@ instance Produces ReadFlowSchemaStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readPriorityLevelConfiguration 
+readPriorityLevelConfiguration
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the PriorityLevelConfiguration
   -> KubernetesRequest ReadPriorityLevelConfiguration MimeNoContent V1alpha1PriorityLevelConfiguration accept
@@ -987,7 +987,7 @@ instance Produces ReadPriorityLevelConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readPriorityLevelConfigurationStatus 
+readPriorityLevelConfigurationStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the PriorityLevelConfiguration
   -> KubernetesRequest ReadPriorityLevelConfigurationStatus MimeNoContent V1alpha1PriorityLevelConfiguration accept
@@ -1017,7 +1017,7 @@ instance Produces ReadPriorityLevelConfigurationStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceFlowSchema 
+replaceFlowSchema
   :: (Consumes ReplaceFlowSchema contentType, MimeRender contentType V1alpha1FlowSchema)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1046,7 +1046,7 @@ instance HasOptionalParam ReplaceFlowSchema DryRun where
 instance HasOptionalParam ReplaceFlowSchema FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceFlowSchema mtype
 
@@ -1066,7 +1066,7 @@ instance Produces ReplaceFlowSchema MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceFlowSchemaStatus 
+replaceFlowSchemaStatus
   :: (Consumes ReplaceFlowSchemaStatus contentType, MimeRender contentType V1alpha1FlowSchema)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1095,7 +1095,7 @@ instance HasOptionalParam ReplaceFlowSchemaStatus DryRun where
 instance HasOptionalParam ReplaceFlowSchemaStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceFlowSchemaStatus mtype
 
@@ -1115,7 +1115,7 @@ instance Produces ReplaceFlowSchemaStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replacePriorityLevelConfiguration 
+replacePriorityLevelConfiguration
   :: (Consumes ReplacePriorityLevelConfiguration contentType, MimeRender contentType V1alpha1PriorityLevelConfiguration)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1144,7 +1144,7 @@ instance HasOptionalParam ReplacePriorityLevelConfiguration DryRun where
 instance HasOptionalParam ReplacePriorityLevelConfiguration FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplacePriorityLevelConfiguration mtype
 
@@ -1164,7 +1164,7 @@ instance Produces ReplacePriorityLevelConfiguration MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replacePriorityLevelConfigurationStatus 
+replacePriorityLevelConfigurationStatus
   :: (Consumes ReplacePriorityLevelConfigurationStatus contentType, MimeRender contentType V1alpha1PriorityLevelConfiguration)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1193,7 +1193,7 @@ instance HasOptionalParam ReplacePriorityLevelConfigurationStatus DryRun where
 instance HasOptionalParam ReplacePriorityLevelConfigurationStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplacePriorityLevelConfigurationStatus mtype
 

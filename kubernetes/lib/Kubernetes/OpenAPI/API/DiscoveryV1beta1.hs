@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedEndpointSlice 
+createNamespacedEndpointSlice
   :: (Consumes CreateNamespacedEndpointSlice contentType, MimeRender contentType V1beta1EndpointSlice)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -94,7 +94,7 @@ instance HasOptionalParam CreateNamespacedEndpointSlice DryRun where
 instance HasOptionalParam CreateNamespacedEndpointSlice FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedEndpointSlice mtype
 
@@ -114,7 +114,7 @@ instance Produces CreateNamespacedEndpointSlice MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedEndpointSlice 
+deleteCollectionNamespacedEndpointSlice
   :: (Consumes DeleteCollectionNamespacedEndpointSlice contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -186,7 +186,7 @@ instance HasOptionalParam DeleteCollectionNamespacedEndpointSlice ResourceVersio
 instance HasOptionalParam DeleteCollectionNamespacedEndpointSlice TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedEndpointSlice mtype
 
@@ -206,7 +206,7 @@ instance Produces DeleteCollectionNamespacedEndpointSlice MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedEndpointSlice 
+deleteNamespacedEndpointSlice
   :: (Consumes DeleteNamespacedEndpointSlice contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -244,7 +244,7 @@ instance HasOptionalParam DeleteNamespacedEndpointSlice OrphanDependents where
 instance HasOptionalParam DeleteNamespacedEndpointSlice PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedEndpointSlice mtype
 
@@ -264,7 +264,7 @@ instance Produces DeleteNamespacedEndpointSlice MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -288,7 +288,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listEndpointSliceForAllNamespaces 
+listEndpointSliceForAllNamespaces
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListEndpointSliceForAllNamespaces MimeNoContent V1beta1EndpointSliceList accept
 listEndpointSliceForAllNamespaces  _ =
@@ -366,7 +366,7 @@ instance Produces ListEndpointSliceForAllNamespaces MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedEndpointSlice 
+listNamespacedEndpointSlice
   :: Accept accept -- ^ request accept ('MimeType')
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
   -> KubernetesRequest ListNamespacedEndpointSlice MimeNoContent V1beta1EndpointSliceList accept
@@ -445,7 +445,7 @@ instance Produces ListNamespacedEndpointSlice MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedEndpointSlice 
+patchNamespacedEndpointSlice
   :: (Consumes PatchNamespacedEndpointSlice contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -506,7 +506,7 @@ instance Produces PatchNamespacedEndpointSlice MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedEndpointSlice 
+readNamespacedEndpointSlice
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the EndpointSlice
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -547,7 +547,7 @@ instance Produces ReadNamespacedEndpointSlice MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedEndpointSlice 
+replaceNamespacedEndpointSlice
   :: (Consumes ReplaceNamespacedEndpointSlice contentType, MimeRender contentType V1beta1EndpointSlice)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -577,7 +577,7 @@ instance HasOptionalParam ReplaceNamespacedEndpointSlice DryRun where
 instance HasOptionalParam ReplaceNamespacedEndpointSlice FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedEndpointSlice mtype
 

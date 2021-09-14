@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createTokenReview 
+createTokenReview
   :: (Consumes CreateTokenReview contentType, MimeRender contentType V1TokenReview)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -93,7 +93,7 @@ instance HasOptionalParam CreateTokenReview FieldManager where
 instance HasOptionalParam CreateTokenReview Pretty where
   applyOptionalParam req (Pretty xs) =
     req `addQuery` toQuery ("pretty", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateTokenReview mtype
 
@@ -113,7 +113,7 @@ instance Produces CreateTokenReview MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =

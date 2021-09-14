@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createRuntimeClass 
+createRuntimeClass
   :: (Consumes CreateRuntimeClass contentType, MimeRender contentType V1beta1RuntimeClass)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -93,7 +93,7 @@ instance HasOptionalParam CreateRuntimeClass DryRun where
 instance HasOptionalParam CreateRuntimeClass FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateRuntimeClass mtype
 
@@ -113,7 +113,7 @@ instance Produces CreateRuntimeClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionRuntimeClass 
+deleteCollectionRuntimeClass
   :: (Consumes DeleteCollectionRuntimeClass contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -184,7 +184,7 @@ instance HasOptionalParam DeleteCollectionRuntimeClass ResourceVersionMatch wher
 instance HasOptionalParam DeleteCollectionRuntimeClass TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionRuntimeClass mtype
 
@@ -204,7 +204,7 @@ instance Produces DeleteCollectionRuntimeClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteRuntimeClass 
+deleteRuntimeClass
   :: (Consumes DeleteRuntimeClass contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -241,7 +241,7 @@ instance HasOptionalParam DeleteRuntimeClass OrphanDependents where
 instance HasOptionalParam DeleteRuntimeClass PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteRuntimeClass mtype
 
@@ -261,7 +261,7 @@ instance Produces DeleteRuntimeClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -285,7 +285,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listRuntimeClass 
+listRuntimeClass
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListRuntimeClass MimeNoContent V1beta1RuntimeClassList accept
 listRuntimeClass  _ =
@@ -363,7 +363,7 @@ instance Produces ListRuntimeClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchRuntimeClass 
+patchRuntimeClass
   :: (Consumes PatchRuntimeClass contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -423,7 +423,7 @@ instance Produces PatchRuntimeClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readRuntimeClass 
+readRuntimeClass
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the RuntimeClass
   -> KubernetesRequest ReadRuntimeClass MimeNoContent V1beta1RuntimeClass accept
@@ -463,7 +463,7 @@ instance Produces ReadRuntimeClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceRuntimeClass 
+replaceRuntimeClass
   :: (Consumes ReplaceRuntimeClass contentType, MimeRender contentType V1beta1RuntimeClass)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -492,7 +492,7 @@ instance HasOptionalParam ReplaceRuntimeClass DryRun where
 instance HasOptionalParam ReplaceRuntimeClass FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceRuntimeClass mtype
 

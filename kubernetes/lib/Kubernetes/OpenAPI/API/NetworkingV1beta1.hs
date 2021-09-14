@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createIngressClass 
+createIngressClass
   :: (Consumes CreateIngressClass contentType, MimeRender contentType V1beta1IngressClass)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -93,7 +93,7 @@ instance HasOptionalParam CreateIngressClass DryRun where
 instance HasOptionalParam CreateIngressClass FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateIngressClass mtype
 
@@ -113,7 +113,7 @@ instance Produces CreateIngressClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedIngress 
+createNamespacedIngress
   :: (Consumes CreateNamespacedIngress contentType, MimeRender contentType NetworkingV1beta1Ingress)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -142,7 +142,7 @@ instance HasOptionalParam CreateNamespacedIngress DryRun where
 instance HasOptionalParam CreateNamespacedIngress FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedIngress mtype
 
@@ -162,7 +162,7 @@ instance Produces CreateNamespacedIngress MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionIngressClass 
+deleteCollectionIngressClass
   :: (Consumes DeleteCollectionIngressClass contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -233,7 +233,7 @@ instance HasOptionalParam DeleteCollectionIngressClass ResourceVersionMatch wher
 instance HasOptionalParam DeleteCollectionIngressClass TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionIngressClass mtype
 
@@ -253,7 +253,7 @@ instance Produces DeleteCollectionIngressClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedIngress 
+deleteCollectionNamespacedIngress
   :: (Consumes DeleteCollectionNamespacedIngress contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -325,7 +325,7 @@ instance HasOptionalParam DeleteCollectionNamespacedIngress ResourceVersionMatch
 instance HasOptionalParam DeleteCollectionNamespacedIngress TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedIngress mtype
 
@@ -345,7 +345,7 @@ instance Produces DeleteCollectionNamespacedIngress MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteIngressClass 
+deleteIngressClass
   :: (Consumes DeleteIngressClass contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -382,7 +382,7 @@ instance HasOptionalParam DeleteIngressClass OrphanDependents where
 instance HasOptionalParam DeleteIngressClass PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteIngressClass mtype
 
@@ -402,7 +402,7 @@ instance Produces DeleteIngressClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedIngress 
+deleteNamespacedIngress
   :: (Consumes DeleteNamespacedIngress contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -440,7 +440,7 @@ instance HasOptionalParam DeleteNamespacedIngress OrphanDependents where
 instance HasOptionalParam DeleteNamespacedIngress PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedIngress mtype
 
@@ -460,7 +460,7 @@ instance Produces DeleteNamespacedIngress MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -484,7 +484,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listIngressClass 
+listIngressClass
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListIngressClass MimeNoContent V1beta1IngressClassList accept
 listIngressClass  _ =
@@ -562,7 +562,7 @@ instance Produces ListIngressClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listIngressForAllNamespaces 
+listIngressForAllNamespaces
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListIngressForAllNamespaces MimeNoContent NetworkingV1beta1IngressList accept
 listIngressForAllNamespaces  _ =
@@ -640,7 +640,7 @@ instance Produces ListIngressForAllNamespaces MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedIngress 
+listNamespacedIngress
   :: Accept accept -- ^ request accept ('MimeType')
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
   -> KubernetesRequest ListNamespacedIngress MimeNoContent NetworkingV1beta1IngressList accept
@@ -719,7 +719,7 @@ instance Produces ListNamespacedIngress MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchIngressClass 
+patchIngressClass
   :: (Consumes PatchIngressClass contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -779,7 +779,7 @@ instance Produces PatchIngressClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedIngress 
+patchNamespacedIngress
   :: (Consumes PatchNamespacedIngress contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -840,7 +840,7 @@ instance Produces PatchNamespacedIngress MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedIngressStatus 
+patchNamespacedIngressStatus
   :: (Consumes PatchNamespacedIngressStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -901,7 +901,7 @@ instance Produces PatchNamespacedIngressStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readIngressClass 
+readIngressClass
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the IngressClass
   -> KubernetesRequest ReadIngressClass MimeNoContent V1beta1IngressClass accept
@@ -941,7 +941,7 @@ instance Produces ReadIngressClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedIngress 
+readNamespacedIngress
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the Ingress
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -982,7 +982,7 @@ instance Produces ReadNamespacedIngress MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedIngressStatus 
+readNamespacedIngressStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the Ingress
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -1013,7 +1013,7 @@ instance Produces ReadNamespacedIngressStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceIngressClass 
+replaceIngressClass
   :: (Consumes ReplaceIngressClass contentType, MimeRender contentType V1beta1IngressClass)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1042,7 +1042,7 @@ instance HasOptionalParam ReplaceIngressClass DryRun where
 instance HasOptionalParam ReplaceIngressClass FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceIngressClass mtype
 
@@ -1062,7 +1062,7 @@ instance Produces ReplaceIngressClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedIngress 
+replaceNamespacedIngress
   :: (Consumes ReplaceNamespacedIngress contentType, MimeRender contentType NetworkingV1beta1Ingress)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1092,7 +1092,7 @@ instance HasOptionalParam ReplaceNamespacedIngress DryRun where
 instance HasOptionalParam ReplaceNamespacedIngress FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedIngress mtype
 
@@ -1112,7 +1112,7 @@ instance Produces ReplaceNamespacedIngress MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedIngressStatus 
+replaceNamespacedIngressStatus
   :: (Consumes ReplaceNamespacedIngressStatus contentType, MimeRender contentType NetworkingV1beta1Ingress)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1142,7 +1142,7 @@ instance HasOptionalParam ReplaceNamespacedIngressStatus DryRun where
 instance HasOptionalParam ReplaceNamespacedIngressStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedIngressStatus mtype
 

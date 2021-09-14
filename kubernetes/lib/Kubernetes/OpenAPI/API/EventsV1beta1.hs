@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedEvent 
+createNamespacedEvent
   :: (Consumes CreateNamespacedEvent contentType, MimeRender contentType V1beta1Event)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -94,7 +94,7 @@ instance HasOptionalParam CreateNamespacedEvent DryRun where
 instance HasOptionalParam CreateNamespacedEvent FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedEvent mtype
 
@@ -114,7 +114,7 @@ instance Produces CreateNamespacedEvent MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedEvent 
+deleteCollectionNamespacedEvent
   :: (Consumes DeleteCollectionNamespacedEvent contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -186,7 +186,7 @@ instance HasOptionalParam DeleteCollectionNamespacedEvent ResourceVersionMatch w
 instance HasOptionalParam DeleteCollectionNamespacedEvent TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedEvent mtype
 
@@ -206,7 +206,7 @@ instance Produces DeleteCollectionNamespacedEvent MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedEvent 
+deleteNamespacedEvent
   :: (Consumes DeleteNamespacedEvent contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -244,7 +244,7 @@ instance HasOptionalParam DeleteNamespacedEvent OrphanDependents where
 instance HasOptionalParam DeleteNamespacedEvent PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedEvent mtype
 
@@ -264,7 +264,7 @@ instance Produces DeleteNamespacedEvent MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -288,7 +288,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listEventForAllNamespaces 
+listEventForAllNamespaces
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListEventForAllNamespaces MimeNoContent V1beta1EventList accept
 listEventForAllNamespaces  _ =
@@ -366,7 +366,7 @@ instance Produces ListEventForAllNamespaces MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedEvent 
+listNamespacedEvent
   :: Accept accept -- ^ request accept ('MimeType')
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
   -> KubernetesRequest ListNamespacedEvent MimeNoContent V1beta1EventList accept
@@ -445,7 +445,7 @@ instance Produces ListNamespacedEvent MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedEvent 
+patchNamespacedEvent
   :: (Consumes PatchNamespacedEvent contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -506,7 +506,7 @@ instance Produces PatchNamespacedEvent MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedEvent 
+readNamespacedEvent
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the Event
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -547,7 +547,7 @@ instance Produces ReadNamespacedEvent MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedEvent 
+replaceNamespacedEvent
   :: (Consumes ReplaceNamespacedEvent contentType, MimeRender contentType V1beta1Event)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -577,7 +577,7 @@ instance HasOptionalParam ReplaceNamespacedEvent DryRun where
 instance HasOptionalParam ReplaceNamespacedEvent FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedEvent mtype
 

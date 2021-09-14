@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedLease 
+createNamespacedLease
   :: (Consumes CreateNamespacedLease contentType, MimeRender contentType V1beta1Lease)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -94,7 +94,7 @@ instance HasOptionalParam CreateNamespacedLease DryRun where
 instance HasOptionalParam CreateNamespacedLease FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedLease mtype
 
@@ -114,7 +114,7 @@ instance Produces CreateNamespacedLease MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedLease 
+deleteCollectionNamespacedLease
   :: (Consumes DeleteCollectionNamespacedLease contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -186,7 +186,7 @@ instance HasOptionalParam DeleteCollectionNamespacedLease ResourceVersionMatch w
 instance HasOptionalParam DeleteCollectionNamespacedLease TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedLease mtype
 
@@ -206,7 +206,7 @@ instance Produces DeleteCollectionNamespacedLease MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedLease 
+deleteNamespacedLease
   :: (Consumes DeleteNamespacedLease contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -244,7 +244,7 @@ instance HasOptionalParam DeleteNamespacedLease OrphanDependents where
 instance HasOptionalParam DeleteNamespacedLease PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedLease mtype
 
@@ -264,7 +264,7 @@ instance Produces DeleteNamespacedLease MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -288,7 +288,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listLeaseForAllNamespaces 
+listLeaseForAllNamespaces
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListLeaseForAllNamespaces MimeNoContent V1beta1LeaseList accept
 listLeaseForAllNamespaces  _ =
@@ -366,7 +366,7 @@ instance Produces ListLeaseForAllNamespaces MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedLease 
+listNamespacedLease
   :: Accept accept -- ^ request accept ('MimeType')
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
   -> KubernetesRequest ListNamespacedLease MimeNoContent V1beta1LeaseList accept
@@ -445,7 +445,7 @@ instance Produces ListNamespacedLease MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedLease 
+patchNamespacedLease
   :: (Consumes PatchNamespacedLease contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -506,7 +506,7 @@ instance Produces PatchNamespacedLease MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedLease 
+readNamespacedLease
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the Lease
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -547,7 +547,7 @@ instance Produces ReadNamespacedLease MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedLease 
+replaceNamespacedLease
   :: (Consumes ReplaceNamespacedLease contentType, MimeRender contentType V1beta1Lease)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -577,7 +577,7 @@ instance HasOptionalParam ReplaceNamespacedLease DryRun where
 instance HasOptionalParam ReplaceNamespacedLease FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedLease mtype
 
