@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createPriorityClass 
+createPriorityClass
   :: (Consumes CreatePriorityClass contentType, MimeRender contentType V1alpha1PriorityClass)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -93,7 +93,7 @@ instance HasOptionalParam CreatePriorityClass DryRun where
 instance HasOptionalParam CreatePriorityClass FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreatePriorityClass mtype
 
@@ -113,7 +113,7 @@ instance Produces CreatePriorityClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionPriorityClass 
+deleteCollectionPriorityClass
   :: (Consumes DeleteCollectionPriorityClass contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -184,7 +184,7 @@ instance HasOptionalParam DeleteCollectionPriorityClass ResourceVersionMatch whe
 instance HasOptionalParam DeleteCollectionPriorityClass TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionPriorityClass mtype
 
@@ -204,7 +204,7 @@ instance Produces DeleteCollectionPriorityClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deletePriorityClass 
+deletePriorityClass
   :: (Consumes DeletePriorityClass contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -241,7 +241,7 @@ instance HasOptionalParam DeletePriorityClass OrphanDependents where
 instance HasOptionalParam DeletePriorityClass PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeletePriorityClass mtype
 
@@ -261,7 +261,7 @@ instance Produces DeletePriorityClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -285,7 +285,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listPriorityClass 
+listPriorityClass
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListPriorityClass MimeNoContent V1alpha1PriorityClassList accept
 listPriorityClass  _ =
@@ -363,7 +363,7 @@ instance Produces ListPriorityClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchPriorityClass 
+patchPriorityClass
   :: (Consumes PatchPriorityClass contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -423,7 +423,7 @@ instance Produces PatchPriorityClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readPriorityClass 
+readPriorityClass
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the PriorityClass
   -> KubernetesRequest ReadPriorityClass MimeNoContent V1alpha1PriorityClass accept
@@ -463,7 +463,7 @@ instance Produces ReadPriorityClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replacePriorityClass 
+replacePriorityClass
   :: (Consumes ReplacePriorityClass contentType, MimeRender contentType V1alpha1PriorityClass)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -492,7 +492,7 @@ instance HasOptionalParam ReplacePriorityClass DryRun where
 instance HasOptionalParam ReplacePriorityClass FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplacePriorityClass mtype
 

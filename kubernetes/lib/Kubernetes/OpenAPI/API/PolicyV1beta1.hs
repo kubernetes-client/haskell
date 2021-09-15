@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedPodDisruptionBudget 
+createNamespacedPodDisruptionBudget
   :: (Consumes CreateNamespacedPodDisruptionBudget contentType, MimeRender contentType V1beta1PodDisruptionBudget)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -94,7 +94,7 @@ instance HasOptionalParam CreateNamespacedPodDisruptionBudget DryRun where
 instance HasOptionalParam CreateNamespacedPodDisruptionBudget FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedPodDisruptionBudget mtype
 
@@ -114,7 +114,7 @@ instance Produces CreateNamespacedPodDisruptionBudget MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createPodSecurityPolicy 
+createPodSecurityPolicy
   :: (Consumes CreatePodSecurityPolicy contentType, MimeRender contentType V1beta1PodSecurityPolicy)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -142,7 +142,7 @@ instance HasOptionalParam CreatePodSecurityPolicy DryRun where
 instance HasOptionalParam CreatePodSecurityPolicy FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreatePodSecurityPolicy mtype
 
@@ -162,7 +162,7 @@ instance Produces CreatePodSecurityPolicy MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedPodDisruptionBudget 
+deleteCollectionNamespacedPodDisruptionBudget
   :: (Consumes DeleteCollectionNamespacedPodDisruptionBudget contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -234,7 +234,7 @@ instance HasOptionalParam DeleteCollectionNamespacedPodDisruptionBudget Resource
 instance HasOptionalParam DeleteCollectionNamespacedPodDisruptionBudget TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedPodDisruptionBudget mtype
 
@@ -254,7 +254,7 @@ instance Produces DeleteCollectionNamespacedPodDisruptionBudget MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionPodSecurityPolicy 
+deleteCollectionPodSecurityPolicy
   :: (Consumes DeleteCollectionPodSecurityPolicy contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -325,7 +325,7 @@ instance HasOptionalParam DeleteCollectionPodSecurityPolicy ResourceVersionMatch
 instance HasOptionalParam DeleteCollectionPodSecurityPolicy TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionPodSecurityPolicy mtype
 
@@ -345,7 +345,7 @@ instance Produces DeleteCollectionPodSecurityPolicy MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedPodDisruptionBudget 
+deleteNamespacedPodDisruptionBudget
   :: (Consumes DeleteNamespacedPodDisruptionBudget contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -383,7 +383,7 @@ instance HasOptionalParam DeleteNamespacedPodDisruptionBudget OrphanDependents w
 instance HasOptionalParam DeleteNamespacedPodDisruptionBudget PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedPodDisruptionBudget mtype
 
@@ -403,7 +403,7 @@ instance Produces DeleteNamespacedPodDisruptionBudget MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deletePodSecurityPolicy 
+deletePodSecurityPolicy
   :: (Consumes DeletePodSecurityPolicy contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -440,7 +440,7 @@ instance HasOptionalParam DeletePodSecurityPolicy OrphanDependents where
 instance HasOptionalParam DeletePodSecurityPolicy PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeletePodSecurityPolicy mtype
 
@@ -460,7 +460,7 @@ instance Produces DeletePodSecurityPolicy MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -484,7 +484,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedPodDisruptionBudget 
+listNamespacedPodDisruptionBudget
   :: Accept accept -- ^ request accept ('MimeType')
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
   -> KubernetesRequest ListNamespacedPodDisruptionBudget MimeNoContent V1beta1PodDisruptionBudgetList accept
@@ -563,7 +563,7 @@ instance Produces ListNamespacedPodDisruptionBudget MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listPodDisruptionBudgetForAllNamespaces 
+listPodDisruptionBudgetForAllNamespaces
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListPodDisruptionBudgetForAllNamespaces MimeNoContent V1beta1PodDisruptionBudgetList accept
 listPodDisruptionBudgetForAllNamespaces  _ =
@@ -641,7 +641,7 @@ instance Produces ListPodDisruptionBudgetForAllNamespaces MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listPodSecurityPolicy 
+listPodSecurityPolicy
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListPodSecurityPolicy MimeNoContent V1beta1PodSecurityPolicyList accept
 listPodSecurityPolicy  _ =
@@ -719,7 +719,7 @@ instance Produces ListPodSecurityPolicy MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedPodDisruptionBudget 
+patchNamespacedPodDisruptionBudget
   :: (Consumes PatchNamespacedPodDisruptionBudget contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -780,7 +780,7 @@ instance Produces PatchNamespacedPodDisruptionBudget MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedPodDisruptionBudgetStatus 
+patchNamespacedPodDisruptionBudgetStatus
   :: (Consumes PatchNamespacedPodDisruptionBudgetStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -841,7 +841,7 @@ instance Produces PatchNamespacedPodDisruptionBudgetStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchPodSecurityPolicy 
+patchPodSecurityPolicy
   :: (Consumes PatchPodSecurityPolicy contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -901,7 +901,7 @@ instance Produces PatchPodSecurityPolicy MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedPodDisruptionBudget 
+readNamespacedPodDisruptionBudget
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the PodDisruptionBudget
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -942,7 +942,7 @@ instance Produces ReadNamespacedPodDisruptionBudget MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedPodDisruptionBudgetStatus 
+readNamespacedPodDisruptionBudgetStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the PodDisruptionBudget
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -973,7 +973,7 @@ instance Produces ReadNamespacedPodDisruptionBudgetStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readPodSecurityPolicy 
+readPodSecurityPolicy
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the PodSecurityPolicy
   -> KubernetesRequest ReadPodSecurityPolicy MimeNoContent V1beta1PodSecurityPolicy accept
@@ -1013,7 +1013,7 @@ instance Produces ReadPodSecurityPolicy MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedPodDisruptionBudget 
+replaceNamespacedPodDisruptionBudget
   :: (Consumes ReplaceNamespacedPodDisruptionBudget contentType, MimeRender contentType V1beta1PodDisruptionBudget)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1043,7 +1043,7 @@ instance HasOptionalParam ReplaceNamespacedPodDisruptionBudget DryRun where
 instance HasOptionalParam ReplaceNamespacedPodDisruptionBudget FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedPodDisruptionBudget mtype
 
@@ -1063,7 +1063,7 @@ instance Produces ReplaceNamespacedPodDisruptionBudget MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedPodDisruptionBudgetStatus 
+replaceNamespacedPodDisruptionBudgetStatus
   :: (Consumes ReplaceNamespacedPodDisruptionBudgetStatus contentType, MimeRender contentType V1beta1PodDisruptionBudget)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1093,7 +1093,7 @@ instance HasOptionalParam ReplaceNamespacedPodDisruptionBudgetStatus DryRun wher
 instance HasOptionalParam ReplaceNamespacedPodDisruptionBudgetStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedPodDisruptionBudgetStatus mtype
 
@@ -1113,7 +1113,7 @@ instance Produces ReplaceNamespacedPodDisruptionBudgetStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replacePodSecurityPolicy 
+replacePodSecurityPolicy
   :: (Consumes ReplacePodSecurityPolicy contentType, MimeRender contentType V1beta1PodSecurityPolicy)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1142,7 +1142,7 @@ instance HasOptionalParam ReplacePodSecurityPolicy DryRun where
 instance HasOptionalParam ReplacePodSecurityPolicy FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplacePodSecurityPolicy mtype
 

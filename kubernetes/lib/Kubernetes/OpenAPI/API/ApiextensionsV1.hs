@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createCustomResourceDefinition 
+createCustomResourceDefinition
   :: (Consumes CreateCustomResourceDefinition contentType, MimeRender contentType V1CustomResourceDefinition)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -93,7 +93,7 @@ instance HasOptionalParam CreateCustomResourceDefinition DryRun where
 instance HasOptionalParam CreateCustomResourceDefinition FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateCustomResourceDefinition mtype
 
@@ -113,7 +113,7 @@ instance Produces CreateCustomResourceDefinition MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionCustomResourceDefinition 
+deleteCollectionCustomResourceDefinition
   :: (Consumes DeleteCollectionCustomResourceDefinition contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -184,7 +184,7 @@ instance HasOptionalParam DeleteCollectionCustomResourceDefinition ResourceVersi
 instance HasOptionalParam DeleteCollectionCustomResourceDefinition TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionCustomResourceDefinition mtype
 
@@ -204,7 +204,7 @@ instance Produces DeleteCollectionCustomResourceDefinition MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCustomResourceDefinition 
+deleteCustomResourceDefinition
   :: (Consumes DeleteCustomResourceDefinition contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -241,7 +241,7 @@ instance HasOptionalParam DeleteCustomResourceDefinition OrphanDependents where
 instance HasOptionalParam DeleteCustomResourceDefinition PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCustomResourceDefinition mtype
 
@@ -261,7 +261,7 @@ instance Produces DeleteCustomResourceDefinition MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -285,7 +285,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listCustomResourceDefinition 
+listCustomResourceDefinition
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListCustomResourceDefinition MimeNoContent V1CustomResourceDefinitionList accept
 listCustomResourceDefinition  _ =
@@ -363,7 +363,7 @@ instance Produces ListCustomResourceDefinition MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchCustomResourceDefinition 
+patchCustomResourceDefinition
   :: (Consumes PatchCustomResourceDefinition contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -423,7 +423,7 @@ instance Produces PatchCustomResourceDefinition MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchCustomResourceDefinitionStatus 
+patchCustomResourceDefinitionStatus
   :: (Consumes PatchCustomResourceDefinitionStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -483,7 +483,7 @@ instance Produces PatchCustomResourceDefinitionStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readCustomResourceDefinition 
+readCustomResourceDefinition
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the CustomResourceDefinition
   -> KubernetesRequest ReadCustomResourceDefinition MimeNoContent V1CustomResourceDefinition accept
@@ -523,7 +523,7 @@ instance Produces ReadCustomResourceDefinition MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readCustomResourceDefinitionStatus 
+readCustomResourceDefinitionStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the CustomResourceDefinition
   -> KubernetesRequest ReadCustomResourceDefinitionStatus MimeNoContent V1CustomResourceDefinition accept
@@ -553,7 +553,7 @@ instance Produces ReadCustomResourceDefinitionStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceCustomResourceDefinition 
+replaceCustomResourceDefinition
   :: (Consumes ReplaceCustomResourceDefinition contentType, MimeRender contentType V1CustomResourceDefinition)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -582,7 +582,7 @@ instance HasOptionalParam ReplaceCustomResourceDefinition DryRun where
 instance HasOptionalParam ReplaceCustomResourceDefinition FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceCustomResourceDefinition mtype
 
@@ -602,7 +602,7 @@ instance Produces ReplaceCustomResourceDefinition MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceCustomResourceDefinitionStatus 
+replaceCustomResourceDefinitionStatus
   :: (Consumes ReplaceCustomResourceDefinitionStatus contentType, MimeRender contentType V1CustomResourceDefinition)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -631,7 +631,7 @@ instance HasOptionalParam ReplaceCustomResourceDefinitionStatus DryRun where
 instance HasOptionalParam ReplaceCustomResourceDefinitionStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceCustomResourceDefinitionStatus mtype
 

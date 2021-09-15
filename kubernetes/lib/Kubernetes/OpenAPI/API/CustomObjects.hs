@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createClusterCustomObject 
+createClusterCustomObject
   :: (Consumes CreateClusterCustomObject contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Body -- ^ "body" -  The JSON schema of the Resource to create.
@@ -97,7 +97,7 @@ instance HasOptionalParam CreateClusterCustomObject DryRun where
 instance HasOptionalParam CreateClusterCustomObject FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateClusterCustomObject mtype
 
@@ -113,7 +113,7 @@ instance Produces CreateClusterCustomObject MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedCustomObject 
+createNamespacedCustomObject
   :: (Consumes CreateNamespacedCustomObject contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Body -- ^ "body" -  The JSON schema of the Resource to create.
@@ -146,7 +146,7 @@ instance HasOptionalParam CreateNamespacedCustomObject DryRun where
 instance HasOptionalParam CreateNamespacedCustomObject FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedCustomObject mtype
 
@@ -162,7 +162,7 @@ instance Produces CreateNamespacedCustomObject MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteClusterCustomObject 
+deleteClusterCustomObject
   :: (Consumes DeleteClusterCustomObject contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Group -- ^ "group" -  the custom resource's group
@@ -196,7 +196,7 @@ instance HasOptionalParam DeleteClusterCustomObject PropagationPolicy where
 instance HasOptionalParam DeleteClusterCustomObject DryRun where
   applyOptionalParam req (DryRun xs) =
     req `addQuery` toQuery ("dryRun", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteClusterCustomObject mtype
 
@@ -212,7 +212,7 @@ instance Produces DeleteClusterCustomObject MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionClusterCustomObject 
+deleteCollectionClusterCustomObject
   :: (Consumes DeleteCollectionClusterCustomObject contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Group -- ^ "group" -  The custom resource's group name
@@ -250,7 +250,7 @@ instance HasOptionalParam DeleteCollectionClusterCustomObject PropagationPolicy 
 instance HasOptionalParam DeleteCollectionClusterCustomObject DryRun where
   applyOptionalParam req (DryRun xs) =
     req `addQuery` toQuery ("dryRun", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionClusterCustomObject mtype
 
@@ -266,7 +266,7 @@ instance Produces DeleteCollectionClusterCustomObject MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedCustomObject 
+deleteCollectionNamespacedCustomObject
   :: (Consumes DeleteCollectionNamespacedCustomObject contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Group -- ^ "group" -  The custom resource's group name
@@ -305,7 +305,7 @@ instance HasOptionalParam DeleteCollectionNamespacedCustomObject PropagationPoli
 instance HasOptionalParam DeleteCollectionNamespacedCustomObject DryRun where
   applyOptionalParam req (DryRun xs) =
     req `addQuery` toQuery ("dryRun", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedCustomObject mtype
 
@@ -321,7 +321,7 @@ instance Produces DeleteCollectionNamespacedCustomObject MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedCustomObject 
+deleteNamespacedCustomObject
   :: (Consumes DeleteNamespacedCustomObject contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Group -- ^ "group" -  the custom resource's group
@@ -356,7 +356,7 @@ instance HasOptionalParam DeleteNamespacedCustomObject PropagationPolicy where
 instance HasOptionalParam DeleteNamespacedCustomObject DryRun where
   applyOptionalParam req (DryRun xs) =
     req `addQuery` toQuery ("dryRun", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedCustomObject mtype
 
@@ -372,7 +372,7 @@ instance Produces DeleteNamespacedCustomObject MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getClusterCustomObject 
+getClusterCustomObject
   :: Group -- ^ "group" -  the custom resource's group
   -> Version -- ^ "version" -  the custom resource's version
   -> Plural -- ^ "plural" -  the custom object's plural name. For TPRs this would be lowercase plural kind.
@@ -395,7 +395,7 @@ instance Produces GetClusterCustomObject MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getClusterCustomObjectScale 
+getClusterCustomObjectScale
   :: Accept accept -- ^ request accept ('MimeType')
   -> Group -- ^ "group" -  the custom resource's group
   -> Version -- ^ "version" -  the custom resource's version
@@ -423,7 +423,7 @@ instance Produces GetClusterCustomObjectScale MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getClusterCustomObjectStatus 
+getClusterCustomObjectStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Group -- ^ "group" -  the custom resource's group
   -> Version -- ^ "version" -  the custom resource's version
@@ -451,7 +451,7 @@ instance Produces GetClusterCustomObjectStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getNamespacedCustomObject 
+getNamespacedCustomObject
   :: Group -- ^ "group" -  the custom resource's group
   -> Version -- ^ "version" -  the custom resource's version
   -> Namespace -- ^ "namespace" -  The custom resource's namespace
@@ -475,7 +475,7 @@ instance Produces GetNamespacedCustomObject MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getNamespacedCustomObjectScale 
+getNamespacedCustomObjectScale
   :: Accept accept -- ^ request accept ('MimeType')
   -> Group -- ^ "group" -  the custom resource's group
   -> Version -- ^ "version" -  the custom resource's version
@@ -504,7 +504,7 @@ instance Produces GetNamespacedCustomObjectScale MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getNamespacedCustomObjectStatus 
+getNamespacedCustomObjectStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Group -- ^ "group" -  the custom resource's group
   -> Version -- ^ "version" -  the custom resource's version
@@ -533,7 +533,7 @@ instance Produces GetNamespacedCustomObjectStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listClusterCustomObject 
+listClusterCustomObject
   :: Accept accept -- ^ request accept ('MimeType')
   -> Group -- ^ "group" -  The custom resource's group name
   -> Version -- ^ "version" -  The custom resource's version
@@ -598,7 +598,7 @@ instance Produces ListClusterCustomObject MimeJsonstreamwatch
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedCustomObject 
+listNamespacedCustomObject
   :: Accept accept -- ^ request accept ('MimeType')
   -> Group -- ^ "group" -  The custom resource's group name
   -> Version -- ^ "version" -  The custom resource's version
@@ -664,7 +664,7 @@ instance Produces ListNamespacedCustomObject MimeJsonstreamwatch
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchClusterCustomObject 
+patchClusterCustomObject
   :: (Consumes PatchClusterCustomObject contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Body -- ^ "body" -  The JSON schema of the Resource to patch.
@@ -715,7 +715,7 @@ instance Produces PatchClusterCustomObject MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchClusterCustomObjectScale 
+patchClusterCustomObjectScale
   :: (Consumes PatchClusterCustomObjectScale contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -769,7 +769,7 @@ instance Produces PatchClusterCustomObjectScale MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchClusterCustomObjectStatus 
+patchClusterCustomObjectStatus
   :: (Consumes PatchClusterCustomObjectStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -823,7 +823,7 @@ instance Produces PatchClusterCustomObjectStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedCustomObject 
+patchNamespacedCustomObject
   :: (Consumes PatchNamespacedCustomObject contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Body -- ^ "body" -  The JSON schema of the Resource to patch.
@@ -875,7 +875,7 @@ instance Produces PatchNamespacedCustomObject MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedCustomObjectScale 
+patchNamespacedCustomObjectScale
   :: (Consumes PatchNamespacedCustomObjectScale contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -932,7 +932,7 @@ instance Produces PatchNamespacedCustomObjectScale MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedCustomObjectStatus 
+patchNamespacedCustomObjectStatus
   :: (Consumes PatchNamespacedCustomObjectStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -989,7 +989,7 @@ instance Produces PatchNamespacedCustomObjectStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceClusterCustomObject 
+replaceClusterCustomObject
   :: (Consumes ReplaceClusterCustomObject contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Body -- ^ "body" -  The JSON schema of the Resource to replace.
@@ -1017,7 +1017,7 @@ instance HasOptionalParam ReplaceClusterCustomObject DryRun where
 instance HasOptionalParam ReplaceClusterCustomObject FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceClusterCustomObject mtype
 
@@ -1033,7 +1033,7 @@ instance Produces ReplaceClusterCustomObject MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceClusterCustomObjectScale 
+replaceClusterCustomObjectScale
   :: (Consumes ReplaceClusterCustomObjectScale contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1060,7 +1060,7 @@ instance HasOptionalParam ReplaceClusterCustomObjectScale DryRun where
 instance HasOptionalParam ReplaceClusterCustomObjectScale FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceClusterCustomObjectScale mtype
 
@@ -1080,7 +1080,7 @@ instance Produces ReplaceClusterCustomObjectScale MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceClusterCustomObjectStatus 
+replaceClusterCustomObjectStatus
   :: (Consumes ReplaceClusterCustomObjectStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1107,7 +1107,7 @@ instance HasOptionalParam ReplaceClusterCustomObjectStatus DryRun where
 instance HasOptionalParam ReplaceClusterCustomObjectStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceClusterCustomObjectStatus mtype
 
@@ -1127,7 +1127,7 @@ instance Produces ReplaceClusterCustomObjectStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedCustomObject 
+replaceNamespacedCustomObject
   :: (Consumes ReplaceNamespacedCustomObject contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Body -- ^ "body" -  The JSON schema of the Resource to replace.
@@ -1156,7 +1156,7 @@ instance HasOptionalParam ReplaceNamespacedCustomObject DryRun where
 instance HasOptionalParam ReplaceNamespacedCustomObject FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedCustomObject mtype
 
@@ -1172,7 +1172,7 @@ instance Produces ReplaceNamespacedCustomObject MimeJSON
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedCustomObjectScale 
+replaceNamespacedCustomObjectScale
   :: (Consumes ReplaceNamespacedCustomObjectScale contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1200,7 +1200,7 @@ instance HasOptionalParam ReplaceNamespacedCustomObjectScale DryRun where
 instance HasOptionalParam ReplaceNamespacedCustomObjectScale FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedCustomObjectScale mtype
 
@@ -1220,7 +1220,7 @@ instance Produces ReplaceNamespacedCustomObjectScale MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedCustomObjectStatus 
+replaceNamespacedCustomObjectStatus
   :: (Consumes ReplaceNamespacedCustomObjectStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1248,7 +1248,7 @@ instance HasOptionalParam ReplaceNamespacedCustomObjectStatus DryRun where
 instance HasOptionalParam ReplaceNamespacedCustomObjectStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedCustomObjectStatus mtype
 

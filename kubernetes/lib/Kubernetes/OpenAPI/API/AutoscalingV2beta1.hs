@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedHorizontalPodAutoscaler 
+createNamespacedHorizontalPodAutoscaler
   :: (Consumes CreateNamespacedHorizontalPodAutoscaler contentType, MimeRender contentType V2beta1HorizontalPodAutoscaler)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -94,7 +94,7 @@ instance HasOptionalParam CreateNamespacedHorizontalPodAutoscaler DryRun where
 instance HasOptionalParam CreateNamespacedHorizontalPodAutoscaler FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedHorizontalPodAutoscaler mtype
 
@@ -114,7 +114,7 @@ instance Produces CreateNamespacedHorizontalPodAutoscaler MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedHorizontalPodAutoscaler 
+deleteCollectionNamespacedHorizontalPodAutoscaler
   :: (Consumes DeleteCollectionNamespacedHorizontalPodAutoscaler contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -186,7 +186,7 @@ instance HasOptionalParam DeleteCollectionNamespacedHorizontalPodAutoscaler Reso
 instance HasOptionalParam DeleteCollectionNamespacedHorizontalPodAutoscaler TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedHorizontalPodAutoscaler mtype
 
@@ -206,7 +206,7 @@ instance Produces DeleteCollectionNamespacedHorizontalPodAutoscaler MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedHorizontalPodAutoscaler 
+deleteNamespacedHorizontalPodAutoscaler
   :: (Consumes DeleteNamespacedHorizontalPodAutoscaler contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -244,7 +244,7 @@ instance HasOptionalParam DeleteNamespacedHorizontalPodAutoscaler OrphanDependen
 instance HasOptionalParam DeleteNamespacedHorizontalPodAutoscaler PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedHorizontalPodAutoscaler mtype
 
@@ -264,7 +264,7 @@ instance Produces DeleteNamespacedHorizontalPodAutoscaler MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -288,7 +288,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listHorizontalPodAutoscalerForAllNamespaces 
+listHorizontalPodAutoscalerForAllNamespaces
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListHorizontalPodAutoscalerForAllNamespaces MimeNoContent V2beta1HorizontalPodAutoscalerList accept
 listHorizontalPodAutoscalerForAllNamespaces  _ =
@@ -366,7 +366,7 @@ instance Produces ListHorizontalPodAutoscalerForAllNamespaces MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedHorizontalPodAutoscaler 
+listNamespacedHorizontalPodAutoscaler
   :: Accept accept -- ^ request accept ('MimeType')
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
   -> KubernetesRequest ListNamespacedHorizontalPodAutoscaler MimeNoContent V2beta1HorizontalPodAutoscalerList accept
@@ -445,7 +445,7 @@ instance Produces ListNamespacedHorizontalPodAutoscaler MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedHorizontalPodAutoscaler 
+patchNamespacedHorizontalPodAutoscaler
   :: (Consumes PatchNamespacedHorizontalPodAutoscaler contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -506,7 +506,7 @@ instance Produces PatchNamespacedHorizontalPodAutoscaler MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedHorizontalPodAutoscalerStatus 
+patchNamespacedHorizontalPodAutoscalerStatus
   :: (Consumes PatchNamespacedHorizontalPodAutoscalerStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -567,7 +567,7 @@ instance Produces PatchNamespacedHorizontalPodAutoscalerStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedHorizontalPodAutoscaler 
+readNamespacedHorizontalPodAutoscaler
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the HorizontalPodAutoscaler
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -608,7 +608,7 @@ instance Produces ReadNamespacedHorizontalPodAutoscaler MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedHorizontalPodAutoscalerStatus 
+readNamespacedHorizontalPodAutoscalerStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the HorizontalPodAutoscaler
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -639,7 +639,7 @@ instance Produces ReadNamespacedHorizontalPodAutoscalerStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedHorizontalPodAutoscaler 
+replaceNamespacedHorizontalPodAutoscaler
   :: (Consumes ReplaceNamespacedHorizontalPodAutoscaler contentType, MimeRender contentType V2beta1HorizontalPodAutoscaler)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -669,7 +669,7 @@ instance HasOptionalParam ReplaceNamespacedHorizontalPodAutoscaler DryRun where
 instance HasOptionalParam ReplaceNamespacedHorizontalPodAutoscaler FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedHorizontalPodAutoscaler mtype
 
@@ -689,7 +689,7 @@ instance Produces ReplaceNamespacedHorizontalPodAutoscaler MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedHorizontalPodAutoscalerStatus 
+replaceNamespacedHorizontalPodAutoscalerStatus
   :: (Consumes ReplaceNamespacedHorizontalPodAutoscalerStatus contentType, MimeRender contentType V2beta1HorizontalPodAutoscaler)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -719,7 +719,7 @@ instance HasOptionalParam ReplaceNamespacedHorizontalPodAutoscalerStatus DryRun 
 instance HasOptionalParam ReplaceNamespacedHorizontalPodAutoscalerStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedHorizontalPodAutoscalerStatus mtype
 

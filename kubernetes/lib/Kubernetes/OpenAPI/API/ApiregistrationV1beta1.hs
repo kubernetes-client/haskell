@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createAPIService 
+createAPIService
   :: (Consumes CreateAPIService contentType, MimeRender contentType V1beta1APIService)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -93,7 +93,7 @@ instance HasOptionalParam CreateAPIService DryRun where
 instance HasOptionalParam CreateAPIService FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateAPIService mtype
 
@@ -113,7 +113,7 @@ instance Produces CreateAPIService MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteAPIService 
+deleteAPIService
   :: (Consumes DeleteAPIService contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -150,7 +150,7 @@ instance HasOptionalParam DeleteAPIService OrphanDependents where
 instance HasOptionalParam DeleteAPIService PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteAPIService mtype
 
@@ -170,7 +170,7 @@ instance Produces DeleteAPIService MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionAPIService 
+deleteCollectionAPIService
   :: (Consumes DeleteCollectionAPIService contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -241,7 +241,7 @@ instance HasOptionalParam DeleteCollectionAPIService ResourceVersionMatch where
 instance HasOptionalParam DeleteCollectionAPIService TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionAPIService mtype
 
@@ -261,7 +261,7 @@ instance Produces DeleteCollectionAPIService MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -285,7 +285,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listAPIService 
+listAPIService
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListAPIService MimeNoContent V1beta1APIServiceList accept
 listAPIService  _ =
@@ -363,7 +363,7 @@ instance Produces ListAPIService MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchAPIService 
+patchAPIService
   :: (Consumes PatchAPIService contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -423,7 +423,7 @@ instance Produces PatchAPIService MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchAPIServiceStatus 
+patchAPIServiceStatus
   :: (Consumes PatchAPIServiceStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -483,7 +483,7 @@ instance Produces PatchAPIServiceStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readAPIService 
+readAPIService
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the APIService
   -> KubernetesRequest ReadAPIService MimeNoContent V1beta1APIService accept
@@ -523,7 +523,7 @@ instance Produces ReadAPIService MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readAPIServiceStatus 
+readAPIServiceStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the APIService
   -> KubernetesRequest ReadAPIServiceStatus MimeNoContent V1beta1APIService accept
@@ -553,7 +553,7 @@ instance Produces ReadAPIServiceStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceAPIService 
+replaceAPIService
   :: (Consumes ReplaceAPIService contentType, MimeRender contentType V1beta1APIService)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -582,7 +582,7 @@ instance HasOptionalParam ReplaceAPIService DryRun where
 instance HasOptionalParam ReplaceAPIService FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceAPIService mtype
 
@@ -602,7 +602,7 @@ instance Produces ReplaceAPIService MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceAPIServiceStatus 
+replaceAPIServiceStatus
   :: (Consumes ReplaceAPIServiceStatus contentType, MimeRender contentType V1beta1APIService)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -631,7 +631,7 @@ instance HasOptionalParam ReplaceAPIServiceStatus DryRun where
 instance HasOptionalParam ReplaceAPIServiceStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceAPIServiceStatus mtype
 

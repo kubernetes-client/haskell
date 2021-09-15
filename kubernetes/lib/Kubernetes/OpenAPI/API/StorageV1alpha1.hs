@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createVolumeAttachment 
+createVolumeAttachment
   :: (Consumes CreateVolumeAttachment contentType, MimeRender contentType V1alpha1VolumeAttachment)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -93,7 +93,7 @@ instance HasOptionalParam CreateVolumeAttachment DryRun where
 instance HasOptionalParam CreateVolumeAttachment FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateVolumeAttachment mtype
 
@@ -113,7 +113,7 @@ instance Produces CreateVolumeAttachment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionVolumeAttachment 
+deleteCollectionVolumeAttachment
   :: (Consumes DeleteCollectionVolumeAttachment contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -184,7 +184,7 @@ instance HasOptionalParam DeleteCollectionVolumeAttachment ResourceVersionMatch 
 instance HasOptionalParam DeleteCollectionVolumeAttachment TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionVolumeAttachment mtype
 
@@ -204,7 +204,7 @@ instance Produces DeleteCollectionVolumeAttachment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteVolumeAttachment 
+deleteVolumeAttachment
   :: (Consumes DeleteVolumeAttachment contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -241,7 +241,7 @@ instance HasOptionalParam DeleteVolumeAttachment OrphanDependents where
 instance HasOptionalParam DeleteVolumeAttachment PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteVolumeAttachment mtype
 
@@ -261,7 +261,7 @@ instance Produces DeleteVolumeAttachment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -285,7 +285,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listVolumeAttachment 
+listVolumeAttachment
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListVolumeAttachment MimeNoContent V1alpha1VolumeAttachmentList accept
 listVolumeAttachment  _ =
@@ -363,7 +363,7 @@ instance Produces ListVolumeAttachment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchVolumeAttachment 
+patchVolumeAttachment
   :: (Consumes PatchVolumeAttachment contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -423,7 +423,7 @@ instance Produces PatchVolumeAttachment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readVolumeAttachment 
+readVolumeAttachment
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the VolumeAttachment
   -> KubernetesRequest ReadVolumeAttachment MimeNoContent V1alpha1VolumeAttachment accept
@@ -463,7 +463,7 @@ instance Produces ReadVolumeAttachment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceVolumeAttachment 
+replaceVolumeAttachment
   :: (Consumes ReplaceVolumeAttachment contentType, MimeRender contentType V1alpha1VolumeAttachment)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -492,7 +492,7 @@ instance HasOptionalParam ReplaceVolumeAttachment DryRun where
 instance HasOptionalParam ReplaceVolumeAttachment FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceVolumeAttachment mtype
 

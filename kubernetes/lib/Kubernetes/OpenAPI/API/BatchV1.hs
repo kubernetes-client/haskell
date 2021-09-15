@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createNamespacedJob 
+createNamespacedJob
   :: (Consumes CreateNamespacedJob contentType, MimeRender contentType V1Job)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -94,7 +94,7 @@ instance HasOptionalParam CreateNamespacedJob DryRun where
 instance HasOptionalParam CreateNamespacedJob FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateNamespacedJob mtype
 
@@ -114,7 +114,7 @@ instance Produces CreateNamespacedJob MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionNamespacedJob 
+deleteCollectionNamespacedJob
   :: (Consumes DeleteCollectionNamespacedJob contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -186,7 +186,7 @@ instance HasOptionalParam DeleteCollectionNamespacedJob ResourceVersionMatch whe
 instance HasOptionalParam DeleteCollectionNamespacedJob TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionNamespacedJob mtype
 
@@ -206,7 +206,7 @@ instance Produces DeleteCollectionNamespacedJob MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteNamespacedJob 
+deleteNamespacedJob
   :: (Consumes DeleteNamespacedJob contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -244,7 +244,7 @@ instance HasOptionalParam DeleteNamespacedJob OrphanDependents where
 instance HasOptionalParam DeleteNamespacedJob PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteNamespacedJob mtype
 
@@ -264,7 +264,7 @@ instance Produces DeleteNamespacedJob MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -288,7 +288,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listJobForAllNamespaces 
+listJobForAllNamespaces
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListJobForAllNamespaces MimeNoContent V1JobList accept
 listJobForAllNamespaces  _ =
@@ -366,7 +366,7 @@ instance Produces ListJobForAllNamespaces MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listNamespacedJob 
+listNamespacedJob
   :: Accept accept -- ^ request accept ('MimeType')
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
   -> KubernetesRequest ListNamespacedJob MimeNoContent V1JobList accept
@@ -445,7 +445,7 @@ instance Produces ListNamespacedJob MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedJob 
+patchNamespacedJob
   :: (Consumes PatchNamespacedJob contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -506,7 +506,7 @@ instance Produces PatchNamespacedJob MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchNamespacedJobStatus 
+patchNamespacedJobStatus
   :: (Consumes PatchNamespacedJobStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -567,7 +567,7 @@ instance Produces PatchNamespacedJobStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedJob 
+readNamespacedJob
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the Job
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -608,7 +608,7 @@ instance Produces ReadNamespacedJob MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readNamespacedJobStatus 
+readNamespacedJobStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the Job
   -> Namespace -- ^ "namespace" -  object name and auth scope, such as for teams and projects
@@ -639,7 +639,7 @@ instance Produces ReadNamespacedJobStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedJob 
+replaceNamespacedJob
   :: (Consumes ReplaceNamespacedJob contentType, MimeRender contentType V1Job)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -669,7 +669,7 @@ instance HasOptionalParam ReplaceNamespacedJob DryRun where
 instance HasOptionalParam ReplaceNamespacedJob FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedJob mtype
 
@@ -689,7 +689,7 @@ instance Produces ReplaceNamespacedJob MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceNamespacedJobStatus 
+replaceNamespacedJobStatus
   :: (Consumes ReplaceNamespacedJobStatus contentType, MimeRender contentType V1Job)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -719,7 +719,7 @@ instance HasOptionalParam ReplaceNamespacedJobStatus DryRun where
 instance HasOptionalParam ReplaceNamespacedJobStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceNamespacedJobStatus mtype
 

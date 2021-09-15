@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createCSIDriver 
+createCSIDriver
   :: (Consumes CreateCSIDriver contentType, MimeRender contentType V1CSIDriver)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -93,7 +93,7 @@ instance HasOptionalParam CreateCSIDriver DryRun where
 instance HasOptionalParam CreateCSIDriver FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateCSIDriver mtype
 
@@ -113,7 +113,7 @@ instance Produces CreateCSIDriver MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createCSINode 
+createCSINode
   :: (Consumes CreateCSINode contentType, MimeRender contentType V1CSINode)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -141,7 +141,7 @@ instance HasOptionalParam CreateCSINode DryRun where
 instance HasOptionalParam CreateCSINode FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateCSINode mtype
 
@@ -161,7 +161,7 @@ instance Produces CreateCSINode MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createStorageClass 
+createStorageClass
   :: (Consumes CreateStorageClass contentType, MimeRender contentType V1StorageClass)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -189,7 +189,7 @@ instance HasOptionalParam CreateStorageClass DryRun where
 instance HasOptionalParam CreateStorageClass FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateStorageClass mtype
 
@@ -209,7 +209,7 @@ instance Produces CreateStorageClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createVolumeAttachment 
+createVolumeAttachment
   :: (Consumes CreateVolumeAttachment contentType, MimeRender contentType V1VolumeAttachment)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -237,7 +237,7 @@ instance HasOptionalParam CreateVolumeAttachment DryRun where
 instance HasOptionalParam CreateVolumeAttachment FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateVolumeAttachment mtype
 
@@ -257,7 +257,7 @@ instance Produces CreateVolumeAttachment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCSIDriver 
+deleteCSIDriver
   :: (Consumes DeleteCSIDriver contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -294,7 +294,7 @@ instance HasOptionalParam DeleteCSIDriver OrphanDependents where
 instance HasOptionalParam DeleteCSIDriver PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCSIDriver mtype
 
@@ -314,7 +314,7 @@ instance Produces DeleteCSIDriver MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCSINode 
+deleteCSINode
   :: (Consumes DeleteCSINode contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -351,7 +351,7 @@ instance HasOptionalParam DeleteCSINode OrphanDependents where
 instance HasOptionalParam DeleteCSINode PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCSINode mtype
 
@@ -371,7 +371,7 @@ instance Produces DeleteCSINode MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionCSIDriver 
+deleteCollectionCSIDriver
   :: (Consumes DeleteCollectionCSIDriver contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -442,7 +442,7 @@ instance HasOptionalParam DeleteCollectionCSIDriver ResourceVersionMatch where
 instance HasOptionalParam DeleteCollectionCSIDriver TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionCSIDriver mtype
 
@@ -462,7 +462,7 @@ instance Produces DeleteCollectionCSIDriver MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionCSINode 
+deleteCollectionCSINode
   :: (Consumes DeleteCollectionCSINode contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -533,7 +533,7 @@ instance HasOptionalParam DeleteCollectionCSINode ResourceVersionMatch where
 instance HasOptionalParam DeleteCollectionCSINode TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionCSINode mtype
 
@@ -553,7 +553,7 @@ instance Produces DeleteCollectionCSINode MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionStorageClass 
+deleteCollectionStorageClass
   :: (Consumes DeleteCollectionStorageClass contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -624,7 +624,7 @@ instance HasOptionalParam DeleteCollectionStorageClass ResourceVersionMatch wher
 instance HasOptionalParam DeleteCollectionStorageClass TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionStorageClass mtype
 
@@ -644,7 +644,7 @@ instance Produces DeleteCollectionStorageClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionVolumeAttachment 
+deleteCollectionVolumeAttachment
   :: (Consumes DeleteCollectionVolumeAttachment contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -715,7 +715,7 @@ instance HasOptionalParam DeleteCollectionVolumeAttachment ResourceVersionMatch 
 instance HasOptionalParam DeleteCollectionVolumeAttachment TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionVolumeAttachment mtype
 
@@ -735,7 +735,7 @@ instance Produces DeleteCollectionVolumeAttachment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteStorageClass 
+deleteStorageClass
   :: (Consumes DeleteStorageClass contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -772,7 +772,7 @@ instance HasOptionalParam DeleteStorageClass OrphanDependents where
 instance HasOptionalParam DeleteStorageClass PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteStorageClass mtype
 
@@ -792,7 +792,7 @@ instance Produces DeleteStorageClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteVolumeAttachment 
+deleteVolumeAttachment
   :: (Consumes DeleteVolumeAttachment contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -829,7 +829,7 @@ instance HasOptionalParam DeleteVolumeAttachment OrphanDependents where
 instance HasOptionalParam DeleteVolumeAttachment PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteVolumeAttachment mtype
 
@@ -849,7 +849,7 @@ instance Produces DeleteVolumeAttachment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -873,7 +873,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listCSIDriver 
+listCSIDriver
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListCSIDriver MimeNoContent V1CSIDriverList accept
 listCSIDriver  _ =
@@ -951,7 +951,7 @@ instance Produces ListCSIDriver MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listCSINode 
+listCSINode
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListCSINode MimeNoContent V1CSINodeList accept
 listCSINode  _ =
@@ -1029,7 +1029,7 @@ instance Produces ListCSINode MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listStorageClass 
+listStorageClass
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListStorageClass MimeNoContent V1StorageClassList accept
 listStorageClass  _ =
@@ -1107,7 +1107,7 @@ instance Produces ListStorageClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listVolumeAttachment 
+listVolumeAttachment
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListVolumeAttachment MimeNoContent V1VolumeAttachmentList accept
 listVolumeAttachment  _ =
@@ -1185,7 +1185,7 @@ instance Produces ListVolumeAttachment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchCSIDriver 
+patchCSIDriver
   :: (Consumes PatchCSIDriver contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1245,7 +1245,7 @@ instance Produces PatchCSIDriver MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchCSINode 
+patchCSINode
   :: (Consumes PatchCSINode contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1305,7 +1305,7 @@ instance Produces PatchCSINode MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchStorageClass 
+patchStorageClass
   :: (Consumes PatchStorageClass contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1365,7 +1365,7 @@ instance Produces PatchStorageClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchVolumeAttachment 
+patchVolumeAttachment
   :: (Consumes PatchVolumeAttachment contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1425,7 +1425,7 @@ instance Produces PatchVolumeAttachment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchVolumeAttachmentStatus 
+patchVolumeAttachmentStatus
   :: (Consumes PatchVolumeAttachmentStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1485,7 +1485,7 @@ instance Produces PatchVolumeAttachmentStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readCSIDriver 
+readCSIDriver
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the CSIDriver
   -> KubernetesRequest ReadCSIDriver MimeNoContent V1CSIDriver accept
@@ -1525,7 +1525,7 @@ instance Produces ReadCSIDriver MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readCSINode 
+readCSINode
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the CSINode
   -> KubernetesRequest ReadCSINode MimeNoContent V1CSINode accept
@@ -1565,7 +1565,7 @@ instance Produces ReadCSINode MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readStorageClass 
+readStorageClass
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the StorageClass
   -> KubernetesRequest ReadStorageClass MimeNoContent V1StorageClass accept
@@ -1605,7 +1605,7 @@ instance Produces ReadStorageClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readVolumeAttachment 
+readVolumeAttachment
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the VolumeAttachment
   -> KubernetesRequest ReadVolumeAttachment MimeNoContent V1VolumeAttachment accept
@@ -1645,7 +1645,7 @@ instance Produces ReadVolumeAttachment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readVolumeAttachmentStatus 
+readVolumeAttachmentStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the VolumeAttachment
   -> KubernetesRequest ReadVolumeAttachmentStatus MimeNoContent V1VolumeAttachment accept
@@ -1675,7 +1675,7 @@ instance Produces ReadVolumeAttachmentStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceCSIDriver 
+replaceCSIDriver
   :: (Consumes ReplaceCSIDriver contentType, MimeRender contentType V1CSIDriver)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1704,7 +1704,7 @@ instance HasOptionalParam ReplaceCSIDriver DryRun where
 instance HasOptionalParam ReplaceCSIDriver FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceCSIDriver mtype
 
@@ -1724,7 +1724,7 @@ instance Produces ReplaceCSIDriver MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceCSINode 
+replaceCSINode
   :: (Consumes ReplaceCSINode contentType, MimeRender contentType V1CSINode)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1753,7 +1753,7 @@ instance HasOptionalParam ReplaceCSINode DryRun where
 instance HasOptionalParam ReplaceCSINode FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceCSINode mtype
 
@@ -1773,7 +1773,7 @@ instance Produces ReplaceCSINode MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceStorageClass 
+replaceStorageClass
   :: (Consumes ReplaceStorageClass contentType, MimeRender contentType V1StorageClass)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1802,7 +1802,7 @@ instance HasOptionalParam ReplaceStorageClass DryRun where
 instance HasOptionalParam ReplaceStorageClass FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceStorageClass mtype
 
@@ -1822,7 +1822,7 @@ instance Produces ReplaceStorageClass MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceVolumeAttachment 
+replaceVolumeAttachment
   :: (Consumes ReplaceVolumeAttachment contentType, MimeRender contentType V1VolumeAttachment)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1851,7 +1851,7 @@ instance HasOptionalParam ReplaceVolumeAttachment DryRun where
 instance HasOptionalParam ReplaceVolumeAttachment FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceVolumeAttachment mtype
 
@@ -1871,7 +1871,7 @@ instance Produces ReplaceVolumeAttachment MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceVolumeAttachmentStatus 
+replaceVolumeAttachmentStatus
   :: (Consumes ReplaceVolumeAttachmentStatus contentType, MimeRender contentType V1VolumeAttachment)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -1900,7 +1900,7 @@ instance HasOptionalParam ReplaceVolumeAttachmentStatus DryRun where
 instance HasOptionalParam ReplaceVolumeAttachmentStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceVolumeAttachmentStatus mtype
 

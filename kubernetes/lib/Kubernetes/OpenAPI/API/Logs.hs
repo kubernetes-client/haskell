@@ -63,7 +63,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-logFileHandler 
+logFileHandler
   :: Logpath -- ^ "logpath" -  path to the log
   -> KubernetesRequest LogFileHandler MimeNoContent NoContent MimeNoContent
 logFileHandler (Logpath logpath) =
@@ -80,7 +80,7 @@ instance Produces LogFileHandler MimeNoContent
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-logFileListHandler 
+logFileListHandler
   :: KubernetesRequest LogFileListHandler MimeNoContent NoContent MimeNoContent
 logFileListHandler =
   _mkRequest "GET" ["/logs/"]

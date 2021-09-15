@@ -65,7 +65,7 @@ import qualified Prelude as P
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-createCertificateSigningRequest 
+createCertificateSigningRequest
   :: (Consumes CreateCertificateSigningRequest contentType, MimeRender contentType V1beta1CertificateSigningRequest)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -93,7 +93,7 @@ instance HasOptionalParam CreateCertificateSigningRequest DryRun where
 instance HasOptionalParam CreateCertificateSigningRequest FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes CreateCertificateSigningRequest mtype
 
@@ -113,7 +113,7 @@ instance Produces CreateCertificateSigningRequest MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCertificateSigningRequest 
+deleteCertificateSigningRequest
   :: (Consumes DeleteCertificateSigningRequest contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -150,7 +150,7 @@ instance HasOptionalParam DeleteCertificateSigningRequest OrphanDependents where
 instance HasOptionalParam DeleteCertificateSigningRequest PropagationPolicy where
   applyOptionalParam req (PropagationPolicy xs) =
     req `addQuery` toQuery ("propagationPolicy", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCertificateSigningRequest mtype
 
@@ -170,7 +170,7 @@ instance Produces DeleteCertificateSigningRequest MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-deleteCollectionCertificateSigningRequest 
+deleteCollectionCertificateSigningRequest
   :: (Consumes DeleteCollectionCertificateSigningRequest contentType)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -241,7 +241,7 @@ instance HasOptionalParam DeleteCollectionCertificateSigningRequest ResourceVers
 instance HasOptionalParam DeleteCollectionCertificateSigningRequest TimeoutSeconds where
   applyOptionalParam req (TimeoutSeconds xs) =
     req `addQuery` toQuery ("timeoutSeconds", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes DeleteCollectionCertificateSigningRequest mtype
 
@@ -261,7 +261,7 @@ instance Produces DeleteCollectionCertificateSigningRequest MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-getAPIResources 
+getAPIResources
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList accept
 getAPIResources  _ =
@@ -285,7 +285,7 @@ instance Produces GetAPIResources MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-listCertificateSigningRequest 
+listCertificateSigningRequest
   :: Accept accept -- ^ request accept ('MimeType')
   -> KubernetesRequest ListCertificateSigningRequest MimeNoContent V1beta1CertificateSigningRequestList accept
 listCertificateSigningRequest  _ =
@@ -363,7 +363,7 @@ instance Produces ListCertificateSigningRequest MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchCertificateSigningRequest 
+patchCertificateSigningRequest
   :: (Consumes PatchCertificateSigningRequest contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -423,7 +423,7 @@ instance Produces PatchCertificateSigningRequest MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchCertificateSigningRequestApproval 
+patchCertificateSigningRequestApproval
   :: (Consumes PatchCertificateSigningRequestApproval contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -483,7 +483,7 @@ instance Produces PatchCertificateSigningRequestApproval MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-patchCertificateSigningRequestStatus 
+patchCertificateSigningRequestStatus
   :: (Consumes PatchCertificateSigningRequestStatus contentType, MimeRender contentType Body)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -543,7 +543,7 @@ instance Produces PatchCertificateSigningRequestStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readCertificateSigningRequest 
+readCertificateSigningRequest
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the CertificateSigningRequest
   -> KubernetesRequest ReadCertificateSigningRequest MimeNoContent V1beta1CertificateSigningRequest accept
@@ -583,7 +583,7 @@ instance Produces ReadCertificateSigningRequest MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readCertificateSigningRequestApproval 
+readCertificateSigningRequestApproval
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the CertificateSigningRequest
   -> KubernetesRequest ReadCertificateSigningRequestApproval MimeNoContent V1beta1CertificateSigningRequest accept
@@ -613,7 +613,7 @@ instance Produces ReadCertificateSigningRequestApproval MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-readCertificateSigningRequestStatus 
+readCertificateSigningRequestStatus
   :: Accept accept -- ^ request accept ('MimeType')
   -> Name -- ^ "name" -  name of the CertificateSigningRequest
   -> KubernetesRequest ReadCertificateSigningRequestStatus MimeNoContent V1beta1CertificateSigningRequest accept
@@ -643,7 +643,7 @@ instance Produces ReadCertificateSigningRequestStatus MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceCertificateSigningRequest 
+replaceCertificateSigningRequest
   :: (Consumes ReplaceCertificateSigningRequest contentType, MimeRender contentType V1beta1CertificateSigningRequest)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -672,7 +672,7 @@ instance HasOptionalParam ReplaceCertificateSigningRequest DryRun where
 instance HasOptionalParam ReplaceCertificateSigningRequest FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceCertificateSigningRequest mtype
 
@@ -692,7 +692,7 @@ instance Produces ReplaceCertificateSigningRequest MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceCertificateSigningRequestApproval 
+replaceCertificateSigningRequestApproval
   :: (Consumes ReplaceCertificateSigningRequestApproval contentType, MimeRender contentType V1beta1CertificateSigningRequest)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -721,7 +721,7 @@ instance HasOptionalParam ReplaceCertificateSigningRequestApproval DryRun where
 instance HasOptionalParam ReplaceCertificateSigningRequestApproval FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceCertificateSigningRequestApproval mtype
 
@@ -741,7 +741,7 @@ instance Produces ReplaceCertificateSigningRequestApproval MimeYaml
 -- 
 -- AuthMethod: 'AuthApiKeyBearerToken'
 -- 
-replaceCertificateSigningRequestStatus 
+replaceCertificateSigningRequestStatus
   :: (Consumes ReplaceCertificateSigningRequestStatus contentType, MimeRender contentType V1beta1CertificateSigningRequest)
   => ContentType contentType -- ^ request content-type ('MimeType')
   -> Accept accept -- ^ request accept ('MimeType')
@@ -770,7 +770,7 @@ instance HasOptionalParam ReplaceCertificateSigningRequestStatus DryRun where
 instance HasOptionalParam ReplaceCertificateSigningRequestStatus FieldManager where
   applyOptionalParam req (FieldManager xs) =
     req `addQuery` toQuery ("fieldManager", Just xs)
-    
+
 -- | @*/*@
 instance MimeType mtype => Consumes ReplaceCertificateSigningRequestStatus mtype
 
