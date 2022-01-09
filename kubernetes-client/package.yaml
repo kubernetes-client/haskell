@@ -1,5 +1,5 @@
 name: kubernetes-client
-version: 0.4.1.0
+version: 0.4.2.0
 description: |
   Client library for interacting with a Kubernetes cluster.
 
@@ -49,7 +49,7 @@ dependencies:
   - http-client >=0.5 && <0.8
   - http-client-tls >=0.3
   - jose-jwt >=0.8
-  - kubernetes-client-core ==0.4.1.0
+  - kubernetes-client-core ==0.4.2.0
   - microlens >=0.4
   - mtl >=2.2
   - oidc-client >=0.4
