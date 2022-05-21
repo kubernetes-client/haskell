@@ -1,6 +1,8 @@
 {-# LANGUAGE FlexibleContexts  #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards   #-}
+{-# LANGUAGE LambdaCase        #-}
+{-# LANGUAGE CPP               #-}
 module Kubernetes.Client.Auth.OIDC
   (oidcAuth, OIDCCache, cachedOIDCAuth)
 where
@@ -8,12 +10,14 @@ where
 import Control.Applicative
 import Control.Concurrent.STM
 import Control.Exception.Safe                (Exception, throwM)
+import Control.Monad.Except                  (runExceptT)
 import Data.Either.Combinators
 import Data.Function                         ((&))
 import Data.Map                              (Map)
 import Data.Maybe
 import Data.Monoid                           ((<>))
 import Data.Text
+import Data.Text.Encoding                    (encodeUtf8)
 import Data.Time.Clock.POSIX                 (getPOSIXTime)
 import Jose.Jwt
 import Kubernetes.Client.Auth.Internal.Types
@@ -41,6 +45,9 @@ data OIDCAuth = OIDCAuth { issuerURL        :: Text
                          , tlsParams        :: TLS.ClientParams
                          , idTokenTVar      :: TVar(Maybe Text)
                          , refreshTokenTVar :: TVar(Maybe Text)
+#if MIN_VERSION_hoauth2(2,3,0)
+                         , redirectUri      :: URI
+#endif
                          }
 
 -- | Cache OIDCAuth based on issuerURL and clientID.
@@ -93,14 +100,43 @@ fetchToken auth@(OIDCAuth{..}) = do
       tokenEndpoint <- fetchTokenEndpoint mgr auth
       tokenURI <- parseURI strictURIParserOptions (Text.encodeUtf8 tokenEndpoint)
                   & either (throwM . OIDCURIException) pure
+
+#if MIN_VERSION_hoauth2(2,3,0)
+      let oauth = OAuth2{ oauth2ClientId = clientID
+                        , oauth2ClientSecret = clientSecret
+                        , oauth2AuthorizeEndpoint = tokenURI
+                        , oauth2TokenEndpoint = tokenURI
+                        , oauth2RedirectUri = redirectUri
+                        }
+#elif MIN_VERSION_hoauth2(2,2,0)
+      let oauth = OAuth2{ oauth2ClientId = clientID
+                        , oauth2ClientSecret = clientSecret
+                        , oauth2AuthorizeEndpoint = tokenURI
+                        , oauth2TokenEndpoint = tokenURI
+                        , oauth2RedirectUri = Nothing
+                        }
+#elif MIN_VERSION_hoauth2(2,0,0)
+      let oauth = OAuth2{ oauth2ClientId = clientID
+                        , oauth2ClientSecret = Just clientSecret
+                        , oauth2AuthorizeEndpoint = tokenURI
+                        , oauth2TokenEndpoint = tokenURI
+                        , oauth2RedirectUri = Nothing
+                        }
+#else
       let oauth = OAuth2{ oauthClientId = clientID
                         , oauthClientSecret = Just clientSecret
                         , oauthAccessTokenEndpoint = tokenURI
                         , oauthOAuthorizeEndpoint = tokenURI
                         , oauthCallback = Nothing
                         }
-      oauthToken <- refreshAccessToken mgr oauth (RefreshToken token)
-                    >>= either (throwM . OIDCOAuthException) pure
+#endif
+
+#if MIN_VERSION_hoauth2(2,2,0)
+      oauthToken <- runExceptT (refreshAccessToken mgr oauth (RefreshToken token)) >>= either (throwM . OIDCOAuthException) pure
+#else
+      oauthToken <- (refreshAccessToken mgr oauth (RefreshToken token)) >>= either (throwM . OIDCOAuthException) pure
+#endif
+
       case OAuth.idToken oauthToken of
         Nothing -> throwM $ OIDCGetTokenException "token response did not contain an id_token, either the scope \"openid\" wasn't requested upon login, or the provider doesn't support id_tokens as part of the refresh response."
         Just (IdToken t) -> do
@@ -152,6 +188,15 @@ parseOIDCAuthInfo authInfo = do
   eitherTLSParams <- parseCA authInfo
   idTokenTVar <- atomically $ newTVar $ Map.lookup "id-token" authInfo
   refreshTokenTVar <- atomically $ newTVar $ Map.lookup "refresh-token" authInfo
+
+#if MIN_VERSION_hoauth2(2,3,0)
+  redirectUri <- case Map.lookup "redirect-uri" authInfo of
+    Nothing -> throwM $ OIDCAuthMissingInformation "redirect-uri"
+    Just raw -> case parseURI laxURIParserOptions $ encodeUtf8 raw of
+      Left err -> throwM $ OIDCAuthMissingInformation ("Couldn't parse redirect URI: " <> show err)
+      Right x -> return x
+#endif
+
   return $ do
     tlsParams <- mapLeft OIDCAuthCAParsingFailed eitherTLSParams
     issuerURL <- lookupEither "idp-issuer-url"
