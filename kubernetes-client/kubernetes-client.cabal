@@ -45,7 +45,7 @@ library
       src
   ghc-options: -Wall
   build-depends:
-      aeson >=1.2 && <1.6
+      aeson >=1.2 && <3
     , attoparsec >=0.13
     , base >=4.7 && <5.0
     , base64-bytestring
@@ -89,7 +89,7 @@ test-suite example
   hs-source-dirs:
       example
   build-depends:
-      aeson >=1.2 && <1.6
+      aeson >=1.2 && <3
     , attoparsec >=0.13
     , base >=4.7 && <5.0
     , base64-bytestring
@@ -139,7 +139,7 @@ test-suite spec
   hs-source-dirs:
       test
   build-depends:
-      aeson >=1.2 && <1.6
+      aeson >=1.2 && <3
     , attoparsec >=0.13
     , base >=4.7 && <5.0
     , base64-bytestring

@@ -37,7 +37,7 @@ dependencies:
   - base >=4.7 && <5.0
   - base64-bytestring
   - bytestring >=0.10
-  - aeson >=1.2 && <1.6
+  - aeson >=1.2 && <3
   - attoparsec >=0.13
   - jsonpath >=0.1 && <0.3
   - connection >=0.2
