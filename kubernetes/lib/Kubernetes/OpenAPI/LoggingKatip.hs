@@ -54,7 +54,7 @@ initLogContext = LG.initLogEnv "Kubernetes.OpenAPI" "dev"
 
 -- | Runs a Katip logging block with the Log environment
 runDefaultLogExecWithContext :: LogExecWithContext
-runDefaultLogExecWithContext x = LG.runKatipT x
+runDefaultLogExecWithContext = LG.runKatipT
 
 -- * stdout logger
 
