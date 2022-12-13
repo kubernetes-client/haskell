@@ -22,7 +22,7 @@ executables:
     ghc-options:
     - -Wall
 dependencies:
-- base
+- base < 5
 - containers
 - http-client
 - http-types

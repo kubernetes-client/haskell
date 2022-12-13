@@ -25,7 +25,7 @@ executable in-cluster
       in-cluster
   ghc-options: -Wall
   build-depends:
-      base
+      base <5
     , containers
     , http-client
     , http-types
@@ -44,7 +44,7 @@ executable simple
       simple
   ghc-options: -Wall
   build-depends:
-      base
+      base <5
     , containers
     , http-client
     , http-types
