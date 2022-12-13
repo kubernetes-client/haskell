@@ -1,0 +1,56 @@
+cabal-version: 1.12
+
+-- This file has been generated from package.yaml by hpack version 0.34.4.
+--
+-- see: https://github.com/sol/hpack
+
+name:           kubernetes-examples
+version:        0.1.0.1
+synopsis:       Kubernetes examples with Haskell
+description:    Examples to interact with Kubernetes using kubernetes-client and kubernetes-client-core
+category:       Examples, Kubernetes
+maintainer:     Shimin Guo <smguo2001@gmail.com>,
+                Akshay Mankar <itsakshaymankar@gmail.com>
+license:        Apache-2.0
+license-file:   LICENSE
+build-type:     Simple
+tested-with:
+    GHC==9.0.2, GHC==8.10.7
+
+executable in-cluster
+  main-is: Main.hs
+  other-modules:
+      Paths_kubernetes_examples
+  hs-source-dirs:
+      in-cluster
+  ghc-options: -Wall
+  build-depends:
+      base
+    , containers
+    , http-client
+    , http-types
+    , kubernetes-client
+    , kubernetes-client-core
+    , safe-exceptions
+    , stm
+    , text
+  default-language: Haskell2010
+
+executable simple
+  main-is: Main.hs
+  other-modules:
+      Paths_kubernetes_examples
+  hs-source-dirs:
+      simple
+  ghc-options: -Wall
+  build-depends:
+      base
+    , containers
+    , http-client
+    , http-types
+    , kubernetes-client
+    , kubernetes-client-core
+    , safe-exceptions
+    , stm
+    , text
+  default-language: Haskell2010

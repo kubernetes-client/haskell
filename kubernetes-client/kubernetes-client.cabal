@@ -16,6 +16,8 @@ maintainer:     Shimin Guo <smguo2001@gmail.com>,
 license:        Apache-2.0
 license-file:   LICENSE
 build-type:     Simple
+tested-with:
+    GHC==9.0.2, GHC==8.10.7
 extra-source-files:
     test/testdata/certs/certificate.pem
     test/testdata/certs/private-key.pem

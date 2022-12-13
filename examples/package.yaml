@@ -31,3 +31,4 @@ dependencies:
 - safe-exceptions
 - stm
 - text
+tested-with: GHC==9.0.2, GHC==8.10.7
