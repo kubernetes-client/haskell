@@ -15,6 +15,8 @@ library:
   source-dirs: src
   ghc-options:
   - -Wall
+build-tools:
+  - hspec-discover
 tested-with: GHC==9.0.2, GHC==8.10.7
 tests:
   spec:
