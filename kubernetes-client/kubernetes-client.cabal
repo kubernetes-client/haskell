@@ -44,6 +44,8 @@ library
   hs-source-dirs:
       src
   ghc-options: -Wall
+  build-tool-depends:
+      hspec-discover:hspec-discover
   build-depends:
       aeson >=1.2 && <3
     , attoparsec >=0.13
@@ -88,6 +90,8 @@ test-suite example
       Paths_kubernetes_client
   hs-source-dirs:
       example
+  build-tool-depends:
+      hspec-discover:hspec-discover
   build-depends:
       aeson >=1.2 && <3
     , attoparsec >=0.13
@@ -138,6 +142,8 @@ test-suite spec
       Paths_kubernetes_client
   hs-source-dirs:
       test
+  build-tool-depends:
+      hspec-discover:hspec-discover
   build-depends:
       aeson >=1.2 && <3
     , attoparsec >=0.13

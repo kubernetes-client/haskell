@@ -1,5 +1,6 @@
 # Kubernetes Haskell Client
 
+[![Stack and Cabal](https://github.com/kubernetes-client/haskell/actions/workflows/ci.yml/badge.svg)](https://github.com/kubernetes-client/haskell/actions/workflows/ci.yml)
 [![Build Status](https://travis-ci.org/kubernetes-client/haskell.svg?branch=master)](https://travis-ci.org/kubernetes-client/haskell)
 
 Haskell client for the [kubernetes](http://kubernetes.io/) API.

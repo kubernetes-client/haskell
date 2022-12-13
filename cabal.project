@@ -1,0 +1,4 @@
+packages:
+  kubernetes
+  kubernetes-client
+  examples
