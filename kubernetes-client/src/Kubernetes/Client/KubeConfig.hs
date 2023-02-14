@@ -5,6 +5,7 @@
 {-# LANGUAGE OverloadedStrings     #-}
 {-# LANGUAGE RecordWildCards       #-}
 {-# LANGUAGE ScopedTypeVariables   #-}
+{-# LANGUAGE CPP                   #-}
 
 {-|
 Module      : Kubernetes.KubeConfig
@@ -31,6 +32,10 @@ import qualified Data.Text      as T
 import           Data.Typeable
 import           GHC.Generics
 import           GHC.TypeLits
+
+#if MIN_VERSION_aeson(2,0,0)
+import qualified Data.Aeson.Key as A
+#endif
 
 camelToWithOverrides :: Char -> Map.Map String String -> Options
 camelToWithOverrides c overrides = defaultOptions
@@ -90,12 +95,20 @@ data NamedEntity a (typeKey :: Symbol) = NamedEntity
 instance (FromJSON a, Typeable a, KnownSymbol s) =>
          FromJSON (NamedEntity a s) where
   parseJSON = withObject ("Named" <> (show $ typeOf (undefined :: a))) $ \v ->
+#if MIN_VERSION_aeson(2,0,0)
+    NamedEntity <$> v .: "name" <*> v .: A.fromString (symbolVal (Proxy :: Proxy s))
+#else
     NamedEntity <$> v .: "name" <*> v .: T.pack (symbolVal (Proxy :: Proxy s))
+#endif
 
 instance (ToJSON a, KnownSymbol s) =>
          ToJSON (NamedEntity a s) where
   toJSON (NamedEntity {..}) = object
+#if MIN_VERSION_aeson(2,0,0)
+      ["name" .= toJSON name, A.fromString (symbolVal (Proxy :: Proxy s)) .= toJSON entity]
+#else
       ["name" .= toJSON name, T.pack (symbolVal (Proxy :: Proxy s)) .= toJSON entity]
+#endif
 
 toMap :: [NamedEntity a s] -> Map.Map Text a
 toMap = Map.fromList . fmap (\NamedEntity {..} -> (name, entity))

@@ -1,5 +1,5 @@
 name:           kubernetes-client-core
-version:        0.4.2.0
+version:        0.4.3.0
 synopsis:       Auto-generated kubernetes-client-core API Client
 description:    .
                 Client library for calling the Kubernetes API based on http-client.
@@ -35,7 +35,7 @@ library
       lib
   ghc-options: -Wall -funbox-strict-fields
   build-depends:
-      aeson >=1.0 && <2.0
+      aeson >=1.0 && <3.0
     , base >=4.7 && <5.0
     , base64-bytestring >1.0 && <2.0
     , bytestring >=0.10.0

@@ -5,36 +5,22 @@
 
 packages:
 - completed:
-    hackage: jsonpath-0.2.0.0@sha256:de8eba99a0a970ea1c82b934ccc338f3b5d3fe8273f9196f368ca7bfcf680434,2195
+    hackage: oidc-client-0.6.0.0@sha256:2079dc5c9dfb5b3e2fa93098254ca16787c01a0cd3634b1d84afe84c9a6c4825,3368
     pantry-tree:
-      size: 1098
-      sha256: dd8c7029fab3895f60fef8e1fd537c9ebde4a90006cc0f0582ffd9b87955ad9e
+      size: 1298
+      sha256: c8dac64944a1e60d14958067e1992732effe723d60353690720c34b4d126af48
   original:
-    hackage: jsonpath-0.2.0.0
+    hackage: oidc-client-0.6.0.0@sha256:2079dc5c9dfb5b3e2fa93098254ca16787c01a0cd3634b1d84afe84c9a6c4825,3368
 - completed:
-    hackage: jwt-0.10.0@sha256:d14551b0c357424fb9441ec9a7a9d5b90b13f805fcc9327ba49db548cd64fc29,4180
+    hackage: jose-jwt-0.9.4@sha256:6db77f81cfcf81cf7faf8a4dc4b2110c1603dbb94249d49d069a17b4897e9d69,3560
     pantry-tree:
-      size: 1027
-      sha256: e0cf95e834d99768ad8a3f7e99246948f0cdd2cfa18813517f540144aea6c3e5
+      size: 1231
+      sha256: fd3145cd8ab15be77d49522c454e86f17cf0f233ada7a623457926dbf6ea47e4
   original:
-    hackage: jwt-0.10.0
-- completed:
-    hackage: oidc-client-0.4.0.0@sha256:f72a496ab27d9a5071be44e750718c539118ac52c2f1535a5fb3dde7f9874a55,3306
-    pantry-tree:
-      size: 1153
-      sha256: 68c285c6365360975d50bbb18cb07755d5ef19af8bf0e998d3ea46d35ef4a4e1
-  original:
-    hackage: oidc-client-0.4.0.0
-- completed:
-    hackage: hoauth2-1.16.0@sha256:161b20369ce80cd8348e448e3b307e7850c3d21e8ae4f1e258dbd04d0da34a65,5629
-    pantry-tree:
-      size: 2046
-      sha256: 55931b378faa4a89275c572ecf9a5ec65a7a71f092819e4f704a285a7d4f6f35
-  original:
-    hackage: hoauth2-1.16.0
+    hackage: jose-jwt-0.9.4@sha256:6db77f81cfcf81cf7faf8a4dc4b2110c1603dbb94249d49d069a17b4897e9d69,3560
 snapshots:
 - completed:
-    size: 523700
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/14/7.yaml
-    sha256: 8e3f3c894be74d71fa4bf085e0a8baae7e4d7622d07ea31a52736b80f8b9bb1a
-  original: lts-14.7
+    size: 618884
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/19/7.yaml
+    sha256: 57d4ce67cc097fea2058446927987bc1f7408890e3a6df0da74e5e318f051c20
+  original: lts-19.7
