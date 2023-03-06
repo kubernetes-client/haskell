@@ -1,0 +1,14 @@
+on: [push]
+name: Stack
+jobs:
+  runhaskell:
+    name: Stack build and test
+    runs-on: ubuntu-latest # or macOS-latest, or windows-latest
+    steps:
+      - uses: actions/checkout@v3
+      - uses: haskell/actions/setup@v2
+        with:
+          enable-stack: true
+          stack-version: 'latest'
+      - run: stack build
+      - run: stack test
