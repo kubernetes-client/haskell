@@ -54,6 +54,7 @@ dependencies:
   - mtl >=2.2
   - oidc-client >=0.4
   - pem >=0.2
+  - process
   - safe-exceptions >=0.1.0.0
   - stm >=2.4
   - streaming-bytestring >= 0.1 && < 0.3

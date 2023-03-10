@@ -20,13 +20,12 @@ This is a mostly straightforward translation into Haskell, with 'FromJSON' and '
 module Kubernetes.Client.KubeConfig where
 
 import           Data.Aeson     (FromJSON (..), Options, ToJSON (..),
-                                 Value (..), camelTo2, defaultOptions,
+                                 camelTo2, defaultOptions,
                                  fieldLabelModifier, genericParseJSON,
                                  genericToJSON, object, omitNothingFields,
                                  withObject, (.:), (.=))
 import qualified Data.Map       as Map
 import           Data.Proxy
-import           Data.Semigroup ((<>))
 import           Data.Text      (Text)
 import qualified Data.Text      as T
 import           Data.Typeable
@@ -55,6 +54,7 @@ data Config = Config
   , currentContext :: Text
   } deriving (Eq, Generic, Show)
 
+configJSONOptions :: Options
 configJSONOptions = camelToWithOverrides
     '-'
     (Map.fromList [("apiVersion", "apiVersion"), ("authInfos", "users")])
@@ -126,8 +126,10 @@ data AuthInfo = AuthInfo
   , username              :: Maybe Text
   , password              :: Maybe Text
   , authProvider          :: Maybe AuthProviderConfig
+  , exec                  :: Maybe ExecConfig
   } deriving (Eq, Generic, Show, Typeable)
 
+authInfoJSONOptions :: Options
 authInfoJSONOptions = camelToWithOverrides
     '-'
     ( Map.fromList
@@ -150,6 +152,7 @@ data Context = Context
   , namespace :: Maybe Text
   } deriving (Eq, Generic, Show, Typeable)
 
+contextJSONOptions :: Options
 contextJSONOptions =
     camelToWithOverrides '-' (Map.fromList [("authInfo", "user")])
 
@@ -195,3 +198,28 @@ getCluster cfg@Config {clusters=clusters} = do
     case maybeCluster of
         Just cluster -> Right cluster
         Nothing      -> Left ("No cluster named " <> T.unpack clusterName)
+
+-- https://kubernetes.io/docs/reference/config-api/kubeconfig.v1/
+data ExecConfig = ExecConfig
+  { command :: Text
+  , args :: Maybe [Text]
+  , env :: Maybe [ExecEnvVar]
+    -- not used for now
+  , apiVersion :: Text
+  , installHint :: Text
+    -- not used for now (seems important, since it's true for us)
+  , provideClusterInfo :: Bool
+    -- not used for now
+  , execInteractiveMode :: Maybe Text
+  } deriving (Eq, Generic, Show, Typeable)
+
+instance FromJSON ExecConfig
+instance ToJSON ExecConfig
+
+data ExecEnvVar = ExecEnvVar
+  { name :: Text
+  , value :: Text
+  } deriving (Eq, Generic, Show, Typeable)
+
+instance FromJSON ExecEnvVar
+instance ToJSON ExecEnvVar
