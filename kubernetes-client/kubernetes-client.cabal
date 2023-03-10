@@ -29,6 +29,7 @@ library
       Kubernetes.Client
       Kubernetes.Client.Auth.Basic
       Kubernetes.Client.Auth.ClientCert
+      Kubernetes.Client.Auth.Exec
       Kubernetes.Client.Auth.GCP
       Kubernetes.Client.Auth.Internal.Types
       Kubernetes.Client.Auth.OIDC
@@ -55,6 +56,7 @@ library
     , data-default-class >=0.1
     , either >=5.0
     , filepath >=1.4
+    , hashable
     , hoauth2 >=1.11 && <=3
     , http-client >=0.5 && <0.8
     , http-client-tls >=0.3
@@ -65,6 +67,7 @@ library
     , mtl >=2.2
     , oidc-client >=0.4
     , pem >=0.2
+    , process
     , safe-exceptions >=0.1.0.0
     , stm >=2.4
     , streaming-bytestring >=0.1 && <0.3
@@ -73,6 +76,7 @@ library
     , timerep >=2.0
     , tls >=1.4.1
     , typed-process >=0.2
+    , unordered-containers
     , uri-bytestring >=0.3
     , x509 >=1.7
     , x509-store >=1.6
@@ -99,6 +103,7 @@ test-suite example
     , data-default-class >=0.1
     , either >=5.0
     , filepath >=1.4
+    , hashable
     , hoauth2 >=1.11 && <=3
     , http-client >=0.5 && <0.8
     , http-client-tls >=0.3
@@ -110,6 +115,7 @@ test-suite example
     , mtl >=2.2
     , oidc-client >=0.4
     , pem >=0.2
+    , process
     , safe-exceptions >=0.1.0.0
     , stm >=2.4
     , streaming-bytestring >=0.1 && <0.3
@@ -118,6 +124,7 @@ test-suite example
     , timerep >=2.0
     , tls >=1.4.1
     , typed-process >=0.2
+    , unordered-containers
     , uri-bytestring >=0.3
     , x509 >=1.7
     , x509-store >=1.6
@@ -150,6 +157,7 @@ test-suite spec
     , either >=5.0
     , file-embed
     , filepath >=1.4
+    , hashable
     , hoauth2 >=1.11 && <=3
     , hspec
     , hspec-attoparsec
@@ -163,6 +171,7 @@ test-suite spec
     , mtl >=2.2
     , oidc-client >=0.4
     , pem >=0.2
+    , process
     , safe-exceptions >=0.1.0.0
     , stm >=2.4
     , streaming-bytestring >=0.1 && <0.3
@@ -171,6 +180,7 @@ test-suite spec
     , timerep >=2.0
     , tls >=1.4.1
     , typed-process >=0.2
+    , unordered-containers
     , uri-bytestring >=0.3
     , x509 >=1.7
     , x509-store >=1.6

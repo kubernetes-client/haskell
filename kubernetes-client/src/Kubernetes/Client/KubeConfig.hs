@@ -24,6 +24,7 @@ import           Data.Aeson     (FromJSON (..), Options, ToJSON (..),
                                  fieldLabelModifier, genericParseJSON,
                                  genericToJSON, object, omitNothingFields,
                                  withObject, (.:), (.=))
+import           Data.Hashable  (Hashable)
 import qualified Data.Map       as Map
 import           Data.Proxy
 import           Data.Semigroup ((<>))
@@ -55,6 +56,7 @@ data Config = Config
   , currentContext :: Text
   } deriving (Eq, Generic, Show)
 
+configJSONOptions :: Options
 configJSONOptions = camelToWithOverrides
     '-'
     (Map.fromList [("apiVersion", "apiVersion"), ("authInfos", "users")])
@@ -126,8 +128,10 @@ data AuthInfo = AuthInfo
   , username              :: Maybe Text
   , password              :: Maybe Text
   , authProvider          :: Maybe AuthProviderConfig
+  , exec                  :: Maybe ExecConfig
   } deriving (Eq, Generic, Show, Typeable)
 
+authInfoJSONOptions :: Options
 authInfoJSONOptions = camelToWithOverrides
     '-'
     ( Map.fromList
@@ -150,6 +154,7 @@ data Context = Context
   , namespace :: Maybe Text
   } deriving (Eq, Generic, Show, Typeable)
 
+contextJSONOptions :: Options
 contextJSONOptions =
     camelToWithOverrides '-' (Map.fromList [("authInfo", "user")])
 
@@ -195,3 +200,35 @@ getCluster cfg@Config {clusters=clusters} = do
     case maybeCluster of
         Just cluster -> Right cluster
         Nothing      -> Left ("No cluster named " <> T.unpack clusterName)
+
+-- https://kubernetes.io/docs/reference/config-api/kubeconfig.v1/
+-- | Retrieves the token by executing an external command.
+data ExecConfig = ExecConfig
+  { -- | Executable to be run
+    command :: Text
+    -- | Arguments to the executable
+  , args :: Maybe [Text]
+    -- | Environment variables for the execution
+  , env :: Maybe [ExecEnvVar]
+  , installHint :: Text
+    -- | Ignored for now.
+  , apiVersion :: Text
+    -- | Ignored for now.
+  , provideClusterInfo :: Bool
+    -- | Ignored for now.
+  , execInteractiveMode :: Maybe Text
+  } deriving (Eq, Generic, Show, Typeable)
+
+instance FromJSON ExecConfig
+instance ToJSON ExecConfig
+instance Hashable ExecConfig
+
+-- | Environment variables for the execution.
+data ExecEnvVar = ExecEnvVar
+  { name :: Text
+  , value :: Text
+  } deriving (Eq, Generic, Show, Typeable)
+
+instance FromJSON ExecEnvVar
+instance ToJSON ExecEnvVar
+instance Hashable ExecEnvVar

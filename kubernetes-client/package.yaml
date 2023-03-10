@@ -6,15 +6,15 @@ description: |
   This package contains hand-written code while kubernetes-client-core contains code auto-generated from the OpenAPI spec.
 synopsis: Client library for Kubernetes
 maintainer:
-- Shimin Guo <smguo2001@gmail.com>
-- Akshay Mankar <itsakshaymankar@gmail.com>
+  - Shimin Guo <smguo2001@gmail.com>
+  - Akshay Mankar <itsakshaymankar@gmail.com>
 category: Web
 license: Apache-2.0
 license-file: LICENSE
 library:
   source-dirs: src
   ghc-options:
-  - -Wall
+    - -Wall
 tests:
   spec:
     main: Spec.hs
@@ -45,6 +45,7 @@ dependencies:
   - data-default-class >=0.1
   - either >=5.0
   - filepath >=1.4
+  - hashable
   - hoauth2 >=1.11 && <=3
   - http-client >=0.5 && <0.8
   - http-client-tls >=0.3
@@ -54,6 +55,7 @@ dependencies:
   - mtl >=2.2
   - oidc-client >=0.4
   - pem >=0.2
+  - process
   - safe-exceptions >=0.1.0.0
   - stm >=2.4
   - streaming-bytestring >= 0.1 && < 0.3
@@ -62,6 +64,7 @@ dependencies:
   - timerep >=2.0
   - tls >=1.4.1
   - typed-process >=0.2
+  - unordered-containers
   - uri-bytestring >=0.3
   - x509 >=1.7
   - x509-system >=1.6

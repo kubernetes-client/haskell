@@ -5,6 +5,8 @@ module Kubernetes.Client.Config
   , addCACertData
   , addCACertFile
   , applyAuthSettings
+  , applyDetectAuths
+  , defaultDetectAuths
   , clientHooksL
   , defaultTLSClientParams
   , disableServerCertValidation
@@ -13,6 +15,7 @@ module Kubernetes.Client.Config
   , loadPEMCerts
   , mkInClusterClientConfig
   , mkKubeClientConfig
+  , mkKubeClientConfigWith
   , newManager
   , onCertificateRequestL
   , onServerCertificateL
@@ -32,6 +35,7 @@ import           Control.Applicative            ( (<|>) )
 import           Control.Exception.Safe         ( MonadThrow
                                                 , throwM
                                                 )
+import           Control.Monad                  ( msum )
 import           Control.Monad.IO.Class         ( MonadIO
                                                 , liftIO
                                                 )
@@ -47,6 +51,7 @@ import           Data.Yaml
 import           Kubernetes.Client.Auth.Basic
 import           Kubernetes.Client.Auth.ClientCert
 import           Kubernetes.Client.Auth.GCP
+import           Kubernetes.Client.Auth.Internal.Types
 import           Kubernetes.Client.Auth.OIDC
 import           Kubernetes.Client.Auth.Token
 import           Kubernetes.Client.Auth.TokenFile
@@ -70,7 +75,14 @@ data KubeConfigSource = KubeConfigFile FilePath
 -}
 mkKubeClientConfig
   :: OIDCCache -> KubeConfigSource -> IO (NH.Manager, K.KubernetesClientConfig)
-mkKubeClientConfig oidcCache (KubeConfigFile f) = do
+mkKubeClientConfig oidcCache =
+  mkKubeClientConfigWith (defaultDetectAuths oidcCache)
+
+-- | A variation of @mkKubeClientConfig@ where authentication methods are
+-- configurable.
+mkKubeClientConfigWith
+  :: [DetectAuth] -> KubeConfigSource -> IO (NH.Manager, K.KubernetesClientConfig)
+mkKubeClientConfigWith auths (KubeConfigFile f) = do
   kubeConfig <- decodeFileThrow f
   masterURI  <-
     server
@@ -80,11 +92,12 @@ mkKubeClientConfig oidcCache (KubeConfigFile f) = do
   clientConfig <- K.newConfig & fmap (setMasterURI masterURI)
   (tlsParamsWithAuth, clientConfigWithAuth) <- case getAuthInfo kubeConfig of
     Left _ -> return (tlsParams, clientConfig)
-    Right (_, auth) ->
-      applyAuthSettings oidcCache auth (tlsParams, clientConfig)
+    Right (_, authInfo) ->
+      fromMaybe (pure (tlsParams, clientConfig)) $
+      applyDetectAuths auths authInfo (tlsParams, clientConfig)
   mgr <- newManager tlsParamsWithAuth
   return (mgr, clientConfigWithAuth)
-mkKubeClientConfig _ KubeConfigCluster = mkInClusterClientConfig
+mkKubeClientConfigAuth _ KubeConfigCluster = mkInClusterClientConfig
 
 -- |Creates 'NH.Manager' and 'K.KubernetesClientConfig' assuming it is being executed in a pod
 mkInClusterClientConfig
@@ -160,17 +173,31 @@ addCACertFile cfg dir tlsParams = do
       certText <- B.readFile certFile
       return $ updateClientParams tlsParams certText & fromRight tlsParams
 
+-- | Try all available auth methods, except for the @Exec@ one, in order,
+-- falling back to no authentication if no method matches.
 applyAuthSettings
   :: OIDCCache
   -> AuthInfo
   -> (TLS.ClientParams, K.KubernetesClientConfig)
   -> IO (TLS.ClientParams, K.KubernetesClientConfig)
 applyAuthSettings oidcCache auth input =
-  fromMaybe (pure input)
-    $   clientCertFileAuth auth input
-    <|> clientCertDataAuth auth input
-    <|> tokenAuth auth input
-    <|> tokenFileAuth auth input
-    <|> gcpAuth auth input
-    <|> cachedOIDCAuth oidcCache auth input
-    <|> basicAuth auth input
+  fromMaybe (pure input) $
+  applyDetectAuths (defaultDetectAuths oidcCache) auth input
+
+-- | All available auth methods, except for the @Exec@ one.
+defaultDetectAuths :: OIDCCache -> [DetectAuth]
+defaultDetectAuths oidcCache =
+  [ clientCertFileAuth
+  , clientCertDataAuth
+  , tokenAuth
+  , tokenFileAuth
+  , gcpAuth
+  , cachedOIDCAuth oidcCache
+  , basicAuth
+  ]
+
+-- | Try a list of @DetectAuth@, in order, using the first one that works.
+applyDetectAuths :: [DetectAuth] -> DetectAuth
+applyDetectAuths detectAuths authInfo input =
+  msum $
+  fmap (\detectAuth -> detectAuth authInfo input) detectAuths
