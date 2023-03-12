@@ -14,8 +14,6 @@ maintainer:     Shimin Guo <smguo2001@gmail.com>,
 license:        Apache-2.0
 license-file:   LICENSE
 build-type:     Simple
-tested-with:
-    GHC==9.0.2, GHC==8.10.7
 
 executable in-cluster
   main-is: Main.hs
