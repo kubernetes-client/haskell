@@ -2,3 +2,7 @@ packages:
   kubernetes
   kubernetes-client
   examples
+
+allow-newer:
+  jose-jwt:aeson,
+  hoauth2:text
