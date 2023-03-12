@@ -1,17 +1,39 @@
 on: [push]
-name: Stack
+name: CI
 jobs:
-  runhaskell:
-    name: Stack GHC ${{ matrix.ghc }}
-    runs-on: ubuntu-latest # or macOS-latest, or windows-latest
+  Cabal_build:
+    runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
         ghc:
-          - "8.10.7"
-          - "9.0.2"
-          - "9.2.7"
-          - "9.4.4"
+        - "8.10.7"
+        - "9.0.2"
+        - "9.2.7"
+        - "9.4.4"
+
+    name: Cabal GHC ${{ matrix.ghc }}
+    steps:
+    - uses: actions/checkout@v3
+    - name: Setup Haskell
+      uses: haskell/actions/setup@v2
+      with:
+        ghc-version: ${{ matrix.ghc }}
+        cabal-version: '3.8.1.0'
+    - run: cabal build all --enable-tests
+    - run: cabal test all
+
+  Stack_build:
+    name: Stack GHC ${{ matrix.ghc }}
+    runs-on: ubuntu-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ghc:
+        - "8.10.7"
+        - "9.0.2"
+        - "9.2.7"
+        - "9.4.4"
     steps:
     - uses: actions/checkout@v3
 
