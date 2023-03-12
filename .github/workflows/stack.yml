@@ -2,7 +2,7 @@ on: [push]
 name: Stack
 jobs:
   runhaskell:
-    name: Stack build and test
+    name: Stack GHC ${{ matrix.ghc }}
     runs-on: ubuntu-latest # or macOS-latest, or windows-latest
     strategy:
       fail-fast: false
