@@ -4,6 +4,14 @@ jobs:
   runhaskell:
     name: Stack build and test
     runs-on: ubuntu-latest # or macOS-latest, or windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        ghc:
+          - "8.10.7"
+          - "9.0.2"
+          - "9.2.7"
+          - "9.4.4"
     steps:
     - uses: actions/checkout@v3
 
