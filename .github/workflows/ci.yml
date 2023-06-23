@@ -1,7 +1,8 @@
 on: [push]
 name: CI
 jobs:
-  Cabal_build:
+  cabal:
+    name: Cabal / GHC ${{ matrix.ghc }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
@@ -11,34 +12,34 @@ jobs:
         - "9.0.2"
         - "9.2.8"
         - "9.4.5"
-
-    name: Cabal GHC ${{ matrix.ghc }}
     steps:
     - uses: actions/checkout@v3
-    - name: Setup Haskell
-      uses: haskell/actions/setup@v2
+    - uses: haskell/actions/setup@v2
       with:
         ghc-version: ${{ matrix.ghc }}
         cabal-version: '3.8.1.0'
     - run: cabal build all --enable-tests
     - run: cabal test all
 
-  Stack_build:
-    name: Stack GHC ${{ matrix.ghc }}
+  stack:
+    name: Stack / GHC ${{ matrix.ghc }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
       matrix:
-        ghc:
-        - "8.10.7"
-        - "9.0.2"
-        - "9.2.8"
-        - "9.4.5"
+        include:
+        - ghc: "8.10.7"
+          resolver: "lts-18.28"
+        - ghc: "9.0.2"
+          resolver: "lts-19.33"
+        - ghc: "9.2.8"
+          resolver: "lts-20.26"
+        - ghc: "9.4.5"
+          resolver: "lts-21.0"
     steps:
     - uses: actions/checkout@v3
 
     - uses: haskell/actions/setup@v2
-      name: Setup Haskell Stack
       with:
         ghc-version: ${{ matrix.ghc }}
         enable-stack: true
@@ -48,10 +49,12 @@ jobs:
       name: Cache ~/.stack
       with:
         path: ~/.stack
-        key: ${{ runner.os }}-${{ matrix.ghc }}-stack
+        key: ${{ runner.os }}-${{ matrix.ghc }}-${{ matrix.resolver }}-stack2
 
     - name: Build
-      run: stack build --system-ghc --test --bench --no-run-tests --no-run-benchmarks
+      run: |
+        stack build --resolver ${{matrix.resolver}} --system-ghc --test --bench --no-run-tests --no-run-benchmarks
 
     - name: Test
-      run: stack test --system-ghc
+      run: |
+        stack test --resolver ${{matrix.resolver}} --system-ghc
