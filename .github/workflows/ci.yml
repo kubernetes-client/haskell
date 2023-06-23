@@ -9,8 +9,8 @@ jobs:
         ghc:
         - "8.10.7"
         - "9.0.2"
-        - "9.2.7"
-        - "9.4.4"
+        - "9.2.8"
+        - "9.4.5"
 
     name: Cabal GHC ${{ matrix.ghc }}
     steps:
@@ -32,8 +32,8 @@ jobs:
         ghc:
         - "8.10.7"
         - "9.0.2"
-        - "9.2.7"
-        - "9.4.4"
+        - "9.2.8"
+        - "9.4.5"
     steps:
     - uses: actions/checkout@v3
 
