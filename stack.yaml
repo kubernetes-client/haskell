@@ -1,9 +1,4 @@
-resolver: lts-20.11
-compiler: ghc-9.2.5
-
-extra-deps:
-- jsonpath-0.2.1.0
-- oidc-client-0.7.0.1
+resolver: lts-21.0
 
 packages:
 - kubernetes

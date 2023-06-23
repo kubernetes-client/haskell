@@ -60,9 +60,14 @@ instance AuthMethod OIDCAuth where
       $ setHeader req [("Authorization", "Bearer " <> (Text.encodeUtf8 token))]
       & L.set rAuthTypesL []
 
-data OIDCGetTokenException = OIDCOAuthException (OAuth2Error OAuth2TokenRequest.Errors)
-                           | OIDCURIException URIParseError
-                           | OIDCGetTokenException String
+data OIDCGetTokenException =
+#if MIN_VERSION_hoauth2(2,8,0)
+  OIDCOAuthException TokenRequestError
+#else
+  OIDCOAuthException (OAuth2Error OAuth2TokenRequest.Errors)
+#endif
+  | OIDCURIException URIParseError
+  | OIDCGetTokenException String
   deriving Show
 instance Exception OIDCGetTokenException
 
