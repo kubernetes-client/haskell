@@ -63,6 +63,7 @@ library
     , jose-jwt >=0.8
     , jsonpath >=0.1 && <0.4
     , kubernetes-client-core ==0.4.3.0
+    , megaparsec ==9.*
     , microlens >=0.4
     , mtl >=2.2
     , oidc-client >=0.4
@@ -110,6 +111,7 @@ test-suite example
     , jsonpath >=0.1 && <0.4
     , kubernetes-client
     , kubernetes-client-core ==0.4.3.0
+    , megaparsec ==9.*
     , microlens >=0.4
     , mtl >=2.2
     , oidc-client >=0.4
@@ -159,12 +161,14 @@ test-suite spec
     , hoauth2 >=1.11 && <=3
     , hspec
     , hspec-attoparsec
+    , hspec-megaparsec
     , http-client >=0.5 && <0.8
     , http-client-tls >=0.3
     , jose-jwt >=0.8
     , jsonpath >=0.1 && <0.4
     , kubernetes-client
     , kubernetes-client-core ==0.4.3.0
+    , megaparsec ==9.*
     , microlens >=0.4
     , mtl >=2.2
     , oidc-client >=0.4
