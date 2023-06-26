@@ -1,9 +1,9 @@
 
-resolver: lts-19.7
+resolver: lts-19.33
 
 extra-deps:
-- oidc-client-0.6.0.0@sha256:2079dc5c9dfb5b3e2fa93098254ca16787c01a0cd3634b1d84afe84c9a6c4825,3368
-- jose-jwt-0.9.4@sha256:6db77f81cfcf81cf7faf8a4dc4b2110c1603dbb94249d49d069a17b4897e9d69,3560
+- oidc-client-0.6.0.0
+- jose-jwt-0.9.5
 
 packages:
 - kubernetes

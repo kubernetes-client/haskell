@@ -7,20 +7,20 @@ packages:
 - completed:
     hackage: oidc-client-0.6.0.0@sha256:2079dc5c9dfb5b3e2fa93098254ca16787c01a0cd3634b1d84afe84c9a6c4825,3368
     pantry-tree:
-      size: 1298
       sha256: c8dac64944a1e60d14958067e1992732effe723d60353690720c34b4d126af48
+      size: 1298
   original:
-    hackage: oidc-client-0.6.0.0@sha256:2079dc5c9dfb5b3e2fa93098254ca16787c01a0cd3634b1d84afe84c9a6c4825,3368
+    hackage: oidc-client-0.6.0.0
 - completed:
-    hackage: jose-jwt-0.9.4@sha256:6db77f81cfcf81cf7faf8a4dc4b2110c1603dbb94249d49d069a17b4897e9d69,3560
+    hackage: jose-jwt-0.9.5@sha256:c02db1ef32e582330054d8befa412215afeeb597cb8756dadc75407ba776a159,3557
     pantry-tree:
+      sha256: 778e69fddd33a43f9a2322d4404a27c3f7474295bbdad6f65325fe9c9fee3d86
       size: 1231
-      sha256: fd3145cd8ab15be77d49522c454e86f17cf0f233ada7a623457926dbf6ea47e4
   original:
-    hackage: jose-jwt-0.9.4@sha256:6db77f81cfcf81cf7faf8a4dc4b2110c1603dbb94249d49d069a17b4897e9d69,3560
+    hackage: jose-jwt-0.9.5
 snapshots:
 - completed:
-    size: 618884
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/19/7.yaml
-    sha256: 57d4ce67cc097fea2058446927987bc1f7408890e3a6df0da74e5e318f051c20
-  original: lts-19.7
+    sha256: 6d1532d40621957a25bad5195bfca7938e8a06d923c91bc52aa0f3c41181f2d4
+    size: 619204
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/19/33.yaml
+  original: lts-19.33

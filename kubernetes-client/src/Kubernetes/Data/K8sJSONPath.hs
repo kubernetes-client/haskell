@@ -17,7 +17,7 @@ import Text.Megaparsec ( Parsec, eof, runParser, some, takeWhile1P )
 import Text.Megaparsec.Char ( char )
 type Parser a = Parsec Void Text a
 #else
-import Data.Attoparsec.Text ( many1, char, takeWhile1, Parser )
+import Data.Attoparsec.Text ( Parser, char, endOfInput, many1, parseOnly, takeWhile1 )
 #endif
 
 

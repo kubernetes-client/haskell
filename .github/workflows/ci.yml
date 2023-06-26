@@ -29,13 +29,15 @@ jobs:
       matrix:
         include:
         - ghc: "8.10.7"
-          resolver: "lts-18.28"
-        - ghc: "9.0.2"
-          resolver: "lts-19.33"
+          yaml: "stack-8.10.7.yaml"
+        - ghc: "9.0.2 (aeson-1)"
+          yaml: "stack-9.0.2-aeson1.yaml"
+        - ghc: "9.0.2 (aeson-2)"
+          yaml: "stack-9.0.2-aeson2.yaml"
         - ghc: "9.2.8"
-          resolver: "lts-20.26"
+          yaml: "stack-9.2.8.yaml"
         - ghc: "9.4.5"
-          resolver: "lts-21.0"
+          yaml: "stack.yaml"
     steps:
     - uses: actions/checkout@v3
 
@@ -49,12 +51,12 @@ jobs:
       name: Cache ~/.stack
       with:
         path: ~/.stack
-        key: ${{ runner.os }}-${{ matrix.ghc }}-${{ matrix.resolver }}-stack2
+        key: ${{ runner.os }}-${{ matrix.ghc }}-${{ matrix.yaml }}-stack2
 
     - name: Build
       run: |
-        stack build --resolver ${{matrix.resolver}} --system-ghc --test --bench --no-run-tests --no-run-benchmarks
+        stack build --stack-yaml ${{matrix.yaml}} --system-ghc --test --bench --no-run-tests --no-run-benchmarks
 
     - name: Test
       run: |
-        stack test --resolver ${{matrix.resolver}} --system-ghc
+        stack test --stack-yaml ${{matrix.yaml}} --system-ghc

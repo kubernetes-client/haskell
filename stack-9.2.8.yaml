@@ -1,0 +1,8 @@
+resolver: lts-20.26
+
+extra-deps:
+- oidc-client-0.7.0.1
+
+packages:
+- kubernetes
+- kubernetes-client
