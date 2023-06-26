@@ -1,6 +1,8 @@
-resolver: nightly-2020-12-06
+resolver: lts-18.28
+
 extra-deps:
 - oidc-client-0.4.0.0
+
 packages:
 - kubernetes
 - kubernetes-client
