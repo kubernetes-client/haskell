@@ -43,7 +43,7 @@ dependencies:
   - aeson >=1.2 && <3
   - attoparsec >=0.13
   - jsonpath >=0.1 && <0.4
-  - connection >=0.2
+  - connection >=0.3
   - containers >= 0.5
   - data-default-class >=0.1
   - either >=5.0
