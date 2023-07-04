@@ -6,7 +6,6 @@ where
 
 import Control.Concurrent.STM
 import Control.Exception.Safe                (Exception, throwM)
-import Data.Attoparsec.Text
 import Data.Either.Combinators
 import Data.Function                         ((&))
 import Data.JSONPath
@@ -126,7 +125,6 @@ parseGCPAuthInfo authInfo = do
         Just expiryText -> Just <$> parseExpiryTime expiryText
     lookupEither key = Map.lookup key authInfo
                        & maybeToRight (GCPAuthMissingInformation $ Text.unpack key)
-    parseK8sJSONPath = parseOnly (k8sJSONPath <* endOfInput)
     readJSONPath key defaultPath =
       maybe (Right defaultPath) parseK8sJSONPath $ Map.lookup key authInfo
 

@@ -3,24 +3,10 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages:
-- completed:
-    hackage: jsonpath-0.2.1.0@sha256:0a16677ca023ce46344d0f4812e076578f7b21fc0bec6a21fda227b7b33e1447,1929
-    pantry-tree:
-      sha256: b477413421c0856e2ac2ba85f7308fe1192d7a9f9ec7c1f4be3de3c0d4cf6de5
-      size: 1097
-  original:
-    hackage: jsonpath-0.2.1.0
-- completed:
-    hackage: oidc-client-0.7.0.1@sha256:557341f7521e62c09abddf0d06c8e8acce119d3a9a4c4ffac1ab8ca3fc0e5067,3382
-    pantry-tree:
-      sha256: 51cfcd6c170923db24ba297ac9937961f6b26e041ceec8ff09500e61017b433b
-      size: 1298
-  original:
-    hackage: oidc-client-0.7.0.1
+packages: []
 snapshots:
 - completed:
-    sha256: adbc602422dde10cc330175da7de8609e70afc41449a7e2d6e8b1827aa0e5008
-    size: 649342
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/20/11.yaml
-  original: lts-20.11
+    sha256: 1867d84255dff8c87373f5dd03e5a5cb1c10a99587e26c8793e750c54e83ffdc
+    size: 639139
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/21/0.yaml
+  original: lts-21.0

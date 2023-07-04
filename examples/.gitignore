@@ -1,4 +1,3 @@
 dist
 dist-newstyle
-*.cabal
 .stack-work
