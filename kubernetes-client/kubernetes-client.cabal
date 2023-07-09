@@ -62,7 +62,7 @@ library
     , http-client-tls >=0.3
     , jose-jwt >=0.8
     , jsonpath >=0.1 && <0.4
-    , kubernetes-client-core ==0.4.3.0
+    , kubernetes-client-core ==0.4.4.0
     , megaparsec ==9.*
     , microlens >=0.4
     , mtl >=2.2
@@ -110,7 +110,7 @@ test-suite example
     , jose-jwt >=0.8
     , jsonpath >=0.1 && <0.4
     , kubernetes-client
-    , kubernetes-client-core ==0.4.3.0
+    , kubernetes-client-core ==0.4.4.0
     , megaparsec ==9.*
     , microlens >=0.4
     , mtl >=2.2
@@ -167,7 +167,7 @@ test-suite spec
     , jose-jwt >=0.8
     , jsonpath >=0.1 && <0.4
     , kubernetes-client
-    , kubernetes-client-core ==0.4.3.0
+    , kubernetes-client-core ==0.4.4.0
     , megaparsec ==9.*
     , microlens >=0.4
     , mtl >=2.2

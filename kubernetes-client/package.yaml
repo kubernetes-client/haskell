@@ -52,7 +52,7 @@ dependencies:
   - http-client >=0.5 && <0.8
   - http-client-tls >=0.3
   - jose-jwt >=0.8
-  - kubernetes-client-core ==0.4.3.0
+  - kubernetes-client-core ==0.4.4.0
   - megaparsec >=9 && <10
   - microlens >=0.4
   - mtl >=2.2

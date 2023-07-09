@@ -364,6 +364,27 @@ instance MimeType mtype => Consumes DeleteNamespacedCustomObject mtype
 instance Produces DeleteNamespacedCustomObject MimeJSON
 
 
+-- *** getAPIResources
+
+-- | @GET \/apis\/{group}\/{version}@
+-- 
+-- get available resources
+-- 
+-- AuthMethod: 'AuthApiKeyBearerToken'
+-- 
+getAPIResources
+  :: Group -- ^ "group" -  The custom resource's group name
+  -> Version -- ^ "version" -  The custom resource's version
+  -> KubernetesRequest GetAPIResources MimeNoContent V1APIResourceList MimeJSON
+getAPIResources (Group group) (Version version) =
+  _mkRequest "GET" ["/apis/",toPath group,"/",toPath version]
+    `_hasAuthType` (P.Proxy :: P.Proxy AuthApiKeyBearerToken)
+
+data GetAPIResources  
+-- | @application/json@
+instance Produces GetAPIResources MimeJSON
+
+
 -- *** getClusterCustomObject
 
 -- | @GET \/apis\/{group}\/{version}\/{plural}\/{name}@
