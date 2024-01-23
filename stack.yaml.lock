@@ -3,10 +3,17 @@
 # For more information, please see the documentation at:
 #   https://docs.haskellstack.org/en/stable/lock_files
 
-packages: []
+packages:
+- completed:
+    hackage: oidc-client-0.7.0.1@sha256:557341f7521e62c09abddf0d06c8e8acce119d3a9a4c4ffac1ab8ca3fc0e5067,3382
+    pantry-tree:
+      sha256: 51cfcd6c170923db24ba297ac9937961f6b26e041ceec8ff09500e61017b433b
+      size: 1298
+  original:
+    hackage: oidc-client-0.7.0.1@sha256:557341f7521e62c09abddf0d06c8e8acce119d3a9a4c4ffac1ab8ca3fc0e5067,3382
 snapshots:
 - completed:
-    sha256: 1867d84255dff8c87373f5dd03e5a5cb1c10a99587e26c8793e750c54e83ffdc
-    size: 639139
-    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/21/0.yaml
-  original: lts-21.0
+    sha256: 1b4c2669e26fa828451830ed4725e4d406acc25a1fa24fcc039465dd13d7a575
+    size: 714100
+    url: https://raw.githubusercontent.com/commercialhaskell/stackage-snapshots/master/lts/22/6.yaml
+  original: lts-22.6

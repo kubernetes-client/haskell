@@ -43,8 +43,8 @@ dependencies:
   - aeson >=1.2 && <3
   - attoparsec >=0.13
   - jsonpath >=0.1 && <0.4
-  - connection >=0.3
   - containers >= 0.5
+  - crypton-connection
   - data-default-class >=0.1
   - either >=5.0
   - filepath >=1.4
@@ -67,8 +67,8 @@ dependencies:
   - tls >=1.4.1
   - typed-process >=0.2
   - uri-bytestring >=0.3
-  - x509 >=1.7
-  - x509-system >=1.6
-  - x509-store >=1.6
-  - x509-validation >=1.6
+  - crypton-x509 >=1.7
+  - crypton-x509-system >=1.6
+  - crypton-x509-store >=1.6
+  - crypton-x509-validation >=1.6
   - yaml >=0.8.32

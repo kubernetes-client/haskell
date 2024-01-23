@@ -61,7 +61,9 @@ instance AuthMethod OIDCAuth where
       & L.set rAuthTypesL []
 
 data OIDCGetTokenException =
-#if MIN_VERSION_hoauth2(2,8,0)
+#if MIN_VERSION_hoauth2(2,9,0)
+  OIDCOAuthException TokenResponseError
+#elif MIN_VERSION_hoauth2(2,8,0)
   OIDCOAuthException TokenRequestError
 #else
   OIDCOAuthException (OAuth2Error OAuth2TokenRequest.Errors)
