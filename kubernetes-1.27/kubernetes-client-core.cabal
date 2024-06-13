@@ -1,0 +1,171 @@
+name:           kubernetes-client-core
+version:        1.27.0
+synopsis:       Auto-generated kubernetes-client-core API Client
+description:    .
+                Client library for calling the Kubernetes API based on http-client.
+                .
+                host: localhost
+                .
+                base path: http://localhost
+                .
+                Kubernetes API version: release-1.27
+                .
+                OpenAPI version: 3.0.1
+                .
+                Generator version: 7.6.0
+                .
+category:       Web
+homepage:       https://github.com/kubernetes-client/haskell
+author:         Auto Generated
+maintainer:     Shimin Guo <smguo2001@gmail.com>, Akshay Mankar <itsakshaymankar@gmail.com>
+license:        Apache-2.0
+license-file:   LICENSE
+build-type:     Simple
+cabal-version:  >= 1.10
+
+extra-source-files:
+    README.md
+    openapi.yaml
+
+Flag UseKatip
+  Description: Use the katip package to provide logging (if false, use the default monad-logger package)
+  Default:     True
+  Manual:      True
+
+library
+  hs-source-dirs:
+      lib
+  ghc-options: -Wall -funbox-strict-fields
+  build-depends:
+      aeson >=1.0 && <3.0
+    , base >=4.7 && <5.0
+    , base64-bytestring >1.0 && <2.0
+    , bytestring >=0.10.0
+    , case-insensitive
+    , containers >=0.5.0.0 && <0.8
+    , deepseq >= 1.4 && <1.6
+    , exceptions >= 0.4
+    , http-api-data >= 0.3.4 && <0.7
+    , http-client >=0.5 && <0.8
+    , http-client-tls
+    , http-media >= 0.4 && < 0.9
+    , http-types >=0.8 && <0.13
+    , iso8601-time >=0.1.3 && <0.2.0
+    , microlens >= 0.4.3
+    , mtl >=2.2.1
+    , network >=2.6.2 && <3.9
+    , random >=1.1
+    , safe-exceptions <0.2
+    , text >=0.11 && <3
+    , time >=1.5
+    , transformers >=0.4.0.0
+    , unordered-containers
+    , vector >=0.10.9 && <0.14
+  other-modules:
+      Paths_kubernetes_client_core
+      Kubernetes.OpenAPI.ImportMappings
+  exposed-modules:
+      Kubernetes.OpenAPI
+      Kubernetes.OpenAPI.API.Admissionregistration
+      Kubernetes.OpenAPI.API.AdmissionregistrationV1
+      Kubernetes.OpenAPI.API.AdmissionregistrationV1alpha1
+      Kubernetes.OpenAPI.API.Apiextensions
+      Kubernetes.OpenAPI.API.ApiextensionsV1
+      Kubernetes.OpenAPI.API.Apiregistration
+      Kubernetes.OpenAPI.API.ApiregistrationV1
+      Kubernetes.OpenAPI.API.Apis
+      Kubernetes.OpenAPI.API.Apps
+      Kubernetes.OpenAPI.API.AppsV1
+      Kubernetes.OpenAPI.API.Authentication
+      Kubernetes.OpenAPI.API.AuthenticationV1
+      Kubernetes.OpenAPI.API.AuthenticationV1alpha1
+      Kubernetes.OpenAPI.API.AuthenticationV1beta1
+      Kubernetes.OpenAPI.API.Authorization
+      Kubernetes.OpenAPI.API.AuthorizationV1
+      Kubernetes.OpenAPI.API.Autoscaling
+      Kubernetes.OpenAPI.API.AutoscalingV1
+      Kubernetes.OpenAPI.API.AutoscalingV2
+      Kubernetes.OpenAPI.API.Batch
+      Kubernetes.OpenAPI.API.BatchV1
+      Kubernetes.OpenAPI.API.Certificates
+      Kubernetes.OpenAPI.API.CertificatesV1
+      Kubernetes.OpenAPI.API.CertificatesV1alpha1
+      Kubernetes.OpenAPI.API.Coordination
+      Kubernetes.OpenAPI.API.CoordinationV1
+      Kubernetes.OpenAPI.API.Core
+      Kubernetes.OpenAPI.API.CoreV1
+      Kubernetes.OpenAPI.API.CustomObjects
+      Kubernetes.OpenAPI.API.Discovery
+      Kubernetes.OpenAPI.API.DiscoveryV1
+      Kubernetes.OpenAPI.API.Events
+      Kubernetes.OpenAPI.API.EventsV1
+      Kubernetes.OpenAPI.API.FlowcontrolApiserver
+      Kubernetes.OpenAPI.API.FlowcontrolApiserverV1beta2
+      Kubernetes.OpenAPI.API.FlowcontrolApiserverV1beta3
+      Kubernetes.OpenAPI.API.InternalApiserver
+      Kubernetes.OpenAPI.API.InternalApiserverV1alpha1
+      Kubernetes.OpenAPI.API.Logs
+      Kubernetes.OpenAPI.API.Networking
+      Kubernetes.OpenAPI.API.NetworkingV1
+      Kubernetes.OpenAPI.API.NetworkingV1alpha1
+      Kubernetes.OpenAPI.API.Node
+      Kubernetes.OpenAPI.API.NodeV1
+      Kubernetes.OpenAPI.API.Openid
+      Kubernetes.OpenAPI.API.Policy
+      Kubernetes.OpenAPI.API.PolicyV1
+      Kubernetes.OpenAPI.API.RbacAuthorization
+      Kubernetes.OpenAPI.API.RbacAuthorizationV1
+      Kubernetes.OpenAPI.API.Resource
+      Kubernetes.OpenAPI.API.ResourceV1alpha2
+      Kubernetes.OpenAPI.API.Scheduling
+      Kubernetes.OpenAPI.API.SchedulingV1
+      Kubernetes.OpenAPI.API.Storage
+      Kubernetes.OpenAPI.API.StorageV1
+      Kubernetes.OpenAPI.API.Version
+      Kubernetes.OpenAPI.API.WellKnown
+      Kubernetes.OpenAPI.Client
+      Kubernetes.OpenAPI.Core
+      Kubernetes.OpenAPI.Logging
+      Kubernetes.OpenAPI.MimeTypes
+      Kubernetes.OpenAPI.Model
+      Kubernetes.OpenAPI.ModelLens
+      Kubernetes.OpenAPI.CustomTypes
+  default-language: Haskell2010
+
+  if flag(UseKatip)
+      build-depends: katip >=0.8 && < 1.0
+      other-modules: Kubernetes.OpenAPI.LoggingKatip
+      cpp-options: -DUSE_KATIP
+  else
+      build-depends: monad-logger >=0.3 && <0.4
+      other-modules: Kubernetes.OpenAPI.LoggingMonadLogger
+      cpp-options: -DUSE_MONAD_LOGGER
+
+test-suite tests
+  type: exitcode-stdio-1.0
+  main-is: Test.hs
+  hs-source-dirs:
+      tests
+  ghc-options: -Wall -fno-warn-orphans
+  build-depends:
+      kubernetes-client-core
+    , QuickCheck
+    , aeson
+    , base >=4.7 && <5.0
+    , bytestring >=0.10.0
+    , containers
+    , hspec >=1.8
+    , iso8601-time
+    , mtl >=2.2.1
+    , semigroups
+    , text
+    , time
+    , transformers >=0.4.0.0
+    , unordered-containers
+    , vector
+  other-modules:
+      ApproxEq
+      Instances
+      PropMime
+      CustomInstances
+  default-language: Haskell2010

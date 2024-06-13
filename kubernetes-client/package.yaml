@@ -1,5 +1,5 @@
 name: kubernetes-client
-version: 0.4.3.1
+version: 0.5.0.0
 description: |
   Client library for interacting with a Kubernetes cluster.
 
@@ -37,14 +37,12 @@ extra-source-files:
   - test/testdata/**/*
   - README.md
 dependencies:
+  - aeson >=1.2 && <3
+  - attoparsec >=0.13
   - base >=4.7 && <5.0
   - base64-bytestring
   - bytestring >=0.10
-  - aeson >=1.2 && <3
-  - attoparsec >=0.13
-  - jsonpath >=0.1 && <0.4
   - containers >= 0.5
-  - crypton-connection
   - data-default-class >=0.1
   - either >=5.0
   - filepath >=1.4
@@ -52,7 +50,8 @@ dependencies:
   - http-client >=0.5 && <0.8
   - http-client-tls >=0.3
   - jose-jwt >=0.8
-  - kubernetes-client-core ==0.4.3.0
+  - jsonpath >=0.1 && <0.4
+  - kubernetes-client-core
   - megaparsec >=9 && <10
   - microlens >=0.4
   - mtl >=2.2
@@ -67,8 +66,20 @@ dependencies:
   - tls >=1.4.1
   - typed-process >=0.2
   - uri-bytestring >=0.3
-  - crypton-x509 >=1.7
-  - crypton-x509-system >=1.6
-  - crypton-x509-store >=1.6
-  - crypton-x509-validation >=1.6
   - yaml >=0.8.32
+when:
+- condition: impl(ghc >= 9.6)
+  then:
+    dependencies:
+    - crypton-connection
+    - crypton-x509 >=1.7
+    - crypton-x509-store >=1.6
+    - crypton-x509-system >=1.6
+    - crypton-x509-validation >=1.6
+  else:
+    dependencies:
+    - connection
+    - x509 >=1.7
+    - x509-store >=1.6
+    - x509-system >=1.6
+    - x509-validation >=1.6

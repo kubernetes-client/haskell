@@ -1,8 +1,8 @@
+{-# LANGUAGE CPP               #-}
 {-# LANGUAGE FlexibleContexts  #-}
+{-# LANGUAGE LambdaCase        #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards   #-}
-{-# LANGUAGE LambdaCase        #-}
-{-# LANGUAGE CPP               #-}
 module Kubernetes.Client.Auth.OIDC
   (oidcAuth, OIDCCache, cachedOIDCAuth)
 where
@@ -15,7 +15,6 @@ import Data.Either.Combinators
 import Data.Function                         ((&))
 import Data.Map                              (Map)
 import Data.Maybe
-import Data.Monoid                           ((<>))
 import Data.Text
 import Data.Text.Encoding                    (encodeUtf8)
 import Data.Time.Clock.POSIX                 (getPOSIXTime)
@@ -31,13 +30,21 @@ import Network.TLS                           as TLS
 import URI.ByteString
 import Web.OIDC.Client.Discovery             as OIDC
 
+#if !MIN_VERSION_base(4,11,0)
+import Data.Monoid                           ((<>))
+#endif
+
 import qualified Data.ByteString                   as BS
 import qualified Data.ByteString.Base64            as B64
 import qualified Data.Map                          as Map
 import qualified Data.Text                         as Text
 import qualified Data.Text.Encoding                as Text
 import qualified Lens.Micro                        as L
+
+#if !MIN_VERSION_hoauth2(2,8,0)
 import qualified Network.OAuth.OAuth2.TokenRequest as OAuth2TokenRequest
+#endif
+
 
 data OIDCAuth = OIDCAuth { issuerURL        :: Text
                          , clientID         :: Text

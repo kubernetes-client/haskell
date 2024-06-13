@@ -12,8 +12,7 @@ import Data.PEM                   (pemContent, pemParseBS)
 import Data.X509                  (SignedCertificate, decodeSignedCertificate)
 import Data.X509.CertificateStore (CertificateStore, makeCertificateStore)
 import Lens.Micro
-import Network.TLS                (Credential, defaultParamsClient)
-import Network.TLS
+import Network.TLS                (Credential, credentialLoadX509FromMemory, defaultParamsClient)
 import System.X509                (getSystemCertificateStore)
 
 import qualified Data.ByteString        as B

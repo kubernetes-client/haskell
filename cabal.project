@@ -1,4 +1,9 @@
 packages:
-  kubernetes
+  kubernetes-1.21
   kubernetes-client
   examples
+
+source-repository-package
+  type: git
+  location: https://github.com/codedownio/haskell-oidc-client
+  tag: b70757b85751525cba41316ea9af132d9a43cfaf

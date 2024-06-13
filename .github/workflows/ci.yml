@@ -2,61 +2,109 @@ on: [push]
 name: CI
 jobs:
   cabal:
-    name: Cabal / GHC ${{ matrix.ghc }}
+    name: Cabal / K8S ${{ matrix.k8s_release }} / GHC ${{ matrix.ghc }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      # This full matrix at time of writing is 11 K8S versions * 6 compiler versions = 66,
+      # which is a little big for CI.
+      # Commented some older versions of each to make it manageable.
       matrix:
+        k8s_release:
+        # - "1.20"
+        # - "1.21"
+        # - "1.22"
+        # - "1.23"
+        # - "1.24"
+        - "1.25"
+        - "1.26"
+        - "1.27"
+        - "1.28"
+        - "1.29"
+        - "1.30"
         ghc:
-        - "8.10.7"
-        - "9.0.2"
-        - "9.2.8"
-        - "9.4.5"
+        # - "8.10.7"
+        # - "9.0.2"
+        # - "9.2.8"
+        - "9.4.8"
+        - "9.6.5"
+        - "9.8.2"
     steps:
-    - uses: actions/checkout@v3
-    - uses: haskell/actions/setup@v2
+    - uses: actions/checkout@v4
+
+    - uses: haskell-actions/setup@v2
       with:
-        ghc-version: ${{ matrix.ghc }}
-        cabal-version: '3.8.1.0'
-    - run: cabal build all --enable-tests
-    - run: cabal test all
+        ghc-version: ${{ matrix.compiler.ghc }}
+        cabal-version: '3.10.3.0'
+
+    - uses: cachix/install-nix-action@v27
+
+    - run: |
+        nix run .#set-cabal-version -- "${{matrix.k8s_release}}" cabal.project
+        cabal build all --enable-tests
+
+    - run: |
+        cabal test all
 
   stack:
-    name: Stack / GHC ${{ matrix.ghc }}
+    name: Stack / K8S ${{ matrix.k8s_release }} / GHC ${{ matrix.compiler.ghc }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
+      # This full matrix at time of writing is 11 K8S versions * 7 compiler versions = 77,
+      # which is a little big for CI.
+      # Commented some older versions of each to make it manageable.
       matrix:
-        include:
-        - ghc: "8.10.7"
-          yaml: "stack-8.10.7.yaml"
-        - ghc: "9.0.2"
-          yaml: "stack-9.0.2-aeson1.yaml"
-        - ghc: "9.0.2"
-          yaml: "stack-9.0.2-aeson2.yaml"
-        - ghc: "9.2.8"
-          yaml: "stack-9.2.8.yaml"
-        - ghc: "9.4.5"
+        k8s_release:
+        # - "1.20"
+        # - "1.21"
+        # - "1.22"
+        # - "1.23"
+        # - "1.24"
+        - "1.25"
+        - "1.26"
+        - "1.27"
+        - "1.28"
+        - "1.29"
+        - "1.30"
+        compiler:
+        # - ghc: "8.10.7"
+        #   yaml: "stack-8.10.7.yaml"
+        # - ghc: "9.0.2"
+        #   yaml: "stack-9.0.2-aeson1.yaml"
+        # - ghc: "9.0.2"
+        #   yaml: "stack-9.0.2-aeson2.yaml"
+        # - ghc: "9.2.8"
+        #   yaml: "stack-9.2.8.yaml"
+        - ghc: "9.4.8"
+          yaml: "stack-9.4.8.yaml"
+        - ghc: "9.6.5"
+          yaml: "stack-9.6.5.yaml"
+        - ghc: "9.8.2"
           yaml: "stack.yaml"
     steps:
-    - uses: actions/checkout@v3
+    - uses: actions/checkout@v4
 
-    - uses: haskell/actions/setup@v2
+    - uses: haskell-actions/setup@v2
       with:
-        ghc-version: ${{ matrix.ghc }}
+        ghc-version: ${{ matrix.compiler.ghc }}
         enable-stack: true
         stack-version: "latest"
 
-    - uses: actions/cache@v3
+    - uses: cachix/install-nix-action@v27
+
+    - uses: actions/cache@v4
       name: Cache ~/.stack
       with:
         path: ~/.stack
-        key: ${{ runner.os }}-${{ matrix.ghc }}-${{ matrix.yaml }}
+        key: ${{ runner.os }}-${{ matrix.compiler.ghc }}-${{ matrix.compiler.yaml }}
 
     - name: Build
       run: |
-        stack build --stack-yaml ${{matrix.yaml}} --system-ghc --test --bench --no-run-tests --no-run-benchmarks
+        nix run .#set-stack-version -- "${{matrix.k8s_release}}" "${{matrix.compiler.yaml}}"
+
+        stack build --stack-yaml ${{matrix.compiler.yaml}} --system-ghc --test --bench --no-run-tests --no-run-benchmarks
 
     - name: Test
       run: |
-        stack test --stack-yaml ${{matrix.yaml}} --system-ghc
+        stack test --stack-yaml ${{matrix.compiler.yaml}} --system-ghc

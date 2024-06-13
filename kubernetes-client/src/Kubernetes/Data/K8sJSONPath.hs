@@ -1,5 +1,5 @@
-{-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE CPP #-}
+{-# LANGUAGE OverloadedStrings #-}
 module Kubernetes.Data.K8sJSONPath where
 
 import Control.Applicative  ((<|>))
@@ -7,9 +7,12 @@ import Data.Aeson
 import Data.Aeson.Text
 import Data.Bifunctor
 import Data.JSONPath
-import Data.Monoid     ((<>))
 import Data.Text       as Text
 import Data.Text.Lazy       (toStrict)
+
+#if !MIN_VERSION_base(4,11,0)
+import Data.Monoid ((<>))
+#endif
 
 #if MIN_VERSION_jsonpath(0,3,0)
 import Data.Void (Void)
