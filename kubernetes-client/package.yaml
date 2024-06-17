@@ -26,7 +26,7 @@ tests:
       - hspec
       - hspec-attoparsec
       - hspec-megaparsec
-      - yaml
+      - yaml >= 0.8.4
       - file-embed
   example:
     main: App.hs

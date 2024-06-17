@@ -72,8 +72,7 @@ data GCPGetTokenException = GCPCmdProducedInvalidJSON String
 instance Exception GCPGetTokenException
 
 getToken :: GCPAuth -> IO (Either GCPGetTokenException Text)
-getToken auth@(GCPAuth{..}) = getCurrentToken auth
-                              >>= maybe (fetchToken auth) (return . Right)
+getToken auth@(GCPAuth{}) = getCurrentToken auth >>= maybe (fetchToken auth) (return . Right)
 
 getCurrentToken :: GCPAuth -> IO (Maybe Text)
 getCurrentToken (GCPAuth{..}) = do

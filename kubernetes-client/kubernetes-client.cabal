@@ -199,7 +199,7 @@ test-suite spec
     , tls >=1.4.1
     , typed-process >=0.2
     , uri-bytestring >=0.3
-    , yaml
+    , yaml >=0.8.4
   default-language: Haskell2010
   if impl(ghc >= 9.6)
     build-depends:

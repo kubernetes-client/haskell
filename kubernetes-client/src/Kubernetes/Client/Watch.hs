@@ -1,5 +1,7 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE FlexibleContexts #-}
 {-# LANGUAGE OverloadedStrings #-}
+
 module Kubernetes.Client.Watch
   ( WatchEvent
   , eventType
@@ -11,13 +13,21 @@ import Control.Monad
 import Control.Monad.Trans (lift)
 import Data.Aeson
 import qualified Data.ByteString as B
-import qualified Data.ByteString.Streaming.Char8 as Q
 import qualified Data.Text as T
-import Kubernetes.OpenAPI.Core
 import Kubernetes.OpenAPI.Client
+import Kubernetes.OpenAPI.Core
 import Kubernetes.OpenAPI.MimeTypes
 import Kubernetes.OpenAPI.Model (Watch(..))
 import Network.HTTP.Client
+
+#if MIN_VERSION_streaming_bytestring(0,1,7)
+import qualified Streaming.ByteString.Char8 as Q
+type ByteStream = Q.ByteStream
+#else
+import qualified Data.ByteString.Streaming.Char8 as Q
+type ByteStream = Q.ByteString
+#endif
+
 
 data WatchEvent a = WatchEvent
   { _eventType :: T.Text
@@ -68,7 +78,7 @@ dispatchWatch ::
     Manager
     -> KubernetesClientConfig
     -> KubernetesRequest req contentType resp accept
-    -> (Q.ByteString IO () -> IO a)
+    -> (ByteStream IO () -> IO a)
     -> IO a
 dispatchWatch manager config request apply = do
   let watchRequest = applyOptionalParam request (Watch True)
@@ -78,14 +88,14 @@ dispatchWatch manager config request apply = do
 withHTTP ::
   Request
   -> Manager
-  -> (Response (Q.ByteString IO ()) -> IO a)
+  -> (Response (ByteStream IO ()) -> IO a)
   -> IO a
 withHTTP request manager f = withResponse request manager f'
   where
     f' resp = do
       let p = (from . brRead . responseBody) resp
       f (resp {responseBody = p})
-    from :: IO B.ByteString -> Q.ByteString IO ()
+    from :: IO B.ByteString -> ByteStream IO ()
     from io = go
       where
         go = do

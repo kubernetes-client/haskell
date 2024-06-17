@@ -20,13 +20,12 @@ This is a mostly straightforward translation into Haskell, with 'FromJSON' and '
 module Kubernetes.Client.KubeConfig where
 
 import           Data.Aeson     (FromJSON (..), Options, ToJSON (..),
-                                 Value (..), camelTo2, defaultOptions,
+                                 camelTo2, defaultOptions,
                                  fieldLabelModifier, genericParseJSON,
                                  genericToJSON, object, omitNothingFields,
                                  withObject, (.:), (.=))
 import qualified Data.Map       as Map
 import           Data.Proxy
-import           Data.Semigroup ((<>))
 import           Data.Text      (Text)
 import qualified Data.Text      as T
 import           Data.Typeable
@@ -36,6 +35,11 @@ import           GHC.TypeLits
 #if MIN_VERSION_aeson(2,0,0)
 import qualified Data.Aeson.Key as A
 #endif
+
+#if !MIN_VERSION_base(4,11,0)
+import Data.Monoid                              ((<>))
+#endif
+
 
 camelToWithOverrides :: Char -> Map.Map String String -> Options
 camelToWithOverrides c overrides = defaultOptions
