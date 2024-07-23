@@ -25,7 +25,6 @@ cabal-version:  >= 1.10
 
 extra-source-files:
     README.md
-    openapi.yaml
 
 Flag UseKatip
   Description: Use the katip package to provide logging (if false, use the default monad-logger package)

@@ -30,6 +30,9 @@
 
             # Fix a bound
             ${pkgs.gnused}/bin/sed -i 's/\(http-api-data >= 0.3.4 &&\) <0.6/\1 <0.7/' "$out/kubernetes-client-core.cabal"
+
+            # Delete openapi.yaml from the extra-source-files
+            ${pkgs.gnused}/bin/sed -i '/^\s*openapi\.yaml$/d' "$out/kubernetes-client-core.cabal"
           '';
 
           set-stack-version = pkgs.writeShellScriptBin "build-kubernetes-client.sh" ''
