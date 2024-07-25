@@ -60,7 +60,7 @@ instance AuthMethod OIDCAuth where
       $ setHeader req [("Authorization", "Bearer " <> (Text.encodeUtf8 token))]
       & L.set rAuthTypesL []
 
-data OIDCGetTokenException = OIDCOAuthException TokenRequestError
+data OIDCGetTokenException = OIDCOAuthException TokenResponseError
                            | OIDCURIException URIParseError
                            | OIDCGetTokenException String
   deriving Show

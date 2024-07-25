@@ -1,6 +1,6 @@
 cabal-version: 1.12
 
--- This file has been generated from package.yaml by hpack version 0.35.2.
+-- This file has been generated from package.yaml by hpack version 0.36.0.
 --
 -- see: https://github.com/sol/hpack
 
@@ -51,8 +51,12 @@ library
     , base >=4.7 && <5.0
     , base64-bytestring
     , bytestring >=0.10
-    , connection >=0.2
     , containers >=0.5
+    , crypton-connection
+    , crypton-x509
+    , crypton-x509-store
+    , crypton-x509-system
+    , crypton-x509-validation
     , data-default-class >=0.1
     , either >=5.0
     , filepath >=1.4
@@ -78,10 +82,6 @@ library
     , typed-process >=0.2
     , unordered-containers
     , uri-bytestring >=0.3
-    , x509 >=1.7
-    , x509-store >=1.6
-    , x509-system >=1.6
-    , x509-validation >=1.6
     , yaml >=0.8.32
   default-language: Haskell2010
 
@@ -98,8 +98,12 @@ test-suite example
     , base >=4.7 && <5.0
     , base64-bytestring
     , bytestring >=0.10
-    , connection >=0.2
     , containers >=0.5
+    , crypton-connection
+    , crypton-x509
+    , crypton-x509-store
+    , crypton-x509-system
+    , crypton-x509-validation
     , data-default-class >=0.1
     , either >=5.0
     , filepath >=1.4
@@ -126,10 +130,6 @@ test-suite example
     , typed-process >=0.2
     , unordered-containers
     , uri-bytestring >=0.3
-    , x509 >=1.7
-    , x509-store >=1.6
-    , x509-system >=1.6
-    , x509-validation >=1.6
     , yaml >=0.8.32
   default-language: Haskell2010
 
@@ -151,8 +151,12 @@ test-suite spec
     , base >=4.7 && <5.0
     , base64-bytestring
     , bytestring >=0.10
-    , connection >=0.2
     , containers >=0.5
+    , crypton-connection
+    , crypton-x509
+    , crypton-x509-store
+    , crypton-x509-system
+    , crypton-x509-validation
     , data-default-class >=0.1
     , either >=5.0
     , file-embed
@@ -182,9 +186,5 @@ test-suite spec
     , typed-process >=0.2
     , unordered-containers
     , uri-bytestring >=0.3
-    , x509 >=1.7
-    , x509-store >=1.6
-    , x509-system >=1.6
-    , x509-validation >=1.6
     , yaml
   default-language: Haskell2010
