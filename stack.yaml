@@ -1,5 +1,19 @@
-resolver: lts-21.0
+resolver: nightly-2024-06-12
 
+# This repo contains multiple versions of kubernetes-client-core, in the
+# kubernetes-* directories.
+# You should use exactly one to build kubernetes-client against, or
+# else Stack will get confused.
 packages:
-- kubernetes
+- kubernetes-1.20
 - kubernetes-client
+
+extra-deps:
+- git: https://github.com/codedownio/haskell-oidc-client
+  # codedown-jun-2024-ghc98
+  commit: b70757b85751525cba41316ea9af132d9a43cfaf
+
+nix:
+  pure: false
+  packages:
+  - zlib

@@ -6,5 +6,5 @@ extra-deps:
 - jose-jwt-0.9.5
 
 packages:
-- kubernetes
+- kubernetes-1.20
 - kubernetes-client

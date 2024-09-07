@@ -4,8 +4,8 @@ module Kubernetes.Client.KubeConfigSpec where
 
 import           Data.Aeson                   (decode, encode, parseJSON,
                                                toJSON)
-import           Data.Maybe                   (fromJust)
-import           Data.Yaml                    (decodeFile)
+import           Data.Either                  (fromRight)
+import           Data.Yaml                    (decodeFileEither)
 import           Kubernetes.Client.KubeConfig (AuthInfo (..), Cluster (..),
                                                Config, Context (..),
                                                getAuthInfo, getCluster,
@@ -15,11 +15,13 @@ import           Test.Hspec
 spec :: Spec
 spec = do
   let getConfig :: IO Config
-      getConfig = fromJust <$> decodeFile "test/testdata/kubeconfig.yaml"
+      getConfig = fromRight (error "Couldn't decode config") <$> decodeFileEither "test/testdata/kubeconfig.yaml"
+
   describe "FromJSON and ToJSON instances" $ do
     it "roundtrips successfully" $ do
       config <- getConfig
       decode (encode (toJSON config)) `shouldBe` Just config
+
   describe "getContext" $ do
     it "returns the correct context" $ do
       config <- getConfig

@@ -8,5 +8,5 @@ extra-deps:
 - hoauth2-1.16.0
 
 packages:
-- kubernetes
+- kubernetes-1.20
 - kubernetes-client

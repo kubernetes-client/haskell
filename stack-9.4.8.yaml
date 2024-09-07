@@ -1,0 +1,17 @@
+resolver: lts-21.25
+
+packages:
+- kubernetes-1.20
+- kubernetes-client
+
+extra-deps:
+# - oidc-client-0.7.0.1@sha256:557341f7521e62c09abddf0d06c8e8acce119d3a9a4c4ffac1ab8ca3fc0e5067,3382
+
+- git: https://github.com/codedownio/haskell-oidc-client
+  # codedown-jun-2024-ghc98
+  commit: b70757b85751525cba41316ea9af132d9a43cfaf
+
+nix:
+  pure: false
+  packages:
+  - zlib

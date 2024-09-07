@@ -1,19 +1,23 @@
-{-# LANGUAGE OverloadedStrings #-}
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE NamedFieldPuns #-}
+{-# LANGUAGE OverloadedStrings #-}
 module Kubernetes.Client.Auth.TokenFile where
 
 import           Control.Concurrent.STM
 import           Data.Function                  ( (&) )
-import           Data.Monoid                    ( (<>) )
 import           Data.Text                      ( Text )
-import           Data.Time.Clock
-import           Kubernetes.Client.Auth.Internal.Types
-import           Kubernetes.OpenAPI.Core
-import           Kubernetes.Client.KubeConfig
-                                         hiding ( token )
 import qualified Data.Text                     as T
 import qualified Data.Text.IO                  as T
+import           Data.Time.Clock
+import           Kubernetes.Client.Auth.Internal.Types
+import           Kubernetes.Client.KubeConfig hiding ( token )
+import           Kubernetes.OpenAPI.Core
 import qualified Lens.Micro                    as L
+
+#if !MIN_VERSION_base(4,11,0)
+import           Data.Monoid                    ( (<>) )
+#endif
+
 
 data TokenFileAuth = TokenFileAuth { token :: TVar(Maybe Text)
                                    , expiry :: TVar(Maybe UTCTime)

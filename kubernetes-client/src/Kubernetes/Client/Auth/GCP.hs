@@ -1,3 +1,4 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards   #-}
 module Kubernetes.Client.Auth.GCP
@@ -10,7 +11,6 @@ import Data.Either.Combinators
 import Data.Function                         ((&))
 import Data.JSONPath
 import Data.Map                              (Map)
-import Data.Monoid                           ((<>))
 import Data.Text                             (Text)
 import Data.Time.Clock
 import Data.Time.LocalTime
@@ -20,6 +20,10 @@ import Kubernetes.Client.KubeConfig
 import Kubernetes.Data.K8sJSONPath
 import Kubernetes.OpenAPI.Core
 import System.Process.Typed
+
+#if !MIN_VERSION_base(4,11,0)
+import Data.Monoid                           ((<>))
+#endif
 
 import qualified Data.Aeson         as Aeson
 import qualified Data.Map           as Map
@@ -68,8 +72,7 @@ data GCPGetTokenException = GCPCmdProducedInvalidJSON String
 instance Exception GCPGetTokenException
 
 getToken :: GCPAuth -> IO (Either GCPGetTokenException Text)
-getToken auth@(GCPAuth{..}) = getCurrentToken auth
-                              >>= maybe (fetchToken auth) (return . Right)
+getToken auth@(GCPAuth{}) = getCurrentToken auth >>= maybe (fetchToken auth) (return . Right)
 
 getCurrentToken :: GCPAuth -> IO (Maybe Text)
 getCurrentToken (GCPAuth{..}) = do

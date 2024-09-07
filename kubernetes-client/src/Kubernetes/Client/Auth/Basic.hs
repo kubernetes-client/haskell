@@ -1,14 +1,18 @@
+{-# LANGUAGE CPP #-}
 {-# LANGUAGE OverloadedStrings #-}
 {-# LANGUAGE RecordWildCards   #-}
 module Kubernetes.Client.Auth.Basic where
 
 import           Data.ByteString.Base64         ( encode )
 import           Data.Function                  ( (&) )
-import           Data.Monoid                    ( (<>) )
 import           Data.Text                      ( Text )
 import           Kubernetes.Client.Auth.Internal.Types
-import           Kubernetes.OpenAPI.Core
 import           Kubernetes.Client.KubeConfig
+import           Kubernetes.OpenAPI.Core
+
+#if !MIN_VERSION_base(4,11,0)
+import Data.Monoid                              ((<>))
+#endif
 
 import qualified Data.Text.Encoding            as T
 import qualified Lens.Micro                    as L

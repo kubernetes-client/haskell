@@ -18,3 +18,7 @@ cabal.sandbox.config
 .stack-work/
 cabal.project.local
 .HTF/
+swagger.json
+swagger.json.unprocessed
+git_push.sh
+openapi.yaml
