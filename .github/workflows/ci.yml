@@ -1,8 +1,7 @@
-on: [push]
-name: CI
+Off: [push]name: CI
 jobs:
   cabal:
-    name: Cabal / K8S ${{ matrix.k8s_release }} / GHC ${{ matrix.ghc }}
+    name: Martyb166 / K8S ${{ matrix.k8s_release }} / GHC ${{ matrix.ghc }}
     runs-on: ubuntu-latest
     strategy:
       fail-fast: false
