@@ -96,9 +96,16 @@ mkInClusterClientConfig = do
     defTlsParams
   host <- liftIO $ getEnv "KUBERNETES_SERVICE_HOST"
   port <- liftIO $ getEnv "KUBERNETES_SERVICE_PORT"
-  cfg  <- setMasterURI (T.pack $ "https://" ++ host ++ ":" ++ port) <$> liftIO
+  cfg  <- setMasterURI (T.pack $ "https://" ++ (formatHost host) ++ ":" ++ port) <$> liftIO
     (K.newConfig >>= setTokenFileAuth (serviceAccountDir ++ "/token"))
   return (mgr, cfg)
+
+-- | Wraps host with brackets if IPv6 address detected and not already wrapped
+formatHost :: String -> String
+formatHost host@('[' : _) = host -- already wrapped with brackets
+formatHost host
+  | ':' `elem` host = "[" ++ host ++ "]" -- assume IPv6 if host has colons
+  | otherwise = host
 
 -- |Sets the master URI in the 'K.KubernetesClientConfig'.
 setMasterURI
