@@ -7,7 +7,7 @@ import Data.Aeson
 import Data.Aeson.Text
 import Data.Bifunctor
 import Data.JSONPath
-import Data.Text       as Text
+import Data.Text       as Text hiding (show)
 import Data.Text.Lazy       (toStrict)
 
 #if !MIN_VERSION_base(4,11,0)

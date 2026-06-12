@@ -15,7 +15,7 @@ import Data.Either.Combinators
 import Data.Function                         ((&))
 import Data.Map                              (Map)
 import Data.Maybe
-import Data.Text
+import Data.Text                             hiding (show)
 import Data.Text.Encoding                    (encodeUtf8)
 import Data.Time.Clock.POSIX                 (getPOSIXTime)
 import Jose.Jwt
@@ -25,7 +25,7 @@ import Kubernetes.Client.KubeConfig
 import Kubernetes.OpenAPI.Core
 import Network.HTTP.Client
 import Network.HTTP.Client.TLS
-import Network.OAuth.OAuth2                  as OAuth
+import Network.OAuth2                        as OAuth
 import Network.TLS                           as TLS
 import URI.ByteString
 import Web.OIDC.Client.Discovery             as OIDC
